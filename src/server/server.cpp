@@ -13,6 +13,24 @@
 std::vector<Player *> g_players;
 ENetHost *server;
 
+Player *getPlayerByPeer(ENetPeer *peer) {
+    for (Player *player : g_players) {
+        if (player->isPeer(peer)) {
+            return player;
+        }
+    }
+
+    return nullptr;
+}
+
+void sendToPlayersExcept(void *packet, int len, Player *player) {
+    for (Player *p : g_players) {
+        if (p != player) {
+            p->sendPacket(packet, len);
+        }
+    }
+}
+
 int generateClientId() {
     return rand();
 }
@@ -36,24 +54,6 @@ void NetEvent_Disconnect(ENetEvent event) {
 
     event.peer->data = nullptr;
 }
-
-/*
-void NetEvent_RecievedPacket(ENetEvent event) {
-    Netdata *netdata = reinterpret_cast<Netdata*>(event.packet->data);
-
-    if (netdata->type == Netdata_Type_LOCATION) {
-        Netdata_Location *ndata_location = reinterpret_cast<Netdata_Location*>(netdata);
-        int clientId = ndata_location->clientId;
-
-        for (Player p : g_players) {
-            if (p.clientId != clientId) {
-                Netdata_Location location;
-                p.sendPacket(&location, sizeof(Netdata_Location));
-            }
-        }
-    }
-}
-*/
 
 void NetEvent_InitPlayer(ENetEvent event, ClientMsg_Init *init) {
     char ip[INET6_ADDRSTRLEN];
@@ -85,6 +85,23 @@ void NetEvent_InitPlayer(ENetEvent event, ClientMsg_Init *init) {
     g_players.push_back(player);
 }
 
+void NetEvent_UpdatePlayerLocation(ENetEvent event, ClientMsg_Location *location) {
+    Player *player = getPlayerByPeer(event.peer);
+
+    spdlog::debug("{} x={}, y={}, z={}", player->toString(), location->position.x, location->position.y, location->position.z);
+
+    player->position = location->position;
+    player->rotation = location->rotation;
+
+    ServerMsg_Location loc;
+    loc.type = ServerMsg_Type_LOCATION;
+    loc.clientId = player->clientId;
+    loc.position = location->position;
+    loc.rotation = location->rotation;
+
+    sendToPlayersExcept(&loc, sizeof(loc), player);
+}
+
 void NetEvent_RecievedPacket(ENetEvent event) {
     ClientMsg *msg = reinterpret_cast<ClientMsg*>(event.packet->data);
 
@@ -92,6 +109,11 @@ void NetEvent_RecievedPacket(ENetEvent event) {
     case ClientMsg_Type_INIT: {
         ClientMsg_Init *init = reinterpret_cast<ClientMsg_Init*>(msg);
         NetEvent_InitPlayer(event, init);
+        break;
+    }
+    case ClientMsg_Type_LOCATION: {
+        ClientMsg_Location *location = reinterpret_cast<ClientMsg_Location*>(msg);
+        NetEvent_UpdatePlayerLocation(event, location);
         break;
     }
     default:

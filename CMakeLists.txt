@@ -17,6 +17,7 @@ file(GLOB SERVER_SOURCES
     "${PROJECT_SOURCE_DIR}/src/server/*.cpp"
 )
 
+
 # Add dependencies
 add_subdirectory(libs/raylib)
 add_subdirectory(libs/enet)
@@ -32,7 +33,9 @@ add_executable(server ${SERVER_SOURCES})
 
 # Include dirs for both
 target_include_directories(client PRIVATE ${PROJECT_SOURCE_DIR}/include)
+target_include_directories(client PRIVATE ${PROJECT_SOURCE_DIR}/src/client)
 target_include_directories(server PRIVATE ${PROJECT_SOURCE_DIR}/include)
+target_include_directories(server PRIVATE ${PROJECT_SOURCE_DIR}/src/server)
 
 # Link libraries for both
 target_link_libraries(client PRIVATE raylib enet::enet_static spdlog::spdlog cxxopts::cxxopts)

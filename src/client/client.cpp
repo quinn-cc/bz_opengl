@@ -7,8 +7,9 @@
 #include "netmsg.hpp"
 #include <math.h>
 #include "cxxopts.hpp"
+#include "player.hpp"
 
-Vector3 cubePos = { 0.0f, 0.5f, 0.0f };
+Vector3 position = { 0.0f, 0.5f, 0.0f };
 float cubeYaw = 0.0f;
 const float moveSpeed = 10.0f;
 const float turnSpeed = -2.0f;
@@ -20,6 +21,18 @@ std::string g_name;
 ENetHost* client;
 ENetPeer* server;
 
+std::vector<Player *> g_players;
+
+Player *getPlayerById(int clientId) {
+    for (Player *player : g_players) {
+        if (player->clientId == clientId) {
+            return player;
+        }
+    }
+
+    return nullptr;
+}
+
 void Render_Init() {
     InitWindow(800, 600, "raylib [C++] - First-Person Turning Cube on Grid");
     SetTargetFPS(60);
@@ -28,28 +41,7 @@ void Render_Init() {
     camera.projection = CAMERA_PERSPECTIVE;
 }
 
-void Listen_Input() {
-    float dt = GetFrameTime();
 
-    // Rotation (Y-axis yaw)
-    if (IsKeyDown(KEY_LEFT))  cubeYaw -= turnSpeed * dt;
-    if (IsKeyDown(KEY_RIGHT)) cubeYaw += turnSpeed * dt;
-
-    // Forward direction from yaw
-    Vector3 lookDir = {
-        sinf(cubeYaw),
-        0.0f,
-        cosf(cubeYaw)
-    };
-
-    // Movement
-    if (IsKeyDown(KEY_UP))    cubePos = Vector3Add(cubePos, Vector3Scale(lookDir, moveSpeed * dt));
-    if (IsKeyDown(KEY_DOWN))  cubePos = Vector3Add(cubePos, Vector3Scale(lookDir, -moveSpeed * dt));
-
-    // Update camera
-    camera.position = Vector3Add(cubePos, (Vector3){ 0.0f, 0.5f, 0.0f });
-    camera.target   = Vector3Add(camera.position, lookDir);
-}
 
 void Render_Draw() {
     BeginDrawing();
@@ -58,6 +50,10 @@ void Render_Draw() {
     BeginMode3D(camera);
 
     DrawGrid(100, 1.0f); // Big grid for navigation reference
+
+    for (Player *p : g_players) {
+        p->Draw();
+    }
 
     EndMode3D();
 
@@ -119,7 +115,7 @@ int initNet() {
     return 0;
 }
 
-void initToServer() {
+void NetUpdate_Init() {
     ClientMsg_Init init;
     init.type = ClientMsg_Type_INIT;
     strcpy(init.name, g_name.c_str());
@@ -128,8 +124,32 @@ void initToServer() {
     enet_host_flush(client);
 }
 
+void NetUpdate_Location(Vector3 position) {
+    ClientMsg_Location loc;
+    loc.type = ClientMsg_Type_LOCATION;
+    loc.position = position;
+    ENetPacket* packet = enet_packet_create(&loc, sizeof(loc), ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT);
+    enet_peer_send(server, 0, packet);
+}
+
 void NetEvent_PlayerConnection(ENetEvent event, ServerMsg_Connection *conn) {
+    Player *player = new Player();
+    player->name = conn->name;
+    player->clientId = conn->clientId;
+    player->position.x = 0;
+    player->position.y = 0;
+    player->position.z = 0;
+    g_players.push_back(player);
     spdlog::debug("{} joined", std::string(conn->name));
+}
+
+void NetEvent_UpdatePlayerLocation(ENetEvent event, ServerMsg_Location *loc) {
+    Player *player = getPlayerById(loc->clientId);
+
+    if (!player)
+        spdlog::error("Player with clientId {} does not exist", loc->clientId);
+
+    player->position = loc->position;
 }
 
 void NetEvent_RecievedPacket(ENetEvent event) {
@@ -141,12 +161,17 @@ void NetEvent_RecievedPacket(ENetEvent event) {
         NetEvent_PlayerConnection(event, conn);
         break;
     }
+    case ServerMsg_Type_LOCATION: {
+        ServerMsg_Location *loc = reinterpret_cast<ServerMsg_Location*>(msg);
+        NetEvent_UpdatePlayerLocation(event, loc);
+        break;
+    }
     default:
         break;
     }
 }
 
-void Event_Listener() {
+void NetEvent_Listener() {
     ENetEvent event;
     while (enet_host_service(client, &event, 0) > 0) {
         switch (event.type) {
@@ -161,16 +186,43 @@ void Event_Listener() {
     }
 }
 
+void Listen_Input() {
+    float dt = GetFrameTime();
+
+    // Rotation (Y-axis yaw)
+    if (IsKeyDown(KEY_LEFT))  cubeYaw -= turnSpeed * dt;
+    if (IsKeyDown(KEY_RIGHT)) cubeYaw += turnSpeed * dt;
+
+    // Forward direction from yaw
+    Vector3 lookDir = {
+        sinf(cubeYaw),
+        0.0f,
+        cosf(cubeYaw)
+    };
+
+    // Movement
+    if (IsKeyDown(KEY_UP))
+        position = Vector3Add(position, Vector3Scale(lookDir, moveSpeed * dt));
+    if (IsKeyDown(KEY_DOWN))
+        position = Vector3Add(position, Vector3Scale(lookDir, -moveSpeed * dt));
+
+    // Update camera
+    camera.position = Vector3Add(position, (Vector3){ 0.0f, 0.5f, 0.0f });
+    camera.target   = Vector3Add(camera.position, lookDir);
+
+    NetUpdate_Location(position);
+}
+
 int main(int argc, char *argv[]) {
     spdlog::set_level(spdlog::level::debug);
     parseArgs(argc, argv);
     Render_Init();
     initNet();
-    initToServer();
+    NetUpdate_Init();
 
     // Main loop: send and receive
     while (!WindowShouldClose()) {
-        Event_Listener();
+        NetEvent_Listener();
         Listen_Input();
         Render_Draw();
     }

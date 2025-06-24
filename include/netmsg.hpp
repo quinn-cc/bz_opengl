@@ -1,4 +1,7 @@
+#pragma once
 #include "raylib.h"
+
+#pragma pack(push, 1)
 
 /*
  * Server messages
@@ -50,3 +53,5 @@ typedef struct ClientMsg_Location : ClientMsg {
     Vector3 position;
     Quaternion rotation;
 } ClientMsg_Location;
+
+#pragma pack(pop)
