@@ -49,6 +49,12 @@ void NetEvent_Disconnect(ENetEvent event) {
     } else {
         g_players.erase(std::remove(g_players.begin(), g_players.end(), player), g_players.end());
         spdlog::info("{} disconnected.", player->toString());
+
+        ServerMsg_Disconnection msg;
+        msg.type = ServerMsg_Type_DISCONNECTION;
+        msg.clientId = player->clientId;
+        sendToPlayersExcept(&msg, sizeof(msg), player);
+
         delete player;
     }
 
@@ -79,6 +85,14 @@ void NetEvent_InitPlayer(ENetEvent event, ClientMsg_Init *init) {
         // Send the new connection to everyone else
         p->sendPacket(&connection, sizeof(ServerMsg_Connection));
         spdlog::debug("Sent initialization update to {}", p->toString());
+
+        // Send everyone else to this player
+        ServerMsg_Connection conn;
+        conn.type = ServerMsg_Type_CONNECTION;
+        conn.clientId = p->clientId;
+        strcpy(conn.name, p->name.c_str());
+
+        player->sendPacket(&conn, sizeof(ServerMsg_Connection));
     }
 
     // Add the player
@@ -87,8 +101,6 @@ void NetEvent_InitPlayer(ENetEvent event, ClientMsg_Init *init) {
 
 void NetEvent_UpdatePlayerLocation(ENetEvent event, ClientMsg_Location *location) {
     Player *player = getPlayerByPeer(event.peer);
-
-    spdlog::debug("{} x={}, y={}, z={}", player->toString(), location->position.x, location->position.y, location->position.z);
 
     player->position = location->position;
     player->rotation = location->rotation;

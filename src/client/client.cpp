@@ -132,7 +132,7 @@ void NetUpdate_Location(Vector3 position) {
     enet_peer_send(server, 0, packet);
 }
 
-void NetEvent_PlayerConnection(ENetEvent event, ServerMsg_Connection *conn) {
+void NetEvent_PlayerConnection(ServerMsg_Connection *conn) {
     Player *player = new Player();
     player->name = conn->name;
     player->clientId = conn->clientId;
@@ -141,6 +141,18 @@ void NetEvent_PlayerConnection(ENetEvent event, ServerMsg_Connection *conn) {
     player->position.z = 0;
     g_players.push_back(player);
     spdlog::debug("{} joined", std::string(conn->name));
+}
+
+void NetEvent_PlayerDisconnection(ServerMsg_Disconnection *msg) {
+    Player *player = getPlayerById(msg->clientId);
+
+    if (player == nullptr) {
+        spdlog::error("Peer disconnected, but player was not found");
+    } else {
+        g_players.erase(std::remove(g_players.begin(), g_players.end(), player), g_players.end());
+        spdlog::debug("{} disconnected.", player->name);
+        delete player;
+    }
 }
 
 void NetEvent_UpdatePlayerLocation(ENetEvent event, ServerMsg_Location *loc) {
@@ -158,12 +170,17 @@ void NetEvent_RecievedPacket(ENetEvent event) {
     switch (msg->type) {
     case ServerMsg_Type_CONNECTION: {
         ServerMsg_Connection *conn = reinterpret_cast<ServerMsg_Connection*>(msg);
-        NetEvent_PlayerConnection(event, conn);
+        NetEvent_PlayerConnection(conn);
         break;
     }
     case ServerMsg_Type_LOCATION: {
         ServerMsg_Location *loc = reinterpret_cast<ServerMsg_Location*>(msg);
         NetEvent_UpdatePlayerLocation(event, loc);
+        break;
+    }
+    case ServerMsg_Type_DISCONNECTION: {
+        ServerMsg_Disconnection *dis = reinterpret_cast<ServerMsg_Disconnection*>(msg);
+        NetEvent_PlayerDisconnection(dis);
         break;
     }
     default:
