@@ -23,6 +23,7 @@ add_subdirectory(libs/raylib)
 add_subdirectory(libs/enet)
 add_subdirectory(libs/spdlog)
 add_subdirectory(libs/cxxopts)
+add_subdirectory(libs/glm)
 
 # Create client executable
 add_executable(client ${CLIENT_SOURCES})
@@ -38,5 +39,5 @@ target_include_directories(server PRIVATE ${PROJECT_SOURCE_DIR}/include)
 target_include_directories(server PRIVATE ${PROJECT_SOURCE_DIR}/src/server)
 
 # Link libraries for both
-target_link_libraries(client PRIVATE raylib enet::enet_static spdlog::spdlog cxxopts::cxxopts)
-target_link_libraries(server PRIVATE raylib enet::enet_static spdlog::spdlog cxxopts::cxxopts)
+target_link_libraries(client PRIVATE raylib enet::enet_static spdlog::spdlog cxxopts::cxxopts glm::glm)
+target_link_libraries(server PRIVATE enet::enet_static spdlog::spdlog cxxopts::cxxopts glm::glm)

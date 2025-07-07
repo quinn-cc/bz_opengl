@@ -1,11 +1,26 @@
 #pragma once
-#include "raylib.h"
+#include <glm/glm.hpp>
 #include <string>
+#include "geometry.hpp"
 
 class Player {
-public:
+private:
+    Location location;
+    Location lastLocation;
+    float yaw;
+    float lastYaw;
+
     std::string name;
-    int clientId;
-    Vector3 position;
-    void Draw();
+    float moveSpeed;
+    float turnSpeed;
+
+public:
+    static Player &GetInstance();
+    
+    void Init();
+    void Update();
+    void SetName(std::string name);
+    std::string GetName();
+    glm::vec3 GetForwardVector();
+    Location GetLocation();
 };

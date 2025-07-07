@@ -1,16 +1,33 @@
 #pragma once
-#include "raylib.h"
-#include "netmsg.hpp"
-#include <enet.h>
+#include "geometry.hpp"
+#include <string>
+#include <ctime>
+#include <chrono>
+#include <vector>
 
-void Render_Init();
-void Render_Draw();
-void parseArgs(int argc, char *argv[]);
-int initNet();
-void NetUpdate_Init();
-void NetUpdate_Location(Vector3 position);
-void NetEvent_PlayerConnection(ENetEvent event, ServerMsg_Connection *conn);
-void NetEvent_UpdatePlayerLocation(ENetEvent event, ServerMsg_Location *loc);
-void NetEvent_RecievedPacket(ENetEvent event);
-void NetEvent_Listener();
-void Listen_Input();
+class Client {
+private:
+    int clientId;
+    std::string name;
+    Location location;
+    Location lastLocation;
+    std::chrono::time_point<std::chrono::system_clock> locationTime;
+    std::chrono::time_point<std::chrono::system_clock> lastLocationTime;
+
+public:
+    static std::vector<Client *> clients;
+    static Client *GetClient(int clientId);
+
+    Client(int clientId, std::string name);
+    ~Client();
+    std::string ToString();
+
+    bool IsClient(int clientId) const;
+    bool IsClient(std::string name) const;
+
+    std::string GetName() const;
+
+    Location GetLocation() const;
+    Location GetInterpolatedLocation() const;
+    void SetLocation(Location location);
+};
