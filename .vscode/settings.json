@@ -71,6 +71,12 @@
         "variant": "cpp",
         "set": "cpp",
         "unordered_set": "cpp",
-        "future": "cpp"
+        "future": "cpp",
+        "any": "cpp",
+        "list": "cpp",
+        "ranges": "cpp",
+        "text_encoding": "cpp",
+        "forward_list": "cpp",
+        "valarray": "cpp"
     }
 }

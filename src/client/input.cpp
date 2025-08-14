@@ -1,5 +1,5 @@
 #include "input.hpp"
-#include "raylib.h"
+#include "renderer.hpp"
 
 Input &Input::GetInstance() {
     static Input instance;
@@ -14,19 +14,19 @@ void Input::Update() {
     movement = { 0, 0 };
     fireReady = false;
 
-    if (IsKeyDown(KEY_LEFT))
+    if (glfwGetKey(Renderer::GetInstance().window, GLFW_KEY_LEFT))
         movement.x -= 1;
-    if (IsKeyDown(KEY_RIGHT))
+    if (glfwGetKey(Renderer::GetInstance().window, GLFW_KEY_RIGHT))
         movement.x += 1;
 
     // Movement
-    if (IsKeyDown(KEY_UP))
+    if (glfwGetKey(Renderer::GetInstance().window, GLFW_KEY_UP))
         movement.y += 1;
-    if (IsKeyDown(KEY_DOWN))
+    if (glfwGetKey(Renderer::GetInstance().window, GLFW_KEY_DOWN))
         movement.y -= 1;
 
     // Fire
-    if (IsKeyPressed(KEY_F)) {
+    if (glfwGetKey(Renderer::GetInstance().window, GLFW_KEY_F)) {
         fireReady = true;
     }
 }

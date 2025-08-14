@@ -1,5 +1,6 @@
 #pragma once
 #include "geometry.hpp"
+#include <threepp/threepp.hpp>
 #include <string>
 #include <ctime>
 #include <chrono>
@@ -13,8 +14,12 @@ private:
     Location lastLocation;
     std::chrono::time_point<std::chrono::system_clock> locationTime;
     std::chrono::time_point<std::chrono::system_clock> lastLocationTime;
+    
 
 public:
+    std::shared_ptr<threepp::Mesh> mesh;
+    bool hasMesh = false;
+    
     static std::vector<Client *> clients;
     static Client *GetClient(int clientId);
 

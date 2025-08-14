@@ -6,7 +6,6 @@
 #include "cxxopts.hpp"
 #include "netmsg.hpp"
 #include "client.hpp"
-#include "client.hpp"
 #include "shot.hpp"
 #include "renderer.hpp"
 #include "networker.hpp"
@@ -62,7 +61,7 @@ int main(int argc, char *argv[]) {
     ParseArgs(argc, argv);
     Start();
 
-    while (!WindowShouldClose()) {
+    while (!Renderer::GetInstance().ShouldClose()) {
         Update();
     }
 
