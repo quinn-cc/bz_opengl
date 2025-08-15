@@ -647,4 +647,6 @@ CMakeFiles/client.dir/src/client/player.cpp.o: \
  /home/quinn/Documents/bztest/bz_opengl/libs/threepp/src/../include/threepp/loaders/TextureLoader.hpp \
  /home/quinn/Documents/bztest/bz_opengl/libs/threepp/src/../include/threepp/utils/TaskManager.hpp \
  /usr/include/GLFW/glfw3.h /usr/include/GL/gl.h /usr/include/GL/glext.h \
- /usr/include/KHR/khrplatform.h
+ /usr/include/KHR/khrplatform.h /usr/include/c++/13/map \
+ /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
+ /usr/include/c++/13/bits/stl_multimap.h

@@ -24,6 +24,7 @@ public:
     std::string ToString();
 
     Client(std::string name);
+    ~Client();
 };
 
 int GenerateClientId();

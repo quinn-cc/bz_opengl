@@ -13,26 +13,37 @@ Input::Input() {
 void Input::Update() {
     movement = { 0, 0 };
     fireReady = false;
+    requestingSpawn = false;
+    GLFWwindow *window = Renderer::GetInstance().window;
 
-    if (glfwGetKey(Renderer::GetInstance().window, GLFW_KEY_LEFT))
+    if (glfwGetKey(window, GLFW_KEY_LEFT))
         movement.x -= 1;
-    if (glfwGetKey(Renderer::GetInstance().window, GLFW_KEY_RIGHT))
+    if (glfwGetKey(window, GLFW_KEY_RIGHT))
         movement.x += 1;
 
     // Movement
-    if (glfwGetKey(Renderer::GetInstance().window, GLFW_KEY_UP))
+    if (glfwGetKey(window, GLFW_KEY_UP))
         movement.y += 1;
-    if (glfwGetKey(Renderer::GetInstance().window, GLFW_KEY_DOWN))
+    if (glfwGetKey(window, GLFW_KEY_DOWN))
         movement.y -= 1;
 
     // Fire
-    if (glfwGetKey(Renderer::GetInstance().window, GLFW_KEY_F)) {
+    if (glfwGetKey(window, GLFW_KEY_F)) {
         fireReady = true;
+    }
+
+    // Spawn
+    if (glfwGetKey(window, GLFW_KEY_U)) {
+        requestingSpawn = true;
     }
 }
 
 bool Input::FireReady() {
     return fireReady;
+}
+
+bool Input::RequestingSpawn() {
+    return requestingSpawn;
 }
 
 glm::vec2 Input::GetMovement() {

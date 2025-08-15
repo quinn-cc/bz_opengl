@@ -14,14 +14,15 @@ private:
     Location lastLocation;
     std::chrono::time_point<std::chrono::system_clock> locationTime;
     std::chrono::time_point<std::chrono::system_clock> lastLocationTime;
-    
+
+    static std::vector<std::function<void(Client*)>> callbacks_add;
+    static std::vector<std::function<void(Client*)>> callbacks_remove;
 
 public:
-    std::shared_ptr<threepp::Mesh> mesh;
-    bool hasMesh = false;
-    
     static std::vector<Client *> clients;
     static Client *GetClient(int clientId);
+    static void AddCallback_AddClient(std::function<void(Client*)> func);
+    static void AddCallback_RemoveClient(std::function<void(Client*)> func);
 
     Client(int clientId, std::string name);
     ~Client();
@@ -35,4 +36,6 @@ public:
     Location GetLocation() const;
     Location GetInterpolatedLocation() const;
     void SetLocation(Location location);
+
+
 };

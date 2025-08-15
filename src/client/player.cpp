@@ -60,7 +60,6 @@ void Player::Update() {
     }
 
     if (updateLoc) {
-        spdlog::info("Updating my location x={},y={},z={}", location.position.x, location.position.y, location.position.z);
         Networker::GetInstance().MsgSend_Location();
     }
 }

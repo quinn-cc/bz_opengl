@@ -3,6 +3,8 @@
 #include <cstring>
 #include <spdlog/spdlog.h>
 #include <math.h>
+#include <csignal>
+#include <cstdlib>
 #include "cxxopts.hpp"
 #include "netmsg.hpp"
 #include "client.hpp"
@@ -11,6 +13,8 @@
 #include "networker.hpp"
 #include "player.hpp"
 #include "input.hpp"
+
+bool exitSignalRecieved = false;
 
 void ParseArgs(int argc, char *argv[]) {
     cxxopts::Options options("BZ", "This is the client.");
@@ -39,29 +43,26 @@ void Update() {
 
     Renderer::GetInstance().BeginFrame();
     Renderer::GetInstance().Update();
-
-    for (Client *client : Client::clients) {
-        Renderer::GetInstance().Draw(client);
-    }
-
-    for (Shot *shot : Shot::shots) {
-        Renderer::GetInstance().Draw(shot);
-    }
-    
     Renderer::GetInstance().EndFrame();
 }
 
 void Close() {
+    spdlog::debug("Closing window");
     Networker::GetInstance().Close();
     Renderer::GetInstance().Close();
 }
 
+void SignalHandlerClose(int signum) {
+    exitSignalRecieved = true;
+}
+
 int main(int argc, char *argv[]) {
+    std::signal(SIGINT, SignalHandlerClose);
     spdlog::set_level(spdlog::level::debug);
     ParseArgs(argc, argv);
     Start();
 
-    while (!Renderer::GetInstance().ShouldClose()) {
+    while (!exitSignalRecieved && !Renderer::GetInstance().ShouldClose()) {
         Update();
     }
 

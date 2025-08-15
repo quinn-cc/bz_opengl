@@ -2,6 +2,8 @@
 #include <spdlog/spdlog.h>
 
 std::vector<Client *> Client::clients;
+std::vector<std::function<void(Client*)>> Client::callbacks_add;
+std::vector<std::function<void(Client*)>> Client::callbacks_remove;
 
 Client *Client::GetClient(int clientId) {
     for (Client *client : clients) {
@@ -13,6 +15,14 @@ Client *Client::GetClient(int clientId) {
     return nullptr;
 }
 
+void Client::AddCallback_AddClient(std::function<void(Client *)> func) {
+    Client::callbacks_add.push_back(std::move(func));
+}
+
+void Client::AddCallback_RemoveClient(std::function<void(Client *)> func) {
+    Client::callbacks_remove.push_back(std::move(func));
+}
+
 Client::Client(int clientId, std::string name) {
     this->clientId = clientId;
     this->name = name;
@@ -22,6 +32,10 @@ Client::Client(int clientId, std::string name) {
     lastLocationTime = std::chrono::system_clock::now();
 
     clients.push_back(this);
+
+    for (auto &cb : Client::callbacks_add) {
+        cb(this);
+    }
 }
 
 Client::~Client() {
@@ -32,6 +46,10 @@ Client::~Client() {
                 clients.end()
             );
         }
+    }
+
+    for (auto &cb : Client::callbacks_remove) {
+        cb(this);
     }
 }
 
@@ -67,9 +85,9 @@ Location Client::GetInterpolatedLocation() const {
     auto totalMs = std::chrono::duration_cast<std::chrono::milliseconds>(locationTime - lastLocationTime).count();
 
     float alpha = 1;
-
-    if (ms < totalMs)
+    if (totalMs != 0) 
         alpha = static_cast<float>(ms) / static_cast<float>(totalMs);
+    alpha = glm::clamp(alpha, 0.f, 1.f);
 
     Location loc;
     loc.position = glm::mix(lastLocation.position, location.position, alpha);

@@ -16,19 +16,6 @@ Client *Client::GetClient(int clientId) {
     return nullptr;
 }
 
-Client *Client::RemoveClient(int clientId) {
-    for (Client *c : clients) {
-        if (c->IsPeer(c->clientId)) {
-            clients.erase(
-                std::remove(clients.begin(), clients.end(), c),
-                clients.end()
-            );
-            return c;
-        }
-    }
-
-    return nullptr;
-}
 
 bool Client::IsPeer(int clientId) {
     return this->clientId == clientId;
@@ -65,6 +52,17 @@ Client::Client(std::string name) {
     this->name = name;
     this->clientId = GenerateClientId();
     clients.push_back(this);
+}
+
+Client::~Client() {
+    for (Client *c : clients) {
+        if (c == this) {
+            clients.erase(
+                std::remove(clients.begin(), clients.end(), c),
+                clients.end()
+            );
+        }
+    }
 }
 
 int GenerateClientId() {

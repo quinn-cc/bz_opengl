@@ -10,7 +10,7 @@ private:
     ENetPeer* server;
 
     void MsgRecv(ENetEvent event);
-
+    
 public:
     static Networker &GetInstance();
 

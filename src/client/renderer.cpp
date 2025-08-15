@@ -1,4 +1,5 @@
 #include "renderer.hpp"
+#include "networker.hpp"
 #include <glm/glm.hpp>
 #include <threepp/threepp.hpp>
 #include <GLFW/glfw3.h>
@@ -30,6 +31,8 @@ glm::quat Renderer::toGLM(threepp::Quaternion &q) {
 }
 
 void Renderer::Init() {
+    closed = false;
+
     if (!glfwInit()) {
         spdlog::error("GLFW failed to initialize");
         exit(1);
@@ -46,27 +49,54 @@ void Renderer::Init() {
         exit(1);
     }
     glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
 
     spdlog::debug("About to init renderer");
 
     renderer = new threepp::GLRenderer({800.0f, 600.0f});
+    renderer->setClearColor(threepp::Color(0x3399ff));
+    renderer->shadowMap().enabled = true;
+    renderer->shadowMap().type = threepp::ShadowMap::PFCSoft;
+    renderer->toneMapping = threepp::ToneMapping::ACESFilmic;
 
     scene = threepp::Scene::create();
     camera = threepp::PerspectiveCamera::create(75, 800.f/600.f, 0.1f, 1000.f);
+
+    const auto planeGeometry = threepp::PlaneGeometry::create(100, 100);
+    const auto planeMaterial = threepp::MeshLambertMaterial::create();
+    planeMaterial->color = threepp::Color::lightgray;
+    planeMaterial->side = threepp::Side::Double;
+    auto plane = threepp::Mesh::create(planeGeometry, planeMaterial);
+    plane->rotateX(threepp::math::degToRad(90));
+    plane->receiveShadow = true;
+    scene->add(plane);
 
     auto grid = threepp::GridHelper::create(10, 10); // size=10 units, divisions=10
     scene->add(grid);
 
     auto light = threepp::AmbientLight::create(0xffffff, 0.5f);
     scene->add(light);
+
+    auto dir = threepp::DirectionalLight::create(threepp::Color(0xffffff), 1.0f); // white, full intensity
+    dir->position.set(150, 50, 150);
+    dir->castShadow = true;
+    scene->add(dir);
+
+    Client::AddCallback_AddClient([this](Client *client){ this->OnClientAdd(client); });
+    Client::AddCallback_RemoveClient([this](Client *client){ this->OnClientRemove(client); });
+    Shot::AddCallback_AddShot([this](Shot *shot){ this->OnShotAdd(shot); });
+    Shot::AddCallback_RemoveShot([this](Shot *shot){ this->OnShotRemove(shot); });
 }
 
 bool Renderer::ShouldClose() {
-    return glfwWindowShouldClose(window);
+    return closed || glfwWindowShouldClose(window);
 }
 
 void Renderer::Close() {
+    spdlog::debug("Closing GLFW window");
+    glfwDestroyWindow(window);
     glfwTerminate();
+    closed = true;
 }
 
 void Renderer::BeginFrame() {
@@ -82,6 +112,44 @@ float Renderer::GetDeltaTime() {
     return deltaTime;
 }
 
+void Renderer::OnClientAdd(Client *client) {
+    auto geometry = threepp::BoxGeometry::create(1, 1, 1);
+    auto material = threepp::MeshStandardMaterial::create();
+    material->color = threepp::Color(0x00ff00); // green
+    material->metalness = 0.5f;   // optional: 0 = non-metal, 1 = metal
+    material->roughness = 0.5f;   // 0 = smooth, 1 = rough
+    std::shared_ptr<threepp::Mesh> mesh = threepp::Mesh::create(geometry, material);
+    mesh->castShadow = true;
+    mesh->receiveShadow = true;
+    clientMeshes[client] = mesh;
+    scene->add(mesh);
+}
+
+void Renderer::OnClientRemove(Client *client) {
+    threepp::Mesh &mesh = *(clientMeshes[client]);
+    scene->remove(mesh);
+    clientMeshes.erase(client);
+}
+
+void Renderer::OnShotAdd(Shot *shot) {
+    auto geometry = threepp::SphereGeometry::create(0.5);
+    auto material = threepp::MeshStandardMaterial::create();
+    material->color = threepp::Color(0x00ffff); // green
+    material->metalness = 0.5f;   // optional: 0 = non-metal, 1 = metal
+    material->roughness = 0.5f;   // 0 = smooth, 1 = rough
+    std::shared_ptr<threepp::Mesh> mesh = threepp::Mesh::create(geometry, material);
+    mesh->castShadow = true;
+    mesh->receiveShadow = true;
+    shotMeshes[shot] = mesh;
+    scene->add(mesh);
+}
+
+void Renderer::OnShotRemove(Shot *shot) {
+    threepp::Mesh &mesh = *(shotMeshes[shot]);
+    scene->remove(mesh);
+    shotMeshes.erase(shot);
+}
+
 void Renderer::Update() {
     std::chrono::time_point<std::chrono::system_clock> currTime = std::chrono::system_clock::now();  
     deltaTime = std::chrono::duration<double>(currTime - lastFrameTime).count();
@@ -94,39 +162,16 @@ void Renderer::Update() {
     glm::vec3 total = pos + lookDir;
     threepp::Vector3 atVec = toInternal(total);
     camera->lookAt(atVec);
-}
 
-void Renderer::Draw(Client *client) {
-    Location loc = client->GetInterpolatedLocation();
-
-    if (client->hasMesh == false) {
-        auto geometry = threepp::BoxGeometry::create(1, 1, 1);
-        auto material = threepp::MeshBasicMaterial::create();
-        material->color = threepp::Color(0x00ff00); // green
-        client->mesh = threepp::Mesh::create(geometry, material);
-        client->hasMesh = true;
+    // Draw the meshes
+    for (Client *client : Client::clients) {
+        Location loc = client->GetInterpolatedLocation();
+        clientMeshes[client]->position = toInternal(loc.position);
+        clientMeshes[client]->quaternion = toInternal(loc.rotation);
     }
 
-    scene->add(client->mesh);
-    client->mesh->position = toInternal(loc.position);
+    for (Shot *shot : Shot::shots) {
+        glm::vec3 pos = shot->GetPosition();
+        shotMeshes[shot]->position = toInternal(pos);
+    }
 }
-
-void Renderer::Draw(Shot *shot) {
-    // float dt = GetFrameTime();
-    
-    // glm::vec3 pos = shot->GetPosition();
-    // DrawSphere(toInternal(pos), BULLET_SIZE, GREEN);
-}
-
-
-//Model model;
-
-//void Render_Init() {
-    //model = LoadModel("/home/quinn/bz_opengl/data/models/tank/tank.gltf");     // Supports OBJ, GLTF, IQM
-    //Texture2D texture = LoadTexture("/home/quinn/bz_opengl/data/models/tank/quinn/bz_opengl/01_-_Default_baseColor.png");
-    //model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
-    //texture = LoadTexture("/home/quinn/bz_opengl/data/models/tank/quinn/bz_opengl/02_-_Default_baseColor.png");
-    //model.materials[1].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
-    //texture = LoadTexture("/home/quinn/bz_opengl/data/models/tank/quinn/bz_opengl/03_-_Default_baseColor.png");
-    //model.materials[1].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
-//}

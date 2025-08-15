@@ -530,40 +530,56 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: \
  /home/quinn/Documents/bztest/bz_opengl/libs/glm/glm/detail/type_half.inl \
  /home/quinn/Documents/bztest/bz_opengl/libs/glm/glm/integer.hpp \
  /home/quinn/Documents/bztest/bz_opengl/libs/glm/glm/detail/func_integer.inl \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/spdlog.h \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/common.h \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/null_mutex.h \
- /usr/include/c++/13/atomic \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/tweakme.h \
- /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \
- /usr/include/c++/13/format /usr/include/c++/13/charconv \
- /usr/include/c++/13/span \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/fmt/fmt.h \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/fmt/bundled/format.h \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/fmt/bundled/base.h \
- /usr/include/string.h /usr/include/strings.h \
+ /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
+ /usr/include/c++/13/bits/stl_map.h \
+ /usr/include/c++/13/bits/stl_multimap.h \
+ /home/quinn/Documents/bztest/bz_opengl/src/client/networker.hpp \
+ /home/quinn/Documents/bztest/bz_opengl/libs/enet/include/enet.h \
+ /usr/include/c++/13/stdlib.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
+ /usr/include/x86_64-linux-gnu/sys/ioctl.h \
+ /usr/include/x86_64-linux-gnu/bits/ioctls.h \
+ /usr/include/x86_64-linux-gnu/asm/ioctls.h \
+ /usr/include/asm-generic/ioctls.h /usr/include/linux/ioctl.h \
+ /usr/include/x86_64-linux-gnu/asm/ioctl.h \
+ /usr/include/asm-generic/ioctl.h \
+ /usr/include/x86_64-linux-gnu/bits/ioctl-types.h \
+ /usr/include/x86_64-linux-gnu/sys/ttydefaults.h \
+ /usr/include/x86_64-linux-gnu/sys/time.h \
+ /usr/include/x86_64-linux-gnu/sys/socket.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
+ /usr/include/x86_64-linux-gnu/bits/socket.h \
+ /usr/include/x86_64-linux-gnu/bits/socket_type.h \
+ /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
+ /usr/include/x86_64-linux-gnu/asm/socket.h \
+ /usr/include/asm-generic/socket.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+ /usr/include/asm-generic/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h \
+ /usr/include/x86_64-linux-gnu/asm/sockios.h \
+ /usr/include/asm-generic/sockios.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
+ /usr/include/x86_64-linux-gnu/bits/socket2.h /usr/include/poll.h \
+ /usr/include/x86_64-linux-gnu/sys/poll.h \
+ /usr/include/x86_64-linux-gnu/bits/poll.h \
+ /usr/include/x86_64-linux-gnu/bits/poll2.h /usr/include/arpa/inet.h \
+ /usr/include/netinet/in.h /usr/include/x86_64-linux-gnu/bits/in.h \
+ /usr/include/netinet/tcp.h /usr/include/netdb.h /usr/include/rpc/netdb.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/netdb.h /usr/include/string.h \
+ /usr/include/strings.h \
  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/c++/13/cstring \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/registry.h \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/periodic_worker.h \
- /usr/include/c++/13/condition_variable \
- /usr/include/c++/13/bits/unique_lock.h /usr/include/c++/13/stop_token \
- /usr/include/c++/13/bits/std_thread.h /usr/include/c++/13/semaphore \
- /usr/include/c++/13/bits/semaphore_base.h \
- /usr/include/c++/13/bits/atomic_timed_wait.h \
- /usr/include/c++/13/bits/this_thread_sleep.h \
- /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
- /usr/include/x86_64-linux-gnu/bits/semaphore.h /usr/include/c++/13/mutex \
- /usr/include/c++/13/thread \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/synchronous_factory.h \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/logger.h \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/backtracer.h \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/circular_q.h \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/log_msg_buffer.h \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/log_msg.h \
- /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/version.h \
- /home/quinn/Documents/bztest/bz_opengl/src/client/client.hpp \
+ /usr/include/fcntl.h /usr/include/x86_64-linux-gnu/bits/fcntl.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
+ /usr/include/linux/falloc.h /usr/include/x86_64-linux-gnu/bits/stat.h \
+ /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl2.h \
+ /home/quinn/Documents/bztest/bz_opengl/include/netmsg.hpp \
  /home/quinn/Documents/bztest/bz_opengl/include/geometry.hpp \
  /home/quinn/Documents/bztest/bz_opengl/libs/glm/glm/gtc/quaternion.hpp \
  /home/quinn/Documents/bztest/bz_opengl/libs/glm/glm/gtc/../gtc/constants.hpp \
@@ -603,5 +619,35 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: \
  /home/quinn/Documents/bztest/bz_opengl/libs/glm/glm/gtc/epsilon.hpp \
  /home/quinn/Documents/bztest/bz_opengl/libs/glm/glm/gtc/../detail/setup.hpp \
  /home/quinn/Documents/bztest/bz_opengl/libs/glm/glm/gtc/epsilon.inl \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/spdlog.h \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/common.h \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/null_mutex.h \
+ /usr/include/c++/13/atomic \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/tweakme.h \
+ /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \
+ /usr/include/c++/13/format /usr/include/c++/13/charconv \
+ /usr/include/c++/13/span \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/fmt/fmt.h \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/fmt/bundled/format.h \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/fmt/bundled/base.h \
+ /usr/include/c++/13/cstring \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/registry.h \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/periodic_worker.h \
+ /usr/include/c++/13/condition_variable \
+ /usr/include/c++/13/bits/unique_lock.h /usr/include/c++/13/stop_token \
+ /usr/include/c++/13/bits/std_thread.h /usr/include/c++/13/semaphore \
+ /usr/include/c++/13/bits/semaphore_base.h \
+ /usr/include/c++/13/bits/atomic_timed_wait.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h /usr/include/semaphore.h \
+ /usr/include/x86_64-linux-gnu/bits/semaphore.h /usr/include/c++/13/mutex \
+ /usr/include/c++/13/thread \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/synchronous_factory.h \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/logger.h \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/backtracer.h \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/circular_q.h \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/log_msg_buffer.h \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/details/log_msg.h \
+ /home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include/spdlog/version.h \
+ /home/quinn/Documents/bztest/bz_opengl/src/client/client.hpp \
  /home/quinn/Documents/bztest/bz_opengl/src/client/shot.hpp \
  /home/quinn/Documents/bztest/bz_opengl/src/client/player.hpp

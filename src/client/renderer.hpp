@@ -2,6 +2,7 @@
 #include <threepp/threepp.hpp>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <map>
 
 class Shot;
 class Client;
@@ -11,6 +12,8 @@ private:
     std::shared_ptr<threepp::Scene> scene;
     std::shared_ptr<threepp::PerspectiveCamera> camera;
     threepp::GLRenderer *renderer;
+    std::map<Client *, std::shared_ptr<threepp::Mesh>> clientMeshes;
+    std::map<Shot *, std::shared_ptr<threepp::Mesh>> shotMeshes;
 
     std::chrono::time_point<std::chrono::system_clock> lastFrameTime;
     double deltaTime;
@@ -19,6 +22,12 @@ private:
     threepp::Quaternion toInternal(glm::quat &q);
     glm::vec3 toGLM(threepp::Vector3 &v);
     glm::quat toGLM(threepp::Quaternion &q);
+    bool closed;
+
+    void OnClientAdd(Client *client);
+    void OnClientRemove(Client *client);
+    void OnShotAdd(Shot *client);
+    void OnShotRemove(Shot *client);
 
 public:
     GLFWwindow* window;
@@ -30,8 +39,7 @@ public:
     void BeginFrame();
     void EndFrame();
     float GetDeltaTime();
-    void Update();
 
-    void Draw(Client *client);
-    void Draw(Shot *shot);
+    
+    void Update();
 };

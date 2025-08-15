@@ -90,6 +90,7 @@ void Networker::Event_MsgRecv(ENetEvent event) {
     case ClientMsg_Type_SHOT: {
         ClientMsg_Shot *shotMsg = reinterpret_cast<ClientMsg_Shot*>(msg);
         MsgRecv_Shot(event, shotMsg);
+        break;
     }
     default:
         break;
@@ -98,11 +99,17 @@ void Networker::Event_MsgRecv(ENetEvent event) {
 
 void Networker::Event_Disconnection(ENetEvent event) {
     Client *client = Client::GetClient(GetClient(event.peer));
+    spdlog::debug("Client leaving: {}", client->ToString());
+
+    spdlog::info("Clients:");
+    for (const auto &pair : peers) {
+        spdlog::info("- {}: {}", pair.first, pair.second->connectID);
+    }
 
     if (client == nullptr) {
         spdlog::error("Peer disconnected, but player was not found");
     } else {
-        client = Client::RemoveClient(GetClient(event.peer));
+        client = Client::GetClient(GetClient(event.peer));
         spdlog::info("{} disconnected.", client->ToString());
 
         ServerMsg_Disconnection msg;
@@ -139,6 +146,11 @@ void Networker::MsgRecv_InitClient(ENetEvent event, ClientMsg_Init *init) {
         conn.clientId = client->GetId();
         strcpy(conn.name, client->GetName().c_str());
         SendToClient(new_client, &conn, sizeof(conn));
+    }
+    
+    spdlog::info("Clients:");
+    for (const auto &pair : peers) {
+        spdlog::info("- {}: {}", pair.first, pair.second->connectID);
     }
 }
 

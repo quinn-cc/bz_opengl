@@ -151,11 +151,6 @@ void Networker::MsgRecv_Disconnection(ServerMsg_Disconnection *msg) {
 
 void Networker::MsgRecv_Location(ENetEvent event, ServerMsg_Location *msg) {
     Client *client = Client::GetClient(msg->clientId);
-    spdlog::info("Updating {} location x={},y={},z={}", client->ToString(), msg->location.position.x, msg->location.position.y, msg->location.position.z);
-
-    if (!client)
-        spdlog::error("Client with clientId {} does not exist", msg->clientId);
-
     client->SetLocation(msg->location);
 }
 
