@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/quinn/Documents/bztest/bz_opengl
+CMAKE_SOURCE_DIR = /home/quinn/Desktop/bz_opengl
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/quinn/Documents/bztest/bz_opengl
+CMAKE_BINARY_DIR = /home/quinn/Desktop/bz_opengl
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,14 +132,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/quinn/Documents/bztest/bz_opengl && $(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Documents/bztest/bz_opengl/CMakeFiles /home/quinn/Documents/bztest/bz_opengl/libs/cxxopts//CMakeFiles/progress.marks
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/cxxopts/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Documents/bztest/bz_opengl/CMakeFiles 0
+	cd /home/quinn/Desktop/bz_opengl && $(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Desktop/bz_opengl/CMakeFiles /home/quinn/Desktop/bz_opengl/libs/cxxopts//CMakeFiles/progress.marks
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/cxxopts/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Desktop/bz_opengl/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/cxxopts/clean
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/cxxopts/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,17 +148,17 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/cxxopts/preinstall
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/cxxopts/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/cxxopts/preinstall
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/cxxopts/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/quinn/Desktop/bz_opengl && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Help Target
@@ -184,6 +184,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/quinn/Desktop/bz_opengl && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

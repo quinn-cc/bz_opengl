@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/quinn/Documents/bztest/bz_opengl
+CMAKE_SOURCE_DIR = /home/quinn/Desktop/bz_opengl
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/quinn/Documents/bztest/bz_opengl
+CMAKE_BINARY_DIR = /home/quinn/Desktop/bz_opengl
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,14 +132,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/quinn/Documents/bztest/bz_opengl && $(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Documents/bztest/bz_opengl/CMakeFiles /home/quinn/Documents/bztest/bz_opengl/libs/enet//CMakeFiles/progress.marks
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Documents/bztest/bz_opengl/CMakeFiles 0
+	cd /home/quinn/Desktop/bz_opengl && $(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Desktop/bz_opengl/CMakeFiles /home/quinn/Desktop/bz_opengl/libs/enet//CMakeFiles/progress.marks
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Desktop/bz_opengl/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/clean
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,22 +148,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/preinstall
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/preinstall
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/quinn/Desktop/bz_opengl && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 libs/enet/CMakeFiles/enet_static.dir/rule:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/CMakeFiles/enet_static.dir/rule
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/CMakeFiles/enet_static.dir/rule
 .PHONY : libs/enet/CMakeFiles/enet_static.dir/rule
 
 # Convenience name for target.
@@ -172,12 +172,12 @@ enet_static: libs/enet/CMakeFiles/enet_static.dir/rule
 
 # fast build rule for target.
 enet_static/fast:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_static.dir/build.make libs/enet/CMakeFiles/enet_static.dir/build
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_static.dir/build.make libs/enet/CMakeFiles/enet_static.dir/build
 .PHONY : enet_static/fast
 
 # Convenience name for target.
 libs/enet/CMakeFiles/enet_test.dir/rule:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/CMakeFiles/enet_test.dir/rule
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/CMakeFiles/enet_test.dir/rule
 .PHONY : libs/enet/CMakeFiles/enet_test.dir/rule
 
 # Convenience name for target.
@@ -186,12 +186,12 @@ enet_test: libs/enet/CMakeFiles/enet_test.dir/rule
 
 # fast build rule for target.
 enet_test/fast:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test.dir/build.make libs/enet/CMakeFiles/enet_test.dir/build
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test.dir/build.make libs/enet/CMakeFiles/enet_test.dir/build
 .PHONY : enet_test/fast
 
 # Convenience name for target.
 libs/enet/CMakeFiles/enet_test_extra_peers.dir/rule:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/CMakeFiles/enet_test_extra_peers.dir/rule
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/CMakeFiles/enet_test_extra_peers.dir/rule
 .PHONY : libs/enet/CMakeFiles/enet_test_extra_peers.dir/rule
 
 # Convenience name for target.
@@ -200,12 +200,12 @@ enet_test_extra_peers: libs/enet/CMakeFiles/enet_test_extra_peers.dir/rule
 
 # fast build rule for target.
 enet_test_extra_peers/fast:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_extra_peers.dir/build.make libs/enet/CMakeFiles/enet_test_extra_peers.dir/build
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_extra_peers.dir/build.make libs/enet/CMakeFiles/enet_test_extra_peers.dir/build
 .PHONY : enet_test_extra_peers/fast
 
 # Convenience name for target.
 libs/enet/CMakeFiles/enet_test_unit.dir/rule:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/CMakeFiles/enet_test_unit.dir/rule
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/enet/CMakeFiles/enet_test_unit.dir/rule
 .PHONY : libs/enet/CMakeFiles/enet_test_unit.dir/rule
 
 # Convenience name for target.
@@ -214,7 +214,7 @@ enet_test_unit: libs/enet/CMakeFiles/enet_test_unit.dir/rule
 
 # fast build rule for target.
 enet_test_unit/fast:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_unit.dir/build.make libs/enet/CMakeFiles/enet_test_unit.dir/build
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_unit.dir/build.make libs/enet/CMakeFiles/enet_test_unit.dir/build
 .PHONY : enet_test_unit/fast
 
 test/build.o: test/build.c.o
@@ -222,8 +222,8 @@ test/build.o: test/build.c.o
 
 # target to build an object file
 test/build.c.o:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test.dir/build.make libs/enet/CMakeFiles/enet_test.dir/test/build.c.o
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_extra_peers.dir/build.make libs/enet/CMakeFiles/enet_test_extra_peers.dir/test/build.c.o
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test.dir/build.make libs/enet/CMakeFiles/enet_test.dir/test/build.c.o
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_extra_peers.dir/build.make libs/enet/CMakeFiles/enet_test_extra_peers.dir/test/build.c.o
 .PHONY : test/build.c.o
 
 test/build.i: test/build.c.i
@@ -231,8 +231,8 @@ test/build.i: test/build.c.i
 
 # target to preprocess a source file
 test/build.c.i:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test.dir/build.make libs/enet/CMakeFiles/enet_test.dir/test/build.c.i
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_extra_peers.dir/build.make libs/enet/CMakeFiles/enet_test_extra_peers.dir/test/build.c.i
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test.dir/build.make libs/enet/CMakeFiles/enet_test.dir/test/build.c.i
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_extra_peers.dir/build.make libs/enet/CMakeFiles/enet_test_extra_peers.dir/test/build.c.i
 .PHONY : test/build.c.i
 
 test/build.s: test/build.c.s
@@ -240,8 +240,8 @@ test/build.s: test/build.c.s
 
 # target to generate assembly for a file
 test/build.c.s:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test.dir/build.make libs/enet/CMakeFiles/enet_test.dir/test/build.c.s
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_extra_peers.dir/build.make libs/enet/CMakeFiles/enet_test_extra_peers.dir/test/build.c.s
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test.dir/build.make libs/enet/CMakeFiles/enet_test.dir/test/build.c.s
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_extra_peers.dir/build.make libs/enet/CMakeFiles/enet_test_extra_peers.dir/test/build.c.s
 .PHONY : test/build.c.s
 
 test/library.o: test/library.c.o
@@ -249,7 +249,7 @@ test/library.o: test/library.c.o
 
 # target to build an object file
 test/library.c.o:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_static.dir/build.make libs/enet/CMakeFiles/enet_static.dir/test/library.c.o
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_static.dir/build.make libs/enet/CMakeFiles/enet_static.dir/test/library.c.o
 .PHONY : test/library.c.o
 
 test/library.i: test/library.c.i
@@ -257,7 +257,7 @@ test/library.i: test/library.c.i
 
 # target to preprocess a source file
 test/library.c.i:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_static.dir/build.make libs/enet/CMakeFiles/enet_static.dir/test/library.c.i
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_static.dir/build.make libs/enet/CMakeFiles/enet_static.dir/test/library.c.i
 .PHONY : test/library.c.i
 
 test/library.s: test/library.c.s
@@ -265,7 +265,7 @@ test/library.s: test/library.c.s
 
 # target to generate assembly for a file
 test/library.c.s:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_static.dir/build.make libs/enet/CMakeFiles/enet_static.dir/test/library.c.s
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_static.dir/build.make libs/enet/CMakeFiles/enet_static.dir/test/library.c.s
 .PHONY : test/library.c.s
 
 test/units/test_main.o: test/units/test_main.c.o
@@ -273,7 +273,7 @@ test/units/test_main.o: test/units/test_main.c.o
 
 # target to build an object file
 test/units/test_main.c.o:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_unit.dir/build.make libs/enet/CMakeFiles/enet_test_unit.dir/test/units/test_main.c.o
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_unit.dir/build.make libs/enet/CMakeFiles/enet_test_unit.dir/test/units/test_main.c.o
 .PHONY : test/units/test_main.c.o
 
 test/units/test_main.i: test/units/test_main.c.i
@@ -281,7 +281,7 @@ test/units/test_main.i: test/units/test_main.c.i
 
 # target to preprocess a source file
 test/units/test_main.c.i:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_unit.dir/build.make libs/enet/CMakeFiles/enet_test_unit.dir/test/units/test_main.c.i
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_unit.dir/build.make libs/enet/CMakeFiles/enet_test_unit.dir/test/units/test_main.c.i
 .PHONY : test/units/test_main.c.i
 
 test/units/test_main.s: test/units/test_main.c.s
@@ -289,7 +289,7 @@ test/units/test_main.s: test/units/test_main.c.s
 
 # target to generate assembly for a file
 test/units/test_main.c.s:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_unit.dir/build.make libs/enet/CMakeFiles/enet_test_unit.dir/test/units/test_main.c.s
+	cd /home/quinn/Desktop/bz_opengl && $(MAKE) $(MAKESILENT) -f libs/enet/CMakeFiles/enet_test_unit.dir/build.make libs/enet/CMakeFiles/enet_test_unit.dir/test/units/test_main.c.s
 .PHONY : test/units/test_main.c.s
 
 # Help Target
@@ -328,6 +328,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/quinn/Desktop/bz_opengl && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

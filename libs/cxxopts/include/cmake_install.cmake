@@ -1,4 +1,4 @@
-# Install script for directory: /home/quinn/Documents/bztest/bz_opengl/libs/cxxopts/include
+# Install script for directory: /home/quinn/Desktop/bz_opengl/libs/cxxopts/include
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

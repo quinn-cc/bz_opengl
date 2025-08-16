@@ -36,10 +36,6 @@ public:
     void Init();
     bool ShouldClose();
     void Close();
-    void BeginFrame();
-    void EndFrame();
     float GetDeltaTime();
-
-    
     void Update();
 };

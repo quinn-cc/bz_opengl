@@ -1,4 +1,4 @@
-# Install script for directory: /home/quinn/Documents/bztest/bz_opengl
+# Install script for directory: /home/quinn/Desktop/bz_opengl
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,27 +44,27 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/quinn/Documents/bztest/bz_opengl/libs/enet/cmake_install.cmake")
+  include("/home/quinn/Desktop/bz_opengl/libs/enet/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/quinn/Documents/bztest/bz_opengl/libs/spdlog/cmake_install.cmake")
+  include("/home/quinn/Desktop/bz_opengl/libs/spdlog/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/quinn/Documents/bztest/bz_opengl/libs/cxxopts/cmake_install.cmake")
+  include("/home/quinn/Desktop/bz_opengl/libs/cxxopts/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/quinn/Documents/bztest/bz_opengl/libs/glm/cmake_install.cmake")
+  include("/home/quinn/Desktop/bz_opengl/libs/glm/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/quinn/Documents/bztest/bz_opengl/libs/threepp/cmake_install.cmake")
+  include("/home/quinn/Desktop/bz_opengl/libs/threepp/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -75,5 +75,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/quinn/Documents/bztest/bz_opengl/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/quinn/Desktop/bz_opengl/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

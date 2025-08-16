@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DSPDLOG_COMPILED_LIB
 
-CXX_INCLUDES = -I/home/quinn/Documents/bztest/bz_opengl/include -I/home/quinn/Documents/bztest/bz_opengl/src/server -I/home/quinn/Documents/bztest/bz_opengl/libs/enet/include -I/home/quinn/Documents/bztest/bz_opengl/libs/spdlog/include -I/home/quinn/Documents/bztest/bz_opengl/libs/cxxopts/include -I/home/quinn/Documents/bztest/bz_opengl/libs/glm
+CXX_INCLUDES = -I/home/quinn/Desktop/bz_opengl/include -I/home/quinn/Desktop/bz_opengl/src/server -I/home/quinn/Desktop/bz_opengl/libs/enet/include -I/home/quinn/Desktop/bz_opengl/libs/spdlog/include -I/home/quinn/Desktop/bz_opengl/libs/cxxopts/include -I/home/quinn/Desktop/bz_opengl/libs/glm
 
 CXX_FLAGS = -O3 -DNDEBUG -std=gnu++20
 

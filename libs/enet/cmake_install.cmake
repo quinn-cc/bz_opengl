@@ -1,4 +1,4 @@
-# Install script for directory: /home/quinn/Documents/bztest/bz_opengl/libs/enet
+# Install script for directory: /home/quinn/Desktop/bz_opengl/libs/enet
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -43,18 +43,18 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/quinn/Documents/bztest/bz_opengl/libs/enet/libenet.a")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/quinn/Desktop/bz_opengl/libs/enet/libenet.a")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/quinn/Documents/bztest/bz_opengl/libs/enet/include/" FILES_MATCHING REGEX "/[^/]*\\.h$")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/quinn/Desktop/bz_opengl/libs/enet/include/" FILES_MATCHING REGEX "/[^/]*\\.h$")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/enet/enetConfig.cmake")
     file(DIFFERENT _cmake_export_file_changed FILES
          "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/enet/enetConfig.cmake"
-         "/home/quinn/Documents/bztest/bz_opengl/libs/enet/CMakeFiles/Export/47c3ab5863de4470d6dfdc7151d7b931/enetConfig.cmake")
+         "/home/quinn/Desktop/bz_opengl/libs/enet/CMakeFiles/Export/47c3ab5863de4470d6dfdc7151d7b931/enetConfig.cmake")
     if(_cmake_export_file_changed)
       file(GLOB _cmake_old_config_files "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/enet/enetConfig-*.cmake")
       if(_cmake_old_config_files)
@@ -67,9 +67,9 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
     endif()
     unset(_cmake_export_file_changed)
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/enet" TYPE FILE FILES "/home/quinn/Documents/bztest/bz_opengl/libs/enet/CMakeFiles/Export/47c3ab5863de4470d6dfdc7151d7b931/enetConfig.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/enet" TYPE FILE FILES "/home/quinn/Desktop/bz_opengl/libs/enet/CMakeFiles/Export/47c3ab5863de4470d6dfdc7151d7b931/enetConfig.cmake")
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/enet" TYPE FILE FILES "/home/quinn/Documents/bztest/bz_opengl/libs/enet/CMakeFiles/Export/47c3ab5863de4470d6dfdc7151d7b931/enetConfig-release.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/enet" TYPE FILE FILES "/home/quinn/Desktop/bz_opengl/libs/enet/CMakeFiles/Export/47c3ab5863de4470d6dfdc7151d7b931/enetConfig-release.cmake")
   endif()
 endif()
 

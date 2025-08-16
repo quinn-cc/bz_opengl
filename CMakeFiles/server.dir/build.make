@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/quinn/Documents/bztest/bz_opengl
+CMAKE_SOURCE_DIR = /home/quinn/Desktop/bz_opengl
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/quinn/Documents/bztest/bz_opengl
+CMAKE_BINARY_DIR = /home/quinn/Desktop/bz_opengl
 
 # Include any dependencies generated for this target.
 include CMakeFiles/server.dir/depend.make
@@ -72,58 +72,58 @@ include CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/src/server/client.cpp.o: CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/src/server/client.cpp.o: src/server/client.cpp
 CMakeFiles/server.dir/src/server/client.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/quinn/Documents/bztest/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/server.dir/src/server/client.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/client.cpp.o -MF CMakeFiles/server.dir/src/server/client.cpp.o.d -o CMakeFiles/server.dir/src/server/client.cpp.o -c /home/quinn/Documents/bztest/bz_opengl/src/server/client.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/quinn/Desktop/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/server.dir/src/server/client.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/client.cpp.o -MF CMakeFiles/server.dir/src/server/client.cpp.o.d -o CMakeFiles/server.dir/src/server/client.cpp.o -c /home/quinn/Desktop/bz_opengl/src/server/client.cpp
 
 CMakeFiles/server.dir/src/server/client.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/server/client.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/quinn/Documents/bztest/bz_opengl/src/server/client.cpp > CMakeFiles/server.dir/src/server/client.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/quinn/Desktop/bz_opengl/src/server/client.cpp > CMakeFiles/server.dir/src/server/client.cpp.i
 
 CMakeFiles/server.dir/src/server/client.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/server/client.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/quinn/Documents/bztest/bz_opengl/src/server/client.cpp -o CMakeFiles/server.dir/src/server/client.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/quinn/Desktop/bz_opengl/src/server/client.cpp -o CMakeFiles/server.dir/src/server/client.cpp.s
 
 CMakeFiles/server.dir/src/server/main.cpp.o: CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/src/server/main.cpp.o: src/server/main.cpp
 CMakeFiles/server.dir/src/server/main.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/quinn/Documents/bztest/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/server.dir/src/server/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/main.cpp.o -MF CMakeFiles/server.dir/src/server/main.cpp.o.d -o CMakeFiles/server.dir/src/server/main.cpp.o -c /home/quinn/Documents/bztest/bz_opengl/src/server/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/quinn/Desktop/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/server.dir/src/server/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/main.cpp.o -MF CMakeFiles/server.dir/src/server/main.cpp.o.d -o CMakeFiles/server.dir/src/server/main.cpp.o -c /home/quinn/Desktop/bz_opengl/src/server/main.cpp
 
 CMakeFiles/server.dir/src/server/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/server/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/quinn/Documents/bztest/bz_opengl/src/server/main.cpp > CMakeFiles/server.dir/src/server/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/quinn/Desktop/bz_opengl/src/server/main.cpp > CMakeFiles/server.dir/src/server/main.cpp.i
 
 CMakeFiles/server.dir/src/server/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/server/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/quinn/Documents/bztest/bz_opengl/src/server/main.cpp -o CMakeFiles/server.dir/src/server/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/quinn/Desktop/bz_opengl/src/server/main.cpp -o CMakeFiles/server.dir/src/server/main.cpp.s
 
 CMakeFiles/server.dir/src/server/networker.cpp.o: CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/src/server/networker.cpp.o: src/server/networker.cpp
 CMakeFiles/server.dir/src/server/networker.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/quinn/Documents/bztest/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/server.dir/src/server/networker.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/networker.cpp.o -MF CMakeFiles/server.dir/src/server/networker.cpp.o.d -o CMakeFiles/server.dir/src/server/networker.cpp.o -c /home/quinn/Documents/bztest/bz_opengl/src/server/networker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/quinn/Desktop/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/server.dir/src/server/networker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/networker.cpp.o -MF CMakeFiles/server.dir/src/server/networker.cpp.o.d -o CMakeFiles/server.dir/src/server/networker.cpp.o -c /home/quinn/Desktop/bz_opengl/src/server/networker.cpp
 
 CMakeFiles/server.dir/src/server/networker.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/server/networker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/quinn/Documents/bztest/bz_opengl/src/server/networker.cpp > CMakeFiles/server.dir/src/server/networker.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/quinn/Desktop/bz_opengl/src/server/networker.cpp > CMakeFiles/server.dir/src/server/networker.cpp.i
 
 CMakeFiles/server.dir/src/server/networker.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/server/networker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/quinn/Documents/bztest/bz_opengl/src/server/networker.cpp -o CMakeFiles/server.dir/src/server/networker.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/quinn/Desktop/bz_opengl/src/server/networker.cpp -o CMakeFiles/server.dir/src/server/networker.cpp.s
 
 CMakeFiles/server.dir/src/server/shot.cpp.o: CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/src/server/shot.cpp.o: src/server/shot.cpp
 CMakeFiles/server.dir/src/server/shot.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/quinn/Documents/bztest/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/server.dir/src/server/shot.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/shot.cpp.o -MF CMakeFiles/server.dir/src/server/shot.cpp.o.d -o CMakeFiles/server.dir/src/server/shot.cpp.o -c /home/quinn/Documents/bztest/bz_opengl/src/server/shot.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/quinn/Desktop/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/server.dir/src/server/shot.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/shot.cpp.o -MF CMakeFiles/server.dir/src/server/shot.cpp.o.d -o CMakeFiles/server.dir/src/server/shot.cpp.o -c /home/quinn/Desktop/bz_opengl/src/server/shot.cpp
 
 CMakeFiles/server.dir/src/server/shot.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/server/shot.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/quinn/Documents/bztest/bz_opengl/src/server/shot.cpp > CMakeFiles/server.dir/src/server/shot.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/quinn/Desktop/bz_opengl/src/server/shot.cpp > CMakeFiles/server.dir/src/server/shot.cpp.i
 
 CMakeFiles/server.dir/src/server/shot.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/server/shot.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/quinn/Documents/bztest/bz_opengl/src/server/shot.cpp -o CMakeFiles/server.dir/src/server/shot.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/quinn/Desktop/bz_opengl/src/server/shot.cpp -o CMakeFiles/server.dir/src/server/shot.cpp.s
 
 # Object files for target server
 server_OBJECTS = \
@@ -144,7 +144,7 @@ server: libs/enet/libenet.a
 server: libs/spdlog/libspdlog.a
 server: libs/glm/glm/libglm.a
 server: CMakeFiles/server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/quinn/Documents/bztest/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/quinn/Desktop/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -156,6 +156,6 @@ CMakeFiles/server.dir/clean:
 .PHONY : CMakeFiles/server.dir/clean
 
 CMakeFiles/server.dir/depend:
-	cd /home/quinn/Documents/bztest/bz_opengl && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/quinn/Documents/bztest/bz_opengl /home/quinn/Documents/bztest/bz_opengl /home/quinn/Documents/bztest/bz_opengl /home/quinn/Documents/bztest/bz_opengl /home/quinn/Documents/bztest/bz_opengl/CMakeFiles/server.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/quinn/Desktop/bz_opengl && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/quinn/Desktop/bz_opengl /home/quinn/Desktop/bz_opengl /home/quinn/Desktop/bz_opengl /home/quinn/Desktop/bz_opengl /home/quinn/Desktop/bz_opengl/CMakeFiles/server.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/server.dir/depend
 

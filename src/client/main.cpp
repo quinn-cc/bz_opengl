@@ -27,6 +27,7 @@ void ParseArgs(int argc, char *argv[]) {
 void Start() {
     Player::GetInstance().Init();
     Renderer::GetInstance().Init();
+    Input::GetInstance().Init();
     Networker::GetInstance().Init();
     Networker::GetInstance().MsgSend_Init();
 }
@@ -40,10 +41,7 @@ void Update() {
     }
 
     Player::GetInstance().Update();
-
-    Renderer::GetInstance().BeginFrame();
     Renderer::GetInstance().Update();
-    Renderer::GetInstance().EndFrame();
 }
 
 void Close() {

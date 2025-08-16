@@ -1,5 +1,27 @@
 #include "input.hpp"
 #include "renderer.hpp"
+#include <GLFW/glfw3.h>
+#include <spdlog/spdlog.h>
+
+/*
+ * Priavte
+ */
+
+void Input::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    Input &input = GetInstance();
+
+    if (action == GLFW_PRESS) {
+        // Fire
+        if (key == GLFW_KEY_F) {
+            spdlog::info("Shot fired");
+            input.fireReady = true;
+        }
+    }
+}
+
+/*
+ * Public
+ */
 
 Input &Input::GetInstance() {
     static Input instance;
@@ -8,6 +30,10 @@ Input &Input::GetInstance() {
 
 Input::Input() {
     movement = { 0, 0 };
+}
+
+void Input::Init() {
+    glfwSetKeyCallback(Renderer::GetInstance().window, keyCallback);
 }
 
 void Input::Update() {
@@ -27,15 +53,12 @@ void Input::Update() {
     if (glfwGetKey(window, GLFW_KEY_DOWN))
         movement.y -= 1;
 
-    // Fire
-    if (glfwGetKey(window, GLFW_KEY_F)) {
-        fireReady = true;
-    }
-
     // Spawn
     if (glfwGetKey(window, GLFW_KEY_U)) {
         requestingSpawn = true;
     }
+
+    glfwPollEvents();
 }
 
 bool Input::FireReady() {

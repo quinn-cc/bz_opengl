@@ -198,6 +198,8 @@ CMakeFiles/client.dir/src/client/client.cpp.o: src/client/client.cpp \
   libs/spdlog/include/spdlog/spdlog.h \
   libs/spdlog/include/spdlog/tweakme.h \
   libs/spdlog/include/spdlog/version.h \
+  libs/threepp/include/threepp/animation/AnimationClip.hpp \
+  libs/threepp/include/threepp/animation/KeyframeTrack.hpp \
   libs/threepp/include/threepp/cameras/Camera.hpp \
   libs/threepp/include/threepp/cameras/OrthographicCamera.hpp \
   libs/threepp/include/threepp/cameras/PerspectiveCamera.hpp \
@@ -279,6 +281,7 @@ CMakeFiles/client.dir/src/client/client.cpp.o: src/client/client.cpp \
   libs/threepp/include/threepp/math/Color.hpp \
   libs/threepp/include/threepp/math/Euler.hpp \
   libs/threepp/include/threepp/math/Frustum.hpp \
+  libs/threepp/include/threepp/math/Interpolant.hpp \
   libs/threepp/include/threepp/math/MathUtils.hpp \
   libs/threepp/include/threepp/math/Matrix3.hpp \
   libs/threepp/include/threepp/math/Matrix4.hpp \
@@ -291,6 +294,9 @@ CMakeFiles/client.dir/src/client/client.cpp.o: src/client/client.cpp \
   libs/threepp/include/threepp/math/Vector4.hpp \
   libs/threepp/include/threepp/math/float_view.hpp \
   libs/threepp/include/threepp/math/infinity.hpp \
+  libs/threepp/include/threepp/math/interpolants/CubicInterpolant.hpp \
+  libs/threepp/include/threepp/math/interpolants/DiscreteInterpolant.hpp \
+  libs/threepp/include/threepp/math/interpolants/LinearInterpolant.hpp \
   libs/threepp/include/threepp/objects/Group.hpp \
   libs/threepp/include/threepp/objects/HUD.hpp \
   libs/threepp/include/threepp/objects/InstancedMesh.hpp \
@@ -807,6 +813,24 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   libs/glm/glm/vec2.hpp \
   libs/glm/glm/vec3.hpp \
   libs/glm/glm/vec4.hpp \
+  libs/spdlog/include/spdlog/common.h \
+  libs/spdlog/include/spdlog/details/backtracer.h \
+  libs/spdlog/include/spdlog/details/circular_q.h \
+  libs/spdlog/include/spdlog/details/log_msg.h \
+  libs/spdlog/include/spdlog/details/log_msg_buffer.h \
+  libs/spdlog/include/spdlog/details/null_mutex.h \
+  libs/spdlog/include/spdlog/details/periodic_worker.h \
+  libs/spdlog/include/spdlog/details/registry.h \
+  libs/spdlog/include/spdlog/details/synchronous_factory.h \
+  libs/spdlog/include/spdlog/fmt/bundled/base.h \
+  libs/spdlog/include/spdlog/fmt/bundled/format.h \
+  libs/spdlog/include/spdlog/fmt/fmt.h \
+  libs/spdlog/include/spdlog/logger.h \
+  libs/spdlog/include/spdlog/spdlog.h \
+  libs/spdlog/include/spdlog/tweakme.h \
+  libs/spdlog/include/spdlog/version.h \
+  libs/threepp/include/threepp/animation/AnimationClip.hpp \
+  libs/threepp/include/threepp/animation/KeyframeTrack.hpp \
   libs/threepp/include/threepp/cameras/Camera.hpp \
   libs/threepp/include/threepp/cameras/OrthographicCamera.hpp \
   libs/threepp/include/threepp/cameras/PerspectiveCamera.hpp \
@@ -888,6 +912,7 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   libs/threepp/include/threepp/math/Color.hpp \
   libs/threepp/include/threepp/math/Euler.hpp \
   libs/threepp/include/threepp/math/Frustum.hpp \
+  libs/threepp/include/threepp/math/Interpolant.hpp \
   libs/threepp/include/threepp/math/MathUtils.hpp \
   libs/threepp/include/threepp/math/Matrix3.hpp \
   libs/threepp/include/threepp/math/Matrix4.hpp \
@@ -900,6 +925,9 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   libs/threepp/include/threepp/math/Vector4.hpp \
   libs/threepp/include/threepp/math/float_view.hpp \
   libs/threepp/include/threepp/math/infinity.hpp \
+  libs/threepp/include/threepp/math/interpolants/CubicInterpolant.hpp \
+  libs/threepp/include/threepp/math/interpolants/DiscreteInterpolant.hpp \
+  libs/threepp/include/threepp/math/interpolants/LinearInterpolant.hpp \
   libs/threepp/include/threepp/objects/Group.hpp \
   libs/threepp/include/threepp/objects/HUD.hpp \
   libs/threepp/include/threepp/objects/InstancedMesh.hpp \
@@ -934,6 +962,7 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   /usr/include/assert.h \
   /usr/include/c++/13/any \
   /usr/include/c++/13/array \
+  /usr/include/c++/13/atomic \
   /usr/include/c++/13/backward/auto_ptr.h \
   /usr/include/c++/13/backward/binders.h \
   /usr/include/c++/13/bit \
@@ -944,6 +973,7 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   /usr/include/c++/13/bits/allocator.h \
   /usr/include/c++/13/bits/atomic_base.h \
   /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+  /usr/include/c++/13/bits/atomic_timed_wait.h \
   /usr/include/c++/13/bits/atomic_wait.h \
   /usr/include/c++/13/bits/basic_ios.h \
   /usr/include/c++/13/bits/basic_ios.tcc \
@@ -952,6 +982,7 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   /usr/include/c++/13/bits/char_traits.h \
   /usr/include/c++/13/bits/charconv.h \
   /usr/include/c++/13/bits/chrono.h \
+  /usr/include/c++/13/bits/chrono_io.h \
   /usr/include/c++/13/bits/codecvt.h \
   /usr/include/c++/13/bits/concept_check.h \
   /usr/include/c++/13/bits/cpp_type_traits.h \
@@ -1005,6 +1036,7 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   /usr/include/c++/13/bits/ranges_util.h \
   /usr/include/c++/13/bits/refwrap.h \
   /usr/include/c++/13/bits/requires_hosted.h \
+  /usr/include/c++/13/bits/semaphore_base.h \
   /usr/include/c++/13/bits/shared_ptr.h \
   /usr/include/c++/13/bits/shared_ptr_atomic.h \
   /usr/include/c++/13/bits/shared_ptr_base.h \
@@ -1013,6 +1045,7 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   /usr/include/c++/13/bits/std_abs.h \
   /usr/include/c++/13/bits/std_function.h \
   /usr/include/c++/13/bits/std_mutex.h \
+  /usr/include/c++/13/bits/std_thread.h \
   /usr/include/c++/13/bits/stl_algo.h \
   /usr/include/c++/13/bits/stl_algobase.h \
   /usr/include/c++/13/bits/stl_bvector.h \
@@ -1035,7 +1068,9 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   /usr/include/c++/13/bits/streambuf_iterator.h \
   /usr/include/c++/13/bits/string_view.tcc \
   /usr/include/c++/13/bits/stringfwd.h \
+  /usr/include/c++/13/bits/this_thread_sleep.h \
   /usr/include/c++/13/bits/uniform_int_dist.h \
+  /usr/include/c++/13/bits/unique_lock.h \
   /usr/include/c++/13/bits/unique_ptr.h \
   /usr/include/c++/13/bits/unordered_map.h \
   /usr/include/c++/13/bits/uses_allocator.h \
@@ -1046,16 +1081,20 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   /usr/include/c++/13/cctype \
   /usr/include/c++/13/cerrno \
   /usr/include/c++/13/cfloat \
+  /usr/include/c++/13/charconv \
+  /usr/include/c++/13/chrono \
   /usr/include/c++/13/climits \
   /usr/include/c++/13/clocale \
   /usr/include/c++/13/cmath \
   /usr/include/c++/13/codecvt \
   /usr/include/c++/13/compare \
   /usr/include/c++/13/concepts \
+  /usr/include/c++/13/condition_variable \
   /usr/include/c++/13/cstddef \
   /usr/include/c++/13/cstdint \
   /usr/include/c++/13/cstdio \
   /usr/include/c++/13/cstdlib \
+  /usr/include/c++/13/cstring \
   /usr/include/c++/13/ctime \
   /usr/include/c++/13/cwchar \
   /usr/include/c++/13/cwctype \
@@ -1070,6 +1109,7 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   /usr/include/c++/13/ext/string_conversions.h \
   /usr/include/c++/13/ext/type_traits.h \
   /usr/include/c++/13/filesystem \
+  /usr/include/c++/13/format \
   /usr/include/c++/13/functional \
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/iomanip \
@@ -1080,6 +1120,7 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   /usr/include/c++/13/locale \
   /usr/include/c++/13/map \
   /usr/include/c++/13/memory \
+  /usr/include/c++/13/mutex \
   /usr/include/c++/13/new \
   /usr/include/c++/13/numbers \
   /usr/include/c++/13/optional \
@@ -1088,12 +1129,16 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   /usr/include/c++/13/pstl/glue_memory_defs.h \
   /usr/include/c++/13/pstl/pstl_config.h \
   /usr/include/c++/13/ratio \
+  /usr/include/c++/13/semaphore \
+  /usr/include/c++/13/span \
   /usr/include/c++/13/sstream \
   /usr/include/c++/13/stdexcept \
+  /usr/include/c++/13/stop_token \
   /usr/include/c++/13/streambuf \
   /usr/include/c++/13/string \
   /usr/include/c++/13/string_view \
   /usr/include/c++/13/system_error \
+  /usr/include/c++/13/thread \
   /usr/include/c++/13/tr1/bessel_function.tcc \
   /usr/include/c++/13/tr1/beta_function.tcc \
   /usr/include/c++/13/tr1/ell_integral.tcc \
@@ -1127,10 +1172,13 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   /usr/include/math.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
+  /usr/include/semaphore.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
   /usr/include/syscall.h \
   /usr/include/time.h \
   /usr/include/unistd.h \
@@ -1174,6 +1222,7 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   /usr/include/x86_64-linux-gnu/bits/select-decl.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
   /usr/include/x86_64-linux-gnu/bits/select2.h \
+  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
@@ -1185,6 +1234,8 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib.h \
+  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
+  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
   /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
   /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
   /usr/include/x86_64-linux-gnu/bits/syscall.h \
@@ -1251,6 +1302,7 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
   /usr/include/x86_64-linux-gnu/sys/select.h \
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
   /usr/include/x86_64-linux-gnu/sys/syscall.h \
+  /usr/include/x86_64-linux-gnu/sys/time.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
@@ -1459,6 +1511,8 @@ CMakeFiles/client.dir/src/client/main.cpp.o: src/client/main.cpp \
   libs/spdlog/include/spdlog/spdlog.h \
   libs/spdlog/include/spdlog/tweakme.h \
   libs/spdlog/include/spdlog/version.h \
+  libs/threepp/include/threepp/animation/AnimationClip.hpp \
+  libs/threepp/include/threepp/animation/KeyframeTrack.hpp \
   libs/threepp/include/threepp/cameras/Camera.hpp \
   libs/threepp/include/threepp/cameras/OrthographicCamera.hpp \
   libs/threepp/include/threepp/cameras/PerspectiveCamera.hpp \
@@ -1540,6 +1594,7 @@ CMakeFiles/client.dir/src/client/main.cpp.o: src/client/main.cpp \
   libs/threepp/include/threepp/math/Color.hpp \
   libs/threepp/include/threepp/math/Euler.hpp \
   libs/threepp/include/threepp/math/Frustum.hpp \
+  libs/threepp/include/threepp/math/Interpolant.hpp \
   libs/threepp/include/threepp/math/MathUtils.hpp \
   libs/threepp/include/threepp/math/Matrix3.hpp \
   libs/threepp/include/threepp/math/Matrix4.hpp \
@@ -1552,6 +1607,9 @@ CMakeFiles/client.dir/src/client/main.cpp.o: src/client/main.cpp \
   libs/threepp/include/threepp/math/Vector4.hpp \
   libs/threepp/include/threepp/math/float_view.hpp \
   libs/threepp/include/threepp/math/infinity.hpp \
+  libs/threepp/include/threepp/math/interpolants/CubicInterpolant.hpp \
+  libs/threepp/include/threepp/math/interpolants/DiscreteInterpolant.hpp \
+  libs/threepp/include/threepp/math/interpolants/LinearInterpolant.hpp \
   libs/threepp/include/threepp/objects/Group.hpp \
   libs/threepp/include/threepp/objects/HUD.hpp \
   libs/threepp/include/threepp/objects/InstancedMesh.hpp \
@@ -2234,6 +2292,8 @@ CMakeFiles/client.dir/src/client/networker.cpp.o: src/client/networker.cpp \
   libs/spdlog/include/spdlog/spdlog.h \
   libs/spdlog/include/spdlog/tweakme.h \
   libs/spdlog/include/spdlog/version.h \
+  libs/threepp/include/threepp/animation/AnimationClip.hpp \
+  libs/threepp/include/threepp/animation/KeyframeTrack.hpp \
   libs/threepp/include/threepp/cameras/Camera.hpp \
   libs/threepp/include/threepp/cameras/OrthographicCamera.hpp \
   libs/threepp/include/threepp/cameras/PerspectiveCamera.hpp \
@@ -2315,6 +2375,7 @@ CMakeFiles/client.dir/src/client/networker.cpp.o: src/client/networker.cpp \
   libs/threepp/include/threepp/math/Color.hpp \
   libs/threepp/include/threepp/math/Euler.hpp \
   libs/threepp/include/threepp/math/Frustum.hpp \
+  libs/threepp/include/threepp/math/Interpolant.hpp \
   libs/threepp/include/threepp/math/MathUtils.hpp \
   libs/threepp/include/threepp/math/Matrix3.hpp \
   libs/threepp/include/threepp/math/Matrix4.hpp \
@@ -2327,6 +2388,9 @@ CMakeFiles/client.dir/src/client/networker.cpp.o: src/client/networker.cpp \
   libs/threepp/include/threepp/math/Vector4.hpp \
   libs/threepp/include/threepp/math/float_view.hpp \
   libs/threepp/include/threepp/math/infinity.hpp \
+  libs/threepp/include/threepp/math/interpolants/CubicInterpolant.hpp \
+  libs/threepp/include/threepp/math/interpolants/DiscreteInterpolant.hpp \
+  libs/threepp/include/threepp/math/interpolants/LinearInterpolant.hpp \
   libs/threepp/include/threepp/objects/Group.hpp \
   libs/threepp/include/threepp/objects/HUD.hpp \
   libs/threepp/include/threepp/objects/InstancedMesh.hpp \
@@ -2952,6 +3016,8 @@ CMakeFiles/client.dir/src/client/player.cpp.o: src/client/player.cpp \
   libs/spdlog/include/spdlog/spdlog.h \
   libs/spdlog/include/spdlog/tweakme.h \
   libs/spdlog/include/spdlog/version.h \
+  libs/threepp/include/threepp/animation/AnimationClip.hpp \
+  libs/threepp/include/threepp/animation/KeyframeTrack.hpp \
   libs/threepp/include/threepp/cameras/Camera.hpp \
   libs/threepp/include/threepp/cameras/OrthographicCamera.hpp \
   libs/threepp/include/threepp/cameras/PerspectiveCamera.hpp \
@@ -3033,6 +3099,7 @@ CMakeFiles/client.dir/src/client/player.cpp.o: src/client/player.cpp \
   libs/threepp/include/threepp/math/Color.hpp \
   libs/threepp/include/threepp/math/Euler.hpp \
   libs/threepp/include/threepp/math/Frustum.hpp \
+  libs/threepp/include/threepp/math/Interpolant.hpp \
   libs/threepp/include/threepp/math/MathUtils.hpp \
   libs/threepp/include/threepp/math/Matrix3.hpp \
   libs/threepp/include/threepp/math/Matrix4.hpp \
@@ -3045,6 +3112,9 @@ CMakeFiles/client.dir/src/client/player.cpp.o: src/client/player.cpp \
   libs/threepp/include/threepp/math/Vector4.hpp \
   libs/threepp/include/threepp/math/float_view.hpp \
   libs/threepp/include/threepp/math/infinity.hpp \
+  libs/threepp/include/threepp/math/interpolants/CubicInterpolant.hpp \
+  libs/threepp/include/threepp/math/interpolants/DiscreteInterpolant.hpp \
+  libs/threepp/include/threepp/math/interpolants/LinearInterpolant.hpp \
   libs/threepp/include/threepp/objects/Group.hpp \
   libs/threepp/include/threepp/objects/HUD.hpp \
   libs/threepp/include/threepp/objects/InstancedMesh.hpp \
@@ -3679,6 +3749,8 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: src/client/renderer.cpp \
   libs/spdlog/include/spdlog/spdlog.h \
   libs/spdlog/include/spdlog/tweakme.h \
   libs/spdlog/include/spdlog/version.h \
+  libs/threepp/include/threepp/animation/AnimationClip.hpp \
+  libs/threepp/include/threepp/animation/KeyframeTrack.hpp \
   libs/threepp/include/threepp/cameras/Camera.hpp \
   libs/threepp/include/threepp/cameras/OrthographicCamera.hpp \
   libs/threepp/include/threepp/cameras/PerspectiveCamera.hpp \
@@ -3760,6 +3832,7 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: src/client/renderer.cpp \
   libs/threepp/include/threepp/math/Color.hpp \
   libs/threepp/include/threepp/math/Euler.hpp \
   libs/threepp/include/threepp/math/Frustum.hpp \
+  libs/threepp/include/threepp/math/Interpolant.hpp \
   libs/threepp/include/threepp/math/MathUtils.hpp \
   libs/threepp/include/threepp/math/Matrix3.hpp \
   libs/threepp/include/threepp/math/Matrix4.hpp \
@@ -3772,6 +3845,9 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: src/client/renderer.cpp \
   libs/threepp/include/threepp/math/Vector4.hpp \
   libs/threepp/include/threepp/math/float_view.hpp \
   libs/threepp/include/threepp/math/infinity.hpp \
+  libs/threepp/include/threepp/math/interpolants/CubicInterpolant.hpp \
+  libs/threepp/include/threepp/math/interpolants/DiscreteInterpolant.hpp \
+  libs/threepp/include/threepp/math/interpolants/LinearInterpolant.hpp \
   libs/threepp/include/threepp/objects/Group.hpp \
   libs/threepp/include/threepp/objects/HUD.hpp \
   libs/threepp/include/threepp/objects/InstancedMesh.hpp \
@@ -4349,6 +4425,8 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: src/client/shot.cpp \
   libs/glm/glm/vec2.hpp \
   libs/glm/glm/vec3.hpp \
   libs/glm/glm/vec4.hpp \
+  libs/threepp/include/threepp/animation/AnimationClip.hpp \
+  libs/threepp/include/threepp/animation/KeyframeTrack.hpp \
   libs/threepp/include/threepp/cameras/Camera.hpp \
   libs/threepp/include/threepp/cameras/OrthographicCamera.hpp \
   libs/threepp/include/threepp/cameras/PerspectiveCamera.hpp \
@@ -4430,6 +4508,7 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: src/client/shot.cpp \
   libs/threepp/include/threepp/math/Color.hpp \
   libs/threepp/include/threepp/math/Euler.hpp \
   libs/threepp/include/threepp/math/Frustum.hpp \
+  libs/threepp/include/threepp/math/Interpolant.hpp \
   libs/threepp/include/threepp/math/MathUtils.hpp \
   libs/threepp/include/threepp/math/Matrix3.hpp \
   libs/threepp/include/threepp/math/Matrix4.hpp \
@@ -4442,6 +4521,9 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: src/client/shot.cpp \
   libs/threepp/include/threepp/math/Vector4.hpp \
   libs/threepp/include/threepp/math/float_view.hpp \
   libs/threepp/include/threepp/math/infinity.hpp \
+  libs/threepp/include/threepp/math/interpolants/CubicInterpolant.hpp \
+  libs/threepp/include/threepp/math/interpolants/DiscreteInterpolant.hpp \
+  libs/threepp/include/threepp/math/interpolants/LinearInterpolant.hpp \
   libs/threepp/include/threepp/objects/Group.hpp \
   libs/threepp/include/threepp/objects/HUD.hpp \
   libs/threepp/include/threepp/objects/InstancedMesh.hpp \
@@ -5054,6 +5136,20 @@ src/client/input.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/fp-fast.h:
 
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn.h:
+
+src/client/input.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+
+/usr/include/x86_64-linux-gnu/bits/errno.h:
+
+/usr/include/x86_64-linux-gnu/bits/environments.h:
+
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
+
 libs/threepp/include/threepp/materials/Material.hpp:
 
 libs/threepp/include/threepp/materials/LineBasicMaterial.hpp:
@@ -5099,12 +5195,6 @@ libs/glm/glm/detail/func_vector_relational.inl:
 libs/threepp/include/threepp/helpers/ArrowHelper.hpp:
 
 libs/threepp/include/threepp/math/Box3.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/signal_ext.h:
-
-/usr/include/x86_64-linux-gnu/bits/types.h:
-
-libs/threepp/include/threepp/utils/TaskManager.hpp:
 
 libs/threepp/include/threepp/geometries/IcosahedronGeometry.hpp:
 
@@ -5304,8 +5394,6 @@ libs/glm/glm/ext/matrix_float4x2_precision.hpp:
 
 /usr/include/c++/13/bits/streambuf_iterator.h:
 
-/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
-
 libs/glm/glm/ext/vector_bool2.hpp:
 
 libs/glm/glm/ext/vector_bool4_precision.hpp:
@@ -5347,8 +5435,6 @@ libs/glm/glm/ext/matrix_float2x2.hpp:
 libs/glm/glm/ext/quaternion_common.inl:
 
 libs/glm/glm/ext/matrix_double4x2.hpp:
-
-/usr/include/c++/13/bits/locale_facets_nonio.h:
 
 libs/glm/glm/detail/func_common.inl:
 
@@ -5506,6 +5592,24 @@ libs/glm/glm/ext/matrix_float2x3_precision.hpp:
 
 libs/threepp/include/threepp/core/BufferAttribute.hpp:
 
+/usr/include/x86_64-linux-gnu/bits/signal_ext.h:
+
+/usr/include/x86_64-linux-gnu/bits/types.h:
+
+libs/threepp/include/threepp/utils/TaskManager.hpp:
+
+libs/threepp/include/threepp/animation/AnimationClip.hpp:
+
+libs/glm/glm/ext/quaternion_geometric.hpp:
+
+/usr/include/c++/13/backward/binders.h:
+
+/usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
+
+libs/glm/glm/ext/matrix_float4x3.hpp:
+
+/usr/include/c++/13/charconv:
+
 libs/glm/glm/detail/_vectorize.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
@@ -5582,16 +5686,6 @@ libs/spdlog/include/spdlog/common.h:
 
 libs/glm/glm/detail/type_mat4x2.inl:
 
-libs/glm/glm/ext/quaternion_geometric.hpp:
-
-/usr/include/c++/13/backward/binders.h:
-
-/usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
-
-libs/glm/glm/ext/matrix_float4x3.hpp:
-
-/usr/include/c++/13/charconv:
-
 /usr/include/x86_64-linux-gnu/asm/posix_types_64.h:
 
 libs/glm/glm/ext/matrix_float4x3_precision.hpp:
@@ -5608,8 +5702,6 @@ src/client/networker.hpp:
 
 libs/glm/glm/mat2x4.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/floatn.h:
-
 libs/threepp/include/threepp/lights/DirectionalLight.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
@@ -5621,6 +5713,8 @@ libs/glm/glm/vec4.hpp:
 /usr/include/c++/13/bits/functexcept.h:
 
 libs/glm/glm/mat4x3.hpp:
+
+libs/threepp/include/threepp/animation/KeyframeTrack.hpp:
 
 /usr/include/c++/13/istream:
 
@@ -5639,6 +5733,8 @@ libs/spdlog/include/spdlog/fmt/fmt.h:
 libs/glm/glm/ext/vector_double3_precision.hpp:
 
 libs/glm/glm/ext/vector_bool3_precision.hpp:
+
+libs/threepp/include/threepp/math/interpolants/CubicInterpolant.hpp:
 
 libs/glm/glm/detail/type_mat2x2.inl:
 
@@ -5752,6 +5848,10 @@ libs/glm/glm/ext/vector_float2.hpp:
 
 libs/threepp/include/threepp/materials/MeshStandardMaterial.hpp:
 
+/usr/include/c++/13/bits/locale_facets_nonio.h:
+
+libs/threepp/include/threepp/math/interpolants/DiscreteInterpolant.hpp:
+
 libs/spdlog/include/spdlog/details/null_mutex.h:
 
 libs/glm/glm/ext/vector_float3.hpp:
@@ -5836,11 +5936,15 @@ libs/threepp/include/threepp/materials/materials.hpp:
 
 /usr/include/c++/13/ios:
 
-libs/threepp/include/threepp/math/Color.hpp:
-
 /usr/include/c++/13/bits/codecvt.h:
 
 libs/threepp/include/threepp/math/Euler.hpp:
+
+libs/threepp/include/threepp/math/Color.hpp:
+
+libs/threepp/include/threepp/math/Interpolant.hpp:
+
+/usr/include/c++/13/bits/requires_hosted.h:
 
 libs/threepp/include/threepp/math/MathUtils.hpp:
 
@@ -5867,6 +5971,8 @@ libs/threepp/include/threepp/math/Vector4.hpp:
 libs/threepp/include/threepp/math/infinity.hpp:
 
 /usr/include/c++/13/bits/chrono_io.h:
+
+libs/threepp/include/threepp/math/interpolants/LinearInterpolant.hpp:
 
 libs/threepp/include/threepp/objects/LineSegments.hpp:
 
@@ -5949,8 +6055,6 @@ libs/glm/glm/detail/type_half.hpp:
 /usr/include/c++/13/bits/charconv.h:
 
 /usr/include/c++/13/bits/chrono.h:
-
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
 
 /usr/include/c++/13/bits/enable_special_members.h:
 
@@ -6054,12 +6158,6 @@ libs/threepp/include/threepp/loaders/loaders.hpp:
 
 /usr/include/c++/13/bits/refwrap.h:
 
-/usr/include/c++/13/bits/requires_hosted.h:
-
-src/client/input.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
-
 /usr/include/c++/13/bits/semaphore_base.h:
 
 libs/glm/glm/detail/type_mat3x2.hpp:
@@ -6125,8 +6223,6 @@ src/client/player.hpp:
 /usr/include/x86_64-linux-gnu/bits/socket_type.h:
 
 /usr/include/c++/13/bits/stl_pair.h:
-
-/usr/include/x86_64-linux-gnu/bits/errno.h:
 
 /usr/include/asm-generic/sockios.h:
 
@@ -6341,5 +6437,3 @@ libs/threepp/include/threepp/geometries/LatheGeometry.hpp:
 /usr/include/x86_64-linux-gnu/asm/errno.h:
 
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
-
-/usr/include/x86_64-linux-gnu/bits/environments.h:

@@ -8,10 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/quinn/Documents/bztest/bz_opengl/src/server/client.cpp" "CMakeFiles/server.dir/src/server/client.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/client.cpp.o.d"
-  "/home/quinn/Documents/bztest/bz_opengl/src/server/main.cpp" "CMakeFiles/server.dir/src/server/main.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/main.cpp.o.d"
-  "/home/quinn/Documents/bztest/bz_opengl/src/server/networker.cpp" "CMakeFiles/server.dir/src/server/networker.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/networker.cpp.o.d"
-  "/home/quinn/Documents/bztest/bz_opengl/src/server/shot.cpp" "CMakeFiles/server.dir/src/server/shot.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/shot.cpp.o.d"
+  "/home/quinn/Desktop/bz_opengl/src/server/client.cpp" "CMakeFiles/server.dir/src/server/client.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/client.cpp.o.d"
+  "/home/quinn/Desktop/bz_opengl/src/server/main.cpp" "CMakeFiles/server.dir/src/server/main.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/main.cpp.o.d"
+  "/home/quinn/Desktop/bz_opengl/src/server/networker.cpp" "CMakeFiles/server.dir/src/server/networker.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/networker.cpp.o.d"
+  "/home/quinn/Desktop/bz_opengl/src/server/shot.cpp" "CMakeFiles/server.dir/src/server/shot.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/shot.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

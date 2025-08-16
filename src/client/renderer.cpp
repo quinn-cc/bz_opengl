@@ -99,15 +99,6 @@ void Renderer::Close() {
     closed = true;
 }
 
-void Renderer::BeginFrame() {
-    glfwPollEvents();
-}
-
-void Renderer::EndFrame() {
-    renderer->render(*scene, *camera);
-    glfwSwapBuffers(window);
-}
-
 float Renderer::GetDeltaTime() {
     return deltaTime;
 }
@@ -174,4 +165,7 @@ void Renderer::Update() {
         glm::vec3 pos = shot->GetPosition();
         shotMeshes[shot]->position = toInternal(pos);
     }
+
+    renderer->render(*scene, *camera);
+    glfwSwapBuffers(window);
 }
