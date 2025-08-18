@@ -2,6 +2,7 @@
 #include "networker.hpp"
 #include <glm/glm.hpp>
 #include <threepp/threepp.hpp>
+#include <threepp/loaders/AssimpLoader.hpp>
 #include <GLFW/glfw3.h>
 #include <spdlog/spdlog.h>
 #include <memory>
@@ -104,20 +105,34 @@ float Renderer::GetDeltaTime() {
 }
 
 void Renderer::OnClientAdd(Client *client) {
-    auto geometry = threepp::BoxGeometry::create(1, 1, 1);
-    auto material = threepp::MeshStandardMaterial::create();
-    material->color = threepp::Color(0x00ff00); // green
-    material->metalness = 0.5f;   // optional: 0 = non-metal, 1 = metal
-    material->roughness = 0.5f;   // 0 = smooth, 1 = rough
-    std::shared_ptr<threepp::Mesh> mesh = threepp::Mesh::create(geometry, material);
-    mesh->castShadow = true;
-    mesh->receiveShadow = true;
-    clientMeshes[client] = mesh;
-    scene->add(mesh);
+    // auto geometry = threepp::BoxGeometry::create(1, 1, 1);
+    // auto material = threepp::MeshStandardMaterial::create();
+    // material->color = threepp::Color(0x00ff00); // green
+    // material->metalness = 0.5f;   // optional: 0 = non-metal, 1 = metal
+    // material->roughness = 0.5f;   // 0 = smooth, 1 = rough
+    // std::shared_ptr<threepp::Mesh> mesh = threepp::Mesh::create(geometry, material);
+    // mesh->castShadow = true;
+    // mesh->receiveShadow = true;
+    // clientMeshes[client] = mesh;
+    // scene->add(mesh);
+    threepp::AssimpLoader loader;
+    try {
+        auto model = loader.load("/home/quinn/Desktop/bz_opengl/data/models/tank/tank.glb");
+        clientMeshes[client] = model;
+        model->scale.set(0.5f, 0.5f, 0.5f);
+        model->traverseType<threepp::Mesh>([&](threepp::Mesh& child) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+        });
+        scene->add(model);
+    } catch (...) {
+        spdlog::error("Failed to load tank.");
+    }
+   
 }
 
 void Renderer::OnClientRemove(Client *client) {
-    threepp::Mesh &mesh = *(clientMeshes[client]);
+    auto &mesh = *(clientMeshes[client]);
     scene->remove(mesh);
     clientMeshes.erase(client);
 }
@@ -147,7 +162,7 @@ void Renderer::Update() {
     lastFrameTime = currTime;
 
     glm::vec3 lookDir = Player::GetInstance().GetForwardVector();
-    glm::vec3 offset = { 0.0f, 0.5f, 0.0f };
+    glm::vec3 offset = { 0.0f, 1, 0.0f };
     glm::vec3 pos = Player::GetInstance().GetLocation().position + offset;
     camera->position = toInternal(pos);
     glm::vec3 total = pos + lookDir;
@@ -155,13 +170,13 @@ void Renderer::Update() {
     camera->lookAt(atVec);
 
     // Draw the meshes
-    for (Client *client : Client::clients) {
+    for (const auto& [client, mesh] : clientMeshes) {
         Location loc = client->GetInterpolatedLocation();
         clientMeshes[client]->position = toInternal(loc.position);
         clientMeshes[client]->quaternion = toInternal(loc.rotation);
     }
 
-    for (Shot *shot : Shot::shots) {
+    for (const auto& [shot, mesh] : shotMeshes) {
         glm::vec3 pos = shot->GetPosition();
         shotMeshes[shot]->position = toInternal(pos);
     }

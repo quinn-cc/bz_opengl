@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/client.dir/src/client/main.cpp.o.d"
   "CMakeFiles/client.dir/src/client/networker.cpp.o"
   "CMakeFiles/client.dir/src/client/networker.cpp.o.d"
+  "CMakeFiles/client.dir/src/client/physics.cpp.o"
+  "CMakeFiles/client.dir/src/client/physics.cpp.o.d"
   "CMakeFiles/client.dir/src/client/player.cpp.o"
   "CMakeFiles/client.dir/src/client/player.cpp.o.d"
   "CMakeFiles/client.dir/src/client/renderer.cpp.o"

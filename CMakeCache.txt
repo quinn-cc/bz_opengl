@@ -14,6 +14,207 @@
 # EXTERNAL cache entries
 ########################
 
+//Android JNI IOSystem support is active
+ASSIMP_ANDROID_JNIIOSYSTEM:BOOL=OFF
+
+//Path for library output files
+ASSIMP_ARCHIVE_OUTPUT_DIRECTORY:STRING=/home/quinn/Desktop/bz_opengl/libs/assimp/lib
+
+//Enable AddressSanitizer.
+ASSIMP_ASAN:BOOL=OFF
+
+//default value of all ASSIMP_BUILD_XXX_EXPORTER values
+ASSIMP_BUILD_ALL_EXPORTERS_BY_DEFAULT:BOOL=ON
+
+//default value of all ASSIMP_BUILD_XXX_IMPORTER values
+ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT:BOOL=ON
+
+//describe the current architecture.
+ASSIMP_BUILD_ARCHITECTURE:STRING=
+
+//If the supplementary tools for Assimp are built in addition to
+// the library.
+ASSIMP_BUILD_ASSIMP_TOOLS:BOOL=OFF
+
+//describe the current compiler.
+ASSIMP_BUILD_COMPILER:STRING=
+
+//Build documentation using Doxygen.
+ASSIMP_BUILD_DOCS:BOOL=OFF
+
+//If the Draco libraries are to be built. Primarily for glTF
+ASSIMP_BUILD_DRACO:BOOL=OFF
+
+//Build package as Mac OS X Framework bundle.
+ASSIMP_BUILD_FRAMEWORK:BOOL=OFF
+
+//Enable M3D file export
+ASSIMP_BUILD_M3D_EXPORTER:BOOL=OFF
+
+//Enable M3D file import
+ASSIMP_BUILD_M3D_IMPORTER:BOOL=OFF
+
+//Build the C4D importer, which relies on the non-free Cineware
+// SDK.
+ASSIMP_BUILD_NONFREE_C4D_IMPORTER:BOOL=OFF
+
+//If the official samples are built as well (needs Glut).
+ASSIMP_BUILD_SAMPLES:BOOL=OFF
+
+//If the test suite for Assimp is built in addition to the library.
+ASSIMP_BUILD_TESTS:BOOL=ON
+
+//Enable USD file import
+ASSIMP_BUILD_USD_IMPORTER:BOOL=OFF
+
+//Enable verbose USD import debug logging
+ASSIMP_BUILD_USD_VERBOSE_LOGS:BOOL=OFF
+
+//Use ccache to speed up compilation.
+ASSIMP_BUILD_USE_CCACHE:BOOL=ON
+
+//Enable VRML (.wrl/.x3dv) file import
+ASSIMP_BUILD_VRML_IMPORTER:BOOL=OFF
+
+//Build your zlib
+ASSIMP_BUILD_ZLIB:BOOL=OFF
+
+//Enable this to measure test coverage.
+ASSIMP_COVERALLS:BOOL=OFF
+
+//Set to ON to enable double precision processing
+ASSIMP_DOUBLE_PRECISION:BOOL=OFF
+
+//adds the target headercheck which compiles every header file,
+// default disabled because it adds many targets
+ASSIMP_HEADERCHECK:BOOL=OFF
+
+//Enable Hunter package manager support
+ASSIMP_HUNTER_ENABLED:BOOL=OFF
+
+//Don't call git to get the hash.
+ASSIMP_IGNORE_GIT_HASH:BOOL=OFF
+
+//Inject debug postfix in .a/.so/.dll lib names
+ASSIMP_INJECT_DEBUG_POSTFIX:BOOL=ON
+
+//Disable this if you want to use assimp as a submodule.
+ASSIMP_INSTALL:BOOL=ON
+
+//Path for library output files
+ASSIMP_LIBRARY_OUTPUT_DIRECTORY:STRING=/home/quinn/Desktop/bz_opengl/libs/assimp/bin
+
+//Suffix to append to library names
+ASSIMP_LIBRARY_SUFFIX:STRING=
+
+//Disable Assimp's export functionality.
+ASSIMP_NO_EXPORT:BOOL=OFF
+
+//Set to ON to generate CPack configuration files and packaging
+// targets
+ASSIMP_OPT_BUILD_PACKAGES:BOOL=OFF
+
+//the package-specific version used for uploading the sources
+ASSIMP_PACKAGE_VERSION:STRING=0
+
+//Suppress rapidjson warning on MSVC (NOTE: breaks android build)
+ASSIMP_RAPIDJSON_NO_MEMBER_ITERATOR:BOOL=ON
+
+//Path for runtime output files
+ASSIMP_RUNTIME_OUTPUT_DIRECTORY:STRING=/home/quinn/Desktop/bz_opengl/libs/assimp/bin
+
+//Enable Undefined Behavior sanitizer.
+ASSIMP_UBSAN:BOOL=OFF
+
+//Treat all warnings as errors.
+ASSIMP_WARNINGS_AS_ERRORS:BOOL=ON
+
+//Value Computed by CMake
+Assimp_BINARY_DIR:STATIC=/home/quinn/Desktop/bz_opengl/libs/assimp
+
+//Value Computed by CMake
+Assimp_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+Assimp_SOURCE_DIR:STATIC=/home/quinn/Desktop/bz_opengl/libs/assimp
+
+//Set when you want to build the Bullet 2 demos
+BUILD_BULLET2_DEMOS:BOOL=OFF
+
+//Set when you want to build Bullet 3
+BUILD_BULLET3:BOOL=OFF
+
+//Build BulletRobotics extra module, only applied when BUILD_EXTRAS
+// is ON
+BUILD_BULLET_ROBOTICS_EXTRA:BOOL=ON
+
+//Build BulletRoboticsGUI extra module, only applied when BUILD_EXTRAS
+// is ON
+BUILD_BULLET_ROBOTICS_GUI_EXTRA:BOOL=ON
+
+//Set when you want to build apps with enet TCP networking support
+BUILD_CLSOCKET:BOOL=ON
+
+//Build ConvexDecomposition extra module, only applied when BUILD_EXTRAS
+// is ON
+BUILD_CONVEX_DECOMPOSITION_EXTRA:BOOL=ON
+
+//Build original Bullet CPU examples
+BUILD_CPU_DEMOS:BOOL=ON
+
+//Build OpenGL/EGL
+BUILD_EGL:BOOL=ON
+
+//Set when you want to build apps with enet UDP networking support
+BUILD_ENET:BOOL=ON
+
+//Set when you want to build the extras
+BUILD_EXTRAS:BOOL=OFF
+
+//Build GIMPACTUtils extra module, only applied when BUILD_EXTRAS
+// is ON
+BUILD_GIMPACTUTILS_EXTRA:BOOL=ON
+
+//Build HACD extra module, only applied when BUILD_EXTRAS is ON
+BUILD_HACD_EXTRA:BOOL=ON
+
+//Build InverseDynamic extra module, only applied when BUILD_EXTRAS
+// is ON
+BUILD_INVERSE_DYNAMIC_EXTRA:BOOL=ON
+
+//Build obj2sdf extra module, only applied when BUILD_EXTRAS is
+// ON
+BUILD_OBJ2SDF_EXTRA:BOOL=ON
+
+//Set when you want to build Bullet 3 OpenGL3+ demos
+BUILD_OPENGL3_DEMOS:BOOL=OFF
+
+//Set when you want to build pybullet (Python bindings for Bullet)
+BUILD_PYBULLET:BOOL=OFF
+
+//Build Serialize extra module, only applied when BUILD_EXTRAS
+// is ON
+BUILD_SERIALIZE_EXTRA:BOOL=ON
+
+//Use shared libraries
+BUILD_SHARED_LIBS:BOOL=OFF
+
+//Build Unit Tests
+BUILD_UNIT_TESTS:BOOL=OFF
+
+//Build Bullet 2 libraries with mutex locking around certain operations
+// (required for multi-threading)
+BULLET2_MULTITHREADING:BOOL=OFF
+
+//Value Computed by CMake
+BULLET_PHYSICS_BINARY_DIR:STATIC=/home/quinn/Desktop/bz_opengl/libs/bullet
+
+//Value Computed by CMake
+BULLET_PHYSICS_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+BULLET_PHYSICS_SOURCE_DIR:STATIC=/home/quinn/Desktop/bz_opengl/libs/bullet
+
 //Value Computed by CMake
 BZ_BINARY_DIR:STATIC=/home/quinn/Desktop/bz_opengl
 
@@ -22,6 +223,26 @@ BZ_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 BZ_SOURCE_DIR:STATIC=/home/quinn/Desktop/bz_opengl
+
+//Dependencies for the target
+BulletRoboticsGUI_LIB_DEPENDS:STATIC=general;dl;
+
+//Dependencies for the target
+BulletRobotics_LIB_DEPENDS:STATIC=general;dl;
+
+//Path to a program.
+CCACHE_PATH:FILEPATH=CCACHE_PATH-NOTFOUND
+
+//Clamp rigid bodies' velocity to this value, if larger than zero.
+// Useful to prevent floating point errors or in general runaway
+// velocities in complex scenarios
+CLAMP_VELOCITIES:STRING=0
+
+//Build for use inside other CMake projects as dependency.
+CLSOCKET_DEP_ONLY:BOOL=OFF
+
+//Build clsocket lib as shared.
+CLSOCKET_SHARED:BOOL=OFF
 
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
@@ -87,6 +308,9 @@ CMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 
 //Flags used by the C compiler during RELWITHDEBINFO builds.
 CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
+
+//Debug Postfix for lib, samples and tools
+CMAKE_DEBUG_POSTFIX:STRING=
 
 //Path to a program.
 CMAKE_DLLTOOL:FILEPATH=CMAKE_DLLTOOL-NOTFOUND
@@ -302,6 +526,9 @@ CXXOPTS_ENABLE_WARNINGS:BOOL=OFF
 //Use ICU Unicode library
 CXXOPTS_USE_UNICODE_HELP:BOOL=OFF
 
+//Use VHACD in BulletRobotics and pybullet
+ENABLE_VHACD:BOOL=ON
+
 //Build enet as a shared library
 ENET_SHARED:BOOL=OFF
 
@@ -421,8 +648,74 @@ GLM_ENABLE_SIMD_SSSE3:BOOL=OFF
 //Force 'pure' instructions
 GLM_FORCE_PURE:BOOL=OFF
 
+//The subdirectory to the header prefix
+INCLUDE_INSTALL_DIR:PATH=include/bullet
+
+//Install generated CMake files
+INSTALL_CMAKE_FILES:BOOL=ON
+
+//Set when you want extra libraries installed
+INSTALL_EXTRA_LIBS:BOOL=ON
+
+//Set when you want to install libraries
+INSTALL_LIBS:BOOL=ON
+
+//Internal update serialization structures
+INTERNAL_UPDATE_SERIALIZATION_STRUCTURES:BOOL=OFF
+
+//Library directory name
+LIB_DESTINATION:STRING=lib
+
+//Define suffix of directory name (32/64)
+LIB_SUFFIX:STRING=
+
 //Path to a library.
 MATH_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libm.so
+
+//Path to a file.
+OPENGL_EGL_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a file.
+OPENGL_GLES2_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a file.
+OPENGL_GLES3_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a file.
+OPENGL_GLX_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a file.
+OPENGL_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a library.
+OPENGL_egl_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libEGL.so
+
+//Path to a library.
+OPENGL_gl_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGL.so
+
+//Path to a library.
+OPENGL_gles2_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGLESv2.so
+
+//Path to a library.
+OPENGL_gles3_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGLESv2.so
+
+//Path to a library.
+OPENGL_glu_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGLU.so
+
+//Path to a library.
+OPENGL_glx_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGLX.so
+
+//Path to a library.
+OPENGL_opengl_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libOpenGL.so
+
+//Path to a file.
+OPENGL_xmesa_INCLUDE_DIR:PATH=OPENGL_xmesa_INCLUDE_DIR-NOTFOUND
+
+//Dependencies for the target
+OpenGLWindow_LIB_DEPENDS:STATIC=general;dl;
+
+//Base directory for pkgconfig files
+PKGCONFIG_INSTALL_PREFIX:STRING=lib/pkgconfig/
 
 //Arguments to supply to pkg-config
 PKG_CONFIG_ARGN:STRING=
@@ -545,6 +838,27 @@ THREEPP_WITH_GLFW:BOOL=ON
 
 //Build with SVGLoader
 THREEPP_WITH_SVG:BOOL=OFF
+
+//Use double precision
+USE_DOUBLE_PRECISION:BOOL=OFF
+
+//Use Glut
+USE_GLUT:BOOL=ON
+
+//Use Graphical Benchmark
+USE_GRAPHICAL_BENCHMARK:BOOL=ON
+
+//Use MSVC Incremental Linking
+USE_MSVC_INCREMENTAL_LINKING:BOOL=OFF
+
+//Use MSVC Release Runtime Library even in Debug
+USE_MSVC_RELEASE_RUNTIME_ALWAYS:BOOL=OFF
+
+//Use OpenVR for virtual reality
+USE_OPENVR:BOOL=OFF
+
+//Use btSoftMultiBodyDynamicsWorld
+USE_SOFT_BODY_MULTI_BODY_DYNAMICS_WORLD:BOOL=ON
 
 //Path to a file.
 X11_ICE_INCLUDE_PATH:PATH=/usr/include
@@ -948,6 +1262,15 @@ X11_xkbfile_INCLUDE_PATH:PATH=/usr/include
 //Path to a library.
 X11_xkbfile_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libxkbfile.so
 
+//Path to a file.
+ZLIB_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a library.
+ZLIB_LIBRARY_DBG:FILEPATH=/usr/lib/x86_64-linux-gnu/libz.a
+
+//Path to a library.
+ZLIB_LIBRARY_REL:FILEPATH=/usr/lib/x86_64-linux-gnu/libz.a
+
 //Value Computed by CMake
 cxxopts_BINARY_DIR:STATIC=/home/quinn/Desktop/bz_opengl/libs/cxxopts
 
@@ -1004,6 +1327,10 @@ threepp_SOURCE_DIR:STATIC=/home/quinn/Desktop/bz_opengl/libs/threepp
 # INTERNAL cache entries
 ########################
 
+//ADVANCED property for variable: ASSIMP_BUILD_ARCHITECTURE
+ASSIMP_BUILD_ARCHITECTURE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: ASSIMP_BUILD_COMPILER
+ASSIMP_BUILD_COMPILER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_ADDR2LINE
 CMAKE_ADDR2LINE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
@@ -1148,7 +1475,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=11
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=23
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -1196,6 +1523,10 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 CXXOPTS__VERSION_MAJOR:INTERNAL=3
 CXXOPTS__VERSION_MINOR:INTERNAL=3
 CXXOPTS__VERSION_PATCH:INTERNAL=1
+//Details about finding OpenGL
+FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[/usr/lib/x86_64-linux-gnu/libOpenGL.so][/usr/lib/x86_64-linux-gnu/libGLX.so][/usr/include][c ][v()]
+//Details about finding PkgConfig
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v1.8.1()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //Details about finding X11
@@ -1220,6 +1551,32 @@ GLFW_PKG_CONFIG_REQUIRES_PRIVATE:INTERNAL=
 HAVE_FWRITE_UNLOCKED:INTERNAL=1
 //ADVANCED property for variable: MATH_LIBRARY
 MATH_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_EGL_INCLUDE_DIR
+OPENGL_EGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_GLES2_INCLUDE_DIR
+OPENGL_GLES2_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_GLES3_INCLUDE_DIR
+OPENGL_GLES3_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_GLX_INCLUDE_DIR
+OPENGL_GLX_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_INCLUDE_DIR
+OPENGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_egl_LIBRARY
+OPENGL_egl_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_gl_LIBRARY
+OPENGL_gl_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_gles2_LIBRARY
+OPENGL_gles2_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_gles3_LIBRARY
+OPENGL_gles3_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_glu_LIBRARY
+OPENGL_glu_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_glx_LIBRARY
+OPENGL_glx_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_opengl_LIBRARY
+OPENGL_opengl_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_xmesa_INCLUDE_DIR
+OPENGL_xmesa_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_ARGN
 PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
@@ -1261,6 +1618,33 @@ PKG_FONTCONFIG_fontconfig_PREFIX:INTERNAL=
 PKG_FONTCONFIG_fontconfig_VERSION:INTERNAL=
 //ADVANCED property for variable: RT_LIBRARY
 RT_LIBRARY-ADVANCED:INTERNAL=1
+UNZIP_CFLAGS:INTERNAL=
+UNZIP_CFLAGS_I:INTERNAL=
+UNZIP_CFLAGS_OTHER:INTERNAL=
+UNZIP_FOUND:INTERNAL=
+UNZIP_INCLUDEDIR:INTERNAL=
+UNZIP_LIBDIR:INTERNAL=
+UNZIP_LIBS:INTERNAL=
+UNZIP_LIBS_L:INTERNAL=
+UNZIP_LIBS_OTHER:INTERNAL=
+UNZIP_LIBS_PATHS:INTERNAL=
+UNZIP_MODULE_NAME:INTERNAL=
+UNZIP_PREFIX:INTERNAL=
+UNZIP_STATIC_CFLAGS:INTERNAL=
+UNZIP_STATIC_CFLAGS_I:INTERNAL=
+UNZIP_STATIC_CFLAGS_OTHER:INTERNAL=
+UNZIP_STATIC_LIBDIR:INTERNAL=
+UNZIP_STATIC_LIBS:INTERNAL=
+UNZIP_STATIC_LIBS_L:INTERNAL=
+UNZIP_STATIC_LIBS_OTHER:INTERNAL=
+UNZIP_STATIC_LIBS_PATHS:INTERNAL=
+UNZIP_VERSION:INTERNAL=
+UNZIP_minizip_INCLUDEDIR:INTERNAL=
+UNZIP_minizip_LIBDIR:INTERNAL=
+UNZIP_minizip_PREFIX:INTERNAL=
+UNZIP_minizip_VERSION:INTERNAL=
+//Use MSVC Runtime Library DLL (/MD or /MDd)
+USE_MSVC_RUNTIME_LIBRARY_DLL:INTERNAL=OFF
 //ADVANCED property for variable: X11_ICE_INCLUDE_PATH
 X11_ICE_INCLUDE_PATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_ICE_LIB
@@ -1529,12 +1913,47 @@ X11_xkbcommon_X11_LIB-ADVANCED:INTERNAL=1
 X11_xkbfile_INCLUDE_PATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_xkbfile_LIB
 X11_xkbfile_LIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: ZLIB_INCLUDE_DIR
+ZLIB_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: ZLIB_LIBRARY_DBG
+ZLIB_LIBRARY_DBG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: ZLIB_LIBRARY_REL
+ZLIB_LIBRARY_REL-ADVANCED:INTERNAL=1
+ZLIB_PKGC_CFLAGS:INTERNAL=
+ZLIB_PKGC_CFLAGS_I:INTERNAL=
+ZLIB_PKGC_CFLAGS_OTHER:INTERNAL=
+ZLIB_PKGC_FOUND:INTERNAL=
+ZLIB_PKGC_INCLUDEDIR:INTERNAL=
+ZLIB_PKGC_LIBDIR:INTERNAL=
+ZLIB_PKGC_LIBS:INTERNAL=
+ZLIB_PKGC_LIBS_L:INTERNAL=
+ZLIB_PKGC_LIBS_OTHER:INTERNAL=
+ZLIB_PKGC_LIBS_PATHS:INTERNAL=
+ZLIB_PKGC_MODULE_NAME:INTERNAL=
+ZLIB_PKGC_PREFIX:INTERNAL=
+ZLIB_PKGC_STATIC_CFLAGS:INTERNAL=
+ZLIB_PKGC_STATIC_CFLAGS_I:INTERNAL=
+ZLIB_PKGC_STATIC_CFLAGS_OTHER:INTERNAL=
+ZLIB_PKGC_STATIC_LIBDIR:INTERNAL=
+ZLIB_PKGC_STATIC_LIBS:INTERNAL=
+ZLIB_PKGC_STATIC_LIBS_L:INTERNAL=
+ZLIB_PKGC_STATIC_LIBS_OTHER:INTERNAL=
+ZLIB_PKGC_STATIC_LIBS_PATHS:INTERNAL=
+ZLIB_PKGC_VERSION:INTERNAL=
+ZLIB_PKGC_zzip-zlib-config_INCLUDEDIR:INTERNAL=
+ZLIB_PKGC_zzip-zlib-config_LIBDIR:INTERNAL=
+ZLIB_PKGC_zzip-zlib-config_PREFIX:INTERNAL=
+ZLIB_PKGC_zzip-zlib-config_VERSION:INTERNAL=
+//x
+ZLIB_PREFIX_PATH_INT_CHECK:INTERNAL=
 //linker supports push/pop state
 _CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
 //CMAKE_INSTALL_PREFIX during last run
 _GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=/usr/local
 __pkg_config_arguments_PKG_FONTCONFIG:INTERNAL=QUIET;fontconfig
 __pkg_config_checked_PKG_FONTCONFIG:INTERNAL=1
+__pkg_config_checked_UNZIP:INTERNAL=1
+__pkg_config_checked_ZLIB_PKGC:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_PKG_FONTCONFIG_fontconfig
 pkgcfg_lib_PKG_FONTCONFIG_fontconfig-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_PKG_FONTCONFIG_freetype

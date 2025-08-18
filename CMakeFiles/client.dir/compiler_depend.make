@@ -1314,6 +1314,105 @@ CMakeFiles/client.dir/src/client/input.cpp.o: src/client/input.cpp \
 CMakeFiles/client.dir/src/client/main.cpp.o: src/client/main.cpp \
   include/geometry.hpp \
   include/netmsg.hpp \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btAxisSweep3.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btAxisSweep3Internal.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btBroadphaseInterface.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btBroadphaseProxy.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btDbvt.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btDbvtBroadphase.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btDispatcher.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btOverlappingPairCache.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btOverlappingPairCallback.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btQuantizedBvh.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btSimpleBroadphase.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionConfiguration.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionCreateFunc.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionDispatcher.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionObject.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionWorld.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btManifoldResult.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btBoxShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btCapsuleShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btCollisionMargin.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btCollisionShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btCompoundShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btConcaveShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btConeShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btConvexHullShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btConvexInternalShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btConvexShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btConvexTriangleMeshShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btCylinderShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btEmptyShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btMultiSphereShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btOptimizedBvh.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btPolyhedralConvexShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btScaledBvhTriangleMeshShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btSphereShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btStaticPlaneShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btStridingMeshInterface.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btTetrahedronShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btTriangleCallback.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btTriangleIndexVertexArray.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btTriangleInfoMap.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btTriangleMesh.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btTriangleMeshShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btUniformScalingShape.h \
+  libs/bullet/src/BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h \
+  libs/bullet/src/BulletCollision/NarrowPhaseCollision/btManifoldPoint.h \
+  libs/bullet/src/BulletCollision/NarrowPhaseCollision/btPersistentManifold.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btConeTwistConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btConstraintSolver.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btContactSolverInfo.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btFixedConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btGearConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btHinge2Constraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btHingeConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btJacobianEntry.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btSliderConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btSolverBody.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btSolverConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btTypedConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btUniversalConstraint.h \
+  libs/bullet/src/BulletDynamics/Dynamics/btActionInterface.h \
+  libs/bullet/src/BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h \
+  libs/bullet/src/BulletDynamics/Dynamics/btDynamicsWorld.h \
+  libs/bullet/src/BulletDynamics/Dynamics/btRigidBody.h \
+  libs/bullet/src/BulletDynamics/Dynamics/btSimpleDynamicsWorld.h \
+  libs/bullet/src/BulletDynamics/Vehicle/btRaycastVehicle.h \
+  libs/bullet/src/BulletDynamics/Vehicle/btVehicleRaycaster.h \
+  libs/bullet/src/BulletDynamics/Vehicle/btWheelInfo.h \
+  libs/bullet/src/LinearMath/btAabbUtil2.h \
+  libs/bullet/src/LinearMath/btAlignedAllocator.h \
+  libs/bullet/src/LinearMath/btAlignedObjectArray.h \
+  libs/bullet/src/LinearMath/btDefaultMotionState.h \
+  libs/bullet/src/LinearMath/btHashMap.h \
+  libs/bullet/src/LinearMath/btIDebugDraw.h \
+  libs/bullet/src/LinearMath/btMatrix3x3.h \
+  libs/bullet/src/LinearMath/btMinMax.h \
+  libs/bullet/src/LinearMath/btMotionState.h \
+  libs/bullet/src/LinearMath/btQuadWord.h \
+  libs/bullet/src/LinearMath/btQuaternion.h \
+  libs/bullet/src/LinearMath/btQuickprof.h \
+  libs/bullet/src/LinearMath/btScalar.h \
+  libs/bullet/src/LinearMath/btSerializer.h \
+  libs/bullet/src/LinearMath/btThreads.h \
+  libs/bullet/src/LinearMath/btTransform.h \
+  libs/bullet/src/LinearMath/btTransformUtil.h \
+  libs/bullet/src/LinearMath/btVector3.h \
+  libs/bullet/src/btBulletCollisionCommon.h \
+  libs/bullet/src/btBulletDynamicsCommon.h \
   libs/cxxopts/include/cxxopts.hpp \
   libs/enet/include/enet.h \
   libs/glm/glm/common.hpp \
@@ -1635,6 +1734,7 @@ CMakeFiles/client.dir/src/client/main.cpp.o: src/client/main.cpp \
   src/client/client.hpp \
   src/client/input.hpp \
   src/client/networker.hpp \
+  src/client/physics.hpp \
   src/client/player.hpp \
   src/client/renderer.hpp \
   src/client/shot.hpp \
@@ -1896,6 +1996,7 @@ CMakeFiles/client.dir/src/client/main.cpp.o: src/client/main.cpp \
   /usr/include/linux/stddef.h \
   /usr/include/locale.h \
   /usr/include/math.h \
+  /usr/include/memory.h \
   /usr/include/netdb.h \
   /usr/include/netinet/in.h \
   /usr/include/netinet/tcp.h \
@@ -2817,6 +2918,656 @@ CMakeFiles/client.dir/src/client/networker.cpp.o: src/client/networker.cpp \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h
 
+CMakeFiles/client.dir/src/client/physics.cpp.o: src/client/physics.cpp \
+  include/geometry.hpp \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btAxisSweep3.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btAxisSweep3Internal.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btBroadphaseInterface.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btBroadphaseProxy.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btDbvt.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btDbvtBroadphase.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btDispatcher.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btOverlappingPairCache.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btOverlappingPairCallback.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btQuantizedBvh.h \
+  libs/bullet/src/BulletCollision/BroadphaseCollision/btSimpleBroadphase.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionConfiguration.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionCreateFunc.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionDispatcher.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionObject.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionWorld.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btManifoldResult.h \
+  libs/bullet/src/BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btBoxShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btCapsuleShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btCollisionMargin.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btCollisionShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btCompoundShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btConcaveShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btConeShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btConvexHullShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btConvexInternalShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btConvexShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btConvexTriangleMeshShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btCylinderShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btEmptyShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btMultiSphereShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btOptimizedBvh.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btPolyhedralConvexShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btScaledBvhTriangleMeshShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btSphereShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btStaticPlaneShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btStridingMeshInterface.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btTetrahedronShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btTriangleCallback.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btTriangleIndexVertexArray.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btTriangleInfoMap.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btTriangleMesh.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btTriangleMeshShape.h \
+  libs/bullet/src/BulletCollision/CollisionShapes/btUniformScalingShape.h \
+  libs/bullet/src/BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h \
+  libs/bullet/src/BulletCollision/NarrowPhaseCollision/btManifoldPoint.h \
+  libs/bullet/src/BulletCollision/NarrowPhaseCollision/btPersistentManifold.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btConeTwistConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btConstraintSolver.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btContactSolverInfo.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btFixedConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btGearConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btHinge2Constraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btHingeConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btJacobianEntry.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btSliderConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btSolverBody.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btSolverConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btTypedConstraint.h \
+  libs/bullet/src/BulletDynamics/ConstraintSolver/btUniversalConstraint.h \
+  libs/bullet/src/BulletDynamics/Dynamics/btActionInterface.h \
+  libs/bullet/src/BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h \
+  libs/bullet/src/BulletDynamics/Dynamics/btDynamicsWorld.h \
+  libs/bullet/src/BulletDynamics/Dynamics/btRigidBody.h \
+  libs/bullet/src/BulletDynamics/Dynamics/btSimpleDynamicsWorld.h \
+  libs/bullet/src/BulletDynamics/Vehicle/btRaycastVehicle.h \
+  libs/bullet/src/BulletDynamics/Vehicle/btVehicleRaycaster.h \
+  libs/bullet/src/BulletDynamics/Vehicle/btWheelInfo.h \
+  libs/bullet/src/LinearMath/btAabbUtil2.h \
+  libs/bullet/src/LinearMath/btAlignedAllocator.h \
+  libs/bullet/src/LinearMath/btAlignedObjectArray.h \
+  libs/bullet/src/LinearMath/btDefaultMotionState.h \
+  libs/bullet/src/LinearMath/btHashMap.h \
+  libs/bullet/src/LinearMath/btIDebugDraw.h \
+  libs/bullet/src/LinearMath/btMatrix3x3.h \
+  libs/bullet/src/LinearMath/btMinMax.h \
+  libs/bullet/src/LinearMath/btMotionState.h \
+  libs/bullet/src/LinearMath/btQuadWord.h \
+  libs/bullet/src/LinearMath/btQuaternion.h \
+  libs/bullet/src/LinearMath/btQuickprof.h \
+  libs/bullet/src/LinearMath/btScalar.h \
+  libs/bullet/src/LinearMath/btSerializer.h \
+  libs/bullet/src/LinearMath/btThreads.h \
+  libs/bullet/src/LinearMath/btTransform.h \
+  libs/bullet/src/LinearMath/btTransformUtil.h \
+  libs/bullet/src/LinearMath/btVector3.h \
+  libs/bullet/src/btBulletCollisionCommon.h \
+  libs/bullet/src/btBulletDynamicsCommon.h \
+  libs/glm/glm/common.hpp \
+  libs/glm/glm/detail/func_exponential.inl \
+  libs/glm/glm/detail/func_vector_relational.inl \
+  libs/glm/glm/detail/setup.hpp \
+  libs/glm/glm/exponential.hpp \
+  libs/glm/glm/vector_relational.hpp \
+  libs/glm/glm/detail/_fixes.hpp \
+  libs/glm/glm/detail/compute_common.hpp \
+  libs/glm/glm/detail/func_common.inl \
+  libs/glm/glm/detail/func_geometric.inl \
+  libs/glm/glm/detail/setup.hpp \
+  libs/glm/glm/detail/type_vec1.hpp \
+  libs/glm/glm/detail/type_vec1.inl \
+  libs/glm/glm/geometric.hpp \
+  libs/glm/glm/detail/type_mat2x3.hpp \
+  libs/glm/glm/detail/type_mat2x3.inl \
+  libs/glm/glm/detail/type_mat2x4.hpp \
+  libs/glm/glm/detail/type_mat2x4.inl \
+  libs/glm/glm/detail/type_mat3x2.hpp \
+  libs/glm/glm/detail/type_mat3x2.inl \
+  libs/glm/glm/detail/type_mat3x3.hpp \
+  libs/glm/glm/detail/type_mat3x3.inl \
+  libs/glm/glm/detail/type_mat3x4.hpp \
+  libs/glm/glm/detail/type_mat3x4.inl \
+  libs/glm/glm/detail/type_mat4x2.hpp \
+  libs/glm/glm/detail/type_mat4x2.inl \
+  libs/glm/glm/detail/type_mat4x3.hpp \
+  libs/glm/glm/detail/type_mat4x3.inl \
+  libs/glm/glm/detail/type_mat4x4.hpp \
+  libs/glm/glm/detail/type_mat4x4.inl \
+  libs/glm/glm/ext/matrix_double2x3.hpp \
+  libs/glm/glm/ext/matrix_double2x3_precision.hpp \
+  libs/glm/glm/ext/matrix_double2x4.hpp \
+  libs/glm/glm/ext/matrix_double2x4_precision.hpp \
+  libs/glm/glm/ext/matrix_double3x2.hpp \
+  libs/glm/glm/ext/matrix_double3x2_precision.hpp \
+  libs/glm/glm/ext/matrix_double3x3.hpp \
+  libs/glm/glm/ext/matrix_double3x3_precision.hpp \
+  libs/glm/glm/ext/matrix_double3x4.hpp \
+  libs/glm/glm/ext/matrix_double3x4_precision.hpp \
+  libs/glm/glm/ext/matrix_double4x2.hpp \
+  libs/glm/glm/ext/matrix_double4x2_precision.hpp \
+  libs/glm/glm/ext/matrix_double4x3.hpp \
+  libs/glm/glm/ext/matrix_double4x3_precision.hpp \
+  libs/glm/glm/ext/matrix_double4x4.hpp \
+  libs/glm/glm/ext/matrix_double4x4_precision.hpp \
+  libs/glm/glm/ext/matrix_float2x3.hpp \
+  libs/glm/glm/ext/matrix_float2x3_precision.hpp \
+  libs/glm/glm/ext/matrix_float2x4.hpp \
+  libs/glm/glm/ext/matrix_float2x4_precision.hpp \
+  libs/glm/glm/ext/matrix_float3x2.hpp \
+  libs/glm/glm/ext/matrix_float3x2_precision.hpp \
+  libs/glm/glm/ext/matrix_float3x3.hpp \
+  libs/glm/glm/ext/matrix_float3x3_precision.hpp \
+  libs/glm/glm/ext/matrix_float3x4.hpp \
+  libs/glm/glm/ext/matrix_float3x4_precision.hpp \
+  libs/glm/glm/ext/matrix_float4x2.hpp \
+  libs/glm/glm/ext/matrix_float4x2_precision.hpp \
+  libs/glm/glm/ext/matrix_float4x3.hpp \
+  libs/glm/glm/ext/matrix_float4x3_precision.hpp \
+  libs/glm/glm/ext/matrix_float4x4.hpp \
+  libs/glm/glm/ext/matrix_float4x4_precision.hpp \
+  libs/glm/glm/detail/func_matrix.inl \
+  libs/glm/glm/detail/setup.hpp \
+  libs/glm/glm/mat2x3.hpp \
+  libs/glm/glm/mat2x4.hpp \
+  libs/glm/glm/mat3x2.hpp \
+  libs/glm/glm/mat3x3.hpp \
+  libs/glm/glm/mat3x4.hpp \
+  libs/glm/glm/mat4x2.hpp \
+  libs/glm/glm/mat4x3.hpp \
+  libs/glm/glm/mat4x4.hpp \
+  libs/glm/glm/matrix.hpp \
+  libs/glm/glm/detail/compute_vector_relational.hpp \
+  libs/glm/glm/detail/setup.hpp \
+  libs/glm/glm/detail/_vectorize.hpp \
+  libs/glm/glm/detail/compute_vector_decl.hpp \
+  libs/glm/glm/detail/setup.hpp \
+  libs/glm/glm/detail/type_mat2x2.hpp \
+  libs/glm/glm/detail/type_mat2x2.inl \
+  libs/glm/glm/detail/type_vec2.hpp \
+  libs/glm/glm/detail/type_vec2.inl \
+  libs/glm/glm/detail/type_vec3.hpp \
+  libs/glm/glm/detail/type_vec3.inl \
+  libs/glm/glm/detail/type_vec4.hpp \
+  libs/glm/glm/detail/type_vec4.inl \
+  libs/glm/glm/detail/setup.hpp \
+  libs/glm/glm/ext/scalar_int_sized.hpp \
+  libs/glm/glm/ext/scalar_uint_sized.hpp \
+  libs/glm/glm/ext/matrix_double2x2.hpp \
+  libs/glm/glm/ext/matrix_double2x2_precision.hpp \
+  libs/glm/glm/ext/matrix_float2x2.hpp \
+  libs/glm/glm/ext/matrix_float2x2_precision.hpp \
+  libs/glm/glm/ext/vector_bool2.hpp \
+  libs/glm/glm/ext/vector_bool2_precision.hpp \
+  libs/glm/glm/ext/vector_bool3.hpp \
+  libs/glm/glm/ext/vector_bool3_precision.hpp \
+  libs/glm/glm/ext/vector_bool4.hpp \
+  libs/glm/glm/ext/vector_bool4_precision.hpp \
+  libs/glm/glm/ext/vector_double2.hpp \
+  libs/glm/glm/ext/vector_double2_precision.hpp \
+  libs/glm/glm/ext/vector_double3.hpp \
+  libs/glm/glm/ext/vector_double3_precision.hpp \
+  libs/glm/glm/ext/vector_double4.hpp \
+  libs/glm/glm/ext/vector_double4_precision.hpp \
+  libs/glm/glm/ext/vector_float2.hpp \
+  libs/glm/glm/ext/vector_float2_precision.hpp \
+  libs/glm/glm/ext/vector_float3.hpp \
+  libs/glm/glm/ext/vector_float3_precision.hpp \
+  libs/glm/glm/ext/vector_float4.hpp \
+  libs/glm/glm/ext/vector_float4_precision.hpp \
+  libs/glm/glm/ext/vector_int2.hpp \
+  libs/glm/glm/ext/vector_int2_sized.hpp \
+  libs/glm/glm/ext/vector_int3.hpp \
+  libs/glm/glm/ext/vector_int3_sized.hpp \
+  libs/glm/glm/ext/vector_int4.hpp \
+  libs/glm/glm/ext/vector_int4_sized.hpp \
+  libs/glm/glm/ext/vector_uint2.hpp \
+  libs/glm/glm/ext/vector_uint2_sized.hpp \
+  libs/glm/glm/ext/vector_uint3.hpp \
+  libs/glm/glm/ext/vector_uint3_sized.hpp \
+  libs/glm/glm/ext/vector_uint4.hpp \
+  libs/glm/glm/ext/vector_uint4_sized.hpp \
+  libs/glm/glm/simd/platform.h \
+  libs/glm/glm/detail/_fixes.hpp \
+  libs/glm/glm/detail/func_integer.inl \
+  libs/glm/glm/detail/func_packing.inl \
+  libs/glm/glm/detail/func_trigonometric.inl \
+  libs/glm/glm/detail/qualifier.hpp \
+  libs/glm/glm/detail/setup.hpp \
+  libs/glm/glm/detail/type_half.hpp \
+  libs/glm/glm/detail/type_half.inl \
+  libs/glm/glm/fwd.hpp \
+  libs/glm/glm/glm.hpp \
+  libs/glm/glm/detail/setup.hpp \
+  libs/glm/glm/ext/quaternion_relational.hpp \
+  libs/glm/glm/ext/quaternion_relational.inl \
+  libs/glm/glm/detail/setup.hpp \
+  libs/glm/glm/detail/type_float.hpp \
+  libs/glm/glm/detail/type_quat.hpp \
+  libs/glm/glm/detail/type_quat.inl \
+  libs/glm/glm/ext/quaternion_geometric.hpp \
+  libs/glm/glm/ext/quaternion_geometric.inl \
+  libs/glm/glm/ext/quaternion_common.hpp \
+  libs/glm/glm/ext/quaternion_common.inl \
+  libs/glm/glm/ext/quaternion_double.hpp \
+  libs/glm/glm/ext/quaternion_double_precision.hpp \
+  libs/glm/glm/ext/quaternion_float.hpp \
+  libs/glm/glm/ext/quaternion_float_precision.hpp \
+  libs/glm/glm/ext/quaternion_transform.hpp \
+  libs/glm/glm/ext/quaternion_transform.inl \
+  libs/glm/glm/ext/quaternion_trigonometric.hpp \
+  libs/glm/glm/ext/quaternion_trigonometric.inl \
+  libs/glm/glm/ext/vector_relational.hpp \
+  libs/glm/glm/ext/vector_relational.inl \
+  libs/glm/glm/detail/setup.hpp \
+  libs/glm/glm/ext/matrix_clip_space.hpp \
+  libs/glm/glm/ext/matrix_clip_space.inl \
+  libs/glm/glm/ext/matrix_projection.hpp \
+  libs/glm/glm/ext/matrix_projection.inl \
+  libs/glm/glm/ext/matrix_transform.hpp \
+  libs/glm/glm/ext/matrix_transform.inl \
+  libs/glm/glm/ext/scalar_constants.hpp \
+  libs/glm/glm/ext/scalar_constants.inl \
+  libs/glm/glm/gtc/constants.hpp \
+  libs/glm/glm/gtc/constants.inl \
+  libs/glm/glm/gtc/matrix_transform.hpp \
+  libs/glm/glm/gtc/matrix_transform.inl \
+  libs/glm/glm/gtc/epsilon.hpp \
+  libs/glm/glm/gtc/epsilon.inl \
+  libs/glm/glm/gtc/quaternion.hpp \
+  libs/glm/glm/gtc/quaternion.inl \
+  libs/glm/glm/integer.hpp \
+  libs/glm/glm/mat2x2.hpp \
+  libs/glm/glm/packing.hpp \
+  libs/glm/glm/trigonometric.hpp \
+  libs/glm/glm/vec2.hpp \
+  libs/glm/glm/vec3.hpp \
+  libs/glm/glm/vec4.hpp \
+  libs/spdlog/include/spdlog/common.h \
+  libs/spdlog/include/spdlog/details/backtracer.h \
+  libs/spdlog/include/spdlog/details/circular_q.h \
+  libs/spdlog/include/spdlog/details/log_msg.h \
+  libs/spdlog/include/spdlog/details/log_msg_buffer.h \
+  libs/spdlog/include/spdlog/details/null_mutex.h \
+  libs/spdlog/include/spdlog/details/periodic_worker.h \
+  libs/spdlog/include/spdlog/details/registry.h \
+  libs/spdlog/include/spdlog/details/synchronous_factory.h \
+  libs/spdlog/include/spdlog/fmt/bundled/base.h \
+  libs/spdlog/include/spdlog/fmt/bundled/format.h \
+  libs/spdlog/include/spdlog/fmt/fmt.h \
+  libs/spdlog/include/spdlog/logger.h \
+  libs/spdlog/include/spdlog/spdlog.h \
+  libs/spdlog/include/spdlog/tweakme.h \
+  libs/spdlog/include/spdlog/version.h \
+  src/client/input.hpp \
+  src/client/physics.hpp \
+  src/client/player.hpp \
+  /usr/include/GL/gl.h \
+  /usr/include/GL/glext.h \
+  /usr/include/GLFW/glfw3.h \
+  /usr/include/KHR/khrplatform.h \
+  /usr/include/alloca.h \
+  /usr/include/asm-generic/errno-base.h \
+  /usr/include/asm-generic/errno.h \
+  /usr/include/assert.h \
+  /usr/include/c++/13/array \
+  /usr/include/c++/13/atomic \
+  /usr/include/c++/13/backward/auto_ptr.h \
+  /usr/include/c++/13/backward/binders.h \
+  /usr/include/c++/13/bit \
+  /usr/include/c++/13/bits/algorithmfwd.h \
+  /usr/include/c++/13/bits/align.h \
+  /usr/include/c++/13/bits/alloc_traits.h \
+  /usr/include/c++/13/bits/allocated_ptr.h \
+  /usr/include/c++/13/bits/allocator.h \
+  /usr/include/c++/13/bits/atomic_base.h \
+  /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+  /usr/include/c++/13/bits/atomic_timed_wait.h \
+  /usr/include/c++/13/bits/atomic_wait.h \
+  /usr/include/c++/13/bits/basic_ios.h \
+  /usr/include/c++/13/bits/basic_ios.tcc \
+  /usr/include/c++/13/bits/basic_string.h \
+  /usr/include/c++/13/bits/basic_string.tcc \
+  /usr/include/c++/13/bits/char_traits.h \
+  /usr/include/c++/13/bits/charconv.h \
+  /usr/include/c++/13/bits/chrono.h \
+  /usr/include/c++/13/bits/chrono_io.h \
+  /usr/include/c++/13/bits/codecvt.h \
+  /usr/include/c++/13/bits/concept_check.h \
+  /usr/include/c++/13/bits/cpp_type_traits.h \
+  /usr/include/c++/13/bits/cxxabi_forced.h \
+  /usr/include/c++/13/bits/cxxabi_init_exception.h \
+  /usr/include/c++/13/bits/enable_special_members.h \
+  /usr/include/c++/13/bits/erase_if.h \
+  /usr/include/c++/13/bits/exception.h \
+  /usr/include/c++/13/bits/exception_defines.h \
+  /usr/include/c++/13/bits/exception_ptr.h \
+  /usr/include/c++/13/bits/functexcept.h \
+  /usr/include/c++/13/bits/functional_hash.h \
+  /usr/include/c++/13/bits/hash_bytes.h \
+  /usr/include/c++/13/bits/hashtable.h \
+  /usr/include/c++/13/bits/hashtable_policy.h \
+  /usr/include/c++/13/bits/invoke.h \
+  /usr/include/c++/13/bits/ios_base.h \
+  /usr/include/c++/13/bits/istream.tcc \
+  /usr/include/c++/13/bits/iterator_concepts.h \
+  /usr/include/c++/13/bits/locale_classes.h \
+  /usr/include/c++/13/bits/locale_classes.tcc \
+  /usr/include/c++/13/bits/locale_conv.h \
+  /usr/include/c++/13/bits/locale_facets.h \
+  /usr/include/c++/13/bits/locale_facets.tcc \
+  /usr/include/c++/13/bits/locale_facets_nonio.h \
+  /usr/include/c++/13/bits/locale_facets_nonio.tcc \
+  /usr/include/c++/13/bits/localefwd.h \
+  /usr/include/c++/13/bits/max_size_type.h \
+  /usr/include/c++/13/bits/memory_resource.h \
+  /usr/include/c++/13/bits/memoryfwd.h \
+  /usr/include/c++/13/bits/move.h \
+  /usr/include/c++/13/bits/nested_exception.h \
+  /usr/include/c++/13/bits/new_allocator.h \
+  /usr/include/c++/13/bits/node_handle.h \
+  /usr/include/c++/13/bits/ostream.tcc \
+  /usr/include/c++/13/bits/ostream_insert.h \
+  /usr/include/c++/13/bits/parse_numbers.h \
+  /usr/include/c++/13/bits/postypes.h \
+  /usr/include/c++/13/bits/predefined_ops.h \
+  /usr/include/c++/13/bits/ptr_traits.h \
+  /usr/include/c++/13/bits/quoted_string.h \
+  /usr/include/c++/13/bits/range_access.h \
+  /usr/include/c++/13/bits/ranges_algobase.h \
+  /usr/include/c++/13/bits/ranges_base.h \
+  /usr/include/c++/13/bits/ranges_cmp.h \
+  /usr/include/c++/13/bits/ranges_uninitialized.h \
+  /usr/include/c++/13/bits/ranges_util.h \
+  /usr/include/c++/13/bits/refwrap.h \
+  /usr/include/c++/13/bits/requires_hosted.h \
+  /usr/include/c++/13/bits/semaphore_base.h \
+  /usr/include/c++/13/bits/shared_ptr.h \
+  /usr/include/c++/13/bits/shared_ptr_atomic.h \
+  /usr/include/c++/13/bits/shared_ptr_base.h \
+  /usr/include/c++/13/bits/specfun.h \
+  /usr/include/c++/13/bits/sstream.tcc \
+  /usr/include/c++/13/bits/std_abs.h \
+  /usr/include/c++/13/bits/std_function.h \
+  /usr/include/c++/13/bits/std_mutex.h \
+  /usr/include/c++/13/bits/std_thread.h \
+  /usr/include/c++/13/bits/stl_algo.h \
+  /usr/include/c++/13/bits/stl_algobase.h \
+  /usr/include/c++/13/bits/stl_bvector.h \
+  /usr/include/c++/13/bits/stl_construct.h \
+  /usr/include/c++/13/bits/stl_function.h \
+  /usr/include/c++/13/bits/stl_heap.h \
+  /usr/include/c++/13/bits/stl_iterator.h \
+  /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
+  /usr/include/c++/13/bits/stl_iterator_base_types.h \
+  /usr/include/c++/13/bits/stl_pair.h \
+  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
+  /usr/include/c++/13/bits/stl_relops.h \
+  /usr/include/c++/13/bits/stl_tempbuf.h \
+  /usr/include/c++/13/bits/stl_uninitialized.h \
+  /usr/include/c++/13/bits/stl_vector.h \
+  /usr/include/c++/13/bits/streambuf.tcc \
+  /usr/include/c++/13/bits/streambuf_iterator.h \
+  /usr/include/c++/13/bits/string_view.tcc \
+  /usr/include/c++/13/bits/stringfwd.h \
+  /usr/include/c++/13/bits/this_thread_sleep.h \
+  /usr/include/c++/13/bits/uniform_int_dist.h \
+  /usr/include/c++/13/bits/unique_lock.h \
+  /usr/include/c++/13/bits/unique_ptr.h \
+  /usr/include/c++/13/bits/unordered_map.h \
+  /usr/include/c++/13/bits/uses_allocator.h \
+  /usr/include/c++/13/bits/uses_allocator_args.h \
+  /usr/include/c++/13/bits/utility.h \
+  /usr/include/c++/13/bits/vector.tcc \
+  /usr/include/c++/13/cassert \
+  /usr/include/c++/13/cctype \
+  /usr/include/c++/13/cerrno \
+  /usr/include/c++/13/cfloat \
+  /usr/include/c++/13/charconv \
+  /usr/include/c++/13/chrono \
+  /usr/include/c++/13/climits \
+  /usr/include/c++/13/clocale \
+  /usr/include/c++/13/cmath \
+  /usr/include/c++/13/compare \
+  /usr/include/c++/13/concepts \
+  /usr/include/c++/13/condition_variable \
+  /usr/include/c++/13/cstddef \
+  /usr/include/c++/13/cstdint \
+  /usr/include/c++/13/cstdio \
+  /usr/include/c++/13/cstdlib \
+  /usr/include/c++/13/cstring \
+  /usr/include/c++/13/ctime \
+  /usr/include/c++/13/cwchar \
+  /usr/include/c++/13/cwctype \
+  /usr/include/c++/13/debug/assertions.h \
+  /usr/include/c++/13/debug/debug.h \
+  /usr/include/c++/13/exception \
+  /usr/include/c++/13/ext/aligned_buffer.h \
+  /usr/include/c++/13/ext/alloc_traits.h \
+  /usr/include/c++/13/ext/atomicity.h \
+  /usr/include/c++/13/ext/concurrence.h \
+  /usr/include/c++/13/ext/numeric_traits.h \
+  /usr/include/c++/13/ext/string_conversions.h \
+  /usr/include/c++/13/ext/type_traits.h \
+  /usr/include/c++/13/format \
+  /usr/include/c++/13/functional \
+  /usr/include/c++/13/initializer_list \
+  /usr/include/c++/13/iomanip \
+  /usr/include/c++/13/ios \
+  /usr/include/c++/13/iosfwd \
+  /usr/include/c++/13/istream \
+  /usr/include/c++/13/limits \
+  /usr/include/c++/13/locale \
+  /usr/include/c++/13/math.h \
+  /usr/include/c++/13/memory \
+  /usr/include/c++/13/mutex \
+  /usr/include/c++/13/new \
+  /usr/include/c++/13/numbers \
+  /usr/include/c++/13/optional \
+  /usr/include/c++/13/ostream \
+  /usr/include/c++/13/pstl/execution_defs.h \
+  /usr/include/c++/13/pstl/glue_memory_defs.h \
+  /usr/include/c++/13/pstl/pstl_config.h \
+  /usr/include/c++/13/ratio \
+  /usr/include/c++/13/semaphore \
+  /usr/include/c++/13/span \
+  /usr/include/c++/13/sstream \
+  /usr/include/c++/13/stdexcept \
+  /usr/include/c++/13/stdlib.h \
+  /usr/include/c++/13/stop_token \
+  /usr/include/c++/13/streambuf \
+  /usr/include/c++/13/string \
+  /usr/include/c++/13/string_view \
+  /usr/include/c++/13/system_error \
+  /usr/include/c++/13/thread \
+  /usr/include/c++/13/tr1/bessel_function.tcc \
+  /usr/include/c++/13/tr1/beta_function.tcc \
+  /usr/include/c++/13/tr1/ell_integral.tcc \
+  /usr/include/c++/13/tr1/exp_integral.tcc \
+  /usr/include/c++/13/tr1/gamma.tcc \
+  /usr/include/c++/13/tr1/hypergeometric.tcc \
+  /usr/include/c++/13/tr1/legendre_function.tcc \
+  /usr/include/c++/13/tr1/modified_bessel_func.tcc \
+  /usr/include/c++/13/tr1/poly_hermite.tcc \
+  /usr/include/c++/13/tr1/poly_laguerre.tcc \
+  /usr/include/c++/13/tr1/riemann_zeta.tcc \
+  /usr/include/c++/13/tr1/special_function_util.h \
+  /usr/include/c++/13/tuple \
+  /usr/include/c++/13/type_traits \
+  /usr/include/c++/13/typeinfo \
+  /usr/include/c++/13/unordered_map \
+  /usr/include/c++/13/utility \
+  /usr/include/c++/13/variant \
+  /usr/include/c++/13/vector \
+  /usr/include/ctype.h \
+  /usr/include/endian.h \
+  /usr/include/errno.h \
+  /usr/include/features-time64.h \
+  /usr/include/features.h \
+  /usr/include/libintl.h \
+  /usr/include/limits.h \
+  /usr/include/linux/close_range.h \
+  /usr/include/linux/errno.h \
+  /usr/include/linux/limits.h \
+  /usr/include/locale.h \
+  /usr/include/math.h \
+  /usr/include/memory.h \
+  /usr/include/pthread.h \
+  /usr/include/sched.h \
+  /usr/include/semaphore.h \
+  /usr/include/stdc-predef.h \
+  /usr/include/stdint.h \
+  /usr/include/stdio.h \
+  /usr/include/stdlib.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
+  /usr/include/syscall.h \
+  /usr/include/time.h \
+  /usr/include/unistd.h \
+  /usr/include/wchar.h \
+  /usr/include/wctype.h \
+  /usr/include/x86_64-linux-gnu/asm/errno.h \
+  /usr/include/x86_64-linux-gnu/asm/unistd.h \
+  /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
+  /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
+  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
+  /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
+  /usr/include/x86_64-linux-gnu/bits/endian.h \
+  /usr/include/x86_64-linux-gnu/bits/endianness.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
+  /usr/include/x86_64-linux-gnu/bits/errno.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn.h \
+  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
+  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/locale.h \
+  /usr/include/x86_64-linux-gnu/bits/long-double.h \
+  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
+  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
+  /usr/include/x86_64-linux-gnu/bits/sched.h \
+  /usr/include/x86_64-linux-gnu/bits/select-decl.h \
+  /usr/include/x86_64-linux-gnu/bits/select.h \
+  /usr/include/x86_64-linux-gnu/bits/select2.h \
+  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdio.h \
+  /usr/include/x86_64-linux-gnu/bits/stdio2-decl.h \
+  /usr/include/x86_64-linux-gnu/bits/stdio2.h \
+  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
+  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
+  /usr/include/x86_64-linux-gnu/bits/stdlib.h \
+  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
+  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
+  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
+  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
+  /usr/include/x86_64-linux-gnu/bits/syscall.h \
+  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
+  /usr/include/x86_64-linux-gnu/bits/time.h \
+  /usr/include/x86_64-linux-gnu/bits/time64.h \
+  /usr/include/x86_64-linux-gnu/bits/timesize.h \
+  /usr/include/x86_64-linux-gnu/bits/timex.h \
+  /usr/include/x86_64-linux-gnu/bits/types.h \
+  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
+  /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
+  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+  /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
+  /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd-decl.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
+  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
+  /usr/include/x86_64-linux-gnu/bits/wchar.h \
+  /usr/include/x86_64-linux-gnu/bits/wchar2-decl.h \
+  /usr/include/x86_64-linux-gnu/bits/wchar2.h \
+  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
+  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
+  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
+  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
+  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
+  /usr/include/x86_64-linux-gnu/sys/select.h \
+  /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
+  /usr/include/x86_64-linux-gnu/sys/syscall.h \
+  /usr/include/x86_64-linux-gnu/sys/time.h \
+  /usr/include/x86_64-linux-gnu/sys/types.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h
+
 CMakeFiles/client.dir/src/client/player.cpp.o: src/client/player.cpp \
   include/geometry.hpp \
   include/netmsg.hpp \
@@ -3553,6 +4304,37 @@ CMakeFiles/client.dir/src/client/player.cpp.o: src/client/player.cpp \
 CMakeFiles/client.dir/src/client/renderer.cpp.o: src/client/renderer.cpp \
   include/geometry.hpp \
   include/netmsg.hpp \
+  libs/assimp/include/assimp/Importer.hpp \
+  libs/assimp/include/assimp/aabb.h \
+  libs/assimp/include/assimp/anim.h \
+  libs/assimp/include/assimp/camera.h \
+  libs/assimp/include/assimp/color4.h \
+  libs/assimp/include/assimp/config.h \
+  libs/assimp/include/assimp/defs.h \
+  libs/assimp/include/assimp/light.h \
+  libs/assimp/include/assimp/material.h \
+  libs/assimp/include/assimp/matrix3x3.h \
+  libs/assimp/include/assimp/matrix4x4.h \
+  libs/assimp/include/assimp/mesh.h \
+  libs/assimp/include/assimp/metadata.h \
+  libs/assimp/include/assimp/postprocess.h \
+  libs/assimp/include/assimp/quaternion.h \
+  libs/assimp/include/assimp/scene.h \
+  libs/assimp/include/assimp/texture.h \
+  libs/assimp/include/assimp/types.h \
+  libs/assimp/include/assimp/vector2.h \
+  libs/assimp/include/assimp/vector3.h \
+  libs/assimp/include/assimp/version.h \
+  libs/assimp/include/assimp/Compiler/poppack1.h \
+  libs/assimp/include/assimp/Compiler/pushpack1.h \
+  libs/assimp/include/assimp/MathFunctions.h \
+  libs/assimp/include/assimp/color4.inl \
+  libs/assimp/include/assimp/material.inl \
+  libs/assimp/include/assimp/matrix3x3.inl \
+  libs/assimp/include/assimp/matrix4x4.inl \
+  libs/assimp/include/assimp/quaternion.inl \
+  libs/assimp/include/assimp/vector2.inl \
+  libs/assimp/include/assimp/vector3.inl \
   libs/enet/include/enet.h \
   libs/glm/glm/common.hpp \
   libs/glm/glm/detail/func_exponential.inl \
@@ -3751,6 +4533,8 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: src/client/renderer.cpp \
   libs/spdlog/include/spdlog/version.h \
   libs/threepp/include/threepp/animation/AnimationClip.hpp \
   libs/threepp/include/threepp/animation/KeyframeTrack.hpp \
+  libs/threepp/include/threepp/animation/tracks/QuaternionKeyframeTrack.hpp \
+  libs/threepp/include/threepp/animation/tracks/VectorKeyframeTrack.hpp \
   libs/threepp/include/threepp/cameras/Camera.hpp \
   libs/threepp/include/threepp/cameras/OrthographicCamera.hpp \
   libs/threepp/include/threepp/cameras/PerspectiveCamera.hpp \
@@ -3811,7 +4595,9 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: src/client/renderer.cpp \
   libs/threepp/include/threepp/lights/SpotLight.hpp \
   libs/threepp/include/threepp/lights/light_interfaces.hpp \
   libs/threepp/include/threepp/lights/lights.hpp \
+  libs/threepp/include/threepp/loaders/AssimpLoader.hpp \
   libs/threepp/include/threepp/loaders/FontLoader.hpp \
+  libs/threepp/include/threepp/loaders/Loader.hpp \
   libs/threepp/include/threepp/loaders/OBJLoader.hpp \
   libs/threepp/include/threepp/loaders/STLLoader.hpp \
   libs/threepp/include/threepp/loaders/TextureLoader.hpp \
@@ -3848,6 +4634,8 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: src/client/renderer.cpp \
   libs/threepp/include/threepp/math/interpolants/CubicInterpolant.hpp \
   libs/threepp/include/threepp/math/interpolants/DiscreteInterpolant.hpp \
   libs/threepp/include/threepp/math/interpolants/LinearInterpolant.hpp \
+  libs/threepp/include/threepp/math/interpolants/QuaternionLinearInterpolant.hpp \
+  libs/threepp/include/threepp/objects/Bone.hpp \
   libs/threepp/include/threepp/objects/Group.hpp \
   libs/threepp/include/threepp/objects/HUD.hpp \
   libs/threepp/include/threepp/objects/InstancedMesh.hpp \
@@ -3857,6 +4645,8 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: src/client/renderer.cpp \
   libs/threepp/include/threepp/objects/ObjectWithMaterials.hpp \
   libs/threepp/include/threepp/objects/ObjectWithMorphTargetInfluences.hpp \
   libs/threepp/include/threepp/objects/Points.hpp \
+  libs/threepp/include/threepp/objects/Skeleton.hpp \
+  libs/threepp/include/threepp/objects/SkinnedMesh.hpp \
   libs/threepp/include/threepp/objects/Sprite.hpp \
   libs/threepp/include/threepp/objects/Text.hpp \
   libs/threepp/include/threepp/renderers/GLRenderer.hpp \
@@ -3866,6 +4656,7 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: src/client/renderer.cpp \
   libs/threepp/include/threepp/scenes/Fog.hpp \
   libs/threepp/include/threepp/scenes/FogExp2.hpp \
   libs/threepp/include/threepp/scenes/Scene.hpp \
+  libs/threepp/include/threepp/textures/DataTexture.hpp \
   libs/threepp/include/threepp/textures/Image.hpp \
   libs/threepp/include/threepp/textures/Texture.hpp \
   libs/threepp/include/threepp/threepp.hpp \
@@ -3890,6 +4681,7 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: src/client/renderer.cpp \
   /usr/include/asm-generic/socket.h \
   /usr/include/asm-generic/sockios.h \
   /usr/include/assert.h \
+  /usr/include/c++/13/algorithm \
   /usr/include/c++/13/any \
   /usr/include/c++/13/array \
   /usr/include/c++/13/atomic \
@@ -3959,6 +4751,7 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: src/client/renderer.cpp \
   /usr/include/c++/13/bits/ptr_traits.h \
   /usr/include/c++/13/bits/quoted_string.h \
   /usr/include/c++/13/bits/range_access.h \
+  /usr/include/c++/13/bits/ranges_algo.h \
   /usr/include/c++/13/bits/ranges_algobase.h \
   /usr/include/c++/13/bits/ranges_base.h \
   /usr/include/c++/13/bits/ranges_cmp.h \
@@ -4003,6 +4796,7 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: src/client/renderer.cpp \
   /usr/include/c++/13/bits/unique_lock.h \
   /usr/include/c++/13/bits/unique_ptr.h \
   /usr/include/c++/13/bits/unordered_map.h \
+  /usr/include/c++/13/bits/unordered_set.h \
   /usr/include/c++/13/bits/uses_allocator.h \
   /usr/include/c++/13/bits/uses_allocator_args.h \
   /usr/include/c++/13/bits/utility.h \
@@ -4056,6 +4850,7 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: src/client/renderer.cpp \
   /usr/include/c++/13/optional \
   /usr/include/c++/13/ostream \
   /usr/include/c++/13/pstl/execution_defs.h \
+  /usr/include/c++/13/pstl/glue_algorithm_defs.h \
   /usr/include/c++/13/pstl/glue_memory_defs.h \
   /usr/include/c++/13/pstl/pstl_config.h \
   /usr/include/c++/13/ratio \
@@ -4086,6 +4881,7 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: src/client/renderer.cpp \
   /usr/include/c++/13/type_traits \
   /usr/include/c++/13/typeinfo \
   /usr/include/c++/13/unordered_map \
+  /usr/include/c++/13/unordered_set \
   /usr/include/c++/13/utility \
   /usr/include/c++/13/variant \
   /usr/include/c++/13/vector \
@@ -4884,6 +5680,44 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: src/client/shot.cpp \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h
 
 
+libs/threepp/include/threepp/textures/DataTexture.hpp:
+
+libs/threepp/include/threepp/math/interpolants/QuaternionLinearInterpolant.hpp:
+
+libs/threepp/include/threepp/animation/tracks/VectorKeyframeTrack.hpp:
+
+libs/assimp/include/assimp/quaternion.inl:
+
+libs/assimp/include/assimp/matrix4x4.inl:
+
+libs/assimp/include/assimp/material.inl:
+
+libs/assimp/include/assimp/color4.inl:
+
+libs/assimp/include/assimp/MathFunctions.h:
+
+libs/assimp/include/assimp/texture.h:
+
+libs/assimp/include/assimp/scene.h:
+
+libs/assimp/include/assimp/postprocess.h:
+
+libs/assimp/include/assimp/metadata.h:
+
+libs/assimp/include/assimp/matrix3x3.h:
+
+libs/assimp/include/assimp/material.h:
+
+libs/assimp/include/assimp/defs.h:
+
+libs/assimp/include/assimp/color4.h:
+
+libs/assimp/include/assimp/anim.h:
+
+libs/assimp/include/assimp/aabb.h:
+
+src/client/physics.cpp:
+
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h:
 
 /usr/include/x86_64-linux-gnu/sys/ttydefaults.h:
@@ -4891,8 +5725,6 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: src/client/shot.cpp \
 /usr/include/x86_64-linux-gnu/sys/socket.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/stack_t.h:
 
@@ -4916,6 +5748,8 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: src/client/shot.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/sigevent-consts.h:
 
+libs/threepp/include/threepp/objects/SkinnedMesh.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/sigcontext.h:
 
 /usr/include/x86_64-linux-gnu/bits/poll.h:
@@ -4923,6 +5757,8 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: src/client/shot.cpp \
 /usr/include/x86_64-linux-gnu/bits/ioctl-types.h:
 
 /usr/include/x86_64-linux-gnu/bits/in.h:
+
+libs/assimp/include/assimp/config.h:
 
 /usr/include/x86_64-linux-gnu/asm/sockios.h:
 
@@ -4936,19 +5772,19 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: src/client/shot.cpp \
 
 /usr/include/linux/posix_types.h:
 
-/usr/include/x86_64-linux-gnu/sys/poll.h:
-
-/usr/include/fcntl.h:
-
 /usr/include/c++/13/unordered_set:
 
 /usr/include/c++/13/stdlib.h:
+
+libs/assimp/include/assimp/Compiler/poppack1.h:
 
 /usr/include/c++/13/stack:
 
 /usr/include/c++/13/pstl/glue_algorithm_defs.h:
 
 /usr/include/c++/13/bits/stl_deque.h:
+
+libs/assimp/include/assimp/version.h:
 
 /usr/include/c++/13/bits/regex_scanner.tcc:
 
@@ -4963,6 +5799,8 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: src/client/shot.cpp \
 /usr/include/c++/13/bits/regex_compiler.tcc:
 
 /usr/include/c++/13/bits/regex_automaton.h:
+
+libs/assimp/include/assimp/Importer.hpp:
 
 /usr/include/c++/13/bits/regex.tcc:
 
@@ -4982,7 +5820,125 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: src/client/shot.cpp \
 
 /usr/include/arpa/inet.h:
 
+src/client/physics.hpp:
+
 libs/enet/include/enet.h:
+
+libs/bullet/src/btBulletDynamicsCommon.h:
+
+libs/bullet/src/LinearMath/btThreads.h:
+
+libs/bullet/src/LinearMath/btSerializer.h:
+
+libs/bullet/src/LinearMath/btScalar.h:
+
+libs/bullet/src/LinearMath/btQuickprof.h:
+
+libs/bullet/src/LinearMath/btQuaternion.h:
+
+libs/bullet/src/LinearMath/btMotionState.h:
+
+libs/bullet/src/LinearMath/btMinMax.h:
+
+libs/bullet/src/LinearMath/btMatrix3x3.h:
+
+libs/assimp/include/assimp/quaternion.h:
+
+libs/bullet/src/LinearMath/btDefaultMotionState.h:
+
+libs/bullet/src/LinearMath/btAlignedObjectArray.h:
+
+/usr/include/x86_64-linux-gnu/sys/poll.h:
+
+/usr/include/fcntl.h:
+
+libs/bullet/src/BulletDynamics/Dynamics/btRigidBody.h:
+
+libs/bullet/src/BulletDynamics/Dynamics/btDynamicsWorld.h:
+
+libs/bullet/src/BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h:
+
+libs/bullet/src/BulletDynamics/ConstraintSolver/btUniversalConstraint.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h:
+
+libs/bullet/src/BulletDynamics/ConstraintSolver/btSolverConstraint.h:
+
+libs/bullet/src/BulletDynamics/ConstraintSolver/btSolverBody.h:
+
+libs/bullet/src/BulletDynamics/ConstraintSolver/btSliderConstraint.h:
+
+libs/bullet/src/BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h:
+
+libs/bullet/src/BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h:
+
+libs/bullet/src/BulletDynamics/ConstraintSolver/btHingeConstraint.h:
+
+libs/bullet/src/BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.h:
+
+libs/bullet/src/BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h:
+
+libs/bullet/src/BulletDynamics/ConstraintSolver/btGearConstraint.h:
+
+libs/bullet/src/BulletDynamics/ConstraintSolver/btFixedConstraint.h:
+
+libs/bullet/src/BulletDynamics/ConstraintSolver/btConeTwistConstraint.h:
+
+libs/bullet/src/BulletCollision/NarrowPhaseCollision/btPersistentManifold.h:
+
+libs/bullet/src/BulletCollision/NarrowPhaseCollision/btManifoldPoint.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btUniformScalingShape.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btTriangleMeshShape.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btTriangleInfoMap.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btTriangleCallback.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btStaticPlaneShape.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btPolyhedralConvexShape.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btMultiSphereShape.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btConvexShape.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btConvexHullShape.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btConeShape.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btConcaveShape.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btCollisionShape.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btCollisionMargin.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h:
+
+libs/bullet/src/BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.h:
+
+libs/bullet/src/BulletDynamics/ConstraintSolver/btContactSolverInfo.h:
+
+libs/bullet/src/BulletCollision/CollisionDispatch/btManifoldResult.h:
+
+libs/bullet/src/BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.h:
+
+libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionCreateFunc.h:
+
+libs/bullet/src/BulletCollision/BroadphaseCollision/btSimpleBroadphase.h:
+
+libs/bullet/src/BulletCollision/BroadphaseCollision/btQuantizedBvh.h:
+
+libs/bullet/src/BulletCollision/BroadphaseCollision/btOverlappingPairCache.h:
+
+libs/bullet/src/BulletCollision/BroadphaseCollision/btDispatcher.h:
+
+libs/bullet/src/BulletCollision/BroadphaseCollision/btDbvt.h:
+
+libs/bullet/src/BulletCollision/BroadphaseCollision/btAxisSweep3Internal.h:
+
+libs/bullet/src/BulletCollision/BroadphaseCollision/btAxisSweep3.h:
 
 include/netmsg.hpp:
 
@@ -5042,6 +5998,8 @@ src/client/input.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/unistd.h:
 
+libs/bullet/src/BulletCollision/CollisionShapes/btConvexTriangleMeshShape.h:
+
 /usr/include/x86_64-linux-gnu/bits/uio_lim.h:
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
@@ -5065,6 +6023,8 @@ src/client/input.cpp:
 /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
+
+libs/threepp/include/threepp/loaders/AssimpLoader.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
@@ -5090,9 +6050,13 @@ src/client/input.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
+libs/threepp/include/threepp/objects/Skeleton.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 
 /usr/include/x86_64-linux-gnu/bits/semaphore.h:
+
+libs/assimp/include/assimp/light.h:
 
 /usr/include/x86_64-linux-gnu/bits/select2.h:
 
@@ -5108,6 +6072,8 @@ src/client/input.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
 
+libs/bullet/src/BulletCollision/CollisionShapes/btScaledBvhTriangleMeshShape.h:
+
 /usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
@@ -5122,11 +6088,15 @@ src/client/input.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 
+libs/assimp/include/assimp/vector3.inl:
+
 /usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
 
 /usr/include/x86_64-linux-gnu/bits/locale.h:
 
 /usr/include/x86_64-linux-gnu/bits/local_lim.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btBoxShape.h:
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
@@ -5134,9 +6104,15 @@ src/client/input.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
+libs/bullet/src/BulletCollision/CollisionShapes/btCompoundShape.h:
+
 /usr/include/x86_64-linux-gnu/bits/fp-fast.h:
 
+libs/bullet/src/BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h:
+
 /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+
+libs/bullet/src/LinearMath/btTransformUtil.h:
 
 /usr/include/x86_64-linux-gnu/bits/floatn.h:
 
@@ -5147,6 +6123,8 @@ src/client/input.hpp:
 /usr/include/x86_64-linux-gnu/bits/errno.h:
 
 /usr/include/x86_64-linux-gnu/bits/environments.h:
+
+libs/bullet/src/BulletDynamics/ConstraintSolver/btConstraintSolver.h:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
@@ -5178,15 +6156,21 @@ libs/glm/glm/ext/vector_uint3.hpp:
 
 libs/threepp/include/threepp/scenes/Scene.hpp:
 
+libs/bullet/src/BulletDynamics/Vehicle/btVehicleRaycaster.h:
+
 libs/threepp/include/threepp/helpers/helpers.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h:
 
 /usr/include/c++/13/array:
 
+libs/bullet/src/BulletCollision/CollisionShapes/btCylinderShape.h:
+
 libs/threepp/include/threepp/input/IOCapture.hpp:
 
 libs/threepp/include/threepp/helpers/Box3Helper.hpp:
+
+libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionObject.h:
 
 libs/threepp/include/threepp/geometries/TubeGeometry.hpp:
 
@@ -5247,6 +6231,8 @@ libs/threepp/include/threepp/lights/SpotLight.hpp:
 /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h:
 
 /usr/include/c++/13/bits/predefined_ops.h:
+
+libs/bullet/src/LinearMath/btAlignedAllocator.h:
 
 /usr/include/c++/13/debug/debug.h:
 
@@ -5326,11 +6312,15 @@ libs/glm/glm/mat2x2.hpp:
 
 /usr/include/c++/13/bits/exception_defines.h:
 
+libs/assimp/include/assimp/vector3.h:
+
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
 
 libs/threepp/include/threepp/lights/HemisphereLight.hpp:
 
 libs/threepp/include/threepp/math/Vector2.hpp:
+
+libs/bullet/src/BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.h:
 
 libs/glm/glm/mat3x4.hpp:
 
@@ -5344,13 +6334,19 @@ libs/glm/glm/ext/matrix_clip_space.inl:
 
 libs/glm/glm/detail/type_vec3.inl:
 
+libs/bullet/src/BulletCollision/CollisionShapes/btEmptyShape.h:
+
 libs/glm/glm/ext/vector_int4_sized.hpp:
 
 /usr/include/c++/13/bits/stl_raw_storage_iter.h:
 
+libs/assimp/include/assimp/vector2.h:
+
 libs/glm/glm/ext/vector_relational.inl:
 
 /usr/include/c++/13/cassert:
+
+libs/assimp/include/assimp/vector2.inl:
 
 libs/glm/glm/ext/quaternion_transform.hpp:
 
@@ -5364,9 +6360,17 @@ libs/threepp/include/threepp/constants.hpp:
 
 libs/glm/glm/ext/quaternion_float_precision.hpp:
 
+libs/bullet/src/BulletCollision/CollisionShapes/btTriangleIndexVertexArray.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btSphereShape.h:
+
 libs/glm/glm/ext/matrix_float3x2.hpp:
 
+libs/bullet/src/BulletCollision/CollisionShapes/btConvexInternalShape.h:
+
 /usr/include/c++/13/bits/shared_ptr_atomic.h:
+
+libs/bullet/src/LinearMath/btVector3.h:
 
 libs/glm/glm/ext/quaternion_float.hpp:
 
@@ -5388,6 +6392,8 @@ libs/threepp/include/threepp/geometries/ShapeGeometry.hpp:
 
 libs/glm/glm/ext/scalar_int_sized.hpp:
 
+libs/assimp/include/assimp/matrix4x4.h:
+
 libs/glm/glm/ext/quaternion_relational.hpp:
 
 libs/glm/glm/ext/matrix_float4x2_precision.hpp:
@@ -5402,7 +6408,13 @@ libs/threepp/include/threepp/math/Frustum.hpp:
 
 /usr/include/pthread.h:
 
+libs/bullet/src/BulletCollision/CollisionShapes/btTriangleMesh.h:
+
 libs/threepp/include/threepp/geometries/CircleGeometry.hpp:
+
+libs/assimp/include/assimp/camera.h:
+
+libs/bullet/src/BulletCollision/BroadphaseCollision/btDbvtBroadphase.h:
 
 libs/glm/glm/gtc/matrix_transform.inl:
 
@@ -5436,6 +6448,8 @@ libs/glm/glm/ext/quaternion_common.inl:
 
 libs/glm/glm/ext/matrix_double4x2.hpp:
 
+libs/assimp/include/assimp/Compiler/pushpack1.h:
+
 libs/glm/glm/detail/func_common.inl:
 
 /usr/include/x86_64-linux-gnu/sys/ucontext.h:
@@ -5444,11 +6458,15 @@ libs/glm/glm/detail/func_common.inl:
 
 libs/glm/glm/geometric.hpp:
 
+libs/bullet/src/BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h:
+
 libs/threepp/include/threepp/input/KeyListener.hpp:
 
 /usr/include/c++/13/bits/locale_facets.tcc:
 
 libs/glm/glm/ext/vector_int4.hpp:
+
+libs/bullet/src/BulletDynamics/Vehicle/btRaycastVehicle.h:
 
 libs/glm/glm/ext/scalar_constants.inl:
 
@@ -5478,6 +6496,8 @@ libs/threepp/include/threepp/cameras/OrthographicCamera.hpp:
 
 libs/glm/glm/detail/type_mat2x4.hpp:
 
+libs/assimp/include/assimp/types.h:
+
 /usr/include/c++/13/bits/alloc_traits.h:
 
 libs/glm/glm/ext/vector_float2_precision.hpp:
@@ -5489,6 +6509,8 @@ src/client/shot.cpp:
 libs/spdlog/include/spdlog/details/synchronous_factory.h:
 
 /usr/include/c++/13/bits/algorithmfwd.h:
+
+libs/bullet/src/BulletDynamics/Dynamics/btActionInterface.h:
 
 /usr/include/c++/13/bits/node_handle.h:
 
@@ -5558,11 +6580,15 @@ libs/glm/glm/matrix.hpp:
 
 /usr/include/c++/13/new:
 
+libs/bullet/src/BulletCollision/CollisionShapes/btOptimizedBvh.h:
+
 /usr/include/wctype.h:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
 libs/glm/glm/ext/matrix_float4x4.hpp:
+
+libs/bullet/src/BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h:
 
 libs/threepp/include/threepp/cameras/PerspectiveCamera.hpp:
 
@@ -5609,6 +6635,8 @@ libs/glm/glm/ext/quaternion_geometric.hpp:
 libs/glm/glm/ext/matrix_float4x3.hpp:
 
 /usr/include/c++/13/charconv:
+
+libs/bullet/src/BulletDynamics/ConstraintSolver/btHinge2Constraint.h:
 
 libs/glm/glm/detail/_vectorize.hpp:
 
@@ -5714,6 +6742,8 @@ libs/glm/glm/vec4.hpp:
 
 libs/glm/glm/mat4x3.hpp:
 
+libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionWorld.h:
+
 libs/threepp/include/threepp/animation/KeyframeTrack.hpp:
 
 /usr/include/c++/13/istream:
@@ -5758,6 +6788,8 @@ libs/glm/glm/glm.hpp:
 
 /usr/include/asm-generic/errno.h:
 
+libs/bullet/src/BulletCollision/CollisionShapes/btStridingMeshInterface.h:
+
 libs/glm/glm/detail/type_vec1.hpp:
 
 /usr/include/c++/13/bits/regex_compiler.h:
@@ -5771,6 +6803,8 @@ libs/glm/glm/ext/vector_double3.hpp:
 libs/threepp/include/threepp/helpers/GridHelper.hpp:
 
 /usr/include/c++/13/bits/utility.h:
+
+libs/bullet/src/BulletCollision/CollisionShapes/btTetrahedronShape.h:
 
 libs/glm/glm/ext/scalar_uint_sized.hpp:
 
@@ -5822,6 +6856,8 @@ libs/glm/glm/detail/compute_common.hpp:
 
 libs/glm/glm/ext/vector_double4.hpp:
 
+libs/bullet/src/BulletDynamics/ConstraintSolver/btTypedConstraint.h:
+
 libs/threepp/include/threepp/extras/core/Shape.hpp:
 
 libs/glm/glm/ext/matrix_double3x2_precision.hpp:
@@ -5835,6 +6871,8 @@ libs/glm/glm/ext/vector_double4_precision.hpp:
 /usr/include/c++/13/compare:
 
 /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h:
+
+libs/bullet/src/BulletDynamics/Dynamics/btSimpleDynamicsWorld.h:
 
 libs/glm/glm/detail/func_integer.inl:
 
@@ -5854,9 +6892,13 @@ libs/threepp/include/threepp/math/interpolants/DiscreteInterpolant.hpp:
 
 libs/spdlog/include/spdlog/details/null_mutex.h:
 
+libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionConfiguration.h:
+
 libs/glm/glm/ext/vector_float3.hpp:
 
 libs/glm/glm/ext/vector_float3_precision.hpp:
+
+libs/threepp/include/threepp/animation/tracks/QuaternionKeyframeTrack.hpp:
 
 /usr/include/c++/13/utility:
 
@@ -5926,9 +6968,13 @@ libs/threepp/include/threepp/canvas/Canvas.hpp:
 
 libs/threepp/include/threepp/materials/ShadowMaterial.hpp:
 
+libs/threepp/include/threepp/objects/Bone.hpp:
+
 libs/threepp/include/threepp/materials/SpriteMaterial.hpp:
 
 libs/threepp/include/threepp/materials/interfaces.hpp:
+
+libs/bullet/src/BulletCollision/BroadphaseCollision/btBroadphaseProxy.h:
 
 libs/threepp/include/threepp/materials/materials.hpp:
 
@@ -5994,6 +7040,8 @@ libs/glm/glm/gtc/constants.inl:
 
 libs/threepp/include/threepp/renderers/gl/GLInfo.hpp:
 
+libs/assimp/include/assimp/mesh.h:
+
 /usr/include/c++/13/iosfwd:
 
 libs/threepp/include/threepp/renderers/gl/GLShadowMap.hpp:
@@ -6058,11 +7106,17 @@ libs/glm/glm/detail/type_half.hpp:
 
 /usr/include/c++/13/bits/enable_special_members.h:
 
+libs/bullet/src/LinearMath/btIDebugDraw.h:
+
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
 
 /usr/include/c++/13/bits/erase_if.h:
 
 /usr/include/c++/13/bits/exception.h:
+
+/usr/include/memory.h:
+
+libs/bullet/src/LinearMath/btHashMap.h:
 
 /usr/include/c++/13/bits/fs_dir.h:
 
@@ -6090,6 +7144,8 @@ libs/glm/glm/detail/type_vec4.inl:
 
 /usr/include/c++/13/bits/uniform_int_dist.h:
 
+libs/bullet/src/BulletDynamics/Vehicle/btWheelInfo.h:
+
 libs/glm/glm/ext/matrix_float3x2_precision.hpp:
 
 /usr/include/c++/13/bits/locale_facets.h:
@@ -6099,6 +7155,8 @@ libs/glm/glm/ext/matrix_float3x2_precision.hpp:
 /usr/include/x86_64-linux-gnu/bits/posix_opt.h:
 
 /usr/include/c++/13/thread:
+
+libs/bullet/src/BulletCollision/BroadphaseCollision/btBroadphaseInterface.h:
 
 libs/spdlog/include/spdlog/details/backtracer.h:
 
@@ -6234,6 +7292,8 @@ src/client/player.hpp:
 
 /usr/include/c++/13/bits/stl_vector.h:
 
+libs/assimp/include/assimp/matrix3x3.inl:
+
 /usr/include/x86_64-linux-gnu/bits/stat.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
@@ -6248,6 +7308,8 @@ libs/threepp/include/threepp/lights/AmbientLight.hpp:
 
 /usr/include/c++/13/bits/unique_ptr.h:
 
+libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h:
+
 /usr/include/c++/13/bits/uses_allocator.h:
 
 libs/glm/glm/mat3x2.hpp:
@@ -6256,9 +7318,13 @@ libs/glm/glm/mat3x2.hpp:
 
 /usr/include/c++/13/bits/vector.tcc:
 
+libs/bullet/src/btBulletCollisionCommon.h:
+
 /usr/include/c++/13/optional:
 
 /usr/include/c++/13/cctype:
+
+libs/bullet/src/BulletCollision/BroadphaseCollision/btOverlappingPairCallback.h:
 
 /usr/include/c++/13/chrono:
 
@@ -6282,6 +7348,8 @@ libs/glm/glm/ext/matrix_double4x4_precision.hpp:
 
 /usr/include/c++/13/cstdio:
 
+libs/bullet/src/BulletCollision/CollisionDispatch/btCollisionDispatcher.h:
+
 /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h:
 
 /usr/include/c++/13/cstring:
@@ -6292,9 +7360,13 @@ libs/threepp/include/threepp/textures/Texture.hpp:
 
 /usr/include/c++/13/cwctype:
 
+libs/bullet/src/BulletDynamics/ConstraintSolver/btJacobianEntry.h:
+
 /usr/include/c++/13/debug/assertions.h:
 
 /usr/include/c++/13/exception:
+
+libs/threepp/include/threepp/loaders/Loader.hpp:
 
 /usr/include/c++/13/bits/memory_resource.h:
 
@@ -6334,6 +7406,8 @@ libs/threepp/include/threepp/core/misc.hpp:
 
 /usr/include/c++/13/ratio:
 
+libs/bullet/src/LinearMath/btQuadWord.h:
+
 /usr/include/linux/limits.h:
 
 /usr/include/c++/13/bits/regex.h:
@@ -6362,6 +7436,8 @@ libs/threepp/include/threepp/geometries/ExtrudeTextGeometry.hpp:
 
 /usr/include/c++/13/string_view:
 
+libs/bullet/src/BulletCollision/CollisionShapes/btCapsuleShape.h:
+
 /usr/include/c++/13/tr1/beta_function.tcc:
 
 /usr/include/c++/13/tr1/ell_integral.tcc:
@@ -6371,6 +7447,8 @@ libs/threepp/include/threepp/geometries/ExtrudeTextGeometry.hpp:
 libs/glm/glm/ext/quaternion_common.hpp:
 
 /usr/include/c++/13/tr1/exp_integral.tcc:
+
+libs/bullet/src/LinearMath/btTransform.h:
 
 libs/threepp/include/threepp/extras/core/Path.hpp:
 
@@ -6425,6 +7503,8 @@ libs/glm/glm/detail/type_vec2.hpp:
 /usr/include/c++/13/bits/atomic_lockfree_defines.h:
 
 /usr/include/syscall.h:
+
+libs/bullet/src/LinearMath/btAabbUtil2.h:
 
 /usr/include/time.h:
 

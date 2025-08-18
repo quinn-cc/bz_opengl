@@ -13,6 +13,7 @@
 #include "networker.hpp"
 #include "player.hpp"
 #include "input.hpp"
+#include "physics.hpp"
 
 bool exitSignalRecieved = false;
 
@@ -28,6 +29,7 @@ void Start() {
     Player::GetInstance().Init();
     Renderer::GetInstance().Init();
     Input::GetInstance().Init();
+    Physics::GetInstance().Init();
     Networker::GetInstance().Init();
     Networker::GetInstance().MsgSend_Init();
 }
@@ -35,6 +37,7 @@ void Start() {
 void Update() {
     Networker::GetInstance().Update();
     Input::GetInstance().Update();
+    Physics::GetInstance().Update();
 
     for (Shot *shot : Shot::shots) {
         shot->Update();
@@ -48,6 +51,7 @@ void Close() {
     spdlog::debug("Closing window");
     Networker::GetInstance().Close();
     Renderer::GetInstance().Close();
+    Physics::GetInstance().Close();
 }
 
 void SignalHandlerClose(int signum) {

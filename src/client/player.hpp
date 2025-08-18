@@ -7,12 +7,11 @@ class Player {
 private:
     Location location;
     Location lastLocation;
-    float yaw;
-    float lastYaw;
-
     std::string name;
     float moveSpeed;
     float turnSpeed;
+    float getYaw();
+    float getLastYaw();
 
 public:
     static Player &GetInstance();
@@ -23,4 +22,5 @@ public:
     std::string GetName();
     glm::vec3 GetForwardVector();
     Location GetLocation();
+    void SetLocation(Location location);
 };

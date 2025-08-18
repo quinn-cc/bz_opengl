@@ -125,10 +125,24 @@ CMakeFiles/client.dir/src/client/networker.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client.dir/src/client/networker.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/quinn/Desktop/bz_opengl/src/client/networker.cpp -o CMakeFiles/client.dir/src/client/networker.cpp.s
 
+CMakeFiles/client.dir/src/client/physics.cpp.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/src/client/physics.cpp.o: src/client/physics.cpp
+CMakeFiles/client.dir/src/client/physics.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/quinn/Desktop/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/client.dir/src/client/physics.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/src/client/physics.cpp.o -MF CMakeFiles/client.dir/src/client/physics.cpp.o.d -o CMakeFiles/client.dir/src/client/physics.cpp.o -c /home/quinn/Desktop/bz_opengl/src/client/physics.cpp
+
+CMakeFiles/client.dir/src/client/physics.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/client.dir/src/client/physics.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/quinn/Desktop/bz_opengl/src/client/physics.cpp > CMakeFiles/client.dir/src/client/physics.cpp.i
+
+CMakeFiles/client.dir/src/client/physics.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client.dir/src/client/physics.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/quinn/Desktop/bz_opengl/src/client/physics.cpp -o CMakeFiles/client.dir/src/client/physics.cpp.s
+
 CMakeFiles/client.dir/src/client/player.cpp.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/src/client/player.cpp.o: src/client/player.cpp
 CMakeFiles/client.dir/src/client/player.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/quinn/Desktop/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/client.dir/src/client/player.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/quinn/Desktop/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/client.dir/src/client/player.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/src/client/player.cpp.o -MF CMakeFiles/client.dir/src/client/player.cpp.o.d -o CMakeFiles/client.dir/src/client/player.cpp.o -c /home/quinn/Desktop/bz_opengl/src/client/player.cpp
 
 CMakeFiles/client.dir/src/client/player.cpp.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/client.dir/src/client/player.cpp.s: cmake_force
 CMakeFiles/client.dir/src/client/renderer.cpp.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/src/client/renderer.cpp.o: src/client/renderer.cpp
 CMakeFiles/client.dir/src/client/renderer.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/quinn/Desktop/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/client.dir/src/client/renderer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/quinn/Desktop/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/client.dir/src/client/renderer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/src/client/renderer.cpp.o -MF CMakeFiles/client.dir/src/client/renderer.cpp.o.d -o CMakeFiles/client.dir/src/client/renderer.cpp.o -c /home/quinn/Desktop/bz_opengl/src/client/renderer.cpp
 
 CMakeFiles/client.dir/src/client/renderer.cpp.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/client.dir/src/client/renderer.cpp.s: cmake_force
 CMakeFiles/client.dir/src/client/shot.cpp.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/src/client/shot.cpp.o: src/client/shot.cpp
 CMakeFiles/client.dir/src/client/shot.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/quinn/Desktop/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/client.dir/src/client/shot.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/quinn/Desktop/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/client.dir/src/client/shot.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/src/client/shot.cpp.o -MF CMakeFiles/client.dir/src/client/shot.cpp.o.d -o CMakeFiles/client.dir/src/client/shot.cpp.o -c /home/quinn/Desktop/bz_opengl/src/client/shot.cpp
 
 CMakeFiles/client.dir/src/client/shot.cpp.i: cmake_force
@@ -173,6 +187,7 @@ client_OBJECTS = \
 "CMakeFiles/client.dir/src/client/input.cpp.o" \
 "CMakeFiles/client.dir/src/client/main.cpp.o" \
 "CMakeFiles/client.dir/src/client/networker.cpp.o" \
+"CMakeFiles/client.dir/src/client/physics.cpp.o" \
 "CMakeFiles/client.dir/src/client/player.cpp.o" \
 "CMakeFiles/client.dir/src/client/renderer.cpp.o" \
 "CMakeFiles/client.dir/src/client/shot.cpp.o"
@@ -184,6 +199,7 @@ client: CMakeFiles/client.dir/src/client/client.cpp.o
 client: CMakeFiles/client.dir/src/client/input.cpp.o
 client: CMakeFiles/client.dir/src/client/main.cpp.o
 client: CMakeFiles/client.dir/src/client/networker.cpp.o
+client: CMakeFiles/client.dir/src/client/physics.cpp.o
 client: CMakeFiles/client.dir/src/client/player.cpp.o
 client: CMakeFiles/client.dir/src/client/renderer.cpp.o
 client: CMakeFiles/client.dir/src/client/shot.cpp.o
@@ -192,8 +208,13 @@ client: libs/enet/libenet.a
 client: libs/spdlog/libspdlog.a
 client: libs/glm/glm/libglm.a
 client: libs/threepp/src/libthreepp.a
+client: libs/assimp/lib/libassimp.a
+client: libs/bullet/src/BulletDynamics/libBulletDynamics.a
+client: libs/bullet/src/BulletCollision/libBulletCollision.a
+client: libs/bullet/src/LinearMath/libLinearMath.a
+client: /usr/lib/x86_64-linux-gnu/libz.a
 client: CMakeFiles/client.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/quinn/Desktop/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/quinn/Desktop/bz_opengl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable client"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/client.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

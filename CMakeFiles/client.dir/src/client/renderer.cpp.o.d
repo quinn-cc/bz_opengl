@@ -625,6 +625,52 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: \
  /home/quinn/Desktop/bz_opengl/libs/glm/glm/gtc/epsilon.hpp \
  /home/quinn/Desktop/bz_opengl/libs/glm/glm/gtc/../detail/setup.hpp \
  /home/quinn/Desktop/bz_opengl/libs/glm/glm/gtc/epsilon.inl \
+ /home/quinn/Desktop/bz_opengl/libs/threepp/src/../include/threepp/loaders/AssimpLoader.hpp \
+ /home/quinn/Desktop/bz_opengl/libs/threepp/src/../include/threepp/animation/tracks/QuaternionKeyframeTrack.hpp \
+ /home/quinn/Desktop/bz_opengl/libs/threepp/src/../include/threepp/math/interpolants/QuaternionLinearInterpolant.hpp \
+ /home/quinn/Desktop/bz_opengl/libs/threepp/src/../include/threepp/animation/tracks/VectorKeyframeTrack.hpp \
+ /home/quinn/Desktop/bz_opengl/libs/threepp/src/../include/threepp/loaders/Loader.hpp \
+ /home/quinn/Desktop/bz_opengl/libs/threepp/src/../include/threepp/loaders/TextureLoader.hpp \
+ /home/quinn/Desktop/bz_opengl/libs/threepp/src/../include/threepp/objects/SkinnedMesh.hpp \
+ /home/quinn/Desktop/bz_opengl/libs/threepp/src/../include/threepp/objects/Skeleton.hpp \
+ /home/quinn/Desktop/bz_opengl/libs/threepp/src/../include/threepp/objects/Bone.hpp \
+ /home/quinn/Desktop/bz_opengl/libs/threepp/src/../include/threepp/textures/DataTexture.hpp \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/Importer.hpp \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/types.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/defs.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/config.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/vector2.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/vector3.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/color4.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/matrix3x3.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/matrix4x4.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/quaternion.h \
+ /usr/include/c++/13/cstring \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/include/assimp/vector2.inl \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/include/assimp/vector3.inl \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/include/assimp/color4.inl \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/include/assimp/matrix3x3.inl \
+ /usr/include/c++/13/algorithm /usr/include/c++/13/bits/ranges_algo.h \
+ /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/include/assimp/matrix4x4.inl \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/include/assimp/MathFunctions.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/include/assimp/quaternion.inl \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/postprocess.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/scene.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/texture.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/include/assimp/Compiler/pushpack1.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/include/assimp/Compiler/poppack1.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/mesh.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/aabb.h \
+ /usr/include/c++/13/unordered_set \
+ /usr/include/c++/13/bits/unordered_set.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/light.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/camera.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/material.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/include/assimp/material.inl \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/anim.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/metadata.h \
+ /home/quinn/Desktop/bz_opengl/libs/assimp/code/../include/assimp/version.h \
  /home/quinn/Desktop/bz_opengl/libs/spdlog/include/spdlog/spdlog.h \
  /home/quinn/Desktop/bz_opengl/libs/spdlog/include/spdlog/common.h \
  /home/quinn/Desktop/bz_opengl/libs/spdlog/include/spdlog/details/null_mutex.h \
@@ -636,7 +682,6 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: \
  /home/quinn/Desktop/bz_opengl/libs/spdlog/include/spdlog/fmt/fmt.h \
  /home/quinn/Desktop/bz_opengl/libs/spdlog/include/spdlog/fmt/bundled/format.h \
  /home/quinn/Desktop/bz_opengl/libs/spdlog/include/spdlog/fmt/bundled/base.h \
- /usr/include/c++/13/cstring \
  /home/quinn/Desktop/bz_opengl/libs/spdlog/include/spdlog/details/registry.h \
  /home/quinn/Desktop/bz_opengl/libs/spdlog/include/spdlog/details/periodic_worker.h \
  /usr/include/c++/13/condition_variable \

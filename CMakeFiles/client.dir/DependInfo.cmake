@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/quinn/Desktop/bz_opengl/src/client/input.cpp" "CMakeFiles/client.dir/src/client/input.cpp.o" "gcc" "CMakeFiles/client.dir/src/client/input.cpp.o.d"
   "/home/quinn/Desktop/bz_opengl/src/client/main.cpp" "CMakeFiles/client.dir/src/client/main.cpp.o" "gcc" "CMakeFiles/client.dir/src/client/main.cpp.o.d"
   "/home/quinn/Desktop/bz_opengl/src/client/networker.cpp" "CMakeFiles/client.dir/src/client/networker.cpp.o" "gcc" "CMakeFiles/client.dir/src/client/networker.cpp.o.d"
+  "/home/quinn/Desktop/bz_opengl/src/client/physics.cpp" "CMakeFiles/client.dir/src/client/physics.cpp.o" "gcc" "CMakeFiles/client.dir/src/client/physics.cpp.o.d"
   "/home/quinn/Desktop/bz_opengl/src/client/player.cpp" "CMakeFiles/client.dir/src/client/player.cpp.o" "gcc" "CMakeFiles/client.dir/src/client/player.cpp.o.d"
   "/home/quinn/Desktop/bz_opengl/src/client/renderer.cpp" "CMakeFiles/client.dir/src/client/renderer.cpp.o" "gcc" "CMakeFiles/client.dir/src/client/renderer.cpp.o.d"
   "/home/quinn/Desktop/bz_opengl/src/client/shot.cpp" "CMakeFiles/client.dir/src/client/shot.cpp.o" "gcc" "CMakeFiles/client.dir/src/client/shot.cpp.o.d"

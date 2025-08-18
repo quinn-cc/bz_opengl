@@ -87,7 +87,7 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target list_install_components
 list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\" \"assimp-dev\" \"libassimp6.0.2-dev\""
 .PHONY : list_install_components
 
 # Special rule for the target list_install_components
@@ -304,6 +304,123 @@ update_mappings/fast:
 	$(MAKE) $(MAKESILENT) -f libs/threepp/src/external/glfw/src/CMakeFiles/update_mappings.dir/build.make libs/threepp/src/external/glfw/src/CMakeFiles/update_mappings.dir/build
 .PHONY : update_mappings/fast
 
+#=============================================================================
+# Target rules for targets named uninstall
+
+# Build rule for target.
+uninstall: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 uninstall
+.PHONY : uninstall
+
+# fast build rule for target.
+uninstall/fast:
+	$(MAKE) $(MAKESILENT) -f libs/assimp/CMakeFiles/uninstall.dir/build.make libs/assimp/CMakeFiles/uninstall.dir/build
+.PHONY : uninstall/fast
+
+#=============================================================================
+# Target rules for targets named assimp
+
+# Build rule for target.
+assimp: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 assimp
+.PHONY : assimp
+
+# fast build rule for target.
+assimp/fast:
+	$(MAKE) $(MAKESILENT) -f libs/assimp/code/CMakeFiles/assimp.dir/build.make libs/assimp/code/CMakeFiles/assimp.dir/build
+.PHONY : assimp/fast
+
+#=============================================================================
+# Target rules for targets named unit
+
+# Build rule for target.
+unit: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 unit
+.PHONY : unit
+
+# fast build rule for target.
+unit/fast:
+	$(MAKE) $(MAKESILENT) -f libs/assimp/test/CMakeFiles/unit.dir/build.make libs/assimp/test/CMakeFiles/unit.dir/build
+.PHONY : unit/fast
+
+#=============================================================================
+# Target rules for targets named BulletInverseDynamics
+
+# Build rule for target.
+BulletInverseDynamics: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BulletInverseDynamics
+.PHONY : BulletInverseDynamics
+
+# fast build rule for target.
+BulletInverseDynamics/fast:
+	$(MAKE) $(MAKESILENT) -f libs/bullet/src/BulletInverseDynamics/CMakeFiles/BulletInverseDynamics.dir/build.make libs/bullet/src/BulletInverseDynamics/CMakeFiles/BulletInverseDynamics.dir/build
+.PHONY : BulletInverseDynamics/fast
+
+#=============================================================================
+# Target rules for targets named BulletSoftBody
+
+# Build rule for target.
+BulletSoftBody: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BulletSoftBody
+.PHONY : BulletSoftBody
+
+# fast build rule for target.
+BulletSoftBody/fast:
+	$(MAKE) $(MAKESILENT) -f libs/bullet/src/BulletSoftBody/CMakeFiles/BulletSoftBody.dir/build.make libs/bullet/src/BulletSoftBody/CMakeFiles/BulletSoftBody.dir/build
+.PHONY : BulletSoftBody/fast
+
+#=============================================================================
+# Target rules for targets named BulletCollision
+
+# Build rule for target.
+BulletCollision: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BulletCollision
+.PHONY : BulletCollision
+
+# fast build rule for target.
+BulletCollision/fast:
+	$(MAKE) $(MAKESILENT) -f libs/bullet/src/BulletCollision/CMakeFiles/BulletCollision.dir/build.make libs/bullet/src/BulletCollision/CMakeFiles/BulletCollision.dir/build
+.PHONY : BulletCollision/fast
+
+#=============================================================================
+# Target rules for targets named BulletDynamics
+
+# Build rule for target.
+BulletDynamics: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BulletDynamics
+.PHONY : BulletDynamics
+
+# fast build rule for target.
+BulletDynamics/fast:
+	$(MAKE) $(MAKESILENT) -f libs/bullet/src/BulletDynamics/CMakeFiles/BulletDynamics.dir/build.make libs/bullet/src/BulletDynamics/CMakeFiles/BulletDynamics.dir/build
+.PHONY : BulletDynamics/fast
+
+#=============================================================================
+# Target rules for targets named LinearMath
+
+# Build rule for target.
+LinearMath: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 LinearMath
+.PHONY : LinearMath
+
+# fast build rule for target.
+LinearMath/fast:
+	$(MAKE) $(MAKESILENT) -f libs/bullet/src/LinearMath/CMakeFiles/LinearMath.dir/build.make libs/bullet/src/LinearMath/CMakeFiles/LinearMath.dir/build
+.PHONY : LinearMath/fast
+
+#=============================================================================
+# Target rules for targets named Bullet3Common
+
+# Build rule for target.
+Bullet3Common: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Bullet3Common
+.PHONY : Bullet3Common
+
+# fast build rule for target.
+Bullet3Common/fast:
+	$(MAKE) $(MAKESILENT) -f libs/bullet/src/Bullet3Common/CMakeFiles/Bullet3Common.dir/build.make libs/bullet/src/Bullet3Common/CMakeFiles/Bullet3Common.dir/build
+.PHONY : Bullet3Common/fast
+
 src/client/client.o: src/client/client.cpp.o
 .PHONY : src/client/client.o
 
@@ -399,6 +516,30 @@ src/client/networker.s: src/client/networker.cpp.s
 src/client/networker.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/networker.cpp.s
 .PHONY : src/client/networker.cpp.s
+
+src/client/physics.o: src/client/physics.cpp.o
+.PHONY : src/client/physics.o
+
+# target to build an object file
+src/client/physics.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/physics.cpp.o
+.PHONY : src/client/physics.cpp.o
+
+src/client/physics.i: src/client/physics.cpp.i
+.PHONY : src/client/physics.i
+
+# target to preprocess a source file
+src/client/physics.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/physics.cpp.i
+.PHONY : src/client/physics.cpp.i
+
+src/client/physics.s: src/client/physics.cpp.s
+.PHONY : src/client/physics.s
+
+# target to generate assembly for a file
+src/client/physics.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/physics.cpp.s
+.PHONY : src/client/physics.cpp.s
 
 src/client/player.o: src/client/player.cpp.o
 .PHONY : src/client/player.o
@@ -580,7 +721,15 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... uninstall"
 	@echo "... update_mappings"
+	@echo "... Bullet3Common"
+	@echo "... BulletCollision"
+	@echo "... BulletDynamics"
+	@echo "... BulletInverseDynamics"
+	@echo "... BulletSoftBody"
+	@echo "... LinearMath"
+	@echo "... assimp"
 	@echo "... client"
 	@echo "... enet_static"
 	@echo "... enet_test"
@@ -591,6 +740,7 @@ help:
 	@echo "... server"
 	@echo "... spdlog"
 	@echo "... threepp"
+	@echo "... unit"
 	@echo "... src/client/client.o"
 	@echo "... src/client/client.i"
 	@echo "... src/client/client.s"
@@ -603,6 +753,9 @@ help:
 	@echo "... src/client/networker.o"
 	@echo "... src/client/networker.i"
 	@echo "... src/client/networker.s"
+	@echo "... src/client/physics.o"
+	@echo "... src/client/physics.i"
+	@echo "... src/client/physics.s"
 	@echo "... src/client/player.o"
 	@echo "... src/client/player.i"
 	@echo "... src/client/player.s"
