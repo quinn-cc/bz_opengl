@@ -58,7 +58,7 @@ int Networker::Init() {
 
     // Set up the server address
     ENetAddress address;
-    enet_address_set_host(&address, "127.0.0.1");
+    enet_address_set_host(&address, serverAddress.c_str());
     address.port = 1234;
 
     // Connect to the server

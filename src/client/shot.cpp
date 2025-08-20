@@ -28,9 +28,11 @@ Shot::Shot(int ownerId, glm::vec3 position, glm::vec3 velocity) {
 }
 
 Shot::~Shot() {
+    shots.erase(std::remove(shots.begin(), shots.end(), this), shots.end());
+
     for (auto &cb : Shot::callbacks_remove) {
         cb(this);
-    }
+    }    
 }
 
 void Shot::Update() {

@@ -1,2 +1,0 @@
-use spdlog for debugging
-use enet for networking with udp

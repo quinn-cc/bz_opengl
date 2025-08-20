@@ -3,12 +3,18 @@
 #include <glm/glm.hpp>
 #include <threepp/threepp.hpp>
 #include <threepp/loaders/AssimpLoader.hpp>
+#include <threepp/lights/DirectionalLightShadow.hpp>
+#include <threepp/cameras/OrthographicCamera.hpp>
 #include <GLFW/glfw3.h>
 #include <spdlog/spdlog.h>
 #include <memory>
 #include "client.hpp"
 #include "shot.hpp"
 #include "player.hpp"
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+    Renderer::GetInstance().OnResize(width, height);
+}
 
 Renderer &Renderer::GetInstance() {
     static Renderer instance;
@@ -51,8 +57,7 @@ void Renderer::Init() {
     }
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
-
-    spdlog::debug("About to init renderer");
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     renderer = new threepp::GLRenderer({800.0f, 600.0f});
     renderer->setClearColor(threepp::Color(0x3399ff));
@@ -65,6 +70,16 @@ void Renderer::Init() {
 
     const auto planeGeometry = threepp::PlaneGeometry::create(100, 100);
     const auto planeMaterial = threepp::MeshLambertMaterial::create();
+    threepp::TextureLoader loader;
+    try {
+        auto texture = loader.load("../data/textures/grass.jpg");
+        texture->repeat.set(20, 20);  // Repeat 20 times in both directions
+        texture->wrapS = threepp::TextureWrapping::Repeat;  // Enable horizontal wrapping
+        texture->wrapT = threepp::TextureWrapping::Repeat;  // Enable vertical wrapping
+        planeMaterial->map = texture;
+    } catch (...) {
+        spdlog::error("Failed to load grass texture");
+    }
     planeMaterial->color = threepp::Color::lightgray;
     planeMaterial->side = threepp::Side::Double;
     auto plane = threepp::Mesh::create(planeGeometry, planeMaterial);
@@ -72,8 +87,13 @@ void Renderer::Init() {
     plane->receiveShadow = true;
     scene->add(plane);
 
-    auto grid = threepp::GridHelper::create(10, 10); // size=10 units, divisions=10
-    scene->add(grid);
+    auto geometry = threepp::BoxGeometry::create(5, 5, 5);
+    geometry->translate(10, 0, 10); // Move the box up so it sits on the ground
+    const auto cubeMaterial = threepp::MeshStandardMaterial::create();
+    auto cubeMesh = threepp::Mesh::create(geometry, cubeMaterial);
+    cubeMesh->castShadow = true;
+    cubeMesh->receiveShadow = true;
+    scene->add(cubeMesh);
 
     auto light = threepp::AmbientLight::create(0xffffff, 0.5f);
     scene->add(light);
@@ -81,6 +101,14 @@ void Renderer::Init() {
     auto dir = threepp::DirectionalLight::create(threepp::Color(0xffffff), 1.0f); // white, full intensity
     dir->position.set(150, 50, 150);
     dir->castShadow = true;
+    dir->shadow->mapSize.set(2048, 2048);
+    auto shadowCam = static_cast<threepp::OrthographicCamera*>(dir->shadow->camera.get());
+    if (shadowCam) {
+        shadowCam->left = -50;
+        shadowCam->right = 50;
+        shadowCam->top = 50;
+        shadowCam->bottom = -50;
+    }
     scene->add(dir);
 
     Client::AddCallback_AddClient([this](Client *client){ this->OnClientAdd(client); });
@@ -94,8 +122,21 @@ bool Renderer::ShouldClose() {
 }
 
 void Renderer::Close() {
+    // Release threepp resources first
+    clientMeshes.clear();
+    shotMeshes.clear();
+    scene.reset();
+    camera.reset();
+    if (renderer) {
+        delete renderer;
+        renderer = nullptr;
+    }
+
     spdlog::debug("Closing GLFW window");
-    glfwDestroyWindow(window);
+    if (window) {
+        glfwDestroyWindow(window);
+        window = nullptr;
+    }
     glfwTerminate();
     closed = true;
 }
@@ -105,19 +146,10 @@ float Renderer::GetDeltaTime() {
 }
 
 void Renderer::OnClientAdd(Client *client) {
-    // auto geometry = threepp::BoxGeometry::create(1, 1, 1);
-    // auto material = threepp::MeshStandardMaterial::create();
-    // material->color = threepp::Color(0x00ff00); // green
-    // material->metalness = 0.5f;   // optional: 0 = non-metal, 1 = metal
-    // material->roughness = 0.5f;   // 0 = smooth, 1 = rough
-    // std::shared_ptr<threepp::Mesh> mesh = threepp::Mesh::create(geometry, material);
-    // mesh->castShadow = true;
-    // mesh->receiveShadow = true;
-    // clientMeshes[client] = mesh;
-    // scene->add(mesh);
     threepp::AssimpLoader loader;
+
     try {
-        auto model = loader.load("/home/quinn/Desktop/bz_opengl/data/models/tank/tank.glb");
+        auto model = loader.load("../data/models/tank/tank.glb");
         clientMeshes[client] = model;
         model->scale.set(0.5f, 0.5f, 0.5f);
         model->traverseType<threepp::Mesh>([&](threepp::Mesh& child) {
@@ -162,7 +194,7 @@ void Renderer::Update() {
     lastFrameTime = currTime;
 
     glm::vec3 lookDir = Player::GetInstance().GetForwardVector();
-    glm::vec3 offset = { 0.0f, 1, 0.0f };
+    glm::vec3 offset = { 0.0f, 0, 0.0f };
     glm::vec3 pos = Player::GetInstance().GetLocation().position + offset;
     camera->position = toInternal(pos);
     glm::vec3 total = pos + lookDir;
@@ -172,6 +204,7 @@ void Renderer::Update() {
     // Draw the meshes
     for (const auto& [client, mesh] : clientMeshes) {
         Location loc = client->GetInterpolatedLocation();
+        loc.position.y -= 1; // Adjust height so tank is above ground
         clientMeshes[client]->position = toInternal(loc.position);
         clientMeshes[client]->quaternion = toInternal(loc.rotation);
     }
@@ -184,3 +217,12 @@ void Renderer::Update() {
     renderer->render(*scene, *camera);
     glfwSwapBuffers(window);
 }
+
+void Renderer::OnResize(int width, int height) {
+    if (renderer) renderer->setSize({width, height});
+    if (camera) {
+        camera->aspect = static_cast<float>(width) / static_cast<float>(height);
+        camera->updateProjectionMatrix();
+    }
+}
+

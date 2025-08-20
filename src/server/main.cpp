@@ -8,8 +8,12 @@
 #include <spdlog/spdlog.h>
 #include <chrono>
 #include "networker.hpp"
+#include "runtime.hpp"
 
 void Update() {
+    Networker::GetInstance().Update();
+    Runtime::GetInstance().Update();
+
     for (Shot *shot : Shot::shots) {
         shot->Update();
     }
@@ -18,13 +22,14 @@ void Update() {
 int main(int argc, char** argv) {
     spdlog::set_level(spdlog::level::debug);
     Networker::GetInstance().Init();
-    
+    Runtime::GetInstance().Init();
+
     while (true) {
-        Networker::GetInstance().Update();
         Update();
     }
 
     Networker::GetInstance().Close();
+    Runtime::GetInstance().Close();
     return 0;
 }
 

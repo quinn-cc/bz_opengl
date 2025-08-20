@@ -13,8 +13,12 @@ void Input::keyCallback(GLFWwindow* window, int key, int scancode, int action, i
     if (action == GLFW_PRESS) {
         // Fire
         if (key == GLFW_KEY_F) {
-            spdlog::info("Shot fired");
             input.fireReady = true;
+        }
+
+        // Jump
+        if (key == GLFW_KEY_SPACE) {
+            input.jumpReady = true;
         }
     }
 }
@@ -39,6 +43,7 @@ void Input::Init() {
 void Input::Update() {
     movement = { 0, 0 };
     fireReady = false;
+    jumpReady = false;
     requestingSpawn = false;
     GLFWwindow *window = Renderer::GetInstance().window;
 
@@ -63,6 +68,10 @@ void Input::Update() {
 
 bool Input::FireReady() {
     return fireReady;
+}
+
+bool Input::JumpReady() {
+    return jumpReady;
 }
 
 bool Input::RequestingSpawn() {

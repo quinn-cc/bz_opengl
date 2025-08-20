@@ -6,6 +6,7 @@ class Input {
 private:
     bool fireReady = false;
     bool requestingSpawn = false;
+    bool jumpReady = false;
     glm::vec2 movement;
     static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
@@ -16,6 +17,7 @@ public:
     void Init();
     void Update();    
     bool FireReady();
+    bool JumpReady();
     bool RequestingSpawn();
     glm::vec2 GetMovement();
 };

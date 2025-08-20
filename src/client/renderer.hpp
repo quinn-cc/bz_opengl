@@ -40,4 +40,5 @@ public:
     void Close();
     float GetDeltaTime();
     void Update();
+    void OnResize(int width, int height);
 };

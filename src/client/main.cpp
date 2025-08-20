@@ -20,9 +20,12 @@ bool exitSignalRecieved = false;
 void ParseArgs(int argc, char *argv[]) {
     cxxopts::Options options("BZ", "This is the client.");
     options.add_options()
+        ("a,addr", "Address to connect to", cxxopts::value<std::string>()->default_value("localhost"));
+    options.add_options()
         ("n,name", "Name to display", cxxopts::value<std::string>()->default_value("default"));
     auto result = options.parse(argc, argv);
     Player::GetInstance().SetName(result["name"].as<std::string>());
+    Networker::GetInstance().serverAddress = result["addr"].as<std::string>();
 }
 
 void Start() {

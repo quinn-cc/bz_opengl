@@ -10,8 +10,6 @@ private:
     std::string name;
     float moveSpeed;
     float turnSpeed;
-    float getYaw();
-    float getLastYaw();
 
 public:
     static Player &GetInstance();

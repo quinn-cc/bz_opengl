@@ -2,7 +2,7 @@
 #include "input.hpp"
 #include "player.hpp"
 #include <spdlog/spdlog.h>
-#include "btBulletCollisionCommon.h"
+#include "bullet/btBulletCollisionCommon.h"
 
 Physics &Physics::GetInstance() {
     static Physics instance;
@@ -15,7 +15,7 @@ void Physics::Init() {
     dispatcher = new btCollisionDispatcher(collisionConfig);
     solver = new btSequentialImpulseConstraintSolver();
     world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfig);
-    world->setGravity(btVector3(0, -50, 0));
+    world->setGravity(btVector3(0, -9.8, 0));
 
     floorShape = new btBoxShape(btVector3(50, 1, 50));
     btTransform floorTransform;
@@ -25,6 +25,15 @@ void Physics::Init() {
         0.0f, new btDefaultMotionState(floorTransform), floorShape, btVector3(0, 0, 0));
     btRigidBody* floorBody = new btRigidBody(floorInfo);
     world->addRigidBody(floorBody);
+
+    btBoxShape *boxShape = new btBoxShape(btVector3(5, 5, 5));
+    btTransform boxTransform;
+    boxTransform.setIdentity();
+    boxTransform.setOrigin(btVector3(10, 0, 10));
+    btRigidBody::btRigidBodyConstructionInfo boxInfo(
+        0.0f, new btDefaultMotionState(boxTransform), boxShape, btVector3(0, 0, 0));
+    btRigidBody* boxBody = new btRigidBody(boxInfo);
+    world->addRigidBody(boxBody);
 
     // Player (dynamic box)
     playerShape = new btBoxShape(btVector3(0.5, 1.0, 0.5));
@@ -50,8 +59,6 @@ void Physics::Init() {
 }
 
 void Physics::Update() {
-    spdlog::debug("About to move");
-
     glm::vec2 movement = Input::GetInstance().GetMovement();
     playerBody->activate(true);
 
@@ -62,12 +69,22 @@ void Physics::Update() {
     btVector3 localVel(0, 0, movement.y * 10); // local velocity
     btMatrix3x3 rotMat(rot);
     btVector3 worldVel = rotMat * localVel;
-    playerBody->setLinearVelocity(worldVel);
+    btVector3 velocity = playerBody->getLinearVelocity();
+    velocity.setX(worldVel.getX());
+    velocity.setZ(worldVel.getZ());
+    playerBody->setLinearVelocity(velocity);
+
+
+    // Jump logic
+    // Simple ground check: if player's Y is close to 1 (floor height + half player height)
+    if (Input::GetInstance().JumpReady()) {
+        btVector3 velocity = playerBody->getLinearVelocity();
+        velocity.setY(10.0f); // Set jump velocity (tune as needed)
+        playerBody->setLinearVelocity(velocity);
+    }
 
     // Step simulation
-    spdlog::debug("About to step");
     world->stepSimulation(1.f / 60.f);
-    spdlog::debug("Stepped");
 
     Location location;
     btTransform trans;
@@ -75,8 +92,6 @@ void Physics::Update() {
     location.position = glm::vec3(trans.getOrigin().getX(), trans.getOrigin().getY(), trans.getOrigin().getZ());
     location.rotation = glm::quat(trans.getRotation().getW(), trans.getRotation().getX(), trans.getRotation().getY(), trans.getRotation().getZ());
     Player::GetInstance().SetLocation(location);
-
-    spdlog::debug("location x={},y={},z={}", location.position.x, location.position.y, location.position.z);
 }
 
 void Physics::Close() {

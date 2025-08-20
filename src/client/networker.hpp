@@ -1,5 +1,6 @@
 #pragma once
 #include "enet.h"
+#include <string>
 #include "netmsg.hpp"
 
 class Shot;
@@ -12,6 +13,7 @@ private:
     void MsgRecv(ENetEvent event);
     
 public:
+    std::string serverAddress;
     static Networker &GetInstance();
 
     int Init();

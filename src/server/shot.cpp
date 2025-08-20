@@ -1,4 +1,5 @@
 #include "shot.hpp"
+#include "runtime.hpp"
 #include <glm/glm.hpp>
 
 #define BULLET_SIZE 1
@@ -13,7 +14,5 @@ Shot::Shot(Client *owner, glm::vec3 position, glm::vec3 velocity) {
 }
 
 void Shot::Update() {
-    float dt = 0.5f;
-
-    position = position + (velocity * dt);
+    position = position + (velocity * Runtime::GetInstance().GetDeltaTime());
 }

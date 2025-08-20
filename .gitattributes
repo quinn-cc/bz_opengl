@@ -1,0 +1,6 @@
+libs/lib/linux/libBulletDynamics.a filter=lfs diff=lfs merge=lfs -text
+libs/lib/linux/libenet.a filter=lfs diff=lfs merge=lfs -text
+libs/lib/linux/libLinearMath.a filter=lfs diff=lfs merge=lfs -text
+libs/lib/linux/libthreepp.a filter=lfs diff=lfs merge=lfs -text
+libs/lib/linux/libassimp.a filter=lfs diff=lfs merge=lfs -text
+libs/lib/linux/libBulletCollision.a filter=lfs diff=lfs merge=lfs -text

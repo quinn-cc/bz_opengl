@@ -9,13 +9,6 @@
 #define POS_UPDATE_TOLERANCE 0.1
 #define ROT_UPDATE_TOLERANCE 0.05
 
-float Player::getYaw() {
-    return glm::eulerAngles(location.rotation).y;
-}
-
-float Player::getLastYaw() {
-    return glm::eulerAngles(lastLocation.rotation).y;
-}
 
 Player &Player::GetInstance() {
     static Player instance;
@@ -33,13 +26,7 @@ void Player::Init() {
 void Player::Update() {
     if (Input::GetInstance().FireReady()) {
         float speed = 1;
-        glm::vec3 velocity = glm::normalize(glm::vec3(
-            sinf(getYaw()),
-            0.0f,
-            cosf(getYaw())
-        ));
-
-        velocity *= speed;
+        glm::vec3 velocity = GetForwardVector() * speed;
         Shot *shot = new Shot(0, location.position, velocity);
         Networker::GetInstance().MsgSend_Shot(shot);
     }
@@ -60,8 +47,12 @@ void Player::Update() {
         updateLoc = true;
         lastLocation.position = location.position;
     }
-    if (abs(getLastYaw() - getYaw()) > ROT_UPDATE_TOLERANCE) {
+
+    float dot = glm::dot(lastLocation.rotation, location.rotation);
+    float angle = 2.0f * acos(glm::clamp(dot, -1.0f, 1.0f));
+    if (angle > ROT_UPDATE_TOLERANCE) {
         updateLoc = true;
+        lastLocation.rotation = location.rotation;
     }
 
     if (updateLoc) {
@@ -78,11 +69,7 @@ std::string Player::GetName() {
 }
 
 glm::vec3 Player::GetForwardVector() {
-    return glm::normalize(glm::vec3(
-        sinf(getYaw()),  // x
-        0.0f,         // y (no vertical movement)
-        cosf(getYaw())   // z
-    ));
+    return location.rotation * glm::vec3(0, 0, 1);
 }
 
 Location Player::GetLocation() {
