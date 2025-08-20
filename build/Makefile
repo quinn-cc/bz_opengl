@@ -142,6 +142,150 @@ server/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
 .PHONY : server/fast
 
+libs/include/imgui/backends/imgui_impl_glfw.o: libs/include/imgui/backends/imgui_impl_glfw.cpp.o
+.PHONY : libs/include/imgui/backends/imgui_impl_glfw.o
+
+# target to build an object file
+libs/include/imgui/backends/imgui_impl_glfw.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.o
+.PHONY : libs/include/imgui/backends/imgui_impl_glfw.cpp.o
+
+libs/include/imgui/backends/imgui_impl_glfw.i: libs/include/imgui/backends/imgui_impl_glfw.cpp.i
+.PHONY : libs/include/imgui/backends/imgui_impl_glfw.i
+
+# target to preprocess a source file
+libs/include/imgui/backends/imgui_impl_glfw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.i
+.PHONY : libs/include/imgui/backends/imgui_impl_glfw.cpp.i
+
+libs/include/imgui/backends/imgui_impl_glfw.s: libs/include/imgui/backends/imgui_impl_glfw.cpp.s
+.PHONY : libs/include/imgui/backends/imgui_impl_glfw.s
+
+# target to generate assembly for a file
+libs/include/imgui/backends/imgui_impl_glfw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.s
+.PHONY : libs/include/imgui/backends/imgui_impl_glfw.cpp.s
+
+libs/include/imgui/backends/imgui_impl_opengl3.o: libs/include/imgui/backends/imgui_impl_opengl3.cpp.o
+.PHONY : libs/include/imgui/backends/imgui_impl_opengl3.o
+
+# target to build an object file
+libs/include/imgui/backends/imgui_impl_opengl3.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.o
+.PHONY : libs/include/imgui/backends/imgui_impl_opengl3.cpp.o
+
+libs/include/imgui/backends/imgui_impl_opengl3.i: libs/include/imgui/backends/imgui_impl_opengl3.cpp.i
+.PHONY : libs/include/imgui/backends/imgui_impl_opengl3.i
+
+# target to preprocess a source file
+libs/include/imgui/backends/imgui_impl_opengl3.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.i
+.PHONY : libs/include/imgui/backends/imgui_impl_opengl3.cpp.i
+
+libs/include/imgui/backends/imgui_impl_opengl3.s: libs/include/imgui/backends/imgui_impl_opengl3.cpp.s
+.PHONY : libs/include/imgui/backends/imgui_impl_opengl3.s
+
+# target to generate assembly for a file
+libs/include/imgui/backends/imgui_impl_opengl3.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.s
+.PHONY : libs/include/imgui/backends/imgui_impl_opengl3.cpp.s
+
+libs/include/imgui/imgui.o: libs/include/imgui/imgui.cpp.o
+.PHONY : libs/include/imgui/imgui.o
+
+# target to build an object file
+libs/include/imgui/imgui.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.o
+.PHONY : libs/include/imgui/imgui.cpp.o
+
+libs/include/imgui/imgui.i: libs/include/imgui/imgui.cpp.i
+.PHONY : libs/include/imgui/imgui.i
+
+# target to preprocess a source file
+libs/include/imgui/imgui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.i
+.PHONY : libs/include/imgui/imgui.cpp.i
+
+libs/include/imgui/imgui.s: libs/include/imgui/imgui.cpp.s
+.PHONY : libs/include/imgui/imgui.s
+
+# target to generate assembly for a file
+libs/include/imgui/imgui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.s
+.PHONY : libs/include/imgui/imgui.cpp.s
+
+libs/include/imgui/imgui_draw.o: libs/include/imgui/imgui_draw.cpp.o
+.PHONY : libs/include/imgui/imgui_draw.o
+
+# target to build an object file
+libs/include/imgui/imgui_draw.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.o
+.PHONY : libs/include/imgui/imgui_draw.cpp.o
+
+libs/include/imgui/imgui_draw.i: libs/include/imgui/imgui_draw.cpp.i
+.PHONY : libs/include/imgui/imgui_draw.i
+
+# target to preprocess a source file
+libs/include/imgui/imgui_draw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.i
+.PHONY : libs/include/imgui/imgui_draw.cpp.i
+
+libs/include/imgui/imgui_draw.s: libs/include/imgui/imgui_draw.cpp.s
+.PHONY : libs/include/imgui/imgui_draw.s
+
+# target to generate assembly for a file
+libs/include/imgui/imgui_draw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.s
+.PHONY : libs/include/imgui/imgui_draw.cpp.s
+
+libs/include/imgui/imgui_tables.o: libs/include/imgui/imgui_tables.cpp.o
+.PHONY : libs/include/imgui/imgui_tables.o
+
+# target to build an object file
+libs/include/imgui/imgui_tables.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.o
+.PHONY : libs/include/imgui/imgui_tables.cpp.o
+
+libs/include/imgui/imgui_tables.i: libs/include/imgui/imgui_tables.cpp.i
+.PHONY : libs/include/imgui/imgui_tables.i
+
+# target to preprocess a source file
+libs/include/imgui/imgui_tables.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.i
+.PHONY : libs/include/imgui/imgui_tables.cpp.i
+
+libs/include/imgui/imgui_tables.s: libs/include/imgui/imgui_tables.cpp.s
+.PHONY : libs/include/imgui/imgui_tables.s
+
+# target to generate assembly for a file
+libs/include/imgui/imgui_tables.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.s
+.PHONY : libs/include/imgui/imgui_tables.cpp.s
+
+libs/include/imgui/imgui_widgets.o: libs/include/imgui/imgui_widgets.cpp.o
+.PHONY : libs/include/imgui/imgui_widgets.o
+
+# target to build an object file
+libs/include/imgui/imgui_widgets.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.o
+.PHONY : libs/include/imgui/imgui_widgets.cpp.o
+
+libs/include/imgui/imgui_widgets.i: libs/include/imgui/imgui_widgets.cpp.i
+.PHONY : libs/include/imgui/imgui_widgets.i
+
+# target to preprocess a source file
+libs/include/imgui/imgui_widgets.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.i
+.PHONY : libs/include/imgui/imgui_widgets.cpp.i
+
+libs/include/imgui/imgui_widgets.s: libs/include/imgui/imgui_widgets.cpp.s
+.PHONY : libs/include/imgui/imgui_widgets.s
+
+# target to generate assembly for a file
+libs/include/imgui/imgui_widgets.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.s
+.PHONY : libs/include/imgui/imgui_widgets.cpp.s
+
 src/client/client.o: src/client/client.cpp.o
 .PHONY : src/client/client.o
 
@@ -165,6 +309,30 @@ src/client/client.s: src/client/client.cpp.s
 src/client/client.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/client.cpp.s
 .PHONY : src/client/client.cpp.s
+
+src/client/gui.o: src/client/gui.cpp.o
+.PHONY : src/client/gui.o
+
+# target to build an object file
+src/client/gui.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/gui.cpp.o
+.PHONY : src/client/gui.cpp.o
+
+src/client/gui.i: src/client/gui.cpp.i
+.PHONY : src/client/gui.i
+
+# target to preprocess a source file
+src/client/gui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/gui.cpp.i
+.PHONY : src/client/gui.cpp.i
+
+src/client/gui.s: src/client/gui.cpp.s
+.PHONY : src/client/gui.s
+
+# target to generate assembly for a file
+src/client/gui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/gui.cpp.s
+.PHONY : src/client/gui.cpp.s
 
 src/client/input.o: src/client/input.cpp.o
 .PHONY : src/client/input.o
@@ -464,9 +632,30 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... client"
 	@echo "... server"
+	@echo "... libs/include/imgui/backends/imgui_impl_glfw.o"
+	@echo "... libs/include/imgui/backends/imgui_impl_glfw.i"
+	@echo "... libs/include/imgui/backends/imgui_impl_glfw.s"
+	@echo "... libs/include/imgui/backends/imgui_impl_opengl3.o"
+	@echo "... libs/include/imgui/backends/imgui_impl_opengl3.i"
+	@echo "... libs/include/imgui/backends/imgui_impl_opengl3.s"
+	@echo "... libs/include/imgui/imgui.o"
+	@echo "... libs/include/imgui/imgui.i"
+	@echo "... libs/include/imgui/imgui.s"
+	@echo "... libs/include/imgui/imgui_draw.o"
+	@echo "... libs/include/imgui/imgui_draw.i"
+	@echo "... libs/include/imgui/imgui_draw.s"
+	@echo "... libs/include/imgui/imgui_tables.o"
+	@echo "... libs/include/imgui/imgui_tables.i"
+	@echo "... libs/include/imgui/imgui_tables.s"
+	@echo "... libs/include/imgui/imgui_widgets.o"
+	@echo "... libs/include/imgui/imgui_widgets.i"
+	@echo "... libs/include/imgui/imgui_widgets.s"
 	@echo "... src/client/client.o"
 	@echo "... src/client/client.i"
 	@echo "... src/client/client.s"
+	@echo "... src/client/gui.o"
+	@echo "... src/client/gui.i"
+	@echo "... src/client/gui.s"
 	@echo "... src/client/input.o"
 	@echo "... src/client/input.i"
 	@echo "... src/client/input.s"

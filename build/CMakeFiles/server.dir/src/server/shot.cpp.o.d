@@ -292,7 +292,7 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_half.inl \
  /home/irie/Desktop/bz_opengl/libs/include/glm/integer.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/glm/detail/func_integer.inl \
- /home/irie/Desktop/bz_opengl/src/server/runtime.hpp \
+ /home/irie/Desktop/bz_opengl/include/timeutils.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono.h \
  /usr/include/c++/13/ratio /usr/include/c++/13/ctime /usr/include/time.h \
  /usr/include/x86_64-linux-gnu/bits/time.h \
@@ -383,4 +383,6 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: \
  /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/format \
  /usr/include/c++/13/charconv /usr/include/c++/13/optional \
  /usr/include/c++/13/span /usr/include/c++/13/variant \
- /usr/include/c++/13/bits/ranges_algobase.h
+ /usr/include/c++/13/bits/ranges_algobase.h \
+ /home/irie/Desktop/bz_opengl/include/types.hpp \
+ /home/irie/Desktop/bz_opengl/src/server/runtime.hpp

@@ -591,6 +591,7 @@ CMakeFiles/client.dir/src/client/main.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/epsilon.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../detail/setup.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/epsilon.inl \
+ /home/irie/Desktop/bz_opengl/include/types.hpp \
  /home/irie/Desktop/bz_opengl/src/client/client.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/threepp/threepp.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/threepp/constants.hpp \
@@ -853,4 +854,7 @@ CMakeFiles/client.dir/src/client/main.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Vehicle/btVehicleRaycaster.h \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Vehicle/btWheelInfo.h \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btActionInterface.h \
- /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btRigidBody.h
+ /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
+ /home/irie/Desktop/bz_opengl/src/client/gui.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui.h \
+ /home/irie/Desktop/bz_opengl/libs/include/imgui/imconfig.h

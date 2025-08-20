@@ -3,6 +3,7 @@
 
 CMakeFiles/server.dir/src/server/client.cpp.o: /home/irie/Desktop/bz_opengl/src/server/client.cpp \
   /home/irie/Desktop/bz_opengl/include/geometry.hpp \
+  /home/irie/Desktop/bz_opengl/include/types.hpp \
   /home/irie/Desktop/bz_opengl/libs/include/glm/common.hpp \
   /home/irie/Desktop/bz_opengl/libs/include/glm/detail/func_exponential.inl \
   /home/irie/Desktop/bz_opengl/libs/include/glm/detail/func_vector_relational.inl \
@@ -601,6 +602,8 @@ CMakeFiles/server.dir/src/server/client.cpp.o: /home/irie/Desktop/bz_opengl/src/
 CMakeFiles/server.dir/src/server/main.cpp.o: /home/irie/Desktop/bz_opengl/src/server/main.cpp \
   /home/irie/Desktop/bz_opengl/include/geometry.hpp \
   /home/irie/Desktop/bz_opengl/include/netmsg.hpp \
+  /home/irie/Desktop/bz_opengl/include/timeutils.hpp \
+  /home/irie/Desktop/bz_opengl/include/types.hpp \
   /home/irie/Desktop/bz_opengl/libs/include/enet.h \
   /home/irie/Desktop/bz_opengl/libs/include/glm/common.hpp \
   /home/irie/Desktop/bz_opengl/libs/include/glm/detail/func_exponential.inl \
@@ -1238,6 +1241,8 @@ CMakeFiles/server.dir/src/server/main.cpp.o: /home/irie/Desktop/bz_opengl/src/se
 CMakeFiles/server.dir/src/server/networker.cpp.o: /home/irie/Desktop/bz_opengl/src/server/networker.cpp \
   /home/irie/Desktop/bz_opengl/include/geometry.hpp \
   /home/irie/Desktop/bz_opengl/include/netmsg.hpp \
+  /home/irie/Desktop/bz_opengl/include/timeutils.hpp \
+  /home/irie/Desktop/bz_opengl/include/types.hpp \
   /home/irie/Desktop/bz_opengl/libs/include/enet.h \
   /home/irie/Desktop/bz_opengl/libs/include/glm/common.hpp \
   /home/irie/Desktop/bz_opengl/libs/include/glm/detail/func_exponential.inl \
@@ -2124,6 +2129,8 @@ CMakeFiles/server.dir/src/server/runtime.cpp.o: /home/irie/Desktop/bz_opengl/src
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
 
 CMakeFiles/server.dir/src/server/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/server/shot.cpp \
+  /home/irie/Desktop/bz_opengl/include/timeutils.hpp \
+  /home/irie/Desktop/bz_opengl/include/types.hpp \
   /home/irie/Desktop/bz_opengl/libs/include/glm/common.hpp \
   /home/irie/Desktop/bz_opengl/libs/include/glm/detail/func_exponential.inl \
   /home/irie/Desktop/bz_opengl/libs/include/glm/detail/func_vector_relational.inl \
@@ -2655,6 +2662,8 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/se
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
+/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
+
 /usr/include/c++/13/bits/invoke.h:
 
 /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/constants.hpp:
@@ -2773,16 +2782,6 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/se
 
 /usr/include/c++/13/exception:
 
-/usr/include/c++/13/bits/allocated_ptr.h:
-
-/home/irie/Desktop/bz_opengl/libs/include/spdlog/details/registry.h:
-
-/home/irie/Desktop/bz_opengl/libs/include/spdlog/details/os.h:
-
-/home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg_buffer.h:
-
-/usr/include/x86_64-linux-gnu/bits/statx.h:
-
 /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg-inl.h:
 
 /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/backtracer.h:
@@ -2796,6 +2795,8 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/se
 /home/irie/Desktop/bz_opengl/libs/include/spdlog/common-inl.h:
 
 /home/irie/Desktop/bz_opengl/libs/include/glm/vec2.hpp:
+
+/home/irie/Desktop/bz_opengl/include/timeutils.hpp:
 
 /home/irie/Desktop/bz_opengl/libs/include/glm/packing.hpp:
 
@@ -2839,11 +2840,7 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/se
 
 /home/irie/Desktop/bz_opengl/libs/include/spdlog/pattern_formatter.h:
 
-/home/irie/Desktop/bz_opengl/libs/include/glm/ext/matrix_float4x2_precision.hpp:
-
-/home/irie/Desktop/bz_opengl/libs/include/glm/detail/func_exponential.inl:
-
-/usr/include/c++/13/bits/memoryfwd.h:
+/home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_half.inl:
 
 /home/irie/Desktop/bz_opengl/libs/include/glm/ext/matrix_float3x4_precision.hpp:
 
@@ -2887,12 +2884,6 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/se
 
 /home/irie/Desktop/bz_opengl/libs/include/glm/detail/func_vector_relational.inl:
 
-/home/irie/Desktop/bz_opengl/libs/include/glm/ext/matrix_projection.inl:
-
-/usr/include/c++/13/bits/ios_base.h:
-
-/home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_half.inl:
-
 /home/irie/Desktop/bz_opengl/libs/include/glm/ext/matrix_double4x4_precision.hpp:
 
 /home/irie/Desktop/bz_opengl/libs/include/glm/ext/vector_uint4.hpp:
@@ -2900,14 +2891,6 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/se
 /usr/include/c++/13/bits/ranges_cmp.h:
 
 /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/epsilon.inl:
-
-/home/irie/Desktop/bz_opengl/src/server/shot.hpp:
-
-/home/irie/Desktop/bz_opengl/libs/include/spdlog/details/null_mutex.h:
-
-/home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_vec2.inl:
-
-/home/irie/Desktop/bz_opengl/libs/include/glm/trigonometric.hpp:
 
 /usr/include/c++/13/bits/locale_facets_nonio.tcc:
 
@@ -2936,6 +2919,16 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/se
 /home/irie/Desktop/bz_opengl/libs/include/enet.h:
 
 /home/irie/Desktop/bz_opengl/libs/include/glm/ext/matrix_float2x2.hpp:
+
+/usr/include/c++/13/bits/allocated_ptr.h:
+
+/home/irie/Desktop/bz_opengl/libs/include/spdlog/details/registry.h:
+
+/home/irie/Desktop/bz_opengl/libs/include/spdlog/details/os.h:
+
+/home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg_buffer.h:
+
+/usr/include/x86_64-linux-gnu/bits/statx.h:
 
 /home/irie/Desktop/bz_opengl/libs/include/glm/ext/matrix_double2x4_precision.hpp:
 
@@ -3023,6 +3016,20 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/se
 
 /home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_vec1.inl:
 
+/home/irie/Desktop/bz_opengl/libs/include/glm/detail/func_exponential.inl:
+
+/home/irie/Desktop/bz_opengl/libs/include/glm/ext/matrix_float4x2_precision.hpp:
+
+/home/irie/Desktop/bz_opengl/src/server/shot.hpp:
+
+/home/irie/Desktop/bz_opengl/libs/include/spdlog/details/null_mutex.h:
+
+/home/irie/Desktop/bz_opengl/libs/include/glm/trigonometric.hpp:
+
+/home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_vec2.inl:
+
+/usr/include/c++/13/bits/memoryfwd.h:
+
 /home/irie/Desktop/bz_opengl/libs/include/glm/common.hpp:
 
 /usr/include/c++/13/bits/unordered_map.h:
@@ -3090,10 +3097,6 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/se
 /home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_mat2x3.inl:
 
 /usr/include/c++/13/bits/stl_bvector.h:
-
-/usr/include/c++/13/iterator:
-
-/home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_mat3x2.hpp:
 
 /home/irie/Desktop/bz_opengl/libs/include/glm/ext/vector_int3_sized.hpp:
 
@@ -3313,6 +3316,14 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/se
 
 /home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_half.hpp:
 
+/home/irie/Desktop/bz_opengl/libs/include/glm/ext/matrix_projection.inl:
+
+/usr/include/c++/13/bits/ios_base.h:
+
+/home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_mat3x2.hpp:
+
+/usr/include/c++/13/iterator:
+
 /usr/include/c++/13/bits/istream.tcc:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
@@ -3529,8 +3540,6 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/se
 
 /usr/include/c++/13/ext/atomicity.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
-
 /home/irie/Desktop/bz_opengl/libs/include/glm/ext/matrix_float2x2_precision.hpp:
 
 /usr/include/c++/13/ext/concurrence.h:
@@ -3538,6 +3547,8 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/se
 /usr/include/c++/13/ext/string_conversions.h:
 
 /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/fmt_helper.h:
+
+/home/irie/Desktop/bz_opengl/include/types.hpp:
 
 /usr/include/c++/13/iomanip:
 

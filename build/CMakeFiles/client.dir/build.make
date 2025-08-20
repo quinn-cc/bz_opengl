@@ -83,10 +83,24 @@ CMakeFiles/client.dir/src/client/client.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client.dir/src/client/client.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/src/client/client.cpp -o CMakeFiles/client.dir/src/client/client.cpp.s
 
+CMakeFiles/client.dir/src/client/gui.cpp.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/src/client/gui.cpp.o: /home/irie/Desktop/bz_opengl/src/client/gui.cpp
+CMakeFiles/client.dir/src/client/gui.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/client.dir/src/client/gui.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/src/client/gui.cpp.o -MF CMakeFiles/client.dir/src/client/gui.cpp.o.d -o CMakeFiles/client.dir/src/client/gui.cpp.o -c /home/irie/Desktop/bz_opengl/src/client/gui.cpp
+
+CMakeFiles/client.dir/src/client/gui.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/client.dir/src/client/gui.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/irie/Desktop/bz_opengl/src/client/gui.cpp > CMakeFiles/client.dir/src/client/gui.cpp.i
+
+CMakeFiles/client.dir/src/client/gui.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client.dir/src/client/gui.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/src/client/gui.cpp -o CMakeFiles/client.dir/src/client/gui.cpp.s
+
 CMakeFiles/client.dir/src/client/input.cpp.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/src/client/input.cpp.o: /home/irie/Desktop/bz_opengl/src/client/input.cpp
 CMakeFiles/client.dir/src/client/input.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/client.dir/src/client/input.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/client.dir/src/client/input.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/src/client/input.cpp.o -MF CMakeFiles/client.dir/src/client/input.cpp.o.d -o CMakeFiles/client.dir/src/client/input.cpp.o -c /home/irie/Desktop/bz_opengl/src/client/input.cpp
 
 CMakeFiles/client.dir/src/client/input.cpp.i: cmake_force
@@ -100,7 +114,7 @@ CMakeFiles/client.dir/src/client/input.cpp.s: cmake_force
 CMakeFiles/client.dir/src/client/main.cpp.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/src/client/main.cpp.o: /home/irie/Desktop/bz_opengl/src/client/main.cpp
 CMakeFiles/client.dir/src/client/main.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/client.dir/src/client/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/client.dir/src/client/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/src/client/main.cpp.o -MF CMakeFiles/client.dir/src/client/main.cpp.o.d -o CMakeFiles/client.dir/src/client/main.cpp.o -c /home/irie/Desktop/bz_opengl/src/client/main.cpp
 
 CMakeFiles/client.dir/src/client/main.cpp.i: cmake_force
@@ -114,7 +128,7 @@ CMakeFiles/client.dir/src/client/main.cpp.s: cmake_force
 CMakeFiles/client.dir/src/client/networker.cpp.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/src/client/networker.cpp.o: /home/irie/Desktop/bz_opengl/src/client/networker.cpp
 CMakeFiles/client.dir/src/client/networker.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/client.dir/src/client/networker.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/client.dir/src/client/networker.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/src/client/networker.cpp.o -MF CMakeFiles/client.dir/src/client/networker.cpp.o.d -o CMakeFiles/client.dir/src/client/networker.cpp.o -c /home/irie/Desktop/bz_opengl/src/client/networker.cpp
 
 CMakeFiles/client.dir/src/client/networker.cpp.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/client.dir/src/client/networker.cpp.s: cmake_force
 CMakeFiles/client.dir/src/client/physics.cpp.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/src/client/physics.cpp.o: /home/irie/Desktop/bz_opengl/src/client/physics.cpp
 CMakeFiles/client.dir/src/client/physics.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/client.dir/src/client/physics.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/client.dir/src/client/physics.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/src/client/physics.cpp.o -MF CMakeFiles/client.dir/src/client/physics.cpp.o.d -o CMakeFiles/client.dir/src/client/physics.cpp.o -c /home/irie/Desktop/bz_opengl/src/client/physics.cpp
 
 CMakeFiles/client.dir/src/client/physics.cpp.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/client.dir/src/client/physics.cpp.s: cmake_force
 CMakeFiles/client.dir/src/client/player.cpp.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/src/client/player.cpp.o: /home/irie/Desktop/bz_opengl/src/client/player.cpp
 CMakeFiles/client.dir/src/client/player.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/client.dir/src/client/player.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/client.dir/src/client/player.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/src/client/player.cpp.o -MF CMakeFiles/client.dir/src/client/player.cpp.o.d -o CMakeFiles/client.dir/src/client/player.cpp.o -c /home/irie/Desktop/bz_opengl/src/client/player.cpp
 
 CMakeFiles/client.dir/src/client/player.cpp.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/client.dir/src/client/player.cpp.s: cmake_force
 CMakeFiles/client.dir/src/client/renderer.cpp.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/src/client/renderer.cpp.o: /home/irie/Desktop/bz_opengl/src/client/renderer.cpp
 CMakeFiles/client.dir/src/client/renderer.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/client.dir/src/client/renderer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/client.dir/src/client/renderer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/src/client/renderer.cpp.o -MF CMakeFiles/client.dir/src/client/renderer.cpp.o.d -o CMakeFiles/client.dir/src/client/renderer.cpp.o -c /home/irie/Desktop/bz_opengl/src/client/renderer.cpp
 
 CMakeFiles/client.dir/src/client/renderer.cpp.i: cmake_force
@@ -170,7 +184,7 @@ CMakeFiles/client.dir/src/client/renderer.cpp.s: cmake_force
 CMakeFiles/client.dir/src/client/shot.cpp.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/src/client/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/client/shot.cpp
 CMakeFiles/client.dir/src/client/shot.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/client.dir/src/client/shot.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/client.dir/src/client/shot.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/src/client/shot.cpp.o -MF CMakeFiles/client.dir/src/client/shot.cpp.o.d -o CMakeFiles/client.dir/src/client/shot.cpp.o -c /home/irie/Desktop/bz_opengl/src/client/shot.cpp
 
 CMakeFiles/client.dir/src/client/shot.cpp.i: cmake_force
@@ -181,21 +195,113 @@ CMakeFiles/client.dir/src/client/shot.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client.dir/src/client/shot.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/src/client/shot.cpp -o CMakeFiles/client.dir/src/client/shot.cpp.s
 
+CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.o: /home/irie/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_glfw.cpp
+CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.o -MF CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.o.d -o CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.o -c /home/irie/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_glfw.cpp
+
+CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/irie/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_glfw.cpp > CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.i
+
+CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_glfw.cpp -o CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.s
+
+CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.o: /home/irie/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_opengl3.cpp
+CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.o -MF CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.o.d -o CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.o -c /home/irie/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_opengl3.cpp
+
+CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/irie/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_opengl3.cpp > CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.i
+
+CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_opengl3.cpp -o CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.s
+
+CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.o: /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui.cpp
+CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.o -MF CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.o.d -o CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.o -c /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui.cpp
+
+CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui.cpp > CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.i
+
+CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui.cpp -o CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.s
+
+CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.o: /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui_draw.cpp
+CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.o -MF CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.o.d -o CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.o -c /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui_draw.cpp
+
+CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui_draw.cpp > CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.i
+
+CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui_draw.cpp -o CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.s
+
+CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.o: /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui_tables.cpp
+CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.o -MF CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.o.d -o CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.o -c /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui_tables.cpp
+
+CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui_tables.cpp > CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.i
+
+CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui_tables.cpp -o CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.s
+
+CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.o: /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui_widgets.cpp
+CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.o -MF CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.o.d -o CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.o -c /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui_widgets.cpp
+
+CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui_widgets.cpp > CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.i
+
+CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui_widgets.cpp -o CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.s
+
 # Object files for target client
 client_OBJECTS = \
 "CMakeFiles/client.dir/src/client/client.cpp.o" \
+"CMakeFiles/client.dir/src/client/gui.cpp.o" \
 "CMakeFiles/client.dir/src/client/input.cpp.o" \
 "CMakeFiles/client.dir/src/client/main.cpp.o" \
 "CMakeFiles/client.dir/src/client/networker.cpp.o" \
 "CMakeFiles/client.dir/src/client/physics.cpp.o" \
 "CMakeFiles/client.dir/src/client/player.cpp.o" \
 "CMakeFiles/client.dir/src/client/renderer.cpp.o" \
-"CMakeFiles/client.dir/src/client/shot.cpp.o"
+"CMakeFiles/client.dir/src/client/shot.cpp.o" \
+"CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.o" \
+"CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.o" \
+"CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.o" \
+"CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.o" \
+"CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.o" \
+"CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.o"
 
 # External object files for target client
 client_EXTERNAL_OBJECTS =
 
 client: CMakeFiles/client.dir/src/client/client.cpp.o
+client: CMakeFiles/client.dir/src/client/gui.cpp.o
 client: CMakeFiles/client.dir/src/client/input.cpp.o
 client: CMakeFiles/client.dir/src/client/main.cpp.o
 client: CMakeFiles/client.dir/src/client/networker.cpp.o
@@ -203,6 +309,12 @@ client: CMakeFiles/client.dir/src/client/physics.cpp.o
 client: CMakeFiles/client.dir/src/client/player.cpp.o
 client: CMakeFiles/client.dir/src/client/renderer.cpp.o
 client: CMakeFiles/client.dir/src/client/shot.cpp.o
+client: CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.o
+client: CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.o
+client: CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.o
+client: CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.o
+client: CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.o
+client: CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.o
 client: CMakeFiles/client.dir/build.make
 client: /home/irie/Desktop/bz_opengl/libs/lib/linux/libenet.a
 client: /home/irie/Desktop/bz_opengl/libs/lib/linux/libthreepp.a
@@ -211,7 +323,7 @@ client: /home/irie/Desktop/bz_opengl/libs/lib/linux/libBulletDynamics.a
 client: /home/irie/Desktop/bz_opengl/libs/lib/linux/libBulletCollision.a
 client: /home/irie/Desktop/bz_opengl/libs/lib/linux/libLinearMath.a
 client: CMakeFiles/client.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable client"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/client.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

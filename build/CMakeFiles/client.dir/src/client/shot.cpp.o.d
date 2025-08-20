@@ -292,6 +292,7 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_half.inl \
  /home/irie/Desktop/bz_opengl/libs/include/glm/integer.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/glm/detail/func_integer.inl \
+ /home/irie/Desktop/bz_opengl/include/types.hpp \
  /home/irie/Desktop/bz_opengl/src/client/renderer.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/threepp/threepp.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/threepp/constants.hpp \

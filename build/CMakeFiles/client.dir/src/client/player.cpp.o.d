@@ -523,6 +523,7 @@ CMakeFiles/client.dir/src/client/player.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/version.h \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog-inl.h \
  /home/irie/Desktop/bz_opengl/src/client/shot.hpp \
+ /home/irie/Desktop/bz_opengl/include/types.hpp \
  /home/irie/Desktop/bz_opengl/src/client/networker.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/enet.h \
  /usr/include/c++/13/stdlib.h \
