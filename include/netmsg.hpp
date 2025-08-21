@@ -1,6 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 #include "geometry.hpp"
+#include "types.hpp"
 
 #pragma pack(push, 1)
 
@@ -12,7 +13,8 @@ enum ServerMsg_Type {
     ServerMsg_Type_LOCATION,
     ServerMsg_Type_DISCONNECTION,
     ServerMsg_Type_CONNECTION,
-    ServerMsg_Type_SHOT
+    ServerMsg_Type_SHOT,
+    ServerMsg_Type_REMOVE_SHOT
 };
 
 typedef struct ServerMsg {
@@ -20,24 +22,29 @@ typedef struct ServerMsg {
 } ServerMsg;
 
 typedef struct ServerMsg_Location : ServerMsg {
-    int clientId;
+    client_id clientId;
     Location location;
 } ServerMsg_Location;
 
 typedef struct ServerMsg_Connection : ServerMsg {
-    int clientId;
+    client_id clientId;
     char name[256];
 } ServerMsg_Connection;
 
 typedef struct ServerMsg_Disconnection : ServerMsg {
-    int clientId;
+    client_id clientId;
 } ServerMsg_Disconnection;
 
 typedef struct ServerMsg_Shot : ServerMsg {
-    int clientId;
+    shot_id globalShotId;
     glm::vec3 position;
     glm::vec3 velocity;
 } ServerMsg_Shot;
+
+typedef struct ServerMsg_RemoveShot : ServerMsg {
+    client_id clientId;
+    shot_id shotId;
+} ServerMsg_RemoveShot;
 
 /*
  * Client messages
@@ -62,6 +69,7 @@ typedef struct ClientMsg_Location : ClientMsg {
 } ClientMsg_Location;
 
 typedef struct ClientMsg_Shot : ClientMsg {
+    shot_id localShotId;
     glm::vec3 position;
     glm::vec3 velocity;
 } ClientMsg_Shot;

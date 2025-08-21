@@ -18,6 +18,7 @@ public:
     static Physics &GetInstance();
 
     void Init();
+    bool IsGrounded();
     void Update();
     void Close();
 };

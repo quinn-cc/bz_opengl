@@ -14,6 +14,7 @@
 #include "player.hpp"
 #include "input.hpp"
 #include "physics.hpp"
+#include "gui.hpp"
 
 bool exitSignalRecieved = false;
 
@@ -31,6 +32,7 @@ void ParseArgs(int argc, char *argv[]) {
 void Start() {
     Player::GetInstance().Init();
     Renderer::GetInstance().Init();
+    GUI::GetInstance().Init();
     Input::GetInstance().Init();
     Physics::GetInstance().Init();
     Networker::GetInstance().Init();
@@ -48,6 +50,9 @@ void Update() {
 
     Player::GetInstance().Update();
     Renderer::GetInstance().Update();
+    GUI::GetInstance().Update();
+    
+    Renderer::GetInstance().EndFrame();
 }
 
 void Close() {
@@ -55,6 +60,7 @@ void Close() {
     Networker::GetInstance().Close();
     Renderer::GetInstance().Close();
     Physics::GetInstance().Close();
+    GUI::GetInstance().Close();
 }
 
 void SignalHandlerClose(int signum) {

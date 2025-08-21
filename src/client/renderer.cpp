@@ -215,6 +215,9 @@ void Renderer::Update() {
     }
 
     renderer->render(*scene, *camera);
+}
+
+void Renderer::EndFrame() {
     glfwSwapBuffers(window);
 }
 

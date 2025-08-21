@@ -27,7 +27,7 @@ void Player::Update() {
     if (Input::GetInstance().FireReady()) {
         float speed = 1;
         glm::vec3 velocity = GetForwardVector() * speed;
-        Shot *shot = new Shot(0, location.position, velocity);
+        Shot *shot = new Shot(location.position, velocity);
         Networker::GetInstance().MsgSend_Shot(shot);
     }
 

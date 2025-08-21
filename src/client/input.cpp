@@ -16,10 +16,7 @@ void Input::keyCallback(GLFWwindow* window, int key, int scancode, int action, i
             input.fireReady = true;
         }
 
-        // Jump
-        if (key == GLFW_KEY_SPACE) {
-            input.jumpReady = true;
-        }
+        
     }
 }
 
@@ -61,6 +58,11 @@ void Input::Update() {
     // Spawn
     if (glfwGetKey(window, GLFW_KEY_U)) {
         requestingSpawn = true;
+    }
+
+    // Jump
+    if (glfwGetKey(window, GLFW_KEY_SPACE)) {
+        jumpReady = true;
     }
 
     glfwPollEvents();

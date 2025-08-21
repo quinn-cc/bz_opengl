@@ -28,4 +28,5 @@ public:
     void MsgRecv_Disconnection(ServerMsg_Disconnection *msg);
     void MsgRecv_Location(ENetEvent event, ServerMsg_Location *msg);
     void MsgRecv_Shot(ServerMsg_Shot *msg);
+    void MsgRecv_RemoveShot(ServerMsg_RemoveShot *msg);
 };

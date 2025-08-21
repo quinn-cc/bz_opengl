@@ -7293,6 +7293,7 @@ CMakeFiles/client.dir/src/client/renderer.cpp.o: /home/irie/Desktop/bz_opengl/sr
   /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h
 
 CMakeFiles/client.dir/src/client/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/client/shot.cpp \
+  /home/irie/Desktop/bz_opengl/include/geometry.hpp \
   /home/irie/Desktop/bz_opengl/include/types.hpp \
   /home/irie/Desktop/bz_opengl/libs/include/GLFW/glfw3.h \
   /home/irie/Desktop/bz_opengl/libs/include/glm/common.hpp \
@@ -7429,6 +7430,44 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/cl
   /home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_half.inl \
   /home/irie/Desktop/bz_opengl/libs/include/glm/fwd.hpp \
   /home/irie/Desktop/bz_opengl/libs/include/glm/glm.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/detail/setup.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/quaternion_relational.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/quaternion_relational.inl \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/detail/setup.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_float.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_quat.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_quat.inl \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/quaternion_geometric.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/quaternion_geometric.inl \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/quaternion_common.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/quaternion_common.inl \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/quaternion_double.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/quaternion_double_precision.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/quaternion_float.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/quaternion_float_precision.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/quaternion_transform.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/quaternion_transform.inl \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/quaternion_trigonometric.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/quaternion_trigonometric.inl \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/vector_relational.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/vector_relational.inl \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/detail/setup.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/matrix_clip_space.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/matrix_clip_space.inl \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/matrix_projection.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/matrix_projection.inl \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/matrix_transform.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/matrix_transform.inl \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/scalar_constants.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/ext/scalar_constants.inl \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/constants.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/constants.inl \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/matrix_transform.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/matrix_transform.inl \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/epsilon.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/epsilon.inl \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/quaternion.hpp \
+  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/quaternion.inl \
   /home/irie/Desktop/bz_opengl/libs/include/glm/integer.hpp \
   /home/irie/Desktop/bz_opengl/libs/include/glm/mat2x2.hpp \
   /home/irie/Desktop/bz_opengl/libs/include/glm/packing.hpp \
@@ -7551,6 +7590,7 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/cl
   /home/irie/Desktop/bz_opengl/libs/include/threepp/textures/Texture.hpp \
   /home/irie/Desktop/bz_opengl/libs/include/threepp/threepp.hpp \
   /home/irie/Desktop/bz_opengl/libs/include/threepp/utils/TaskManager.hpp \
+  /home/irie/Desktop/bz_opengl/src/client/player.hpp \
   /home/irie/Desktop/bz_opengl/src/client/renderer.hpp \
   /home/irie/Desktop/bz_opengl/src/client/shot.hpp \
   /usr/include/GL/gl.h \

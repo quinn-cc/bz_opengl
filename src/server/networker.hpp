@@ -2,6 +2,7 @@
 #include <map>
 #include <enet.h>
 #include "netmsg.hpp"
+#include "shot.hpp"
 
 #define LISTEN_PORT 1234
 #define MAX_CLIENTS 50
@@ -29,6 +30,8 @@ public:
     void MsgRecv_InitClient(ENetEvent event, ClientMsg_Init *msg);
     void MsgRecv_Location(ENetEvent event, ClientMsg_Location *msg);
     void MsgRecv_Shot(ENetEvent event, ClientMsg_Shot *msg);
+
+    void MsgSend_RemoveShot(Shot *shot);
 
     void InitClient(Client *client);
     void SendToClientsExcept(void *packet, int len, Client *client);

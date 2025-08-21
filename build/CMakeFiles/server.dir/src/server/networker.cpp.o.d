@@ -398,28 +398,8 @@ CMakeFiles/server.dir/src/server/networker.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../detail/setup.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/epsilon.inl \
  /home/irie/Desktop/bz_opengl/include/types.hpp \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/common.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/null_mutex.h \
- /usr/include/c++/13/atomic /usr/include/c++/13/bits/atomic_base.h \
- /usr/include/c++/13/bits/atomic_lockfree_defines.h \
- /usr/include/c++/13/bits/atomic_wait.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h \
- /usr/include/pthread.h /usr/include/sched.h \
- /usr/include/x86_64-linux-gnu/bits/sched.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
- /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
- /usr/include/c++/13/cerrno /usr/include/syscall.h \
- /usr/include/x86_64-linux-gnu/sys/syscall.h \
- /usr/include/x86_64-linux-gnu/asm/unistd.h \
- /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
- /usr/include/x86_64-linux-gnu/bits/syscall.h \
- /usr/include/c++/13/bits/std_mutex.h /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/tweakme.h \
+ /home/irie/Desktop/bz_opengl/src/server/shot.hpp \
+ /home/irie/Desktop/bz_opengl/include/timeutils.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono.h \
  /usr/include/c++/13/ratio /usr/include/c++/13/ctime \
  /usr/include/c++/13/bits/parse_numbers.h /usr/include/c++/13/sstream \
@@ -444,6 +424,14 @@ CMakeFiles/server.dir/src/server/networker.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/locale.h /usr/include/c++/13/cctype \
  /usr/include/ctype.h /usr/include/c++/13/bits/ios_base.h \
  /usr/include/c++/13/ext/atomicity.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h \
+ /usr/include/pthread.h /usr/include/sched.h \
+ /usr/include/x86_64-linux-gnu/bits/sched.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
+ /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
+ /usr/include/x86_64-linux-gnu/bits/setjmp.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
  /usr/include/c++/13/bits/locale_classes.h /usr/include/c++/13/string \
@@ -459,7 +447,7 @@ CMakeFiles/server.dir/src/server/networker.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
  /usr/include/x86_64-linux-gnu/bits/stdio2-decl.h \
  /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h \
+ /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/c++/13/cerrno \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/basic_string.tcc \
  /usr/include/c++/13/bits/locale_classes.tcc \
@@ -494,7 +482,21 @@ CMakeFiles/server.dir/src/server/networker.cpp.o: \
  /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/format \
  /usr/include/c++/13/charconv /usr/include/c++/13/optional \
  /usr/include/c++/13/span /usr/include/c++/13/variant \
- /usr/include/c++/13/bits/ranges_algobase.h /usr/include/c++/13/memory \
+ /usr/include/c++/13/bits/ranges_algobase.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/common.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/null_mutex.h \
+ /usr/include/c++/13/atomic /usr/include/c++/13/bits/atomic_base.h \
+ /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/13/bits/atomic_wait.h /usr/include/syscall.h \
+ /usr/include/x86_64-linux-gnu/sys/syscall.h \
+ /usr/include/x86_64-linux-gnu/asm/unistd.h \
+ /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
+ /usr/include/x86_64-linux-gnu/bits/syscall.h \
+ /usr/include/c++/13/bits/std_mutex.h /usr/include/c++/13/utility \
+ /usr/include/c++/13/bits/stl_relops.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/tweakme.h \
+ /usr/include/c++/13/memory \
  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
  /usr/include/c++/13/bits/shared_ptr_atomic.h \
  /usr/include/c++/13/backward/auto_ptr.h \
@@ -554,6 +556,4 @@ CMakeFiles/server.dir/src/server/networker.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/synchronous_factory.h \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/version.h \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog-inl.h \
- /home/irie/Desktop/bz_opengl/src/server/client.hpp \
- /home/irie/Desktop/bz_opengl/src/server/shot.hpp \
- /home/irie/Desktop/bz_opengl/include/timeutils.hpp
+ /home/irie/Desktop/bz_opengl/src/server/client.hpp

@@ -40,5 +40,7 @@ public:
     void Close();
     float GetDeltaTime();
     void Update();
+    void EndFrame();
+
     void OnResize(int width, int height);
 };

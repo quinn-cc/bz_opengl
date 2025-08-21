@@ -293,14 +293,9 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/glm/integer.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/glm/detail/func_integer.inl \
  /home/irie/Desktop/bz_opengl/include/types.hpp \
- /home/irie/Desktop/bz_opengl/src/client/renderer.hpp \
- /home/irie/Desktop/bz_opengl/libs/include/threepp/threepp.hpp \
- /home/irie/Desktop/bz_opengl/libs/include/threepp/constants.hpp \
- /home/irie/Desktop/bz_opengl/libs/include/threepp/canvas/Canvas.hpp \
- /home/irie/Desktop/bz_opengl/libs/include/threepp/canvas/WindowSize.hpp \
- /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- /usr/include/c++/13/ostream /usr/include/c++/13/ios \
- /usr/include/c++/13/iosfwd /usr/include/c++/13/bits/stringfwd.h \
+ /home/irie/Desktop/bz_opengl/src/client/player.hpp \
+ /usr/include/c++/13/string /usr/include/c++/13/bits/stringfwd.h \
+ /usr/include/c++/13/bits/char_traits.h \
  /usr/include/c++/13/bits/postypes.h /usr/include/c++/13/cwchar \
  /usr/include/wchar.h /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
@@ -310,31 +305,11 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
  /usr/include/x86_64-linux-gnu/bits/wchar2-decl.h \
  /usr/include/x86_64-linux-gnu/bits/wchar2.h \
- /usr/include/c++/13/exception /usr/include/c++/13/bits/exception_ptr.h \
- /usr/include/c++/13/bits/cxxabi_init_exception.h \
- /usr/include/c++/13/bits/nested_exception.h \
- /usr/include/c++/13/bits/char_traits.h \
  /usr/include/c++/13/bits/localefwd.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
  /usr/include/c++/13/clocale /usr/include/locale.h \
- /usr/include/x86_64-linux-gnu/bits/locale.h /usr/include/c++/13/cctype \
- /usr/include/ctype.h /usr/include/c++/13/bits/ios_base.h \
- /usr/include/c++/13/ext/atomicity.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h \
- /usr/include/pthread.h /usr/include/sched.h \
- /usr/include/x86_64-linux-gnu/bits/sched.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
- /usr/include/x86_64-linux-gnu/bits/cpu-set.h /usr/include/time.h \
- /usr/include/x86_64-linux-gnu/bits/time.h \
- /usr/include/x86_64-linux-gnu/bits/timex.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
- /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
- /usr/include/c++/13/bits/locale_classes.h /usr/include/c++/13/string \
+ /usr/include/x86_64-linux-gnu/bits/locale.h /usr/include/c++/13/iosfwd \
+ /usr/include/c++/13/cctype /usr/include/ctype.h \
  /usr/include/c++/13/bits/ostream_insert.h \
  /usr/include/c++/13/bits/cxxabi_forced.h \
  /usr/include/c++/13/bits/basic_string.h /usr/include/c++/13/string_view \
@@ -354,6 +329,71 @@ CMakeFiles/client.dir/src/client/shot.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/basic_string.tcc \
+ /home/irie/Desktop/bz_opengl/include/geometry.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/quaternion.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/constants.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/scalar_constants.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/../detail/setup.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/scalar_constants.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/constants.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/matrix_transform.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/matrix_projection.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/matrix_projection.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/matrix_clip_space.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/matrix_clip_space.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/matrix_transform.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/matrix_transform.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/matrix_transform.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/vector_relational.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/vector_relational.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../detail/type_float.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../detail/setup.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_common.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../ext/quaternion_geometric.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../ext/quaternion_geometric.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_common.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_float.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../detail/type_quat.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../detail/../ext/quaternion_relational.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../detail/../ext/quaternion_relational.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../detail/type_quat.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_float_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_double.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_double_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_trigonometric.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_trigonometric.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_transform.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_transform.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/quaternion.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/epsilon.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../detail/setup.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/epsilon.inl \
+ /home/irie/Desktop/bz_opengl/src/client/renderer.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/threepp/threepp.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/threepp/constants.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/threepp/canvas/Canvas.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/threepp/canvas/WindowSize.hpp \
+ /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
+ /usr/include/c++/13/ostream /usr/include/c++/13/ios \
+ /usr/include/c++/13/exception /usr/include/c++/13/bits/exception_ptr.h \
+ /usr/include/c++/13/bits/cxxabi_init_exception.h \
+ /usr/include/c++/13/bits/nested_exception.h \
+ /usr/include/c++/13/bits/ios_base.h /usr/include/c++/13/ext/atomicity.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h \
+ /usr/include/pthread.h /usr/include/sched.h \
+ /usr/include/x86_64-linux-gnu/bits/sched.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
+ /usr/include/x86_64-linux-gnu/bits/cpu-set.h /usr/include/time.h \
+ /usr/include/x86_64-linux-gnu/bits/time.h \
+ /usr/include/x86_64-linux-gnu/bits/timex.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
+ /usr/include/x86_64-linux-gnu/bits/setjmp.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
+ /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
+ /usr/include/c++/13/bits/locale_classes.h \
  /usr/include/c++/13/bits/locale_classes.tcc \
  /usr/include/c++/13/system_error \
  /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h \

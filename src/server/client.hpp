@@ -2,23 +2,24 @@
 #include <string>
 #include <vector>
 #include "geometry.hpp"
+#include "types.hpp"
 
 class Client {
 private:
-    int clientId;
-
+    client_id clientId;
     std::string name;
     Location location;
     
 public:
     static std::vector<Client *> clients;
-    static Client *GetClient(int clientId);
-    static Client *RemoveClient(int clientId);
+    static Client *GetClient(client_id clientId);
+    static Client *RemoveClient(client_id clientId);
+    static client_id GenerateClientId();
 
     void SendPacket(void *packet, int len);
-    bool IsPeer(int clientId);
+    bool IsPeer(client_id clientId);
     std::string GetName();
-    int GetId();
+    client_id GetId();
     void SetLocation(Location location);
     Location GetLocation();
     std::string ToString();
@@ -26,5 +27,3 @@ public:
     Client(std::string name);
     ~Client();
 };
-
-int GenerateClientId();

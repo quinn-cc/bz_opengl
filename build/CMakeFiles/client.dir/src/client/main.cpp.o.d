@@ -716,12 +716,12 @@ CMakeFiles/client.dir/src/client/main.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/threepp/loaders/TextureLoader.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/threepp/utils/TaskManager.hpp \
  /home/irie/Desktop/bz_opengl/src/client/shot.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/player.hpp \
  /home/irie/Desktop/bz_opengl/src/client/renderer.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/GLFW/glfw3.h \
  /usr/include/GL/gl.h /usr/include/GL/glext.h \
  /usr/include/KHR/khrplatform.h \
  /home/irie/Desktop/bz_opengl/src/client/networker.hpp \
- /home/irie/Desktop/bz_opengl/src/client/player.hpp \
  /home/irie/Desktop/bz_opengl/src/client/input.hpp \
  /home/irie/Desktop/bz_opengl/src/client/physics.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/btBulletDynamicsCommon.h \

@@ -37,6 +37,11 @@ void Networker::MsgRecv(ENetEvent event) {
         MsgRecv_Shot(msgShot);
         break;
     }
+    case ServerMsg_Type_REMOVE_SHOT: {
+        ServerMsg_RemoveShot *msgRemoveShot = reinterpret_cast<ServerMsg_RemoveShot*>(msg);
+        MsgRecv_RemoveShot(msgRemoveShot);
+        break;
+    }
     default:
         break;
     }
@@ -113,6 +118,7 @@ void Networker::MsgSend_Shot(Shot *shot) {
     msgShot.type = ClientMsg_Type_SHOT;
     msgShot.position = shot->GetPosition();
     msgShot.velocity = shot->GetVelocity();
+    msgShot.localShotId = shot->GetId();
     ENetPacket* packet = enet_packet_create(&msgShot, sizeof(msgShot), ENET_PACKET_FLAG_RELIABLE);
     enet_peer_send(server, 0, packet);
 }
@@ -155,5 +161,21 @@ void Networker::MsgRecv_Location(ENetEvent event, ServerMsg_Location *msg) {
 }
 
 void Networker::MsgRecv_Shot(ServerMsg_Shot *msg) {
-    Shot *shot = new Shot(msg->clientId, msg->position, msg->velocity);
+    Shot *shot = new Shot(msg->globalShotId, msg->position, msg->velocity);
+}
+
+void Networker::MsgRecv_RemoveShot(ServerMsg_RemoveShot *msg) {
+    Shot *shot;
+
+    if (msg->clientId == 0) {
+        shot = Shot::GetShotByLocalId(msg->shotId);
+    } else {
+        shot = Shot::GetShotByGlobalId(msg->shotId);
+    }
+
+    if (shot) {
+        delete shot;
+    } else {
+        spdlog::error("Failed to remove shot: shot with ID {} not found", msg->shotId);
+    }
 }

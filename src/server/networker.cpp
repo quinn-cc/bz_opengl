@@ -167,14 +167,30 @@ void Networker::MsgRecv_Location(ENetEvent event, ClientMsg_Location *msg) {
 
 void Networker::MsgRecv_Shot(ENetEvent event, ClientMsg_Shot *msg) {
     Client *client = Client::GetClient(GetClient(event.peer));
-    Shot *shot = new Shot(client, msg->position, msg->velocity);
+    Shot *shot = new Shot(msg->localShotId, client, msg->position, msg->velocity);
 
     ServerMsg_Shot shotMsg;
     shotMsg.type = ServerMsg_Type_SHOT;
-    shotMsg.clientId = client->GetId();
+    shotMsg.globalShotId = shot->GetGlobalId();
     shotMsg.position = msg->position;
     shotMsg.velocity = msg->velocity;
     SendToClientsExcept(&shotMsg, sizeof(shotMsg), client);
+}
+
+void Networker::MsgSend_RemoveShot(Shot *shot) {
+    // Remove from owner (local ID)
+    ServerMsg_RemoveShot msgOwner;
+    msgOwner.type = ServerMsg_Type_REMOVE_SHOT;
+    msgOwner.shotId = shot->GetLocalId();
+    msgOwner.clientId = 0;
+    SendToClient(shot->GetOwner(), &msgOwner, sizeof(msgOwner));
+
+    // Remove from everyone else (global ID)
+    ServerMsg_RemoveShot msgRest;
+    msgRest.type = ServerMsg_Type_REMOVE_SHOT;
+    msgRest.shotId = shot->GetGlobalId();
+    msgRest.clientId = shot->GetOwner()->GetId();
+    SendToClientsExcept(&msgRest, sizeof(msgRest), shot->GetOwner());
 }
 
 void Networker::SendToClientsExcept(void *packet, int len, Client *client) {

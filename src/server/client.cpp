@@ -6,7 +6,12 @@
 
 std::vector<Client *> Client::clients;
 
-Client *Client::GetClient(int clientId) {
+client_id Client::GenerateClientId() {
+    static client_id id = 0;
+    return id++;
+}
+
+Client *Client::GetClient(client_id clientId) {
     for (Client *client : clients) {
         if (client->IsPeer(clientId)) {
             return client;
@@ -17,7 +22,7 @@ Client *Client::GetClient(int clientId) {
 }
 
 
-bool Client::IsPeer(int clientId) {
+bool Client::IsPeer(client_id clientId) {
     return this->clientId == clientId;
 }
 
@@ -25,7 +30,7 @@ std::string Client::GetName() {
     return name;
 }
 
-int Client::GetId() {
+client_id Client::GetId() {
     return clientId;
 }
 
@@ -65,6 +70,3 @@ Client::~Client() {
     }
 }
 
-int GenerateClientId() {
-    return rand();
-}

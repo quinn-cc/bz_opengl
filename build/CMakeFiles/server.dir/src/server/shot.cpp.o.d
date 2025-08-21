@@ -385,4 +385,175 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: \
  /usr/include/c++/13/span /usr/include/c++/13/variant \
  /usr/include/c++/13/bits/ranges_algobase.h \
  /home/irie/Desktop/bz_opengl/include/types.hpp \
- /home/irie/Desktop/bz_opengl/src/server/runtime.hpp
+ /home/irie/Desktop/bz_opengl/src/server/runtime.hpp \
+ /home/irie/Desktop/bz_opengl/src/server/networker.hpp \
+ /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
+ /usr/include/c++/13/bits/stl_map.h \
+ /usr/include/c++/13/bits/stl_multimap.h \
+ /home/irie/Desktop/bz_opengl/libs/include/enet.h \
+ /usr/include/c++/13/stdlib.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
+ /usr/include/x86_64-linux-gnu/sys/ioctl.h \
+ /usr/include/x86_64-linux-gnu/bits/ioctls.h \
+ /usr/include/x86_64-linux-gnu/asm/ioctls.h \
+ /usr/include/asm-generic/ioctls.h /usr/include/linux/ioctl.h \
+ /usr/include/x86_64-linux-gnu/asm/ioctl.h \
+ /usr/include/asm-generic/ioctl.h \
+ /usr/include/x86_64-linux-gnu/bits/ioctl-types.h \
+ /usr/include/x86_64-linux-gnu/sys/ttydefaults.h \
+ /usr/include/x86_64-linux-gnu/sys/time.h \
+ /usr/include/x86_64-linux-gnu/sys/socket.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
+ /usr/include/x86_64-linux-gnu/bits/socket.h \
+ /usr/include/x86_64-linux-gnu/bits/socket_type.h \
+ /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
+ /usr/include/x86_64-linux-gnu/asm/socket.h \
+ /usr/include/asm-generic/socket.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+ /usr/include/asm-generic/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h \
+ /usr/include/x86_64-linux-gnu/asm/sockios.h \
+ /usr/include/asm-generic/sockios.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
+ /usr/include/x86_64-linux-gnu/bits/socket2.h /usr/include/poll.h \
+ /usr/include/x86_64-linux-gnu/sys/poll.h \
+ /usr/include/x86_64-linux-gnu/bits/poll.h \
+ /usr/include/x86_64-linux-gnu/bits/poll2.h /usr/include/arpa/inet.h \
+ /usr/include/netinet/in.h /usr/include/x86_64-linux-gnu/bits/in.h \
+ /usr/include/netinet/tcp.h /usr/include/netdb.h /usr/include/rpc/netdb.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
+ /usr/include/x86_64-linux-gnu/bits/netdb.h /usr/include/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd-decl.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h /usr/include/string.h \
+ /usr/include/strings.h \
+ /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
+ /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
+ /usr/include/fcntl.h /usr/include/x86_64-linux-gnu/bits/fcntl.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
+ /usr/include/linux/falloc.h /usr/include/x86_64-linux-gnu/bits/stat.h \
+ /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl2.h \
+ /home/irie/Desktop/bz_opengl/include/netmsg.hpp \
+ /home/irie/Desktop/bz_opengl/include/geometry.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/quaternion.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/constants.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/scalar_constants.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/../detail/setup.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/scalar_constants.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/constants.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/matrix_transform.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/matrix_projection.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/matrix_projection.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/matrix_clip_space.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/matrix_clip_space.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/matrix_transform.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/../ext/matrix_transform.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../gtc/matrix_transform.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/vector_relational.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/vector_relational.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../detail/type_float.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../detail/setup.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_common.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../ext/quaternion_geometric.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../ext/quaternion_geometric.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_common.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_float.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../detail/type_quat.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../detail/../ext/quaternion_relational.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../detail/../ext/quaternion_relational.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/../detail/type_quat.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_float_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_double.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_double_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_trigonometric.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_trigonometric.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_transform.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../ext/quaternion_transform.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/quaternion.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/epsilon.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../detail/setup.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/epsilon.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/common.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/null_mutex.h \
+ /usr/include/c++/13/atomic /usr/include/c++/13/bits/atomic_base.h \
+ /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/13/bits/atomic_wait.h /usr/include/syscall.h \
+ /usr/include/x86_64-linux-gnu/sys/syscall.h \
+ /usr/include/x86_64-linux-gnu/asm/unistd.h \
+ /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
+ /usr/include/x86_64-linux-gnu/bits/syscall.h \
+ /usr/include/c++/13/bits/std_mutex.h /usr/include/c++/13/utility \
+ /usr/include/c++/13/bits/stl_relops.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/tweakme.h \
+ /usr/include/c++/13/memory \
+ /usr/include/c++/13/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/13/bits/shared_ptr_atomic.h \
+ /usr/include/c++/13/backward/auto_ptr.h \
+ /usr/include/c++/13/bits/ranges_uninitialized.h \
+ /usr/include/c++/13/pstl/glue_memory_defs.h \
+ /usr/include/c++/13/pstl/execution_defs.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/fmt.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/format.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/base.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/format.h \
+ /usr/include/c++/13/cstring \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/format-inl.h \
+ /usr/include/c++/13/algorithm /usr/include/c++/13/bits/ranges_algo.h \
+ /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/common-inl.h \
+ /usr/include/c++/13/iterator /usr/include/c++/13/bits/stream_iterator.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/registry.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/periodic_worker.h \
+ /usr/include/c++/13/condition_variable \
+ /usr/include/c++/13/bits/unique_lock.h /usr/include/c++/13/stop_token \
+ /usr/include/c++/13/bits/std_thread.h /usr/include/c++/13/semaphore \
+ /usr/include/c++/13/bits/semaphore_base.h \
+ /usr/include/c++/13/bits/atomic_timed_wait.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h /usr/include/semaphore.h \
+ /usr/include/x86_64-linux-gnu/bits/semaphore.h /usr/include/c++/13/mutex \
+ /usr/include/c++/13/thread \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/periodic_worker-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/registry-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/logger.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/backtracer.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/circular_q.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg_buffer.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/os.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/os-inl.h \
+ /usr/include/x86_64-linux-gnu/sys/stat.h \
+ /usr/include/x86_64-linux-gnu/bits/statx.h /usr/include/linux/stat.h \
+ /usr/include/linux/types.h /usr/include/x86_64-linux-gnu/asm/types.h \
+ /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
+ /usr/include/x86_64-linux-gnu/bits/statx-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_statx_timestamp.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg_buffer-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/backtracer-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/logger-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/pattern_formatter.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/formatter.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/pattern_formatter-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/fmt_helper.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/mdc.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/sink.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/sink-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/ansicolor_sink.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/console_globals.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/ansicolor_sink-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/synchronous_factory.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/version.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog-inl.h

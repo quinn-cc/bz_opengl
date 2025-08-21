@@ -3,6 +3,7 @@
 #include "player.hpp"
 #include <spdlog/spdlog.h>
 #include "bullet/btBulletCollisionCommon.h"
+#include "renderer.hpp"
 
 Physics &Physics::GetInstance() {
     static Physics instance;
@@ -26,7 +27,7 @@ void Physics::Init() {
     btRigidBody* floorBody = new btRigidBody(floorInfo);
     world->addRigidBody(floorBody);
 
-    btBoxShape *boxShape = new btBoxShape(btVector3(5, 5, 5));
+    btBoxShape *boxShape = new btBoxShape(btVector3(2.5, 2.5, 2.5));
     btTransform boxTransform;
     boxTransform.setIdentity();
     boxTransform.setOrigin(btVector3(10, 0, 10));
@@ -52,35 +53,62 @@ void Physics::Init() {
     // Disable inertia/rotation for arcade-style instant movement
     playerBody->setFriction(0);
     playerBody->setDamping(0, 0);
-    playerBody->setAngularFactor(btVector3(0, 1, 0));
+    playerBody->setAngularFactor(btVector3(0, .1, 0));
     playerBody->setLinearFactor(btVector3(1, 1, 1));
 
     world->addRigidBody(playerBody);
 }
 
+bool Physics::IsGrounded() {
+    btVector3 halfExtents(0.5f, 1.0f, 0.5f);  // adjust to match your box size
+    btBoxShape boxShape(halfExtents);
+
+    btTransform from = playerBody->getWorldTransform();
+    btTransform to = from;
+    to.setOrigin(from.getOrigin() - btVector3(0, 0.1f, 0));  // small downward distance
+
+    // Setup callback
+    btCollisionWorld::ClosestConvexResultCallback cb(from.getOrigin(), to.getOrigin());
+    cb.m_collisionFilterGroup = playerBody->getBroadphaseHandle()->m_collisionFilterGroup;
+    cb.m_collisionFilterMask  = playerBody->getBroadphaseHandle()->m_collisionFilterMask;
+
+    // Sweep
+    world->convexSweepTest(&boxShape, from, to, cb);
+
+    bool isGrounded = cb.hasHit() && cb.m_hitNormalWorld.dot(btVector3(0,1,0)) > 0.7f;
+    return isGrounded;
+}
+
 void Physics::Update() {
-    glm::vec2 movement = Input::GetInstance().GetMovement();
-    playerBody->activate(true);
 
-    playerBody->setAngularVelocity(btVector3(0, -movement.x * 2, 0));
-    btTransform trans1;
-    playerBody->getMotionState()->getWorldTransform(trans1);
-    btQuaternion rot = trans1.getRotation();
-    btVector3 localVel(0, 0, movement.y * 10); // local velocity
-    btMatrix3x3 rotMat(rot);
-    btVector3 worldVel = rotMat * localVel;
-    btVector3 velocity = playerBody->getLinearVelocity();
-    velocity.setX(worldVel.getX());
-    velocity.setZ(worldVel.getZ());
-    playerBody->setLinearVelocity(velocity);
+    if (IsGrounded()) {
+        glm::vec2 movement = Input::GetInstance().GetMovement();
+        playerBody->activate(true);
 
-
-    // Jump logic
-    // Simple ground check: if player's Y is close to 1 (floor height + half player height)
-    if (Input::GetInstance().JumpReady()) {
+        // btQuaternion yawRot;
+        // yawRot.setEuler(-movement.x * Renderer::GetInstance().GetDeltaTime() * 2, 0, 0); // Euler: yaw, pitch, roll
+        // btQuaternion newRot = yawRot * playerBody->getWorldTransform().getRotation();
+        // playerBody->getWorldTransform().setRotation(newRot);
+        
+        btTransform trans1;
+        playerBody->getMotionState()->getWorldTransform(trans1);
+        btQuaternion rot = trans1.getRotation();
+        btVector3 localVel(0, 0, movement.y * 10); // local velocity
+        btMatrix3x3 rotMat(rot);
+        btVector3 worldVel = rotMat * localVel;
         btVector3 velocity = playerBody->getLinearVelocity();
-        velocity.setY(10.0f); // Set jump velocity (tune as needed)
+        velocity.setX(worldVel.getX());
+        velocity.setZ(worldVel.getZ());
         playerBody->setLinearVelocity(velocity);
+        playerBody->setAngularVelocity(btVector3(0, -movement.x * 2, 0));
+
+        // Jump logic
+        // Simple ground check: if player's Y is close to 1 (floor height + half player height)
+        if (Input::GetInstance().JumpReady()) {
+            btVector3 velocity = playerBody->getLinearVelocity();
+            velocity.setY(10.0f); // Set jump velocity (tune as needed)
+            playerBody->setLinearVelocity(velocity);
+        }
     }
 
     // Step simulation

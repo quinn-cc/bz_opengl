@@ -10,6 +10,15 @@ set(BUILD_SHARED_LIBS OFF)
 file(GLOB CLIENT_SOURCES "${PROJECT_SOURCE_DIR}/src/client/*.cpp")
 file(GLOB SERVER_SOURCES "${PROJECT_SOURCE_DIR}/src/server/*.cpp")
 
+file(GLOB IMGUI_SOURCES
+    libs/include/imgui/imgui.cpp
+    libs/include/imgui/imgui_draw.cpp
+    libs/include/imgui/imgui_tables.cpp
+    libs/include/imgui/imgui_widgets.cpp
+    libs/include/imgui/backends/imgui_impl_glfw.cpp
+    libs/include/imgui/backends/imgui_impl_opengl3.cpp
+)
+
 # Platform-specific library folder
 if (WIN32)
     set(LIB_DIR ${CMAKE_SOURCE_DIR}/libs/lib/windows)
@@ -43,7 +52,7 @@ prebuilt_lib(BULLET_LINEAR_LIB LinearMath)
 set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/libs/include)
 
 # Create executables
-add_executable(client ${CLIENT_SOURCES})
+add_executable(client ${CLIENT_SOURCES} ${IMGUI_SOURCES})
 add_executable(server ${SERVER_SOURCES})
 
 # Include directories
@@ -54,6 +63,7 @@ target_include_directories(client PRIVATE
     ${CMAKE_SOURCE_DIR}/libs/include/bullet
     ${CMAKE_SOURCE_DIR}/libs/include/glm
     ${CMAKE_SOURCE_DIR}/libs/include/assimp
+    ${CMAKE_SOURCE_DIR}/libs/include/imgui
 )
 target_include_directories(server PRIVATE
     ${PROJECT_SOURCE_DIR}/include
