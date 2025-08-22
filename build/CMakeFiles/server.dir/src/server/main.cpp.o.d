@@ -457,8 +457,19 @@ CMakeFiles/server.dir/src/server/main.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../detail/setup.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/epsilon.inl \
  /home/irie/Desktop/bz_opengl/include/types.hpp \
- /home/irie/Desktop/bz_opengl/src/server/shot.hpp \
- /home/irie/Desktop/bz_opengl/include/timeutils.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/common.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/null_mutex.h \
+ /usr/include/c++/13/atomic /usr/include/c++/13/bits/atomic_base.h \
+ /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/13/bits/atomic_wait.h /usr/include/syscall.h \
+ /usr/include/x86_64-linux-gnu/sys/syscall.h \
+ /usr/include/x86_64-linux-gnu/asm/unistd.h \
+ /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
+ /usr/include/x86_64-linux-gnu/bits/syscall.h \
+ /usr/include/c++/13/bits/std_mutex.h /usr/include/c++/13/utility \
+ /usr/include/c++/13/bits/stl_relops.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/tweakme.h \
  /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono.h \
  /usr/include/c++/13/ratio /usr/include/c++/13/ctime \
  /usr/include/c++/13/bits/parse_numbers.h /usr/include/c++/13/sstream \
@@ -479,21 +490,7 @@ CMakeFiles/server.dir/src/server/main.cpp.o: \
  /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/format \
  /usr/include/c++/13/charconv /usr/include/c++/13/optional \
  /usr/include/c++/13/span /usr/include/c++/13/variant \
- /usr/include/c++/13/bits/ranges_algobase.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/common.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/null_mutex.h \
- /usr/include/c++/13/atomic /usr/include/c++/13/bits/atomic_base.h \
- /usr/include/c++/13/bits/atomic_lockfree_defines.h \
- /usr/include/c++/13/bits/atomic_wait.h /usr/include/syscall.h \
- /usr/include/x86_64-linux-gnu/sys/syscall.h \
- /usr/include/x86_64-linux-gnu/asm/unistd.h \
- /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
- /usr/include/x86_64-linux-gnu/bits/syscall.h \
- /usr/include/c++/13/bits/std_mutex.h /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/tweakme.h \
- /usr/include/c++/13/memory \
+ /usr/include/c++/13/bits/ranges_algobase.h /usr/include/c++/13/memory \
  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
  /usr/include/c++/13/bits/shared_ptr_atomic.h \
  /usr/include/c++/13/backward/auto_ptr.h \
@@ -556,5 +553,10 @@ CMakeFiles/server.dir/src/server/main.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/synchronous_factory.h \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/version.h \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog-inl.h \
- /home/irie/Desktop/bz_opengl/src/server/networker.hpp \
- /home/irie/Desktop/bz_opengl/src/server/runtime.hpp
+ /home/irie/Desktop/bz_opengl/src/server/game/game.hpp \
+ /home/irie/Desktop/bz_opengl/src/server/game/client.hpp \
+ /home/irie/Desktop/bz_opengl/src/server/game/shot.hpp \
+ /home/irie/Desktop/bz_opengl/include/timeutils.hpp \
+ /home/irie/Desktop/bz_opengl/src/server/game/runtime.hpp \
+ /home/irie/Desktop/bz_opengl/src/server/engine/engine.hpp \
+ /home/irie/Desktop/bz_opengl/src/server/engine/networker.hpp

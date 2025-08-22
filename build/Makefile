@@ -286,77 +286,197 @@ libs/include/imgui/imgui_widgets.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.s
 .PHONY : libs/include/imgui/imgui_widgets.cpp.s
 
-src/client/client.o: src/client/client.cpp.o
-.PHONY : src/client/client.o
+src/client/engine/gui.o: src/client/engine/gui.cpp.o
+.PHONY : src/client/engine/gui.o
 
 # target to build an object file
-src/client/client.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/client.cpp.o
-.PHONY : src/client/client.cpp.o
+src/client/engine/gui.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/gui.cpp.o
+.PHONY : src/client/engine/gui.cpp.o
 
-src/client/client.i: src/client/client.cpp.i
-.PHONY : src/client/client.i
+src/client/engine/gui.i: src/client/engine/gui.cpp.i
+.PHONY : src/client/engine/gui.i
 
 # target to preprocess a source file
-src/client/client.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/client.cpp.i
-.PHONY : src/client/client.cpp.i
+src/client/engine/gui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/gui.cpp.i
+.PHONY : src/client/engine/gui.cpp.i
 
-src/client/client.s: src/client/client.cpp.s
-.PHONY : src/client/client.s
+src/client/engine/gui.s: src/client/engine/gui.cpp.s
+.PHONY : src/client/engine/gui.s
 
 # target to generate assembly for a file
-src/client/client.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/client.cpp.s
-.PHONY : src/client/client.cpp.s
+src/client/engine/gui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/gui.cpp.s
+.PHONY : src/client/engine/gui.cpp.s
 
-src/client/gui.o: src/client/gui.cpp.o
-.PHONY : src/client/gui.o
+src/client/engine/input.o: src/client/engine/input.cpp.o
+.PHONY : src/client/engine/input.o
 
 # target to build an object file
-src/client/gui.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/gui.cpp.o
-.PHONY : src/client/gui.cpp.o
+src/client/engine/input.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/input.cpp.o
+.PHONY : src/client/engine/input.cpp.o
 
-src/client/gui.i: src/client/gui.cpp.i
-.PHONY : src/client/gui.i
+src/client/engine/input.i: src/client/engine/input.cpp.i
+.PHONY : src/client/engine/input.i
 
 # target to preprocess a source file
-src/client/gui.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/gui.cpp.i
-.PHONY : src/client/gui.cpp.i
+src/client/engine/input.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/input.cpp.i
+.PHONY : src/client/engine/input.cpp.i
 
-src/client/gui.s: src/client/gui.cpp.s
-.PHONY : src/client/gui.s
+src/client/engine/input.s: src/client/engine/input.cpp.s
+.PHONY : src/client/engine/input.s
 
 # target to generate assembly for a file
-src/client/gui.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/gui.cpp.s
-.PHONY : src/client/gui.cpp.s
+src/client/engine/input.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/input.cpp.s
+.PHONY : src/client/engine/input.cpp.s
 
-src/client/input.o: src/client/input.cpp.o
-.PHONY : src/client/input.o
+src/client/engine/networker.o: src/client/engine/networker.cpp.o
+.PHONY : src/client/engine/networker.o
 
 # target to build an object file
-src/client/input.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/input.cpp.o
-.PHONY : src/client/input.cpp.o
+src/client/engine/networker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/networker.cpp.o
+.PHONY : src/client/engine/networker.cpp.o
 
-src/client/input.i: src/client/input.cpp.i
-.PHONY : src/client/input.i
+src/client/engine/networker.i: src/client/engine/networker.cpp.i
+.PHONY : src/client/engine/networker.i
 
 # target to preprocess a source file
-src/client/input.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/input.cpp.i
-.PHONY : src/client/input.cpp.i
+src/client/engine/networker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/networker.cpp.i
+.PHONY : src/client/engine/networker.cpp.i
 
-src/client/input.s: src/client/input.cpp.s
-.PHONY : src/client/input.s
+src/client/engine/networker.s: src/client/engine/networker.cpp.s
+.PHONY : src/client/engine/networker.s
 
 # target to generate assembly for a file
-src/client/input.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/input.cpp.s
-.PHONY : src/client/input.cpp.s
+src/client/engine/networker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/networker.cpp.s
+.PHONY : src/client/engine/networker.cpp.s
+
+src/client/engine/physics.o: src/client/engine/physics.cpp.o
+.PHONY : src/client/engine/physics.o
+
+# target to build an object file
+src/client/engine/physics.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/physics.cpp.o
+.PHONY : src/client/engine/physics.cpp.o
+
+src/client/engine/physics.i: src/client/engine/physics.cpp.i
+.PHONY : src/client/engine/physics.i
+
+# target to preprocess a source file
+src/client/engine/physics.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/physics.cpp.i
+.PHONY : src/client/engine/physics.cpp.i
+
+src/client/engine/physics.s: src/client/engine/physics.cpp.s
+.PHONY : src/client/engine/physics.s
+
+# target to generate assembly for a file
+src/client/engine/physics.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/physics.cpp.s
+.PHONY : src/client/engine/physics.cpp.s
+
+src/client/engine/renderer.o: src/client/engine/renderer.cpp.o
+.PHONY : src/client/engine/renderer.o
+
+# target to build an object file
+src/client/engine/renderer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/renderer.cpp.o
+.PHONY : src/client/engine/renderer.cpp.o
+
+src/client/engine/renderer.i: src/client/engine/renderer.cpp.i
+.PHONY : src/client/engine/renderer.i
+
+# target to preprocess a source file
+src/client/engine/renderer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/renderer.cpp.i
+.PHONY : src/client/engine/renderer.cpp.i
+
+src/client/engine/renderer.s: src/client/engine/renderer.cpp.s
+.PHONY : src/client/engine/renderer.s
+
+# target to generate assembly for a file
+src/client/engine/renderer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/renderer.cpp.s
+.PHONY : src/client/engine/renderer.cpp.s
+
+src/client/game/client.o: src/client/game/client.cpp.o
+.PHONY : src/client/game/client.o
+
+# target to build an object file
+src/client/game/client.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/game/client.cpp.o
+.PHONY : src/client/game/client.cpp.o
+
+src/client/game/client.i: src/client/game/client.cpp.i
+.PHONY : src/client/game/client.i
+
+# target to preprocess a source file
+src/client/game/client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/game/client.cpp.i
+.PHONY : src/client/game/client.cpp.i
+
+src/client/game/client.s: src/client/game/client.cpp.s
+.PHONY : src/client/game/client.s
+
+# target to generate assembly for a file
+src/client/game/client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/game/client.cpp.s
+.PHONY : src/client/game/client.cpp.s
+
+src/client/game/player.o: src/client/game/player.cpp.o
+.PHONY : src/client/game/player.o
+
+# target to build an object file
+src/client/game/player.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/game/player.cpp.o
+.PHONY : src/client/game/player.cpp.o
+
+src/client/game/player.i: src/client/game/player.cpp.i
+.PHONY : src/client/game/player.i
+
+# target to preprocess a source file
+src/client/game/player.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/game/player.cpp.i
+.PHONY : src/client/game/player.cpp.i
+
+src/client/game/player.s: src/client/game/player.cpp.s
+.PHONY : src/client/game/player.s
+
+# target to generate assembly for a file
+src/client/game/player.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/game/player.cpp.s
+.PHONY : src/client/game/player.cpp.s
+
+src/client/game/shot.o: src/client/game/shot.cpp.o
+.PHONY : src/client/game/shot.o
+
+# target to build an object file
+src/client/game/shot.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/game/shot.cpp.o
+.PHONY : src/client/game/shot.cpp.o
+
+src/client/game/shot.i: src/client/game/shot.cpp.i
+.PHONY : src/client/game/shot.i
+
+# target to preprocess a source file
+src/client/game/shot.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/game/shot.cpp.i
+.PHONY : src/client/game/shot.cpp.i
+
+src/client/game/shot.s: src/client/game/shot.cpp.s
+.PHONY : src/client/game/shot.s
+
+# target to generate assembly for a file
+src/client/game/shot.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/game/shot.cpp.s
+.PHONY : src/client/game/shot.cpp.s
 
 src/client/main.o: src/client/main.cpp.o
 .PHONY : src/client/main.o
@@ -382,149 +502,77 @@ src/client/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/main.cpp.s
 .PHONY : src/client/main.cpp.s
 
-src/client/networker.o: src/client/networker.cpp.o
-.PHONY : src/client/networker.o
+src/server/engine/networker.o: src/server/engine/networker.cpp.o
+.PHONY : src/server/engine/networker.o
 
 # target to build an object file
-src/client/networker.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/networker.cpp.o
-.PHONY : src/client/networker.cpp.o
+src/server/engine/networker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/engine/networker.cpp.o
+.PHONY : src/server/engine/networker.cpp.o
 
-src/client/networker.i: src/client/networker.cpp.i
-.PHONY : src/client/networker.i
+src/server/engine/networker.i: src/server/engine/networker.cpp.i
+.PHONY : src/server/engine/networker.i
 
 # target to preprocess a source file
-src/client/networker.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/networker.cpp.i
-.PHONY : src/client/networker.cpp.i
+src/server/engine/networker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/engine/networker.cpp.i
+.PHONY : src/server/engine/networker.cpp.i
 
-src/client/networker.s: src/client/networker.cpp.s
-.PHONY : src/client/networker.s
+src/server/engine/networker.s: src/server/engine/networker.cpp.s
+.PHONY : src/server/engine/networker.s
 
 # target to generate assembly for a file
-src/client/networker.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/networker.cpp.s
-.PHONY : src/client/networker.cpp.s
+src/server/engine/networker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/engine/networker.cpp.s
+.PHONY : src/server/engine/networker.cpp.s
 
-src/client/physics.o: src/client/physics.cpp.o
-.PHONY : src/client/physics.o
+src/server/game/client.o: src/server/game/client.cpp.o
+.PHONY : src/server/game/client.o
 
 # target to build an object file
-src/client/physics.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/physics.cpp.o
-.PHONY : src/client/physics.cpp.o
+src/server/game/client.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/game/client.cpp.o
+.PHONY : src/server/game/client.cpp.o
 
-src/client/physics.i: src/client/physics.cpp.i
-.PHONY : src/client/physics.i
+src/server/game/client.i: src/server/game/client.cpp.i
+.PHONY : src/server/game/client.i
 
 # target to preprocess a source file
-src/client/physics.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/physics.cpp.i
-.PHONY : src/client/physics.cpp.i
+src/server/game/client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/game/client.cpp.i
+.PHONY : src/server/game/client.cpp.i
 
-src/client/physics.s: src/client/physics.cpp.s
-.PHONY : src/client/physics.s
+src/server/game/client.s: src/server/game/client.cpp.s
+.PHONY : src/server/game/client.s
 
 # target to generate assembly for a file
-src/client/physics.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/physics.cpp.s
-.PHONY : src/client/physics.cpp.s
+src/server/game/client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/game/client.cpp.s
+.PHONY : src/server/game/client.cpp.s
 
-src/client/player.o: src/client/player.cpp.o
-.PHONY : src/client/player.o
+src/server/game/shot.o: src/server/game/shot.cpp.o
+.PHONY : src/server/game/shot.o
 
 # target to build an object file
-src/client/player.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/player.cpp.o
-.PHONY : src/client/player.cpp.o
+src/server/game/shot.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/game/shot.cpp.o
+.PHONY : src/server/game/shot.cpp.o
 
-src/client/player.i: src/client/player.cpp.i
-.PHONY : src/client/player.i
-
-# target to preprocess a source file
-src/client/player.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/player.cpp.i
-.PHONY : src/client/player.cpp.i
-
-src/client/player.s: src/client/player.cpp.s
-.PHONY : src/client/player.s
-
-# target to generate assembly for a file
-src/client/player.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/player.cpp.s
-.PHONY : src/client/player.cpp.s
-
-src/client/renderer.o: src/client/renderer.cpp.o
-.PHONY : src/client/renderer.o
-
-# target to build an object file
-src/client/renderer.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/renderer.cpp.o
-.PHONY : src/client/renderer.cpp.o
-
-src/client/renderer.i: src/client/renderer.cpp.i
-.PHONY : src/client/renderer.i
+src/server/game/shot.i: src/server/game/shot.cpp.i
+.PHONY : src/server/game/shot.i
 
 # target to preprocess a source file
-src/client/renderer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/renderer.cpp.i
-.PHONY : src/client/renderer.cpp.i
+src/server/game/shot.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/game/shot.cpp.i
+.PHONY : src/server/game/shot.cpp.i
 
-src/client/renderer.s: src/client/renderer.cpp.s
-.PHONY : src/client/renderer.s
-
-# target to generate assembly for a file
-src/client/renderer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/renderer.cpp.s
-.PHONY : src/client/renderer.cpp.s
-
-src/client/shot.o: src/client/shot.cpp.o
-.PHONY : src/client/shot.o
-
-# target to build an object file
-src/client/shot.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/shot.cpp.o
-.PHONY : src/client/shot.cpp.o
-
-src/client/shot.i: src/client/shot.cpp.i
-.PHONY : src/client/shot.i
-
-# target to preprocess a source file
-src/client/shot.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/shot.cpp.i
-.PHONY : src/client/shot.cpp.i
-
-src/client/shot.s: src/client/shot.cpp.s
-.PHONY : src/client/shot.s
+src/server/game/shot.s: src/server/game/shot.cpp.s
+.PHONY : src/server/game/shot.s
 
 # target to generate assembly for a file
-src/client/shot.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/shot.cpp.s
-.PHONY : src/client/shot.cpp.s
-
-src/server/client.o: src/server/client.cpp.o
-.PHONY : src/server/client.o
-
-# target to build an object file
-src/server/client.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/client.cpp.o
-.PHONY : src/server/client.cpp.o
-
-src/server/client.i: src/server/client.cpp.i
-.PHONY : src/server/client.i
-
-# target to preprocess a source file
-src/server/client.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/client.cpp.i
-.PHONY : src/server/client.cpp.i
-
-src/server/client.s: src/server/client.cpp.s
-.PHONY : src/server/client.s
-
-# target to generate assembly for a file
-src/server/client.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/client.cpp.s
-.PHONY : src/server/client.cpp.s
+src/server/game/shot.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/game/shot.cpp.s
+.PHONY : src/server/game/shot.cpp.s
 
 src/server/main.o: src/server/main.cpp.o
 .PHONY : src/server/main.o
@@ -549,78 +597,6 @@ src/server/main.s: src/server/main.cpp.s
 src/server/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/main.cpp.s
 .PHONY : src/server/main.cpp.s
-
-src/server/networker.o: src/server/networker.cpp.o
-.PHONY : src/server/networker.o
-
-# target to build an object file
-src/server/networker.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/networker.cpp.o
-.PHONY : src/server/networker.cpp.o
-
-src/server/networker.i: src/server/networker.cpp.i
-.PHONY : src/server/networker.i
-
-# target to preprocess a source file
-src/server/networker.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/networker.cpp.i
-.PHONY : src/server/networker.cpp.i
-
-src/server/networker.s: src/server/networker.cpp.s
-.PHONY : src/server/networker.s
-
-# target to generate assembly for a file
-src/server/networker.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/networker.cpp.s
-.PHONY : src/server/networker.cpp.s
-
-src/server/runtime.o: src/server/runtime.cpp.o
-.PHONY : src/server/runtime.o
-
-# target to build an object file
-src/server/runtime.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/runtime.cpp.o
-.PHONY : src/server/runtime.cpp.o
-
-src/server/runtime.i: src/server/runtime.cpp.i
-.PHONY : src/server/runtime.i
-
-# target to preprocess a source file
-src/server/runtime.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/runtime.cpp.i
-.PHONY : src/server/runtime.cpp.i
-
-src/server/runtime.s: src/server/runtime.cpp.s
-.PHONY : src/server/runtime.s
-
-# target to generate assembly for a file
-src/server/runtime.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/runtime.cpp.s
-.PHONY : src/server/runtime.cpp.s
-
-src/server/shot.o: src/server/shot.cpp.o
-.PHONY : src/server/shot.o
-
-# target to build an object file
-src/server/shot.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/shot.cpp.o
-.PHONY : src/server/shot.cpp.o
-
-src/server/shot.i: src/server/shot.cpp.i
-.PHONY : src/server/shot.i
-
-# target to preprocess a source file
-src/server/shot.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/shot.cpp.i
-.PHONY : src/server/shot.cpp.i
-
-src/server/shot.s: src/server/shot.cpp.s
-.PHONY : src/server/shot.s
-
-# target to generate assembly for a file
-src/server/shot.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/shot.cpp.s
-.PHONY : src/server/shot.cpp.s
 
 # Help Target
 help:
@@ -650,48 +626,45 @@ help:
 	@echo "... libs/include/imgui/imgui_widgets.o"
 	@echo "... libs/include/imgui/imgui_widgets.i"
 	@echo "... libs/include/imgui/imgui_widgets.s"
-	@echo "... src/client/client.o"
-	@echo "... src/client/client.i"
-	@echo "... src/client/client.s"
-	@echo "... src/client/gui.o"
-	@echo "... src/client/gui.i"
-	@echo "... src/client/gui.s"
-	@echo "... src/client/input.o"
-	@echo "... src/client/input.i"
-	@echo "... src/client/input.s"
+	@echo "... src/client/engine/gui.o"
+	@echo "... src/client/engine/gui.i"
+	@echo "... src/client/engine/gui.s"
+	@echo "... src/client/engine/input.o"
+	@echo "... src/client/engine/input.i"
+	@echo "... src/client/engine/input.s"
+	@echo "... src/client/engine/networker.o"
+	@echo "... src/client/engine/networker.i"
+	@echo "... src/client/engine/networker.s"
+	@echo "... src/client/engine/physics.o"
+	@echo "... src/client/engine/physics.i"
+	@echo "... src/client/engine/physics.s"
+	@echo "... src/client/engine/renderer.o"
+	@echo "... src/client/engine/renderer.i"
+	@echo "... src/client/engine/renderer.s"
+	@echo "... src/client/game/client.o"
+	@echo "... src/client/game/client.i"
+	@echo "... src/client/game/client.s"
+	@echo "... src/client/game/player.o"
+	@echo "... src/client/game/player.i"
+	@echo "... src/client/game/player.s"
+	@echo "... src/client/game/shot.o"
+	@echo "... src/client/game/shot.i"
+	@echo "... src/client/game/shot.s"
 	@echo "... src/client/main.o"
 	@echo "... src/client/main.i"
 	@echo "... src/client/main.s"
-	@echo "... src/client/networker.o"
-	@echo "... src/client/networker.i"
-	@echo "... src/client/networker.s"
-	@echo "... src/client/physics.o"
-	@echo "... src/client/physics.i"
-	@echo "... src/client/physics.s"
-	@echo "... src/client/player.o"
-	@echo "... src/client/player.i"
-	@echo "... src/client/player.s"
-	@echo "... src/client/renderer.o"
-	@echo "... src/client/renderer.i"
-	@echo "... src/client/renderer.s"
-	@echo "... src/client/shot.o"
-	@echo "... src/client/shot.i"
-	@echo "... src/client/shot.s"
-	@echo "... src/server/client.o"
-	@echo "... src/server/client.i"
-	@echo "... src/server/client.s"
+	@echo "... src/server/engine/networker.o"
+	@echo "... src/server/engine/networker.i"
+	@echo "... src/server/engine/networker.s"
+	@echo "... src/server/game/client.o"
+	@echo "... src/server/game/client.i"
+	@echo "... src/server/game/client.s"
+	@echo "... src/server/game/shot.o"
+	@echo "... src/server/game/shot.i"
+	@echo "... src/server/game/shot.s"
 	@echo "... src/server/main.o"
 	@echo "... src/server/main.i"
 	@echo "... src/server/main.s"
-	@echo "... src/server/networker.o"
-	@echo "... src/server/networker.i"
-	@echo "... src/server/networker.s"
-	@echo "... src/server/runtime.o"
-	@echo "... src/server/runtime.i"
-	@echo "... src/server/runtime.s"
-	@echo "... src/server/shot.o"
-	@echo "... src/server/shot.i"
-	@echo "... src/server/shot.s"
 .PHONY : help
 
 

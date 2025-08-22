@@ -69,24 +69,52 @@ include CMakeFiles/server.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/server.dir/flags.make
 
-CMakeFiles/server.dir/src/server/client.cpp.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/src/server/client.cpp.o: /home/irie/Desktop/bz_opengl/src/server/client.cpp
-CMakeFiles/server.dir/src/server/client.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/server.dir/src/server/client.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/client.cpp.o -MF CMakeFiles/server.dir/src/server/client.cpp.o.d -o CMakeFiles/server.dir/src/server/client.cpp.o -c /home/irie/Desktop/bz_opengl/src/server/client.cpp
+CMakeFiles/server.dir/src/server/engine/networker.cpp.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/src/server/engine/networker.cpp.o: /home/irie/Desktop/bz_opengl/src/server/engine/networker.cpp
+CMakeFiles/server.dir/src/server/engine/networker.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/server.dir/src/server/engine/networker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/engine/networker.cpp.o -MF CMakeFiles/server.dir/src/server/engine/networker.cpp.o.d -o CMakeFiles/server.dir/src/server/engine/networker.cpp.o -c /home/irie/Desktop/bz_opengl/src/server/engine/networker.cpp
 
-CMakeFiles/server.dir/src/server/client.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/server/client.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/irie/Desktop/bz_opengl/src/server/client.cpp > CMakeFiles/server.dir/src/server/client.cpp.i
+CMakeFiles/server.dir/src/server/engine/networker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/server/engine/networker.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/irie/Desktop/bz_opengl/src/server/engine/networker.cpp > CMakeFiles/server.dir/src/server/engine/networker.cpp.i
 
-CMakeFiles/server.dir/src/server/client.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/server/client.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/src/server/client.cpp -o CMakeFiles/server.dir/src/server/client.cpp.s
+CMakeFiles/server.dir/src/server/engine/networker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/server/engine/networker.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/src/server/engine/networker.cpp -o CMakeFiles/server.dir/src/server/engine/networker.cpp.s
+
+CMakeFiles/server.dir/src/server/game/client.cpp.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/src/server/game/client.cpp.o: /home/irie/Desktop/bz_opengl/src/server/game/client.cpp
+CMakeFiles/server.dir/src/server/game/client.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/server.dir/src/server/game/client.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/game/client.cpp.o -MF CMakeFiles/server.dir/src/server/game/client.cpp.o.d -o CMakeFiles/server.dir/src/server/game/client.cpp.o -c /home/irie/Desktop/bz_opengl/src/server/game/client.cpp
+
+CMakeFiles/server.dir/src/server/game/client.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/server/game/client.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/irie/Desktop/bz_opengl/src/server/game/client.cpp > CMakeFiles/server.dir/src/server/game/client.cpp.i
+
+CMakeFiles/server.dir/src/server/game/client.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/server/game/client.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/src/server/game/client.cpp -o CMakeFiles/server.dir/src/server/game/client.cpp.s
+
+CMakeFiles/server.dir/src/server/game/shot.cpp.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/src/server/game/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/server/game/shot.cpp
+CMakeFiles/server.dir/src/server/game/shot.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/server.dir/src/server/game/shot.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/game/shot.cpp.o -MF CMakeFiles/server.dir/src/server/game/shot.cpp.o.d -o CMakeFiles/server.dir/src/server/game/shot.cpp.o -c /home/irie/Desktop/bz_opengl/src/server/game/shot.cpp
+
+CMakeFiles/server.dir/src/server/game/shot.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/server/game/shot.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/irie/Desktop/bz_opengl/src/server/game/shot.cpp > CMakeFiles/server.dir/src/server/game/shot.cpp.i
+
+CMakeFiles/server.dir/src/server/game/shot.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/server/game/shot.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/src/server/game/shot.cpp -o CMakeFiles/server.dir/src/server/game/shot.cpp.s
 
 CMakeFiles/server.dir/src/server/main.cpp.o: CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/src/server/main.cpp.o: /home/irie/Desktop/bz_opengl/src/server/main.cpp
 CMakeFiles/server.dir/src/server/main.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/server.dir/src/server/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/server.dir/src/server/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/main.cpp.o -MF CMakeFiles/server.dir/src/server/main.cpp.o.d -o CMakeFiles/server.dir/src/server/main.cpp.o -c /home/irie/Desktop/bz_opengl/src/server/main.cpp
 
 CMakeFiles/server.dir/src/server/main.cpp.i: cmake_force
@@ -97,68 +125,24 @@ CMakeFiles/server.dir/src/server/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/server/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/src/server/main.cpp -o CMakeFiles/server.dir/src/server/main.cpp.s
 
-CMakeFiles/server.dir/src/server/networker.cpp.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/src/server/networker.cpp.o: /home/irie/Desktop/bz_opengl/src/server/networker.cpp
-CMakeFiles/server.dir/src/server/networker.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/server.dir/src/server/networker.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/networker.cpp.o -MF CMakeFiles/server.dir/src/server/networker.cpp.o.d -o CMakeFiles/server.dir/src/server/networker.cpp.o -c /home/irie/Desktop/bz_opengl/src/server/networker.cpp
-
-CMakeFiles/server.dir/src/server/networker.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/server/networker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/irie/Desktop/bz_opengl/src/server/networker.cpp > CMakeFiles/server.dir/src/server/networker.cpp.i
-
-CMakeFiles/server.dir/src/server/networker.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/server/networker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/src/server/networker.cpp -o CMakeFiles/server.dir/src/server/networker.cpp.s
-
-CMakeFiles/server.dir/src/server/runtime.cpp.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/src/server/runtime.cpp.o: /home/irie/Desktop/bz_opengl/src/server/runtime.cpp
-CMakeFiles/server.dir/src/server/runtime.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/server.dir/src/server/runtime.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/runtime.cpp.o -MF CMakeFiles/server.dir/src/server/runtime.cpp.o.d -o CMakeFiles/server.dir/src/server/runtime.cpp.o -c /home/irie/Desktop/bz_opengl/src/server/runtime.cpp
-
-CMakeFiles/server.dir/src/server/runtime.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/server/runtime.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/irie/Desktop/bz_opengl/src/server/runtime.cpp > CMakeFiles/server.dir/src/server/runtime.cpp.i
-
-CMakeFiles/server.dir/src/server/runtime.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/server/runtime.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/src/server/runtime.cpp -o CMakeFiles/server.dir/src/server/runtime.cpp.s
-
-CMakeFiles/server.dir/src/server/shot.cpp.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/src/server/shot.cpp.o: /home/irie/Desktop/bz_opengl/src/server/shot.cpp
-CMakeFiles/server.dir/src/server/shot.cpp.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/server.dir/src/server/shot.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/server.dir/src/server/shot.cpp.o -MF CMakeFiles/server.dir/src/server/shot.cpp.o.d -o CMakeFiles/server.dir/src/server/shot.cpp.o -c /home/irie/Desktop/bz_opengl/src/server/shot.cpp
-
-CMakeFiles/server.dir/src/server/shot.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/server.dir/src/server/shot.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/irie/Desktop/bz_opengl/src/server/shot.cpp > CMakeFiles/server.dir/src/server/shot.cpp.i
-
-CMakeFiles/server.dir/src/server/shot.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/server/shot.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/irie/Desktop/bz_opengl/src/server/shot.cpp -o CMakeFiles/server.dir/src/server/shot.cpp.s
-
 # Object files for target server
 server_OBJECTS = \
-"CMakeFiles/server.dir/src/server/client.cpp.o" \
-"CMakeFiles/server.dir/src/server/main.cpp.o" \
-"CMakeFiles/server.dir/src/server/networker.cpp.o" \
-"CMakeFiles/server.dir/src/server/runtime.cpp.o" \
-"CMakeFiles/server.dir/src/server/shot.cpp.o"
+"CMakeFiles/server.dir/src/server/engine/networker.cpp.o" \
+"CMakeFiles/server.dir/src/server/game/client.cpp.o" \
+"CMakeFiles/server.dir/src/server/game/shot.cpp.o" \
+"CMakeFiles/server.dir/src/server/main.cpp.o"
 
 # External object files for target server
 server_EXTERNAL_OBJECTS =
 
-server: CMakeFiles/server.dir/src/server/client.cpp.o
+server: CMakeFiles/server.dir/src/server/engine/networker.cpp.o
+server: CMakeFiles/server.dir/src/server/game/client.cpp.o
+server: CMakeFiles/server.dir/src/server/game/shot.cpp.o
 server: CMakeFiles/server.dir/src/server/main.cpp.o
-server: CMakeFiles/server.dir/src/server/networker.cpp.o
-server: CMakeFiles/server.dir/src/server/runtime.cpp.o
-server: CMakeFiles/server.dir/src/server/shot.cpp.o
 server: CMakeFiles/server.dir/build.make
 server: /home/irie/Desktop/bz_opengl/libs/lib/linux/libenet.a
 server: CMakeFiles/server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/irie/Desktop/bz_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

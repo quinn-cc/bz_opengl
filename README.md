@@ -57,6 +57,12 @@ Skills:
 * Input: For jumping, you'll need to add the input for jumping, but this is simple.
 * Player: Probably need to add some flags like "isGrounded", but not sure yet. You have at it. Only add what is necessary.
 
+## Coding rules
+1. There are two sections to each the client and the server, that being the `game` and the `engine`.
+2. No file in the `engine` should reference another file in the `engine`.
+3. Any file in `engine` may reference state from a file in `game`, but may not make modifications.
+4. No file in `game` should reference a file in `engine`.
+
 ## License
 MIT License
 

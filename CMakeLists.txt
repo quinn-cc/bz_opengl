@@ -7,8 +7,8 @@ set(CMAKE_BUILD_TYPE Release)
 set(BUILD_SHARED_LIBS OFF)
 
 # Gather sources
-file(GLOB CLIENT_SOURCES "${PROJECT_SOURCE_DIR}/src/client/*.cpp")
-file(GLOB SERVER_SOURCES "${PROJECT_SOURCE_DIR}/src/server/*.cpp")
+file(GLOB_RECURSE CLIENT_SOURCES "${PROJECT_SOURCE_DIR}/src/client/*.cpp")
+file(GLOB_RECURSE SERVER_SOURCES "${PROJECT_SOURCE_DIR}/src/server/*.cpp")
 
 file(GLOB IMGUI_SOURCES
     libs/include/imgui/imgui.cpp
@@ -59,6 +59,8 @@ add_executable(server ${SERVER_SOURCES})
 target_include_directories(client PRIVATE
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_SOURCE_DIR}/src/client
+    ${PROJECT_SOURCE_DIR}/src/client/game
+    ${PROJECT_SOURCE_DIR}/src/client/engine
     ${INCLUDE_DIR}
     ${CMAKE_SOURCE_DIR}/libs/include/bullet
     ${CMAKE_SOURCE_DIR}/libs/include/glm
@@ -68,6 +70,8 @@ target_include_directories(client PRIVATE
 target_include_directories(server PRIVATE
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_SOURCE_DIR}/src/server
+    ${PROJECT_SOURCE_DIR}/src/server/game
+    ${PROJECT_SOURCE_DIR}/src/server/engine
     ${INCLUDE_DIR}
     ${CMAKE_SOURCE_DIR}/libs/include/bullet
 )

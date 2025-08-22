@@ -407,7 +407,8 @@ CMakeFiles/client.dir/src/client/main.cpp.o: \
  /usr/include/c++/13/filesystem /usr/include/c++/13/bits/fs_fwd.h \
  /usr/include/c++/13/bits/fs_path.h /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
- /home/irie/Desktop/bz_opengl/include/netmsg.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/game/game.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/game/player.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/glm/glm.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/glm/detail/_fixes.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/glm/detail/setup.hpp \
@@ -591,8 +592,10 @@ CMakeFiles/client.dir/src/client/main.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/epsilon.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/../detail/setup.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/glm/gtc/epsilon.inl \
+ /home/irie/Desktop/bz_opengl/include/netmsg.hpp \
  /home/irie/Desktop/bz_opengl/include/types.hpp \
- /home/irie/Desktop/bz_opengl/src/client/client.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/game/client.hpp \
+ /home/irie/Desktop/bz_opengl/include/timeutils.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/threepp/threepp.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/threepp/constants.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/threepp/canvas/Canvas.hpp \
@@ -715,15 +718,16 @@ CMakeFiles/client.dir/src/client/main.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/threepp/loaders/STLLoader.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/threepp/loaders/TextureLoader.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/threepp/utils/TaskManager.hpp \
- /home/irie/Desktop/bz_opengl/src/client/shot.hpp \
- /home/irie/Desktop/bz_opengl/src/client/player.hpp \
- /home/irie/Desktop/bz_opengl/src/client/renderer.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/game/shot.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/engine/engine.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/engine/gui.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui.h \
+ /home/irie/Desktop/bz_opengl/libs/include/imgui/imconfig.h \
  /home/irie/Desktop/bz_opengl/libs/include/GLFW/glfw3.h \
  /usr/include/GL/gl.h /usr/include/GL/glext.h \
  /usr/include/KHR/khrplatform.h \
- /home/irie/Desktop/bz_opengl/src/client/networker.hpp \
- /home/irie/Desktop/bz_opengl/src/client/input.hpp \
- /home/irie/Desktop/bz_opengl/src/client/physics.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/engine/input.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/engine/physics.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/btBulletDynamicsCommon.h \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/btBulletCollisionCommon.h \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btCollisionWorld.h \
@@ -855,6 +859,5 @@ CMakeFiles/client.dir/src/client/main.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Vehicle/btWheelInfo.h \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btActionInterface.h \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
- /home/irie/Desktop/bz_opengl/src/client/gui.hpp \
- /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui.h \
- /home/irie/Desktop/bz_opengl/libs/include/imgui/imconfig.h
+ /home/irie/Desktop/bz_opengl/src/client/engine/renderer.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/engine/networker.hpp

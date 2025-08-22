@@ -1,5 +1,8 @@
 #pragma once
 #include <glm/glm.hpp>
+#include <type_traits>
+#include <cstddef>
+#include <string>
 #include "geometry.hpp"
 #include "types.hpp"
 
@@ -14,7 +17,10 @@ enum ServerMsg_Type {
     ServerMsg_Type_DISCONNECTION,
     ServerMsg_Type_CONNECTION,
     ServerMsg_Type_SHOT,
-    ServerMsg_Type_REMOVE_SHOT
+    ServerMsg_Type_REMOVE_SHOT,
+    ServerMsg_Type_ALLOW_SPAWN,
+    ServerMsg_Type_SPAWN,
+    ServerMsg_Type_DEATH
 };
 
 typedef struct ServerMsg {
@@ -46,12 +52,28 @@ typedef struct ServerMsg_RemoveShot : ServerMsg {
     shot_id shotId;
 } ServerMsg_RemoveShot;
 
+typedef struct ServerMsg_AllowSpawn : ServerMsg {
+    bool allow;
+    Location location;
+} ServerMsg_AllowSpawn;
+
+typedef struct ServerMsg_Spawn : ServerMsg {
+    client_id clientId;
+    Location location;
+} ServerMsg_Spawn;
+
+typedef struct ServerMsg_Death : ServerMsg {
+    client_id clientId;
+} ServerMsg_Death;
+
 /*
  * Client messages
  */
 
 enum ClientMsg_Type {
     ClientMsg_Type_INIT,
+    ClientMsg_Type_REQUEST_SPAWN,
+    ClientMsg_Type_SPAWN,
     ClientMsg_Type_LOCATION,
     ClientMsg_Type_SHOT
 };
@@ -64,6 +86,9 @@ typedef struct ClientMsg_Init : ClientMsg {
     char name[256];
 } ClientMsg_Init;
 
+typedef struct ClientMsg_RequestSpawn : ClientMsg {
+} ClientMsg_RequestSpawn;
+
 typedef struct ClientMsg_Location : ClientMsg {
     Location location;
 } ClientMsg_Location;
@@ -74,4 +99,54 @@ typedef struct ClientMsg_Shot : ClientMsg {
     glm::vec3 velocity;
 } ClientMsg_Shot;
 
+typedef struct ClientMsg_Spawn : ClientMsg {
+
+} ClientMsg_Spawn;
+
 #pragma pack(pop)
+
+template <typename T>
+concept ServerMsgSubType = std::is_base_of_v<ServerMsg, T>;
+
+template <typename V>
+concept ClientMsgSubType = std::is_base_of_v<ClientMsg, V>;
+
+inline std::string Debug_ClientMsgToString(const ClientMsg &msg) {
+    switch (msg.type) {
+    case ClientMsg_Type_INIT:
+        return "ClientMsg_Init";
+    case ClientMsg_Type_REQUEST_SPAWN:
+        return "ClientMsg_RequestSpawn";
+    case ClientMsg_Type_SPAWN:
+        return "ClientMsg_Spawn";
+    case ClientMsg_Type_LOCATION:
+        return "ClientMsg_Location";
+    case ClientMsg_Type_SHOT:
+        return "ClientMsg_Shot";
+    default:
+        return "Unknown ClientMsg";
+    }
+}
+
+inline std::string Debug_ServerMsgToString(const ServerMsg &msg) {
+    switch (msg.type) {
+    case ServerMsg_Type_CONNECTION:
+        return "ServerMsg_Connection";
+    case ServerMsg_Type_DISCONNECTION:
+        return "ServerMsg_Disconnection";
+    case ServerMsg_Type_LOCATION:
+        return "ServerMsg_Location";
+    case ServerMsg_Type_SHOT:
+        return "ServerMsg_Shot";
+    case ServerMsg_Type_REMOVE_SHOT:
+        return "ServerMsg_RemoveShot";
+    case ServerMsg_Type_ALLOW_SPAWN:
+        return "ServerMsg_AllowSpawn";
+    case ServerMsg_Type_SPAWN:
+        return "ServerMsg_Spawn";
+    case ServerMsg_Type_DEATH:
+        return "ServerMsg_Death";
+    default:
+        return "Unknown ServerMsg";
+    }
+}
