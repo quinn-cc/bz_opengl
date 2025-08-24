@@ -20,7 +20,8 @@ enum ServerMsg_Type {
     ServerMsg_Type_REMOVE_SHOT,
     ServerMsg_Type_ALLOW_SPAWN,
     ServerMsg_Type_SPAWN,
-    ServerMsg_Type_DEATH
+    ServerMsg_Type_DEATH,
+    ServerMsg_Type_PLAYER_STATE
 };
 
 typedef struct ServerMsg {
@@ -66,6 +67,13 @@ typedef struct ServerMsg_Death : ServerMsg {
     client_id clientId;
 } ServerMsg_Death;
 
+typedef struct ServerMsg_PlayerState : ServerMsg {
+    client_id clientId;
+    char name[256];
+    Location location;
+    bool alive;
+} ServerMsg_PlayerState;
+
 /*
  * Client messages
  */
@@ -73,7 +81,6 @@ typedef struct ServerMsg_Death : ServerMsg {
 enum ClientMsg_Type {
     ClientMsg_Type_INIT,
     ClientMsg_Type_REQUEST_SPAWN,
-    ClientMsg_Type_SPAWN,
     ClientMsg_Type_LOCATION,
     ClientMsg_Type_SHOT
 };
@@ -99,10 +106,6 @@ typedef struct ClientMsg_Shot : ClientMsg {
     glm::vec3 velocity;
 } ClientMsg_Shot;
 
-typedef struct ClientMsg_Spawn : ClientMsg {
-
-} ClientMsg_Spawn;
-
 #pragma pack(pop)
 
 template <typename T>
@@ -117,8 +120,6 @@ inline std::string Debug_ClientMsgToString(const ClientMsg &msg) {
         return "ClientMsg_Init";
     case ClientMsg_Type_REQUEST_SPAWN:
         return "ClientMsg_RequestSpawn";
-    case ClientMsg_Type_SPAWN:
-        return "ClientMsg_Spawn";
     case ClientMsg_Type_LOCATION:
         return "ClientMsg_Location";
     case ClientMsg_Type_SHOT:
@@ -146,6 +147,8 @@ inline std::string Debug_ServerMsgToString(const ServerMsg &msg) {
         return "ServerMsg_Spawn";
     case ServerMsg_Type_DEATH:
         return "ServerMsg_Death";
+    case ServerMsg_Type_PLAYER_STATE:
+        return "ServerMsg_PlayerState";
     default:
         return "Unknown ServerMsg";
     }

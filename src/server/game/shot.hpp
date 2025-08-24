@@ -6,12 +6,11 @@
 #include "client.hpp"
 
 #define BULLET_SIZE 1
-#define SHOT_LIFETIME 1.0f
+#define SHOT_LIFETIME 2.0f
 
 class Shot {
 private:
     TimeUtils::time startTime;
-    
 
 public:
     glm::vec3 position;
@@ -28,4 +27,5 @@ public:
     Shot(shot_id localId, Client *owner, glm::vec3 position, glm::vec3 velocity);
     void Update(TimeUtils::duration deltaTime);
     bool IsExpired() const;
+
 };

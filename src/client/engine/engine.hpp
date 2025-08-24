@@ -17,11 +17,11 @@ public:
     Renderer renderer;
     Networker networker;
 
-    void Init(Game *game) {
+    void Init(Game *game, GLFWwindow* window) {
         this->game = game;
-        renderer.Init(game);
-        gui.Init(game, renderer.window);
-        input.Init(renderer.window);
+        renderer.Init(game, window);
+        gui.Init(game, window);
+        input.Init(window);
         physics.Init(game);
         networker.Init();
     }

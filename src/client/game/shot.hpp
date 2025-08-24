@@ -5,7 +5,8 @@
 #include "types.hpp"
 #include "player.hpp"
 
-#define BULLET_SIZE 1
+#define BULLET_SIZE 0.25f
+#define AHEAD_FACTOR 0.02f
 
 class Shot {
 private:
@@ -31,6 +32,10 @@ public:
         return position;
     }
 
+    glm::vec3 GetAheadPosition() const {
+        return position + velocity * AHEAD_FACTOR;
+    }
+
     template<ClientMsgSubType T> T Get() {
         if constexpr (std::is_same_v<T, ClientMsg_Shot>) {
             ClientMsg_Shot msg;
@@ -50,5 +55,9 @@ public:
 
     client_id GetOwnerId() {
         return ownerId;
+    }
+
+    void RicochetAbout(const glm::vec3& normal) {
+        velocity = glm::reflect(velocity, normal);
     }
 };

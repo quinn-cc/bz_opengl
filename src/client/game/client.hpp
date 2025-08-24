@@ -56,9 +56,8 @@ public:
         this->location = location;
     }
 
-    void Spawn(Location location) {
-        this->location = location;
-        alive = true;
+    void SetAlive(bool alive) {
+        this->alive = alive;
     }
 
     void Die() {

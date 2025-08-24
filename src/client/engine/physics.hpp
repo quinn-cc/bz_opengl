@@ -26,8 +26,9 @@ public:
     void Player_Jump();
     void Player_SetLocation(Location location);
     Location Player_GetLocation();
+    glm::vec3 Player_GetVelocity();
 
     void Init(Game *game);
-    void Update();
+    void Update(float deltaTime);
     void Close();
 };

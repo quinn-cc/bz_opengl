@@ -9,6 +9,7 @@ class Player {
 private:
     Location location;
     Location lastLocation;
+    glm::vec3 velocity;
     std::string name;
     float moveSpeed;
     float turnSpeed;
@@ -24,11 +25,20 @@ public:
     void Update();
 
     void SetLocation(Location location) {
+        this->lastLocation = this->location;
         this->location = location;
     }
 
     Location GetLocation() const {
         return location;
+    }
+
+    glm::vec3 GetVelocity() const {
+        return velocity;
+    }
+
+    void SetVelocity(glm::vec3 velocity) {
+        this->velocity = velocity;
     }
 
     glm::vec3 GetForwardVector() {
@@ -88,10 +98,6 @@ public:
         } else if constexpr (std::is_same_v<T, ClientMsg_RequestSpawn>) {
             ClientMsg_RequestSpawn msg;
             msg.type = ClientMsg_Type_REQUEST_SPAWN;
-            return msg;
-        } else if constexpr (std::is_same_v<T, ClientMsg_Spawn>) {
-            ClientMsg_Spawn msg;
-            msg.type = ClientMsg_Type_SPAWN;
             return msg;
         } else {
             static_assert(sizeof(T) == 0, "Client: Unsupported message type");

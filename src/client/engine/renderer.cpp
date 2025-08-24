@@ -11,6 +11,8 @@
 #include "player.hpp"
 #include "client.hpp"
 #include "shot.hpp"
+#include "timeutils.hpp"
+#include "userpointer.hpp"
 
 threepp::Vector3 Renderer::toInternal(glm::vec3 &v) {
     return threepp::Vector3(v.x, v.y, v.z);
@@ -28,32 +30,20 @@ glm::quat Renderer::toGLM(threepp::Quaternion &q) {
     return glm::quat{ q.x, q.y, q.z, q.w };
 }
 
-void Renderer::Init(Game *game) {
+void Renderer::Init(Game *game, GLFWwindow* window) {
+    this->window = window;
     this->game = game;
     closed = false;
 
-    if (!glfwInit()) {
-        spdlog::error("GLFW failed to initialize");
-        exit(1);
-    }
+    
+    //glfwSwapInterval(1);
+    auto* userPointer = static_cast<GLFWUserPointer*>(glfwGetWindowUserPointer(window));
+    userPointer->renderer = this;
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    window = glfwCreateWindow(800, 600, "BZFlag v3", nullptr, nullptr);
-    if (!window) {
-        spdlog::error("GLFW window failed to create");
-        glfwTerminate();
-        exit(1);
-    }
-    glfwMakeContextCurrent(window);
-    glfwSwapInterval(1);
-    // glfwSetWindowUserPointer(window, this);
-    // glfwSetFramebufferSizeCallback(window, [](GLFWwindow* w, int width, int height) {
-    //     auto* self = static_cast<Renderer*>(glfwGetWindowUserPointer(w));
-    //     self->OnResize(width, height);
-    // });
+    glfwSetFramebufferSizeCallback(window, [](GLFWwindow* w, int width, int height) {
+        auto* userPointer = static_cast<GLFWUserPointer*>(glfwGetWindowUserPointer(w));
+        userPointer->renderer->OnResize(width, height);
+    });
 
     renderer = new threepp::GLRenderer({800.0f, 600.0f});
     renderer->setClearColor(threepp::Color(0x3399ff));
@@ -62,34 +52,22 @@ void Renderer::Init(Game *game) {
     renderer->toneMapping = threepp::ToneMapping::ACESFilmic;
 
     scene = threepp::Scene::create();
-    camera = threepp::PerspectiveCamera::create(75, 800.f/600.f, 0.1f, 1000.f);
+    camera = threepp::PerspectiveCamera::create(60, 800.f/600.f, 0.1f, 1000.f);
 
-    const auto planeGeometry = threepp::PlaneGeometry::create(100, 100);
-    const auto planeMaterial = threepp::MeshLambertMaterial::create();
-    threepp::TextureLoader loader;
-    try {
-        auto texture = loader.load("../data/textures/grass.jpg");
-        texture->repeat.set(20, 20);  // Repeat 20 times in both directions
-        texture->wrapS = threepp::TextureWrapping::Repeat;  // Enable horizontal wrapping
-        texture->wrapT = threepp::TextureWrapping::Repeat;  // Enable vertical wrapping
-        planeMaterial->map = texture;
-    } catch (...) {
-        spdlog::error("Failed to load grass texture");
-    }
-    planeMaterial->color = threepp::Color::lightgray;
-    planeMaterial->side = threepp::Side::Double;
-    auto plane = threepp::Mesh::create(planeGeometry, planeMaterial);
-    plane->rotateX(threepp::math::degToRad(90));
-    plane->receiveShadow = true;
-    scene->add(plane);
 
-    auto geometry = threepp::BoxGeometry::create(5, 5, 5);
-    geometry->translate(10, 0, 10); // Move the box up so it sits on the ground
-    const auto cubeMaterial = threepp::MeshStandardMaterial::create();
-    auto cubeMesh = threepp::Mesh::create(geometry, cubeMaterial);
-    cubeMesh->castShadow = true;
-    cubeMesh->receiveShadow = true;
-    scene->add(cubeMesh);
+    /*
+     * Scene
+     */
+    threepp::AssimpLoader assimpLoader;
+    auto world = assimpLoader.load("../data/world2.glb");
+    world->traverseType<threepp::Mesh>([&](threepp::Mesh& child) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+    });
+    scene->add(world);
+
+    // auto tmp = assimpLoader.load("../data/world.glb");
+    // scene->add(tmp);
 
     auto light = threepp::AmbientLight::create(0xffffff, 0.5f);
     scene->add(light);
@@ -106,6 +84,9 @@ void Renderer::Init(Game *game) {
         shadowCam->bottom = -50;
     }
     scene->add(dir);
+
+    lastFrameTime = TimeUtils::GetCurrentTime();
+    deltaTime = 0.0001f;
 }
 
 bool Renderer::ShouldClose() {
@@ -132,7 +113,9 @@ void Renderer::Close() {
     closed = true;
 }
 
-float Renderer::GetDeltaTime() {
+TimeUtils::duration Renderer::GetDeltaTime() {
+    TimeUtils::duration ret = deltaTime;
+    ret = std::max(ret, 0.001f);
     return deltaTime;
 }
 
@@ -161,7 +144,7 @@ void Renderer::RemoveClient(Client *client) {
 }
 
 void Renderer::AddShot(Shot *shot) {
-    auto geometry = threepp::SphereGeometry::create(0.5);
+    auto geometry = threepp::SphereGeometry::create(BULLET_SIZE);
     auto material = threepp::MeshStandardMaterial::create();
     material->color = threepp::Color(0x00ffff); // green
     material->metalness = 0.5f;   // optional: 0 = non-metal, 1 = metal
@@ -181,7 +164,8 @@ void Renderer::RemoveShot(Shot *shot) {
 
 void Renderer::Update() {
     std::chrono::time_point<std::chrono::system_clock> currTime = std::chrono::system_clock::now();  
-    deltaTime = std::chrono::duration<double>(currTime - lastFrameTime).count();
+    deltaTime = TimeUtils::GetElapsedTime(lastFrameTime, TimeUtils::GetCurrentTime());
+    deltaTime = std::max(deltaTime, 0.0001f);
     lastFrameTime = currTime;
 
     glm::vec3 lookDir = game->player.GetForwardVector();

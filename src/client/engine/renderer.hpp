@@ -20,7 +20,7 @@ private:
     std::map<Shot *, std::shared_ptr<threepp::Mesh>> shotMeshes;
 
     std::chrono::time_point<std::chrono::system_clock> lastFrameTime;
-    double deltaTime;
+    TimeUtils::duration deltaTime;
     
     threepp::Vector3 toInternal(glm::vec3 &v);
     threepp::Quaternion toInternal(glm::quat &q);
@@ -34,10 +34,10 @@ private:
 public:
     GLFWwindow* window;
 
-    void Init(Game *game);
+    void Init(Game *game, GLFWwindow* window);
     bool ShouldClose();
     void Close();
-    float GetDeltaTime();
+    TimeUtils::duration GetDeltaTime();
     void Update();
     void EndFrame();
 

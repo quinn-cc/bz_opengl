@@ -3,6 +3,7 @@
 #include <iostream>
 #include <arpa/inet.h>
 #include <vector>
+#include <random>
 #include "netmsg.hpp"
 #include <spdlog/spdlog.h>
 #include <chrono>
@@ -28,9 +29,11 @@ void Event_Init(Client *client, ClientMsg_Init *msg) {
 
     for (Client *otherClient : game.clients) {
         if (otherClient == client) continue;
-        ServerMsg_Connection conn;
-        conn.type = ServerMsg_Type_CONNECTION;
+        ServerMsg_PlayerState conn;
+        conn.type = ServerMsg_Type_PLAYER_STATE;
         conn.clientId = otherClient->id;
+        conn.location = otherClient->location;
+        conn.alive = otherClient->alive;
         strncpy(conn.name, otherClient->name.c_str(), otherClient->name.size());
         conn.name[otherClient->name.size()] = '\0';
         engine.networker.Send(client, conn);
@@ -38,26 +41,32 @@ void Event_Init(Client *client, ClientMsg_Init *msg) {
 }
 
 void Event_RequestSpawn(Client *client, ClientMsg_RequestSpawn *msg) {
+    Location spawnLocation;
+    spawnLocation.position = glm::vec3(rand() % 50 - 25, 10.0f, rand() % 50 - 25);
+    static std::uniform_real_distribution<float> dist(0.0f, glm::two_pi<float>());
+    static std::mt19937 rng{std::random_device{}()};
+    float angle = dist(rng); 
+    spawnLocation.rotation = glm::angleAxis(angle, glm::vec3(0, 1, 0));
+
+    client->alive = true;
+    client->location = spawnLocation;
+
     ServerMsg_AllowSpawn sendMsg;
     sendMsg.type = ServerMsg_Type_ALLOW_SPAWN;
-    sendMsg.location.position = glm::vec3(0.0f, 10.0f, 0.0f);
-    sendMsg.location.rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+    sendMsg.location = spawnLocation;
     sendMsg.allow = true;
     engine.networker.Send<ServerMsg_AllowSpawn>(
         client,
         sendMsg
     );
-}
 
-void Event_Spawn(Client *client, ClientMsg_Spawn *msg) {
-    ServerMsg_Spawn sendMsg;
-    sendMsg.type = ServerMsg_Type_SPAWN;
-    sendMsg.clientId = client->id;
-    sendMsg.location.position = glm::vec3(0.0f, 10.0f, 0.0f);
-    sendMsg.location.rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+    ServerMsg_Spawn spawnMsg;
+    spawnMsg.type = ServerMsg_Type_SPAWN;
+    spawnMsg.clientId = client->id;
+    spawnMsg.location = spawnLocation;
     engine.networker.SendExcept<ServerMsg_Spawn>(
         client,
-        sendMsg
+        spawnMsg
     );
 }
 
@@ -107,6 +116,15 @@ void Send_Death(Client *client) {
 
 void Event_Disconnection(Client *client) {
     game.RemoveClient(client);
+    
+    ServerMsg_Disconnection sendMsg;
+    sendMsg.type = ServerMsg_Type_DISCONNECTION;
+    sendMsg.clientId = client->id;
+    engine.networker.SendExcept<ServerMsg_Disconnection>(
+        client,
+        sendMsg
+    );
+
     delete client;
 }
 
@@ -127,9 +145,6 @@ void Update() {
                 break;
             case ClientMsg_Type_REQUEST_SPAWN:
                 Event_RequestSpawn(client, reinterpret_cast<ClientMsg_RequestSpawn *>(msg));
-                break;
-            case ClientMsg_Type_SPAWN:
-                Event_Spawn(client, reinterpret_cast<ClientMsg_Spawn *>(msg));
                 break;
             case ClientMsg_Type_LOCATION:
                 Event_Location(client, reinterpret_cast<ClientMsg_Location *>(msg));
@@ -153,6 +168,30 @@ void Update() {
     );
 
     for (Shot *shot : game.shots) {
+        if (shot->IsExpired()) {
+            game.RemoveShot(shot);
+
+            ServerMsg_RemoveShot ownerMsg;
+            ownerMsg.type = ServerMsg_Type_REMOVE_SHOT;
+            ownerMsg.shotId = shot->localId;
+            ownerMsg.clientId = 0;
+            engine.networker.Send<ServerMsg_RemoveShot>(
+                shot->owner,
+                ownerMsg
+            );
+
+            ServerMsg_RemoveShot restMsg;
+            restMsg.type = ServerMsg_Type_REMOVE_SHOT;
+            restMsg.shotId = shot->globalId;
+            restMsg.clientId = shot->owner->id;
+            engine.networker.SendExcept<ServerMsg_RemoveShot>(
+                shot->owner,
+                restMsg
+            );
+
+            continue;
+        }
+
         shot->Update(dt);
 
         for (Client *client : game.clients) {

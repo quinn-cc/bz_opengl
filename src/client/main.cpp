@@ -8,11 +8,14 @@
 #include "cxxopts.hpp"
 #include "game.hpp"
 #include "engine.hpp"
+#include "userpointer.hpp"
 
 bool exitSignalRecieved = false;
 
 Engine engine;
 Game game;
+GLFWwindow *window;
+GLFWUserPointer *userPointer;
 std::string playerName = "default";
 std::string address = "localhost";
 
@@ -29,14 +32,43 @@ void ParseArgs(int argc, char *argv[]) {
 }
 
 void Start() {
-    engine.Init(&game);
+    userPointer = new GLFWUserPointer();
+
+    if (!glfwInit()) {
+        spdlog::error("GLFW failed to initialize");
+        exit(1);
+    }
+
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_SAMPLES, 4);
+
+    window = glfwCreateWindow(800, 600, "BZFlag v3", nullptr, nullptr);
+    glfwSetWindowUserPointer(window, userPointer);
+    if (!window) {
+        spdlog::error("GLFW window failed to create");
+        glfwTerminate();
+        exit(1);
+    }
+    glfwMakeContextCurrent(window);
+
+    engine.Init(&game, window);
     game.player.Init(playerName);
     engine.networker.Connect(address);
     engine.networker.Send<ClientMsg_Init>(game.player.Get<ClientMsg_Init>(), true);
 }
 
 void Event_Connection(ServerMsg_Connection *msg) {
-    Client *client = new Client(msg->clientId, msg->name);
+    Client *client = new Client(msg->clientId, std::string(msg->name));
+    game.AddClient(client);
+    engine.renderer.AddClient(client);
+}
+
+void Event_PlayerState(ServerMsg_PlayerState *msg) {
+    Client *client = new Client(msg->clientId, std::string(msg->name));
+    client->SetAlive(msg->alive);
+    client->SetLocation(msg->location);
     game.AddClient(client);
     engine.renderer.AddClient(client);
 }
@@ -77,16 +109,18 @@ void Event_AllowSpawn(ServerMsg_AllowSpawn *msg) {
     if (game.player.IsAlive()) {
         spdlog::debug("Player is already alive, ignoring spawn approval");
     } else {
-        game.player.Spawn(msg->location);
-        engine.networker.Send<ClientMsg_Spawn>(game.player.Get<ClientMsg_Spawn>(), true);
-        engine.physics.Player_SetLocation(msg->location);
+        if (msg->allow) {
+            game.player.Spawn(msg->location);
+            engine.physics.Player_SetLocation(msg->location);
+        }
     }
 }
 
 void Event_Spawn(ServerMsg_Spawn *msg) {
     spdlog::debug("Got spawn message for client {}", msg->clientId);
     Client *client = game.GetClient(msg->clientId);
-    client->Spawn(msg->location);
+    client->SetAlive(true);
+    client->SetLocation(msg->location);
 }
 
 void Event_Death(ServerMsg_Death *msg) {
@@ -96,18 +130,16 @@ void Event_Death(ServerMsg_Death *msg) {
         game.player.Die();
     } else {
         Client *client = game.GetClient(msg->clientId);
-        client->Die();
+        client->SetAlive(false);
     }
 }
 
 void Update() {
     engine.input.Update();
 
-    spdlog::debug("Input movement: x={}, y={}", engine.input.GetInputMap().movement.x, engine.input.GetInputMap().movement.y);
-
     if (game.player.IsAlive()) {
         if (engine.input.GetInputMap().fire) {
-            Shot *shot = new Shot(game.player.GetLocation().position, game.player.GetForwardVector() * 40.0f);
+            Shot *shot = new Shot(game.player.GetLocation().position, game.player.GetForwardVector() * 20.0f + game.player.GetVelocity());
             game.AddShot(shot);
             engine.renderer.AddShot(shot);
             engine.networker.Send<ClientMsg_Shot>(shot->Get<ClientMsg_Shot>());
@@ -122,14 +154,7 @@ void Update() {
         }
     } else {
         if (engine.input.GetInputMap().spawn) {
-            spdlog::debug("Pushing spawn key");
-            if (game.player.CanSpawn()) {
-                spdlog::debug("Can spawn, spawning player");
-                engine.networker.Send<ClientMsg_Spawn>(game.player.Get<ClientMsg_Spawn>());
-            } else {
-                spdlog::debug("Cannot spawn, requesting spawn");
-                engine.networker.Send<ClientMsg_RequestSpawn>(game.player.Get<ClientMsg_RequestSpawn>());
-            }
+            engine.networker.Send<ClientMsg_RequestSpawn>(game.player.Get<ClientMsg_RequestSpawn>());
         }
     }
 
@@ -163,18 +188,24 @@ void Update() {
         case ServerMsg_Type_DEATH:
             Event_Death(reinterpret_cast<ServerMsg_Death *>(msg));
             break;
+        case ServerMsg_Type_PLAYER_STATE:
+            Event_PlayerState(reinterpret_cast<ServerMsg_PlayerState *>(msg));
+            break;
         default:
             spdlog::warn("Unknown message type: {}", (int)msg->type);
             break;
         }
     });
 
-    engine.physics.Update();
+    engine.physics.Update(engine.renderer.GetDeltaTime());
 
     game.player.SetLocation(engine.physics.Player_GetLocation());
+    game.player.SetVelocity(engine.physics.Player_GetVelocity());
 
-    if (game.player.LocationChanged()) {
-        engine.networker.Send<ClientMsg_Location>(game.player.Get<ClientMsg_Location>());
+    if (game.player.IsAlive()) {
+        if (game.player.LocationChanged()) {
+            engine.networker.Send<ClientMsg_Location>(game.player.Get<ClientMsg_Location>());
+        }
     }
 
     game.player.Update();
@@ -218,7 +249,7 @@ int main(int argc, char *argv[]) {
     ParseArgs(argc, argv);
     Start();
 
-    while (!exitSignalRecieved && !engine.renderer.ShouldClose()) {
+    while (!engine.input.GetInputMap().quickQuit && !exitSignalRecieved && !engine.renderer.ShouldClose()) {
         Update();
     }
 

@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/irie/Desktop/bz_opengl
+CMAKE_SOURCE_DIR = /home/quinn/Documents/bztest/bz_opengl
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/irie/Desktop/bz_opengl/build
+CMAKE_BINARY_DIR = /home/quinn/Documents/bztest/bz_opengl/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/irie/Desktop/bz_opengl/build/CMakeFiles /home/irie/Desktop/bz_opengl/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Documents/bztest/bz_opengl/build/CMakeFiles /home/quinn/Documents/bztest/bz_opengl/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/irie/Desktop/bz_opengl/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Documents/bztest/bz_opengl/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -406,6 +406,30 @@ src/client/engine/renderer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/renderer.cpp.s
 .PHONY : src/client/engine/renderer.cpp.s
 
+src/client/engine/world.o: src/client/engine/world.cpp.o
+.PHONY : src/client/engine/world.o
+
+# target to build an object file
+src/client/engine/world.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/world.cpp.o
+.PHONY : src/client/engine/world.cpp.o
+
+src/client/engine/world.i: src/client/engine/world.cpp.i
+.PHONY : src/client/engine/world.i
+
+# target to preprocess a source file
+src/client/engine/world.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/world.cpp.i
+.PHONY : src/client/engine/world.cpp.i
+
+src/client/engine/world.s: src/client/engine/world.cpp.s
+.PHONY : src/client/engine/world.s
+
+# target to generate assembly for a file
+src/client/engine/world.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/engine/world.cpp.s
+.PHONY : src/client/engine/world.cpp.s
+
 src/client/game/client.o: src/client/game/client.cpp.o
 .PHONY : src/client/game/client.o
 
@@ -641,6 +665,9 @@ help:
 	@echo "... src/client/engine/renderer.o"
 	@echo "... src/client/engine/renderer.i"
 	@echo "... src/client/engine/renderer.s"
+	@echo "... src/client/engine/world.o"
+	@echo "... src/client/engine/world.i"
+	@echo "... src/client/engine/world.s"
 	@echo "... src/client/game/client.o"
 	@echo "... src/client/game/client.i"
 	@echo "... src/client/game/client.s"

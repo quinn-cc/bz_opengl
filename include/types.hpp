@@ -8,5 +8,6 @@ typedef struct InputMap {
     bool fire;
     bool spawn;
     bool jump;
+    bool quickQuit;
     glm::vec2 movement;
 } InputMap;

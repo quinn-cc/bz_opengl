@@ -1,0 +1,910 @@
+[2025-08-23 15:47:48.555] [debug] Connected to server.
+[2025-08-23 15:47:48.556] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.556] [debug] updating physics
+[2025-08-23 15:47:48.590] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.590] [debug] updating physics
+[2025-08-23 15:47:48.592] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.592] [debug] updating physics
+[2025-08-23 15:47:48.594] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.594] [debug] updating physics
+[2025-08-23 15:47:48.599] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.599] [debug] updating physics
+[2025-08-23 15:47:48.615] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.615] [debug] updating physics
+[2025-08-23 15:47:48.632] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.632] [debug] updating physics
+[2025-08-23 15:47:48.648] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.648] [debug] updating physics
+[2025-08-23 15:47:48.665] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.665] [debug] updating physics
+[2025-08-23 15:47:48.681] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.681] [debug] updating physics
+[2025-08-23 15:47:48.698] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.698] [debug] updating physics
+[2025-08-23 15:47:48.714] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.714] [debug] updating physics
+[2025-08-23 15:47:48.730] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.731] [debug] updating physics
+[2025-08-23 15:47:48.746] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.746] [debug] updating physics
+[2025-08-23 15:47:48.763] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.763] [debug] updating physics
+[2025-08-23 15:47:48.779] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.779] [debug] updating physics
+[2025-08-23 15:47:48.796] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.796] [debug] updating physics
+[2025-08-23 15:47:48.813] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.813] [debug] updating physics
+[2025-08-23 15:47:48.829] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.829] [debug] updating physics
+[2025-08-23 15:47:48.846] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.846] [debug] updating physics
+[2025-08-23 15:47:48.863] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.863] [debug] updating physics
+[2025-08-23 15:47:48.879] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.879] [debug] updating physics
+[2025-08-23 15:47:48.896] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.896] [debug] updating physics
+[2025-08-23 15:47:48.913] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.913] [debug] updating physics
+[2025-08-23 15:47:48.929] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.930] [debug] updating physics
+[2025-08-23 15:47:48.946] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.946] [debug] updating physics
+[2025-08-23 15:47:48.962] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.963] [debug] updating physics
+[2025-08-23 15:47:48.979] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.979] [debug] updating physics
+[2025-08-23 15:47:48.996] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:48.996] [debug] updating physics
+[2025-08-23 15:47:49.013] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:49.014] [debug] updating physics
+[2025-08-23 15:47:49.029] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:49.029] [debug] updating physics
+[2025-08-23 15:47:49.046] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:49.046] [debug] updating physics
+[2025-08-23 15:47:49.063] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.063] [debug] updating physics
+[2025-08-23 15:47:49.079] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.080] [debug] updating physics
+[2025-08-23 15:47:49.096] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.096] [debug] updating physics
+[2025-08-23 15:47:49.112] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.113] [debug] updating physics
+[2025-08-23 15:47:49.129] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.129] [debug] updating physics
+[2025-08-23 15:47:49.146] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.146] [debug] updating physics
+[2025-08-23 15:47:49.163] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.163] [debug] updating physics
+[2025-08-23 15:47:49.179] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.179] [debug] updating physics
+[2025-08-23 15:47:49.196] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.196] [debug] updating physics
+[2025-08-23 15:47:49.213] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.213] [debug] updating physics
+[2025-08-23 15:47:49.229] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.229] [debug] updating physics
+[2025-08-23 15:47:49.246] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.246] [debug] updating physics
+[2025-08-23 15:47:49.263] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.263] [debug] updating physics
+[2025-08-23 15:47:49.280] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.280] [debug] updating physics
+[2025-08-23 15:47:49.296] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.296] [debug] updating physics
+[2025-08-23 15:47:49.313] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.313] [debug] updating physics
+[2025-08-23 15:47:49.329] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.329] [debug] updating physics
+[2025-08-23 15:47:49.346] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.346] [debug] updating physics
+[2025-08-23 15:47:49.363] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.363] [debug] updating physics
+[2025-08-23 15:47:49.379] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.379] [debug] updating physics
+[2025-08-23 15:47:49.396] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.396] [debug] updating physics
+[2025-08-23 15:47:49.413] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.413] [debug] updating physics
+[2025-08-23 15:47:49.429] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.429] [debug] updating physics
+[2025-08-23 15:47:49.445] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.445] [debug] Pushing spawn key
+[2025-08-23 15:47:49.445] [debug] Cannot spawn, requesting spawn
+[2025-08-23 15:47:49.445] [debug] updating physics
+[2025-08-23 15:47:49.463] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.463] [debug] Received message of type: ServerMsg_AllowSpawn
+[2025-08-23 15:47:49.463] [debug] setting location
+[2025-08-23 15:47:49.463] [debug] updating physics
+[2025-08-23 15:47:49.479] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.479] [debug] isalive
+[2025-08-23 15:47:49.480] [debug] updating physics
+[2025-08-23 15:47:49.496] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.496] [debug] isalive
+[2025-08-23 15:47:49.496] [debug] updating physics
+[2025-08-23 15:47:49.512] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.513] [debug] isalive
+[2025-08-23 15:47:49.513] [debug] updating physics
+[2025-08-23 15:47:49.529] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.529] [debug] isalive
+[2025-08-23 15:47:49.529] [debug] updating physics
+[2025-08-23 15:47:49.546] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.546] [debug] isalive
+[2025-08-23 15:47:49.546] [debug] updating physics
+[2025-08-23 15:47:49.562] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.562] [debug] isalive
+[2025-08-23 15:47:49.562] [debug] updating physics
+[2025-08-23 15:47:49.579] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.579] [debug] isalive
+[2025-08-23 15:47:49.579] [debug] updating physics
+[2025-08-23 15:47:49.596] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.596] [debug] isalive
+[2025-08-23 15:47:49.596] [debug] updating physics
+[2025-08-23 15:47:49.612] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.612] [debug] isalive
+[2025-08-23 15:47:49.612] [debug] updating physics
+[2025-08-23 15:47:49.629] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.629] [debug] isalive
+[2025-08-23 15:47:49.629] [debug] updating physics
+[2025-08-23 15:47:49.645] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.645] [debug] isalive
+[2025-08-23 15:47:49.645] [debug] updating physics
+[2025-08-23 15:47:49.662] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.662] [debug] isalive
+[2025-08-23 15:47:49.662] [debug] updating physics
+[2025-08-23 15:47:49.678] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.678] [debug] isalive
+[2025-08-23 15:47:49.679] [debug] updating physics
+[2025-08-23 15:47:49.695] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.695] [debug] isalive
+[2025-08-23 15:47:49.695] [debug] updating physics
+[2025-08-23 15:47:49.712] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.712] [debug] isalive
+[2025-08-23 15:47:49.712] [debug] updating physics
+[2025-08-23 15:47:49.728] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.729] [debug] isalive
+[2025-08-23 15:47:49.729] [debug] updating physics
+[2025-08-23 15:47:49.745] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.745] [debug] isalive
+[2025-08-23 15:47:49.745] [debug] updating physics
+[2025-08-23 15:47:49.762] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.762] [debug] isalive
+[2025-08-23 15:47:49.762] [debug] updating physics
+[2025-08-23 15:47:49.779] [debug] Input movement: x=1, y=1
+[2025-08-23 15:47:49.779] [debug] isalive
+[2025-08-23 15:47:49.779] [debug] updating physics
+[2025-08-23 15:47:49.795] [debug] Input movement: x=1, y=1
+[2025-08-23 15:47:49.795] [debug] isalive
+[2025-08-23 15:47:49.795] [debug] updating physics
+[2025-08-23 15:47:49.812] [debug] Input movement: x=0, y=1
+[2025-08-23 15:47:49.812] [debug] isalive
+[2025-08-23 15:47:49.812] [debug] updating physics
+[2025-08-23 15:47:49.828] [debug] Input movement: x=0, y=1
+[2025-08-23 15:47:49.828] [debug] isalive
+[2025-08-23 15:47:49.828] [debug] updating physics
+[2025-08-23 15:47:49.845] [debug] Input movement: x=0, y=1
+[2025-08-23 15:47:49.845] [debug] isalive
+[2025-08-23 15:47:49.845] [debug] updating physics
+[2025-08-23 15:47:49.862] [debug] Input movement: x=0, y=1
+[2025-08-23 15:47:49.862] [debug] isalive
+[2025-08-23 15:47:49.862] [debug] updating physics
+[2025-08-23 15:47:49.879] [debug] Input movement: x=0, y=1
+[2025-08-23 15:47:49.879] [debug] isalive
+[2025-08-23 15:47:49.879] [debug] updating physics
+[2025-08-23 15:47:49.895] [debug] Input movement: x=0, y=1
+[2025-08-23 15:47:49.895] [debug] isalive
+[2025-08-23 15:47:49.895] [debug] updating physics
+[2025-08-23 15:47:49.912] [debug] Input movement: x=0, y=1
+[2025-08-23 15:47:49.912] [debug] isalive
+[2025-08-23 15:47:49.912] [debug] updating physics
+[2025-08-23 15:47:49.928] [debug] Input movement: x=0, y=1
+[2025-08-23 15:47:49.928] [debug] isalive
+[2025-08-23 15:47:49.928] [debug] updating physics
+[2025-08-23 15:47:49.945] [debug] Input movement: x=1, y=1
+[2025-08-23 15:47:49.945] [debug] isalive
+[2025-08-23 15:47:49.945] [debug] updating physics
+[2025-08-23 15:47:49.962] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.962] [debug] isalive
+[2025-08-23 15:47:49.962] [debug] updating physics
+[2025-08-23 15:47:49.979] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.979] [debug] isalive
+[2025-08-23 15:47:49.979] [debug] updating physics
+[2025-08-23 15:47:49.995] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:49.995] [debug] isalive
+[2025-08-23 15:47:49.995] [debug] updating physics
+[2025-08-23 15:47:50.012] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:50.012] [debug] isalive
+[2025-08-23 15:47:50.012] [debug] updating physics
+[2025-08-23 15:47:50.029] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:50.029] [debug] isalive
+[2025-08-23 15:47:50.029] [debug] updating physics
+[2025-08-23 15:47:50.045] [debug] Input movement: x=1, y=0
+[2025-08-23 15:47:50.045] [debug] isalive
+[2025-08-23 15:47:50.045] [debug] updating physics
+[2025-08-23 15:47:50.062] [debug] Input movement: x=1, y=-1
+[2025-08-23 15:47:50.062] [debug] isalive
+[2025-08-23 15:47:50.062] [debug] updating physics
+[2025-08-23 15:47:50.079] [debug] Input movement: x=1, y=-1
+[2025-08-23 15:47:50.079] [debug] isalive
+[2025-08-23 15:47:50.079] [debug] updating physics
+[2025-08-23 15:47:50.095] [debug] Input movement: x=1, y=-1
+[2025-08-23 15:47:50.095] [debug] isalive
+[2025-08-23 15:47:50.095] [debug] updating physics
+[2025-08-23 15:47:50.112] [debug] Input movement: x=1, y=-1
+[2025-08-23 15:47:50.112] [debug] isalive
+[2025-08-23 15:47:50.112] [debug] updating physics
+[2025-08-23 15:47:50.129] [debug] Input movement: x=1, y=-1
+[2025-08-23 15:47:50.129] [debug] isalive
+[2025-08-23 15:47:50.129] [debug] updating physics
+[2025-08-23 15:47:50.145] [debug] Input movement: x=0, y=-1
+[2025-08-23 15:47:50.145] [debug] isalive
+[2025-08-23 15:47:50.145] [debug] updating physics
+[2025-08-23 15:47:50.162] [debug] Input movement: x=-1, y=0
+[2025-08-23 15:47:50.162] [debug] isalive
+[2025-08-23 15:47:50.162] [debug] updating physics
+[2025-08-23 15:47:50.179] [debug] Input movement: x=-1, y=0
+[2025-08-23 15:47:50.179] [debug] isalive
+[2025-08-23 15:47:50.179] [debug] updating physics
+[2025-08-23 15:47:50.195] [debug] Input movement: x=-1, y=0
+[2025-08-23 15:47:50.195] [debug] isalive
+[2025-08-23 15:47:50.195] [debug] updating physics
+[2025-08-23 15:47:50.212] [debug] Input movement: x=-1, y=0
+[2025-08-23 15:47:50.212] [debug] isalive
+[2025-08-23 15:47:50.212] [debug] updating physics
+[2025-08-23 15:47:50.228] [debug] Input movement: x=-1, y=0
+[2025-08-23 15:47:50.228] [debug] isalive
+[2025-08-23 15:47:50.228] [debug] updating physics
+[2025-08-23 15:47:50.245] [debug] Input movement: x=-1, y=0
+[2025-08-23 15:47:50.245] [debug] isalive
+[2025-08-23 15:47:50.245] [debug] updating physics
+[2025-08-23 15:47:50.262] [debug] Input movement: x=-1, y=0
+[2025-08-23 15:47:50.262] [debug] isalive
+[2025-08-23 15:47:50.262] [debug] updating physics
+[2025-08-23 15:47:50.279] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.279] [debug] isalive
+[2025-08-23 15:47:50.279] [debug] updating physics
+[2025-08-23 15:47:50.295] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.295] [debug] isalive
+[2025-08-23 15:47:50.295] [debug] updating physics
+[2025-08-23 15:47:50.312] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.312] [debug] isalive
+[2025-08-23 15:47:50.312] [debug] updating physics
+[2025-08-23 15:47:50.329] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.329] [debug] isalive
+[2025-08-23 15:47:50.329] [debug] updating physics
+[2025-08-23 15:47:50.345] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.345] [debug] isalive
+[2025-08-23 15:47:50.345] [debug] updating physics
+[2025-08-23 15:47:50.362] [debug] Input movement: x=0, y=1
+[2025-08-23 15:47:50.362] [debug] isalive
+[2025-08-23 15:47:50.362] [debug] updating physics
+[2025-08-23 15:47:50.379] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.379] [debug] isalive
+[2025-08-23 15:47:50.379] [debug] updating physics
+[2025-08-23 15:47:50.395] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.395] [debug] isalive
+[2025-08-23 15:47:50.395] [debug] updating physics
+[2025-08-23 15:47:50.418] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.418] [debug] isalive
+[2025-08-23 15:47:50.418] [debug] updating physics
+[2025-08-23 15:47:50.453] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.453] [debug] isalive
+[2025-08-23 15:47:50.453] [debug] updating physics
+[2025-08-23 15:47:50.466] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.466] [debug] isalive
+[2025-08-23 15:47:50.466] [debug] updating physics
+[2025-08-23 15:47:50.479] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.479] [debug] isalive
+[2025-08-23 15:47:50.479] [debug] updating physics
+[2025-08-23 15:47:50.495] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.496] [debug] isalive
+[2025-08-23 15:47:50.496] [debug] updating physics
+[2025-08-23 15:47:50.512] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.512] [debug] isalive
+[2025-08-23 15:47:50.512] [debug] updating physics
+[2025-08-23 15:47:50.534] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.534] [debug] isalive
+[2025-08-23 15:47:50.534] [debug] updating physics
+[2025-08-23 15:47:50.550] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.550] [debug] isalive
+[2025-08-23 15:47:50.550] [debug] updating physics
+[2025-08-23 15:47:50.566] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.567] [debug] isalive
+[2025-08-23 15:47:50.567] [debug] updating physics
+[2025-08-23 15:47:50.583] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.583] [debug] isalive
+[2025-08-23 15:47:50.583] [debug] updating physics
+[2025-08-23 15:47:50.600] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.600] [debug] isalive
+[2025-08-23 15:47:50.600] [debug] updating physics
+[2025-08-23 15:47:50.617] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.617] [debug] isalive
+[2025-08-23 15:47:50.617] [debug] updating physics
+[2025-08-23 15:47:50.633] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.633] [debug] isalive
+[2025-08-23 15:47:50.633] [debug] updating physics
+[2025-08-23 15:47:50.650] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.650] [debug] isalive
+[2025-08-23 15:47:50.650] [debug] updating physics
+[2025-08-23 15:47:50.666] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.666] [debug] isalive
+[2025-08-23 15:47:50.666] [debug] updating physics
+[2025-08-23 15:47:50.683] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.683] [debug] isalive
+[2025-08-23 15:47:50.683] [debug] updating physics
+[2025-08-23 15:47:50.700] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.700] [debug] isalive
+[2025-08-23 15:47:50.700] [debug] updating physics
+[2025-08-23 15:47:50.716] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.716] [debug] isalive
+[2025-08-23 15:47:50.716] [debug] updating physics
+[2025-08-23 15:47:50.733] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.733] [debug] isalive
+[2025-08-23 15:47:50.733] [debug] updating physics
+[2025-08-23 15:47:50.750] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.750] [debug] isalive
+[2025-08-23 15:47:50.750] [debug] updating physics
+[2025-08-23 15:47:50.766] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.766] [debug] isalive
+[2025-08-23 15:47:50.766] [debug] updating physics
+[2025-08-23 15:47:50.783] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.783] [debug] isalive
+[2025-08-23 15:47:50.783] [debug] updating physics
+[2025-08-23 15:47:50.800] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.800] [debug] isalive
+[2025-08-23 15:47:50.800] [debug] updating physics
+[2025-08-23 15:47:50.816] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.816] [debug] isalive
+[2025-08-23 15:47:50.816] [debug] updating physics
+[2025-08-23 15:47:50.833] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.833] [debug] isalive
+[2025-08-23 15:47:50.833] [debug] updating physics
+[2025-08-23 15:47:50.850] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.850] [debug] isalive
+[2025-08-23 15:47:50.850] [debug] updating physics
+[2025-08-23 15:47:50.866] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.867] [debug] isalive
+[2025-08-23 15:47:50.867] [debug] updating physics
+[2025-08-23 15:47:50.883] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.883] [debug] isalive
+[2025-08-23 15:47:50.883] [debug] updating physics
+[2025-08-23 15:47:50.900] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.900] [debug] isalive
+[2025-08-23 15:47:50.900] [debug] updating physics
+[2025-08-23 15:47:50.917] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.917] [debug] isalive
+[2025-08-23 15:47:50.917] [debug] updating physics
+[2025-08-23 15:47:50.933] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.933] [debug] isalive
+[2025-08-23 15:47:50.933] [debug] updating physics
+[2025-08-23 15:47:50.950] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.950] [debug] isalive
+[2025-08-23 15:47:50.950] [debug] updating physics
+[2025-08-23 15:47:50.966] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.966] [debug] isalive
+[2025-08-23 15:47:50.966] [debug] updating physics
+[2025-08-23 15:47:50.983] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:50.983] [debug] isalive
+[2025-08-23 15:47:50.983] [debug] updating physics
+[2025-08-23 15:47:51.000] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.000] [debug] isalive
+[2025-08-23 15:47:51.000] [debug] updating physics
+[2025-08-23 15:47:51.017] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.017] [debug] isalive
+[2025-08-23 15:47:51.017] [debug] updating physics
+[2025-08-23 15:47:51.033] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.033] [debug] isalive
+[2025-08-23 15:47:51.033] [debug] updating physics
+[2025-08-23 15:47:51.050] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.050] [debug] isalive
+[2025-08-23 15:47:51.050] [debug] updating physics
+[2025-08-23 15:47:51.067] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.067] [debug] isalive
+[2025-08-23 15:47:51.067] [debug] updating physics
+[2025-08-23 15:47:51.083] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.083] [debug] isalive
+[2025-08-23 15:47:51.083] [debug] updating physics
+[2025-08-23 15:47:51.100] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.100] [debug] isalive
+[2025-08-23 15:47:51.100] [debug] updating physics
+[2025-08-23 15:47:51.117] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.117] [debug] isalive
+[2025-08-23 15:47:51.117] [debug] updating physics
+[2025-08-23 15:47:51.133] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.133] [debug] isalive
+[2025-08-23 15:47:51.133] [debug] updating physics
+[2025-08-23 15:47:51.150] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.150] [debug] isalive
+[2025-08-23 15:47:51.150] [debug] updating physics
+[2025-08-23 15:47:51.167] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.167] [debug] isalive
+[2025-08-23 15:47:51.167] [debug] updating physics
+[2025-08-23 15:47:51.183] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.183] [debug] isalive
+[2025-08-23 15:47:51.183] [debug] updating physics
+[2025-08-23 15:47:51.200] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.200] [debug] isalive
+[2025-08-23 15:47:51.200] [debug] updating physics
+[2025-08-23 15:47:51.216] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.216] [debug] isalive
+[2025-08-23 15:47:51.217] [debug] updating physics
+[2025-08-23 15:47:51.233] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.233] [debug] isalive
+[2025-08-23 15:47:51.233] [debug] updating physics
+[2025-08-23 15:47:51.250] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.250] [debug] isalive
+[2025-08-23 15:47:51.250] [debug] updating physics
+[2025-08-23 15:47:51.266] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.267] [debug] isalive
+[2025-08-23 15:47:51.267] [debug] updating physics
+[2025-08-23 15:47:51.283] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.283] [debug] isalive
+[2025-08-23 15:47:51.283] [debug] updating physics
+[2025-08-23 15:47:51.300] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.300] [debug] isalive
+[2025-08-23 15:47:51.300] [debug] updating physics
+[2025-08-23 15:47:51.316] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.316] [debug] isalive
+[2025-08-23 15:47:51.317] [debug] updating physics
+[2025-08-23 15:47:51.333] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.333] [debug] isalive
+[2025-08-23 15:47:51.333] [debug] updating physics
+[2025-08-23 15:47:51.350] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.350] [debug] isalive
+[2025-08-23 15:47:51.350] [debug] updating physics
+[2025-08-23 15:47:51.366] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.366] [debug] isalive
+[2025-08-23 15:47:51.366] [debug] updating physics
+[2025-08-23 15:47:51.383] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.383] [debug] isalive
+[2025-08-23 15:47:51.383] [debug] updating physics
+[2025-08-23 15:47:51.400] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.400] [debug] isalive
+[2025-08-23 15:47:51.400] [debug] updating physics
+[2025-08-23 15:47:51.416] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.416] [debug] isalive
+[2025-08-23 15:47:51.416] [debug] updating physics
+[2025-08-23 15:47:51.433] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.433] [debug] isalive
+[2025-08-23 15:47:51.433] [debug] updating physics
+[2025-08-23 15:47:51.450] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.450] [debug] isalive
+[2025-08-23 15:47:51.450] [debug] updating physics
+[2025-08-23 15:47:51.467] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.467] [debug] isalive
+[2025-08-23 15:47:51.467] [debug] updating physics
+[2025-08-23 15:47:51.483] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.483] [debug] isalive
+[2025-08-23 15:47:51.483] [debug] updating physics
+[2025-08-23 15:47:51.500] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.500] [debug] isalive
+[2025-08-23 15:47:51.500] [debug] updating physics
+[2025-08-23 15:47:51.516] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.516] [debug] isalive
+[2025-08-23 15:47:51.516] [debug] updating physics
+[2025-08-23 15:47:51.533] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.533] [debug] isalive
+[2025-08-23 15:47:51.533] [debug] updating physics
+[2025-08-23 15:47:51.554] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.554] [debug] isalive
+[2025-08-23 15:47:51.554] [debug] updating physics
+[2025-08-23 15:47:51.571] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.571] [debug] isalive
+[2025-08-23 15:47:51.571] [debug] updating physics
+[2025-08-23 15:47:51.587] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.587] [debug] isalive
+[2025-08-23 15:47:51.587] [debug] updating physics
+[2025-08-23 15:47:51.604] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.604] [debug] isalive
+[2025-08-23 15:47:51.604] [debug] updating physics
+[2025-08-23 15:47:51.621] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.621] [debug] isalive
+[2025-08-23 15:47:51.621] [debug] updating physics
+[2025-08-23 15:47:51.638] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.638] [debug] isalive
+[2025-08-23 15:47:51.638] [debug] updating physics
+[2025-08-23 15:47:51.654] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.654] [debug] isalive
+[2025-08-23 15:47:51.654] [debug] updating physics
+[2025-08-23 15:47:51.670] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.670] [debug] isalive
+[2025-08-23 15:47:51.670] [debug] updating physics
+[2025-08-23 15:47:51.687] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.687] [debug] isalive
+[2025-08-23 15:47:51.687] [debug] updating physics
+[2025-08-23 15:47:51.704] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.704] [debug] isalive
+[2025-08-23 15:47:51.704] [debug] updating physics
+[2025-08-23 15:47:51.721] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.721] [debug] isalive
+[2025-08-23 15:47:51.721] [debug] updating physics
+[2025-08-23 15:47:51.737] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.737] [debug] isalive
+[2025-08-23 15:47:51.737] [debug] updating physics
+[2025-08-23 15:47:51.754] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.754] [debug] isalive
+[2025-08-23 15:47:51.754] [debug] updating physics
+[2025-08-23 15:47:51.771] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.771] [debug] isalive
+[2025-08-23 15:47:51.771] [debug] updating physics
+[2025-08-23 15:47:51.787] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.788] [debug] isalive
+[2025-08-23 15:47:51.788] [debug] updating physics
+[2025-08-23 15:47:51.804] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.804] [debug] isalive
+[2025-08-23 15:47:51.804] [debug] updating physics
+[2025-08-23 15:47:51.821] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.821] [debug] isalive
+[2025-08-23 15:47:51.821] [debug] updating physics
+[2025-08-23 15:47:51.837] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.837] [debug] isalive
+[2025-08-23 15:47:51.837] [debug] updating physics
+[2025-08-23 15:47:51.854] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.854] [debug] isalive
+[2025-08-23 15:47:51.854] [debug] updating physics
+[2025-08-23 15:47:51.871] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.871] [debug] isalive
+[2025-08-23 15:47:51.871] [debug] updating physics
+[2025-08-23 15:47:51.887] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.887] [debug] isalive
+[2025-08-23 15:47:51.887] [debug] updating physics
+[2025-08-23 15:47:51.904] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.904] [debug] isalive
+[2025-08-23 15:47:51.904] [debug] updating physics
+[2025-08-23 15:47:51.920] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.920] [debug] isalive
+[2025-08-23 15:47:51.920] [debug] updating physics
+[2025-08-23 15:47:51.937] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.937] [debug] isalive
+[2025-08-23 15:47:51.937] [debug] updating physics
+[2025-08-23 15:47:51.954] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.954] [debug] isalive
+[2025-08-23 15:47:51.954] [debug] updating physics
+[2025-08-23 15:47:51.971] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.971] [debug] isalive
+[2025-08-23 15:47:51.971] [debug] updating physics
+[2025-08-23 15:47:51.990] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:51.990] [debug] isalive
+[2025-08-23 15:47:51.991] [debug] updating physics
+[2025-08-23 15:47:52.005] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.005] [debug] isalive
+[2025-08-23 15:47:52.005] [debug] updating physics
+[2025-08-23 15:47:52.022] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.022] [debug] isalive
+[2025-08-23 15:47:52.022] [debug] updating physics
+[2025-08-23 15:47:52.038] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.038] [debug] isalive
+[2025-08-23 15:47:52.038] [debug] updating physics
+[2025-08-23 15:47:52.055] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.055] [debug] isalive
+[2025-08-23 15:47:52.055] [debug] updating physics
+[2025-08-23 15:47:52.071] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.072] [debug] isalive
+[2025-08-23 15:47:52.072] [debug] updating physics
+[2025-08-23 15:47:52.088] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.088] [debug] isalive
+[2025-08-23 15:47:52.088] [debug] updating physics
+[2025-08-23 15:47:52.104] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.104] [debug] isalive
+[2025-08-23 15:47:52.104] [debug] updating physics
+[2025-08-23 15:47:52.121] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.121] [debug] isalive
+[2025-08-23 15:47:52.121] [debug] updating physics
+[2025-08-23 15:47:52.138] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.138] [debug] isalive
+[2025-08-23 15:47:52.138] [debug] updating physics
+[2025-08-23 15:47:52.154] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.154] [debug] isalive
+[2025-08-23 15:47:52.154] [debug] updating physics
+[2025-08-23 15:47:52.171] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.171] [debug] isalive
+[2025-08-23 15:47:52.171] [debug] updating physics
+[2025-08-23 15:47:52.187] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.187] [debug] isalive
+[2025-08-23 15:47:52.187] [debug] updating physics
+[2025-08-23 15:47:52.204] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.204] [debug] isalive
+[2025-08-23 15:47:52.204] [debug] updating physics
+[2025-08-23 15:47:52.220] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.220] [debug] isalive
+[2025-08-23 15:47:52.220] [debug] updating physics
+[2025-08-23 15:47:52.237] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.237] [debug] isalive
+[2025-08-23 15:47:52.237] [debug] updating physics
+[2025-08-23 15:47:52.254] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.254] [debug] isalive
+[2025-08-23 15:47:52.254] [debug] updating physics
+[2025-08-23 15:47:52.271] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.271] [debug] isalive
+[2025-08-23 15:47:52.271] [debug] updating physics
+[2025-08-23 15:47:52.287] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.287] [debug] isalive
+[2025-08-23 15:47:52.288] [debug] updating physics
+[2025-08-23 15:47:52.304] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.304] [debug] isalive
+[2025-08-23 15:47:52.304] [debug] updating physics
+[2025-08-23 15:47:52.320] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.320] [debug] isalive
+[2025-08-23 15:47:52.320] [debug] updating physics
+[2025-08-23 15:47:52.337] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.337] [debug] isalive
+[2025-08-23 15:47:52.338] [debug] updating physics
+[2025-08-23 15:47:52.354] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.354] [debug] isalive
+[2025-08-23 15:47:52.354] [debug] updating physics
+[2025-08-23 15:47:52.371] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.371] [debug] isalive
+[2025-08-23 15:47:52.371] [debug] updating physics
+[2025-08-23 15:47:52.387] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.388] [debug] isalive
+[2025-08-23 15:47:52.388] [debug] updating physics
+[2025-08-23 15:47:52.404] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.404] [debug] isalive
+[2025-08-23 15:47:52.404] [debug] updating physics
+[2025-08-23 15:47:52.421] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.421] [debug] isalive
+[2025-08-23 15:47:52.421] [debug] updating physics
+[2025-08-23 15:47:52.438] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.438] [debug] isalive
+[2025-08-23 15:47:52.438] [debug] updating physics
+[2025-08-23 15:47:52.454] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.454] [debug] isalive
+[2025-08-23 15:47:52.454] [debug] updating physics
+[2025-08-23 15:47:52.471] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.471] [debug] isalive
+[2025-08-23 15:47:52.471] [debug] updating physics
+[2025-08-23 15:47:52.488] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.488] [debug] isalive
+[2025-08-23 15:47:52.488] [debug] updating physics
+[2025-08-23 15:47:52.504] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.504] [debug] isalive
+[2025-08-23 15:47:52.505] [debug] updating physics
+[2025-08-23 15:47:52.521] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.521] [debug] isalive
+[2025-08-23 15:47:52.521] [debug] updating physics
+[2025-08-23 15:47:52.538] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.538] [debug] isalive
+[2025-08-23 15:47:52.538] [debug] updating physics
+[2025-08-23 15:47:52.554] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.554] [debug] isalive
+[2025-08-23 15:47:52.554] [debug] updating physics
+[2025-08-23 15:47:52.573] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.573] [debug] isalive
+[2025-08-23 15:47:52.573] [debug] updating physics
+[2025-08-23 15:47:52.590] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.590] [debug] isalive
+[2025-08-23 15:47:52.590] [debug] updating physics
+[2025-08-23 15:47:52.606] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.606] [debug] isalive
+[2025-08-23 15:47:52.606] [debug] updating physics
+[2025-08-23 15:47:52.623] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.623] [debug] isalive
+[2025-08-23 15:47:52.623] [debug] updating physics
+[2025-08-23 15:47:52.639] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.640] [debug] isalive
+[2025-08-23 15:47:52.640] [debug] updating physics
+[2025-08-23 15:47:52.656] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.656] [debug] isalive
+[2025-08-23 15:47:52.656] [debug] updating physics
+[2025-08-23 15:47:52.673] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.673] [debug] isalive
+[2025-08-23 15:47:52.673] [debug] updating physics
+[2025-08-23 15:47:52.690] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.690] [debug] isalive
+[2025-08-23 15:47:52.690] [debug] updating physics
+[2025-08-23 15:47:52.706] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.706] [debug] isalive
+[2025-08-23 15:47:52.706] [debug] updating physics
+[2025-08-23 15:47:52.723] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.723] [debug] isalive
+[2025-08-23 15:47:52.723] [debug] updating physics
+[2025-08-23 15:47:52.739] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.740] [debug] isalive
+[2025-08-23 15:47:52.740] [debug] updating physics
+[2025-08-23 15:47:52.756] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.756] [debug] isalive
+[2025-08-23 15:47:52.756] [debug] updating physics
+[2025-08-23 15:47:52.773] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.773] [debug] isalive
+[2025-08-23 15:47:52.773] [debug] updating physics
+[2025-08-23 15:47:52.789] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.790] [debug] isalive
+[2025-08-23 15:47:52.790] [debug] updating physics
+[2025-08-23 15:47:52.806] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.806] [debug] isalive
+[2025-08-23 15:47:52.806] [debug] updating physics
+[2025-08-23 15:47:52.823] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.823] [debug] isalive
+[2025-08-23 15:47:52.823] [debug] updating physics
+[2025-08-23 15:47:52.840] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.840] [debug] isalive
+[2025-08-23 15:47:52.840] [debug] updating physics
+[2025-08-23 15:47:52.856] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.856] [debug] isalive
+[2025-08-23 15:47:52.856] [debug] updating physics
+[2025-08-23 15:47:52.873] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.873] [debug] isalive
+[2025-08-23 15:47:52.873] [debug] updating physics
+[2025-08-23 15:47:52.889] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.889] [debug] isalive
+[2025-08-23 15:47:52.889] [debug] updating physics
+[2025-08-23 15:47:52.906] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.906] [debug] isalive
+[2025-08-23 15:47:52.906] [debug] updating physics
+[2025-08-23 15:47:52.923] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.923] [debug] isalive
+[2025-08-23 15:47:52.923] [debug] updating physics
+[2025-08-23 15:47:52.940] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.940] [debug] isalive
+[2025-08-23 15:47:52.940] [debug] updating physics
+[2025-08-23 15:47:52.956] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.956] [debug] isalive
+[2025-08-23 15:47:52.956] [debug] updating physics
+[2025-08-23 15:47:52.973] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.973] [debug] isalive
+[2025-08-23 15:47:52.973] [debug] updating physics
+[2025-08-23 15:47:52.990] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:52.990] [debug] isalive
+[2025-08-23 15:47:52.990] [debug] updating physics
+[2025-08-23 15:47:53.006] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.006] [debug] isalive
+[2025-08-23 15:47:53.006] [debug] updating physics
+[2025-08-23 15:47:53.023] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.023] [debug] isalive
+[2025-08-23 15:47:53.023] [debug] updating physics
+[2025-08-23 15:47:53.039] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.039] [debug] isalive
+[2025-08-23 15:47:53.039] [debug] updating physics
+[2025-08-23 15:47:53.056] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.056] [debug] isalive
+[2025-08-23 15:47:53.056] [debug] updating physics
+[2025-08-23 15:47:53.073] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.073] [debug] isalive
+[2025-08-23 15:47:53.073] [debug] updating physics
+[2025-08-23 15:47:53.089] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.089] [debug] isalive
+[2025-08-23 15:47:53.090] [debug] updating physics
+[2025-08-23 15:47:53.106] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.107] [debug] isalive
+[2025-08-23 15:47:53.107] [debug] updating physics
+[2025-08-23 15:47:53.123] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.123] [debug] isalive
+[2025-08-23 15:47:53.123] [debug] updating physics
+[2025-08-23 15:47:53.140] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.140] [debug] isalive
+[2025-08-23 15:47:53.140] [debug] updating physics
+[2025-08-23 15:47:53.156] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.156] [debug] isalive
+[2025-08-23 15:47:53.156] [debug] updating physics
+[2025-08-23 15:47:53.173] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.173] [debug] isalive
+[2025-08-23 15:47:53.173] [debug] updating physics
+[2025-08-23 15:47:53.190] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.190] [debug] isalive
+[2025-08-23 15:47:53.190] [debug] updating physics
+[2025-08-23 15:47:53.206] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.206] [debug] isalive
+[2025-08-23 15:47:53.206] [debug] updating physics
+[2025-08-23 15:47:53.223] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.223] [debug] isalive
+[2025-08-23 15:47:53.223] [debug] updating physics
+[2025-08-23 15:47:53.228] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.228] [debug] isalive
+[2025-08-23 15:47:53.228] [debug] updating physics
+[2025-08-23 15:47:53.256] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.256] [debug] isalive
+[2025-08-23 15:47:53.256] [debug] updating physics
+[2025-08-23 15:47:53.272] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.272] [debug] isalive
+[2025-08-23 15:47:53.273] [debug] updating physics
+[2025-08-23 15:47:53.289] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.289] [debug] isalive
+[2025-08-23 15:47:53.289] [debug] updating physics
+[2025-08-23 15:47:53.306] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.306] [debug] isalive
+[2025-08-23 15:47:53.306] [debug] updating physics
+[2025-08-23 15:47:53.323] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.323] [debug] isalive
+[2025-08-23 15:47:53.323] [debug] updating physics
+[2025-08-23 15:47:53.339] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.339] [debug] isalive
+[2025-08-23 15:47:53.339] [debug] updating physics
+[2025-08-23 15:47:53.356] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.356] [debug] isalive
+[2025-08-23 15:47:53.356] [debug] updating physics
+[2025-08-23 15:47:53.372] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.372] [debug] isalive
+[2025-08-23 15:47:53.372] [debug] updating physics
+[2025-08-23 15:47:53.389] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.389] [debug] isalive
+[2025-08-23 15:47:53.389] [debug] updating physics
+[2025-08-23 15:47:53.406] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.406] [debug] isalive
+[2025-08-23 15:47:53.406] [debug] updating physics
+[2025-08-23 15:47:53.413] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.413] [debug] isalive
+[2025-08-23 15:47:53.413] [debug] updating physics
+[2025-08-23 15:47:53.439] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.439] [debug] isalive
+[2025-08-23 15:47:53.439] [debug] updating physics
+[2025-08-23 15:47:53.456] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.456] [debug] isalive
+[2025-08-23 15:47:53.456] [debug] updating physics
+[2025-08-23 15:47:53.464] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.464] [debug] isalive
+[2025-08-23 15:47:53.464] [debug] updating physics
+[2025-08-23 15:47:53.489] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.489] [debug] isalive
+[2025-08-23 15:47:53.489] [debug] updating physics
+[2025-08-23 15:47:53.506] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.506] [debug] isalive
+[2025-08-23 15:47:53.506] [debug] updating physics
+[2025-08-23 15:47:53.522] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.522] [debug] isalive
+[2025-08-23 15:47:53.522] [debug] updating physics
+[2025-08-23 15:47:53.539] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.539] [debug] isalive
+[2025-08-23 15:47:53.539] [debug] updating physics
+[2025-08-23 15:47:53.548] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.548] [debug] isalive
+[2025-08-23 15:47:53.548] [debug] updating physics
+[2025-08-23 15:47:53.572] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.572] [debug] isalive
+[2025-08-23 15:47:53.572] [debug] updating physics
+[2025-08-23 15:47:53.590] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.590] [debug] isalive
+[2025-08-23 15:47:53.590] [debug] updating physics
+[2025-08-23 15:47:53.607] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.607] [debug] isalive
+[2025-08-23 15:47:53.607] [debug] updating physics
+[2025-08-23 15:47:53.623] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.623] [debug] isalive
+[2025-08-23 15:47:53.623] [debug] updating physics
+[2025-08-23 15:47:53.640] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.640] [debug] isalive
+[2025-08-23 15:47:53.640] [debug] updating physics
+[2025-08-23 15:47:53.649] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.649] [debug] isalive
+[2025-08-23 15:47:53.649] [debug] updating physics
+[2025-08-23 15:47:53.673] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.673] [debug] isalive
+[2025-08-23 15:47:53.673] [debug] updating physics
+[2025-08-23 15:47:53.690] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.690] [debug] isalive
+[2025-08-23 15:47:53.690] [debug] updating physics
+[2025-08-23 15:47:53.707] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.707] [debug] isalive
+[2025-08-23 15:47:53.707] [debug] updating physics
+[2025-08-23 15:47:53.718] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.718] [debug] isalive
+[2025-08-23 15:47:53.718] [debug] updating physics
+[2025-08-23 15:47:53.740] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.740] [debug] isalive
+[2025-08-23 15:47:53.740] [debug] updating physics
+[2025-08-23 15:47:53.757] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.757] [debug] isalive
+[2025-08-23 15:47:53.757] [debug] updating physics
+[2025-08-23 15:47:53.773] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.773] [debug] isalive
+[2025-08-23 15:47:53.774] [debug] updating physics
+[2025-08-23 15:47:53.790] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.790] [debug] isalive
+[2025-08-23 15:47:53.790] [debug] updating physics
+[2025-08-23 15:47:53.807] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.807] [debug] isalive
+[2025-08-23 15:47:53.807] [debug] updating physics
+[2025-08-23 15:47:53.823] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.823] [debug] isalive
+[2025-08-23 15:47:53.823] [debug] updating physics
+[2025-08-23 15:47:53.840] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.840] [debug] isalive
+[2025-08-23 15:47:53.840] [debug] updating physics
+[2025-08-23 15:47:53.857] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.857] [debug] isalive
+[2025-08-23 15:47:53.857] [debug] updating physics
+[2025-08-23 15:47:53.874] [debug] Input movement: x=0, y=0
+[2025-08-23 15:47:53.874] [debug] isalive
+[2025-08-23 15:47:53.874] [debug] updating physics
+[2025-08-23 15:47:53.890] [debug] Closing window
+[2025-08-23 15:47:53.891] [debug] Closing GLFW window

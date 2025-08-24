@@ -2,8 +2,8 @@
 #include <vector>
 #include <spdlog/spdlog.h>
 
-#define POS_UPDATE_TOLERANCE 0.1
-#define ROT_UPDATE_TOLERANCE 0.05
+#define POS_UPDATE_TOLERANCE 0.01
+#define ROT_UPDATE_TOLERANCE 0.001
 
 Player &Player::GetInstance() {
     static Player instance;
@@ -31,9 +31,7 @@ void Player::Update() {
     }
 
     float dot = glm::dot(lastLocation.rotation, location.rotation);
-    float angle = 2.0f * acos(glm::clamp(dot, -1.0f, 1.0f));
-
-    if (angle > ROT_UPDATE_TOLERANCE) {
+    if (dot < cos(ROT_UPDATE_TOLERANCE * 0.5f)) {
         updateLoc = true;
         lastLocation.rotation = location.rotation;
     }
