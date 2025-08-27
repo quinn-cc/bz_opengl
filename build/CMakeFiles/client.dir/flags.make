@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/quinn/Documents/bztest/bz_opengl/include -I/home/quinn/Documents/bztest/bz_opengl/src/client -I/home/quinn/Documents/bztest/bz_opengl/src/client/game -I/home/quinn/Documents/bztest/bz_opengl/src/client/engine -I/home/quinn/Documents/bztest/bz_opengl/libs/include -I/home/quinn/Documents/bztest/bz_opengl/libs/include/bullet -I/home/quinn/Documents/bztest/bz_opengl/libs/include/glm -I/home/quinn/Documents/bztest/bz_opengl/libs/include/assimp -I/home/quinn/Documents/bztest/bz_opengl/libs/include/imgui
+CXX_INCLUDES = -I/home/quinn/Desktop/bz_opengl/include -I/home/quinn/Desktop/bz_opengl/src/client -I/home/quinn/Desktop/bz_opengl/src/client/game -I/home/quinn/Desktop/bz_opengl/src/client/engine -I/home/quinn/Desktop/bz_opengl/libs/include -I/home/quinn/Desktop/bz_opengl/libs/include/bullet -I/home/quinn/Desktop/bz_opengl/libs/include/glm -I/home/quinn/Desktop/bz_opengl/libs/include/assimp -I/home/quinn/Desktop/bz_opengl/libs/include/imgui
 
 CXX_FLAGS = -O3 -DNDEBUG -std=gnu++20
 

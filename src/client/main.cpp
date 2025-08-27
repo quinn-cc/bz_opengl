@@ -10,6 +10,7 @@
 #include "engine.hpp"
 #include "userpointer.hpp"
 
+
 bool exitSignalRecieved = false;
 
 Engine engine;
@@ -210,7 +211,10 @@ void Update() {
 
     game.player.Update();
     engine.renderer.Update();
+    engine.gui.StartFrame();
     engine.gui.Update();
+    engine.gui.DrawRadar(engine.renderer.GetRadarTextureId());
+    engine.gui.EndFrame();
     engine.renderer.EndFrame();
     
     // Networker::GetInstance().Update();

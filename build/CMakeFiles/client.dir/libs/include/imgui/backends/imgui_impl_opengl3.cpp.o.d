@@ -1,8 +1,8 @@
 CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.o: \
- /home/quinn/Documents/bztest/bz_opengl/libs/include/imgui/backends/imgui_impl_opengl3.cpp \
+ /home/quinn/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_opengl3.cpp \
  /usr/include/stdc-predef.h \
- /home/quinn/Documents/bztest/bz_opengl/libs/include/imgui/imgui.h \
- /home/quinn/Documents/bztest/bz_opengl/libs/include/imgui/imconfig.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/imgui/imgui.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/imgui/imconfig.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h /usr/include/string.h \
@@ -20,7 +20,7 @@ CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
  /usr/include/assert.h \
- /home/quinn/Documents/bztest/bz_opengl/libs/include/imgui/backends/imgui_impl_opengl3.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_opengl3.h \
  /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types.h \
  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
  /usr/include/x86_64-linux-gnu/bits/time64.h \
@@ -42,7 +42,7 @@ CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
- /home/quinn/Documents/bztest/bz_opengl/libs/include/imgui/backends/imgui_impl_opengl3_loader.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_opengl3_loader.h \
  /usr/include/c++/13/stdlib.h /usr/include/c++/13/cstdlib \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \

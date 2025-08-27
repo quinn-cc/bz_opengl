@@ -15,6 +15,9 @@ private:
 
     std::shared_ptr<threepp::Scene> scene;
     std::shared_ptr<threepp::PerspectiveCamera> camera;
+    
+    std::shared_ptr<threepp::OrthographicCamera> radarCamera;
+    std::shared_ptr<threepp::GLRenderTarget> radarRenderTarget;
     threepp::GLRenderer *renderer;
     std::map<Client *, std::shared_ptr<threepp::Object3D>> clientMeshes;
     std::map<Shot *, std::shared_ptr<threepp::Mesh>> shotMeshes;
@@ -22,10 +25,10 @@ private:
     std::chrono::time_point<std::chrono::system_clock> lastFrameTime;
     TimeUtils::duration deltaTime;
     
-    threepp::Vector3 toInternal(glm::vec3 &v);
-    threepp::Quaternion toInternal(glm::quat &q);
-    glm::vec3 toGLM(threepp::Vector3 &v);
-    glm::quat toGLM(threepp::Quaternion &q);
+    threepp::Vector3 toInternal(const glm::vec3 &v);
+    threepp::Quaternion toInternal(const glm::quat &q);
+    glm::vec3 toGLM(const threepp::Vector3 &v);
+    glm::quat toGLM(const threepp::Quaternion &q);
     bool closed;
 
     void applyMaterialAndShadows(const std::shared_ptr<threepp::Object3D>& obj);
@@ -45,6 +48,7 @@ public:
     void RemoveClient(Client *client);
     void AddShot(Shot *shot);
     void RemoveShot(Shot *shot);
+    unsigned int GetRadarTextureId();
 
     void OnResize(int width, int height);
 };

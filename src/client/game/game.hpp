@@ -5,6 +5,11 @@
 #include "client.hpp"
 #include "shot.hpp"
 
+#define RADAR_HEIGHT 60.0f
+#define RADAR_CAMERA_SIZE 80.0f
+#define RADAR_SIZE 500
+#define RADAR_MARGIN 10
+
 class Game {
 public:
     Game() = default;

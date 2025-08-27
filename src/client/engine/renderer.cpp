@@ -5,6 +5,7 @@
 #include <threepp/loaders/AssimpLoader.hpp>
 #include <threepp/lights/DirectionalLightShadow.hpp>
 #include <threepp/cameras/OrthographicCamera.hpp>
+#include <threepp/renderers/GLRenderTarget.hpp>
 #include <GLFW/glfw3.h>
 #include <spdlog/spdlog.h>
 #include <memory>
@@ -13,20 +14,22 @@
 #include "shot.hpp"
 #include "timeutils.hpp"
 #include "userpointer.hpp"
+#include "game.hpp"
 
-threepp::Vector3 Renderer::toInternal(glm::vec3 &v) {
+
+threepp::Vector3 Renderer::toInternal(const glm::vec3 &v) {
     return threepp::Vector3(v.x, v.y, v.z);
 }
 
-threepp::Quaternion Renderer::toInternal(glm::quat &q) {
+threepp::Quaternion Renderer::toInternal(const glm::quat &q) {
     return threepp::Quaternion(q.x, q.y, q.z, q.w);
 }
 
-glm::vec3 Renderer::toGLM(threepp::Vector3 &v) {
+glm::vec3 Renderer::toGLM(const threepp::Vector3 &v) {
     return glm::vec3{ v.x, v.y, v.z };
 }
 
-glm::quat Renderer::toGLM(threepp::Quaternion &q) {
+glm::quat Renderer::toGLM(const threepp::Quaternion &q) {
     return glm::quat{ q.x, q.y, q.z, q.w };
 }
 
@@ -53,8 +56,7 @@ void Renderer::Init(Game *game, GLFWwindow* window) {
 
     scene = threepp::Scene::create();
     camera = threepp::PerspectiveCamera::create(60, 800.f/600.f, 0.1f, 1000.f);
-
-
+    
     /*
      * Scene
      */
@@ -76,17 +78,32 @@ void Renderer::Init(Game *game, GLFWwindow* window) {
     dir->position.set(150, 50, 150);
     dir->castShadow = true;
     dir->shadow->mapSize.set(2048, 2048);
-    auto shadowCam = static_cast<threepp::OrthographicCamera*>(dir->shadow->camera.get());
-    if (shadowCam) {
-        shadowCam->left = -50;
-        shadowCam->right = 50;
-        shadowCam->top = 50;
-        shadowCam->bottom = -50;
-    }
     scene->add(dir);
 
     lastFrameTime = TimeUtils::GetCurrentTime();
     deltaTime = 0.0001f;
+
+    /* 
+     * Radar
+     */
+    // Radar camera parameters
+    float radarWidth = RADAR_CAMERA_SIZE;
+    float radarHeight = RADAR_CAMERA_SIZE;
+
+    radarCamera = threepp::OrthographicCamera::create(
+        -radarWidth/2, radarWidth/2,
+        radarHeight/2, -radarHeight/2,
+        0.1f, 1000.0f
+    );
+
+    threepp::GLRenderTarget::Options options{};
+    options.minFilter = threepp::Filter::Linear;
+    options.magFilter = threepp::Filter::Linear;
+    options.format = threepp::Format::RGBA;
+    options.type = threepp::Type::UnsignedByte; // important
+    options.depthBuffer = true;  // attach depth buffer
+    options.stencilBuffer = false; // usually not needed
+    radarRenderTarget = threepp::GLRenderTarget::create(RADAR_SIZE, RADAR_SIZE, options);
 }
 
 bool Renderer::ShouldClose() {
@@ -162,6 +179,11 @@ void Renderer::RemoveShot(Shot *shot) {
     shotMeshes.erase(shot);
 }
 
+unsigned int Renderer::GetRadarTextureId() {
+    unsigned int framebuffer = renderer->getGlTextureId(*radarRenderTarget->texture).value();
+    return framebuffer;
+}
+
 void Renderer::Update() {
     std::chrono::time_point<std::chrono::system_clock> currTime = std::chrono::system_clock::now();  
     deltaTime = TimeUtils::GetElapsedTime(lastFrameTime, TimeUtils::GetCurrentTime());
@@ -175,6 +197,18 @@ void Renderer::Update() {
     glm::vec3 total = pos + lookDir;
     threepp::Vector3 atVec = toInternal(total);
     camera->lookAt(atVec);
+
+    glm::vec3 radarPos = game->player.GetLocation().position + glm::vec3(0, RADAR_HEIGHT, 0);
+    radarCamera->position = toInternal(radarPos);
+    // 3. Create rotation: pitch straight down + player's yaw
+    glm::quat radarQuat = game->player.GetLocation().rotation;
+    // 3. Pitch down - rotate along the camera's local X axis
+    glm::quat pitchDown = glm::angleAxis(glm::radians(-90.0f), glm::vec3(1, 0, 0));
+    glm::quat pitchAround = glm::angleAxis(glm::radians(180.0f), glm::vec3(0, 0, 1));
+    radarQuat = radarQuat * pitchDown * pitchAround; // apply pitch in local space
+    // 4. Assign to camera
+    radarCamera->quaternion = toInternal(radarQuat);
+
 
     // Draw the meshes
     for (const auto& [client, mesh] : clientMeshes) {
@@ -194,7 +228,23 @@ void Renderer::Update() {
         shotMeshes[shot]->position = toInternal(pos);
     }
 
+    int screenWidth = renderer->size().width();
+    int screenHeight = renderer->size().height();
+
+    renderer->setViewport(0, 0, screenWidth, screenHeight);
     renderer->render(*scene, *camera);
+
+    renderer->setRenderTarget(radarRenderTarget.get()); // Ensure we're rendering to the screen
+    renderer->setViewport(0, 0, RADAR_SIZE, RADAR_SIZE);
+    renderer->toneMapping = threepp::ToneMapping::None;
+    //renderer->setClearColor(threepp::Color::black);
+    renderer->clear(true, true, false);
+    renderer->render(*scene, *radarCamera);
+    renderer->toneMapping = threepp::ToneMapping::ACESFilmic;
+
+    renderer->setRenderTarget(nullptr);
+    renderer->setViewport(0, 0, screenWidth, screenHeight);
+
 }
 
 void Renderer::EndFrame() {

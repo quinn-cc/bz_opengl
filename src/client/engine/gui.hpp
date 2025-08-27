@@ -11,5 +11,8 @@ private:
 public:
     void Init(Game *game, GLFWwindow *window);
     void Update();
+    void StartFrame();
+    void DrawRadar(unsigned int radarTextureId);
+    void EndFrame();
     void Close();
 };
