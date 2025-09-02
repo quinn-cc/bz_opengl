@@ -7,7 +7,9 @@
 #include "world.hpp"
 
 #define MOVE_SPEED 8
+#define TURN_SPEED 1.5
 #define JUMP_VELOCITY 9
+#define GRAVITY -9.8
 
 void Physics::Init(Game *game) {
     this->game = game;
@@ -17,7 +19,7 @@ void Physics::Init(Game *game) {
     dispatcher = new btCollisionDispatcher(collisionConfig);
     solver = new btSequentialImpulseConstraintSolver();
     world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfig);
-    world->setGravity(btVector3(0, -9.8, 0));
+    world->setGravity(btVector3(0, GRAVITY, 0));
 
     std::vector<MeshData> meshes = loadGLB("../data/world2.glb");
 
@@ -33,7 +35,7 @@ void Physics::Init(Game *game) {
             btTransform(btQuaternion(0,0,0,1), btVector3(0,0,0))
         );
 
-        // Static object → mass = 0
+        // Static object mass = 0
         btScalar mass = 0.0f;
         btVector3 inertia(0, 0, 0);
         if (mass > 0.0f)
@@ -52,23 +54,6 @@ void Physics::Init(Game *game) {
         // Add to world
         world->addRigidBody(body);
     }
-    // floorShape = new btBoxShape(btVector3(50, 1, 50));
-    // btTransform floorTransform;
-    // floorTransform.setIdentity();
-    // floorTransform.setOrigin(btVector3(0, -1, 0));
-    // btRigidBody::btRigidBodyConstructionInfo floorInfo(
-    //     0.0f, new btDefaultMotionState(floorTransform), floorShape, btVector3(0, 0, 0));
-    // btRigidBody* floorBody = new btRigidBody(floorInfo);
-    // world->addRigidBody(floorBody);
-
-    // btBoxShape *boxShape = new btBoxShape(btVector3(2.5, 2.5, 2.5));
-    // btTransform boxTransform;
-    // boxTransform.setIdentity();
-    // boxTransform.setOrigin(btVector3(10, 0, 10));
-    // btRigidBody::btRigidBodyConstructionInfo boxInfo(
-    //     0.0f, new btDefaultMotionState(boxTransform), boxShape, btVector3(0, 0, 0));
-    // btRigidBody* boxBody = new btRigidBody(boxInfo);
-    // world->addRigidBody(boxBody);
 
     // Player (dynamic box)
     playerShape = new btBoxShape(btVector3(0.5, 1.0, 0.5));
@@ -118,12 +103,6 @@ bool Physics::Player_IsGrounded() {
 
 void Physics::Player_Move(glm::vec2 movement) {
     playerBody->activate(true);
-
-    // btQuaternion yawRot;
-    // yawRot.setEuler(-movement.x * Renderer::GetInstance().GetDeltaTime() * 2, 0, 0); // Euler: yaw, pitch, roll
-    // btQuaternion newRot = yawRot * playerBody->getWorldTransform().getRotation();
-    // playerBody->getWorldTransform().setRotation(newRot);
-    
     btTransform trans1 = playerBody->getWorldTransform();
     btQuaternion rot = trans1.getRotation();
     btVector3 localVel(0, 0, movement.y * MOVE_SPEED); // local velocity
@@ -133,7 +112,7 @@ void Physics::Player_Move(glm::vec2 movement) {
     velocity.setX(worldVel.getX());
     velocity.setZ(worldVel.getZ());
     playerBody->setLinearVelocity(velocity);
-    playerBody->setAngularVelocity(btVector3(0, -movement.x * 2, 0));
+    playerBody->setAngularVelocity(btVector3(0, -movement.x * TURN_SPEED, 0));
 }
 
 void Physics::Player_Jump() {
@@ -190,8 +169,6 @@ void Physics::Update(float deltaTime) {
 
     // Step simulation
     world->stepSimulation(deltaTime, 10, 1.f/60.f);
-
-    btTransform trans = playerBody->getWorldTransform();
 }
 
 void Physics::Close() {

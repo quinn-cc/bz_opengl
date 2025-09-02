@@ -216,26 +216,6 @@ void Update() {
     engine.gui.DrawRadar(engine.renderer.GetRadarTextureId());
     engine.gui.EndFrame();
     engine.renderer.EndFrame();
-    
-    // Networker::GetInstance().Update();
-    // Input::GetInstance().Update();
-    // Physics::GetInstance().Update();
-
-    // if (inputMap.fire) {
-    //     float speed = 1;
-    //     glm::vec3 velocity = GetForwardVector() * speed;
-    //     Shot *shot = new Shot(location.position, velocity);
-    //     Networker::GetInstance().MsgSend_Shot(shot);
-    // }
-
-    // if (inputMap.spawn) {
-    //     Networker::GetInstance().MsgSend_RequestSpawn();
-    // }
-
-    // for (Shot *shot : Shot::shots) {
-    //     shot->Update();
-    // }
-
 }
 
 void Close() {

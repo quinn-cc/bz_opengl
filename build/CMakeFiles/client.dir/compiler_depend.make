@@ -2118,6 +2118,7 @@ CMakeFiles/client.dir/src/client/engine/input.cpp.o: /home/quinn/Desktop/bz_open
   /home/quinn/Desktop/bz_opengl/libs/include/spdlog/spdlog.h \
   /home/quinn/Desktop/bz_opengl/libs/include/spdlog/tweakme.h \
   /home/quinn/Desktop/bz_opengl/libs/include/spdlog/version.h \
+  /home/quinn/Desktop/bz_opengl/libs/include/threepp/audio/Audio.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/cameras/Camera.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/cameras/OrthographicCamera.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/cameras/PerspectiveCamera.hpp \
@@ -2191,6 +2192,7 @@ CMakeFiles/client.dir/src/client/engine/input.cpp.o: /home/quinn/Desktop/bz_open
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/MeshPhongMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/MeshStandardMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/PointsMaterial.hpp \
+  /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/ShaderMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/ShadowMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/SpriteMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/interfaces.hpp \
@@ -2289,6 +2291,7 @@ CMakeFiles/client.dir/src/client/engine/input.cpp.o: /home/quinn/Desktop/bz_open
   /usr/include/c++/13/bits/fs_fwd.h \
   /usr/include/c++/13/bits/fs_ops.h \
   /usr/include/c++/13/bits/fs_path.h \
+  /usr/include/c++/13/bits/fstream.tcc \
   /usr/include/c++/13/bits/functexcept.h \
   /usr/include/c++/13/bits/functional_hash.h \
   /usr/include/c++/13/bits/hash_bytes.h \
@@ -2404,6 +2407,7 @@ CMakeFiles/client.dir/src/client/engine/input.cpp.o: /home/quinn/Desktop/bz_open
   /usr/include/c++/13/ext/type_traits.h \
   /usr/include/c++/13/filesystem \
   /usr/include/c++/13/format \
+  /usr/include/c++/13/fstream \
   /usr/include/c++/13/functional \
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/iomanip \
@@ -2600,8 +2604,10 @@ CMakeFiles/client.dir/src/client/engine/input.cpp.o: /home/quinn/Desktop/bz_open
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
@@ -4474,6 +4480,7 @@ CMakeFiles/client.dir/src/client/engine/renderer.cpp.o: /home/quinn/Desktop/bz_o
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/animation/KeyframeTrack.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/animation/tracks/QuaternionKeyframeTrack.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/animation/tracks/VectorKeyframeTrack.hpp \
+  /home/quinn/Desktop/bz_opengl/libs/include/threepp/audio/Audio.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/cameras/Camera.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/cameras/OrthographicCamera.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/cameras/PerspectiveCamera.hpp \
@@ -4550,6 +4557,7 @@ CMakeFiles/client.dir/src/client/engine/renderer.cpp.o: /home/quinn/Desktop/bz_o
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/MeshPhongMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/MeshStandardMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/PointsMaterial.hpp \
+  /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/ShaderMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/ShadowMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/SpriteMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/interfaces.hpp \
@@ -4658,6 +4666,7 @@ CMakeFiles/client.dir/src/client/engine/renderer.cpp.o: /home/quinn/Desktop/bz_o
   /usr/include/c++/13/bits/fs_fwd.h \
   /usr/include/c++/13/bits/fs_ops.h \
   /usr/include/c++/13/bits/fs_path.h \
+  /usr/include/c++/13/bits/fstream.tcc \
   /usr/include/c++/13/bits/functexcept.h \
   /usr/include/c++/13/bits/functional_hash.h \
   /usr/include/c++/13/bits/hash_bytes.h \
@@ -4774,6 +4783,7 @@ CMakeFiles/client.dir/src/client/engine/renderer.cpp.o: /home/quinn/Desktop/bz_o
   /usr/include/c++/13/ext/type_traits.h \
   /usr/include/c++/13/filesystem \
   /usr/include/c++/13/format \
+  /usr/include/c++/13/fstream \
   /usr/include/c++/13/functional \
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/iomanip \
@@ -4971,8 +4981,10 @@ CMakeFiles/client.dir/src/client/engine/renderer.cpp.o: /home/quinn/Desktop/bz_o
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
@@ -6917,6 +6929,7 @@ CMakeFiles/client.dir/src/client/game/shot.cpp.o: /home/quinn/Desktop/bz_opengl/
   /home/quinn/Desktop/bz_opengl/libs/include/glm/vec2.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/glm/vec3.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/glm/vec4.hpp \
+  /home/quinn/Desktop/bz_opengl/libs/include/threepp/audio/Audio.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/cameras/Camera.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/cameras/OrthographicCamera.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/cameras/PerspectiveCamera.hpp \
@@ -6990,6 +7003,7 @@ CMakeFiles/client.dir/src/client/game/shot.cpp.o: /home/quinn/Desktop/bz_opengl/
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/MeshPhongMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/MeshStandardMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/PointsMaterial.hpp \
+  /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/ShaderMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/ShadowMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/SpriteMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/interfaces.hpp \
@@ -7080,6 +7094,7 @@ CMakeFiles/client.dir/src/client/game/shot.cpp.o: /home/quinn/Desktop/bz_opengl/
   /usr/include/c++/13/bits/fs_fwd.h \
   /usr/include/c++/13/bits/fs_ops.h \
   /usr/include/c++/13/bits/fs_path.h \
+  /usr/include/c++/13/bits/fstream.tcc \
   /usr/include/c++/13/bits/functexcept.h \
   /usr/include/c++/13/bits/functional_hash.h \
   /usr/include/c++/13/bits/hash_bytes.h \
@@ -7189,6 +7204,7 @@ CMakeFiles/client.dir/src/client/game/shot.cpp.o: /home/quinn/Desktop/bz_opengl/
   /usr/include/c++/13/ext/type_traits.h \
   /usr/include/c++/13/filesystem \
   /usr/include/c++/13/format \
+  /usr/include/c++/13/fstream \
   /usr/include/c++/13/functional \
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/iomanip \
@@ -7358,8 +7374,10 @@ CMakeFiles/client.dir/src/client/game/shot.cpp.o: /home/quinn/Desktop/bz_opengl/
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
@@ -7709,6 +7727,7 @@ CMakeFiles/client.dir/src/client/main.cpp.o: /home/quinn/Desktop/bz_opengl/src/c
   /home/quinn/Desktop/bz_opengl/libs/include/spdlog/spdlog.h \
   /home/quinn/Desktop/bz_opengl/libs/include/spdlog/tweakme.h \
   /home/quinn/Desktop/bz_opengl/libs/include/spdlog/version.h \
+  /home/quinn/Desktop/bz_opengl/libs/include/threepp/audio/Audio.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/cameras/Camera.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/cameras/OrthographicCamera.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/cameras/PerspectiveCamera.hpp \
@@ -7782,6 +7801,7 @@ CMakeFiles/client.dir/src/client/main.cpp.o: /home/quinn/Desktop/bz_opengl/src/c
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/MeshPhongMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/MeshStandardMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/PointsMaterial.hpp \
+  /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/ShaderMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/ShadowMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/SpriteMaterial.hpp \
   /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/interfaces.hpp \
@@ -7890,6 +7910,7 @@ CMakeFiles/client.dir/src/client/main.cpp.o: /home/quinn/Desktop/bz_opengl/src/c
   /usr/include/c++/13/bits/fs_fwd.h \
   /usr/include/c++/13/bits/fs_ops.h \
   /usr/include/c++/13/bits/fs_path.h \
+  /usr/include/c++/13/bits/fstream.tcc \
   /usr/include/c++/13/bits/functexcept.h \
   /usr/include/c++/13/bits/functional_hash.h \
   /usr/include/c++/13/bits/hash_bytes.h \
@@ -8023,6 +8044,7 @@ CMakeFiles/client.dir/src/client/main.cpp.o: /home/quinn/Desktop/bz_opengl/src/c
   /usr/include/c++/13/ext/type_traits.h \
   /usr/include/c++/13/filesystem \
   /usr/include/c++/13/format \
+  /usr/include/c++/13/fstream \
   /usr/include/c++/13/functional \
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/iomanip \
@@ -8268,8 +8290,10 @@ CMakeFiles/client.dir/src/client/main.cpp.o: /home/quinn/Desktop/bz_opengl/src/c
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
@@ -8473,6 +8497,10 @@ CMakeFiles/client.dir/src/client/main.cpp.o: /home/quinn/Desktop/bz_opengl/src/c
 
 /home/quinn/Desktop/bz_opengl/src/client/engine/networker.cpp:
 
+/usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h:
+
+/usr/include/c++/13/bits/fstream.tcc:
+
 /usr/include/c++/13/bits/regex_compiler.h:
 
 /home/quinn/Desktop/bz_opengl/src/client/engine/userpointer.hpp:
@@ -8480,6 +8508,8 @@ CMakeFiles/client.dir/src/client/main.cpp.o: /home/quinn/Desktop/bz_opengl/src/c
 /home/quinn/Desktop/bz_opengl/src/client/engine/renderer.hpp:
 
 /home/quinn/Desktop/bz_opengl/src/client/engine/input.hpp:
+
+/home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/ShaderMaterial.hpp:
 
 /usr/include/x86_64-linux-gnu/sys/time.h:
 
@@ -9501,6 +9531,8 @@ CMakeFiles/client.dir/src/client/main.cpp.o: /home/quinn/Desktop/bz_opengl/src/c
 
 /home/quinn/Desktop/bz_opengl/libs/include/glm/geometric.hpp:
 
+/home/quinn/Desktop/bz_opengl/libs/include/threepp/audio/Audio.hpp:
+
 /usr/lib/gcc/x86_64-linux-gnu/13/include/avx512bwintrin.h:
 
 /usr/include/x86_64-linux-gnu/bits/local_lim.h:
@@ -10217,6 +10249,8 @@ CMakeFiles/client.dir/src/client/main.cpp.o: /home/quinn/Desktop/bz_opengl/src/c
 
 /home/quinn/Desktop/bz_opengl/libs/include/glm/ext/vector_float4_precision.hpp:
 
+/usr/include/c++/13/fstream:
+
 /home/quinn/Desktop/bz_opengl/libs/include/threepp/helpers/Box3Helper.hpp:
 
 /home/quinn/Desktop/bz_opengl/libs/include/threepp/core/Clock.hpp:
@@ -10228,6 +10262,8 @@ CMakeFiles/client.dir/src/client/main.cpp.o: /home/quinn/Desktop/bz_opengl/src/c
 /usr/include/x86_64-linux-gnu/bits/uio_lim.h:
 
 /home/quinn/Desktop/bz_opengl/libs/include/glm/ext/vector_uint3.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h:
 
 /usr/include/x86_64-linux-gnu/bits/syscall.h:
 

@@ -577,8 +577,10 @@ CMakeFiles/client.dir/src/client/game/shot.cpp.o: \
  /home/quinn/Desktop/bz_opengl/libs/include/threepp/utils/TaskManager.hpp \
  /home/quinn/Desktop/bz_opengl/libs/include/GLFW/glfw3.h \
  /usr/include/GL/gl.h /usr/include/GL/glext.h \
- /usr/include/KHR/khrplatform.h /usr/include/c++/13/map \
- /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
+ /usr/include/KHR/khrplatform.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/ShaderMaterial.hpp \
+ /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
+ /usr/include/c++/13/bits/stl_map.h \
  /usr/include/c++/13/bits/stl_multimap.h \
  /home/quinn/Desktop/bz_opengl/src/client/game/game.hpp \
  /usr/include/c++/13/algorithm /usr/include/c++/13/bits/ranges_algo.h \
@@ -587,4 +589,7 @@ CMakeFiles/client.dir/src/client/game/shot.cpp.o: \
  /home/quinn/Desktop/bz_opengl/include/timeutils.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \
  /usr/include/c++/13/format /usr/include/c++/13/charconv \
- /usr/include/c++/13/span
+ /usr/include/c++/13/span /usr/include/c++/13/fstream \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
+ /usr/include/c++/13/bits/fstream.tcc

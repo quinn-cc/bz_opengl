@@ -615,6 +615,7 @@ CMakeFiles/client.dir/src/client/engine/input.cpp.o: \
  /home/quinn/Desktop/bz_opengl/libs/include/threepp/loaders/STLLoader.hpp \
  /home/quinn/Desktop/bz_opengl/libs/include/threepp/loaders/TextureLoader.hpp \
  /home/quinn/Desktop/bz_opengl/libs/include/threepp/utils/TaskManager.hpp \
+ /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/ShaderMaterial.hpp \
  /home/quinn/Desktop/bz_opengl/src/client/game/game.hpp \
  /home/quinn/Desktop/bz_opengl/src/client/game/player.hpp \
  /home/quinn/Desktop/bz_opengl/include/geometry.hpp \
@@ -659,4 +660,8 @@ CMakeFiles/client.dir/src/client/engine/input.cpp.o: \
  /home/quinn/Desktop/bz_opengl/include/netmsg.hpp \
  /home/quinn/Desktop/bz_opengl/src/client/game/client.hpp \
  /home/quinn/Desktop/bz_opengl/include/timeutils.hpp \
- /home/quinn/Desktop/bz_opengl/src/client/game/shot.hpp
+ /home/quinn/Desktop/bz_opengl/src/client/game/shot.hpp \
+ /usr/include/c++/13/fstream \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
+ /usr/include/c++/13/bits/fstream.tcc

@@ -42,7 +42,7 @@ void Networker::Update(std::function<void(Client *, ClientMsg *)> callback,
         }
         case ENET_EVENT_TYPE_RECEIVE: {
             ClientMsg *msg = reinterpret_cast<ClientMsg*>(event.packet->data);
-            spdlog::debug("Received message of type: {}", Debug_ClientMsgToString(*msg));
+            //spdlog::debug("Received message of type: {}", Debug_ClientMsgToString(*msg));
             Client *client = GetClient(event.peer);
             callback(client, msg);
             enet_packet_destroy(event.packet);

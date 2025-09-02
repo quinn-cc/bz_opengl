@@ -531,6 +531,7 @@ CMakeFiles/client.dir/src/client/engine/renderer.cpp.o: \
  /home/quinn/Desktop/bz_opengl/libs/include/glm/detail/type_half.inl \
  /home/quinn/Desktop/bz_opengl/libs/include/glm/integer.hpp \
  /home/quinn/Desktop/bz_opengl/libs/include/glm/detail/func_integer.inl \
+ /home/quinn/Desktop/bz_opengl/libs/include/threepp/materials/ShaderMaterial.hpp \
  /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
  /usr/include/c++/13/bits/stl_map.h \
  /usr/include/c++/13/bits/stl_multimap.h \
@@ -588,6 +589,10 @@ CMakeFiles/client.dir/src/client/engine/renderer.cpp.o: \
  /usr/include/c++/13/format /usr/include/c++/13/charconv \
  /usr/include/c++/13/span \
  /home/quinn/Desktop/bz_opengl/src/client/game/shot.hpp \
+ /usr/include/c++/13/fstream \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
+ /usr/include/c++/13/bits/fstream.tcc \
  /home/quinn/Desktop/bz_opengl/libs/include/threepp/loaders/AssimpLoader.hpp \
  /home/quinn/Desktop/bz_opengl/libs/include/threepp/animation/AnimationClip.hpp \
  /home/quinn/Desktop/bz_opengl/libs/include/threepp/animation/KeyframeTrack.hpp \
