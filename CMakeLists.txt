@@ -59,8 +59,7 @@ add_executable(server ${SERVER_SOURCES})
 target_include_directories(client PRIVATE
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_SOURCE_DIR}/src/client
-    ${PROJECT_SOURCE_DIR}/src/client/game
-    ${PROJECT_SOURCE_DIR}/src/client/engine
+    ${PROJECT_SOURCE_DIR}/src/engine
     ${INCLUDE_DIR}
     ${CMAKE_SOURCE_DIR}/libs/include/bullet
     ${CMAKE_SOURCE_DIR}/libs/include/glm
@@ -70,8 +69,7 @@ target_include_directories(client PRIVATE
 target_include_directories(server PRIVATE
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_SOURCE_DIR}/src/server
-    ${PROJECT_SOURCE_DIR}/src/server/game
-    ${PROJECT_SOURCE_DIR}/src/server/engine
+    ${PROJECT_SOURCE_DIR}/src/engine
     ${INCLUDE_DIR}
     ${CMAKE_SOURCE_DIR}/libs/include/bullet
 )

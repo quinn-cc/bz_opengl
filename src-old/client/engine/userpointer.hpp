@@ -1,9 +1,9 @@
 #pragma once
-#include "renderer.hpp"
+#include "Render.hpp"
 #include "input.hpp"
 
 class GLFWUserPointer {
 public:
-    Renderer *renderer;
+    Render *render;
     Input *input;
 };

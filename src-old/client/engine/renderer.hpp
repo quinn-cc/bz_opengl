@@ -35,7 +35,7 @@ private:
     /*
      * Radar
      */
-    std::shared_ptr<threepp::Scene> radarScene;
+    
     std::shared_ptr<threepp::OrthographicCamera> radarCamera;
     std::shared_ptr<threepp::GLRenderTarget> radarRenderTarget;
     std::shared_ptr<threepp::ShaderMaterial> radarMat;
