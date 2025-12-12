@@ -1,7 +1,5 @@
 #pragma once
-#include "client/client.hpp"
-
-using shot_id = uint32_t;
+#include "client.hpp"
 
 class Shot {
 private:

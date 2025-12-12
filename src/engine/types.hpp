@@ -1,10 +1,34 @@
 #pragma once
 #include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/glm.hpp>
 #include <type_traits>
 #include <cstddef>
 #include <string>
-#include "geometry.hpp"
-#include "types.hpp"
+#include <chrono>
+
+namespace TimeUtils {
+    using time = std::chrono::time_point<std::chrono::system_clock>;
+    using duration = float;
+
+    inline float GetElapsedTime(time start, time end) {
+        return std::chrono::duration<float>(end - start).count();
+    }
+
+    inline time GetCurrentTime() {
+        return std::chrono::system_clock::now();
+    }
+}
+
+typedef struct Location {
+    glm::vec3 position;
+    glm::quat rotation;
+} Location;
+
+using client_id = uint32_t;
+using shot_id = uint32_t;
+using physics_id = uint32_t;
+using render_id = uint32_t;
 
 #pragma pack(push, 1)
 

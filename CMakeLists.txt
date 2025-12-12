@@ -7,8 +7,8 @@ set(CMAKE_BUILD_TYPE Release)
 set(BUILD_SHARED_LIBS OFF)
 
 # Gather sources
-file(GLOB_RECURSE CLIENT_SOURCES "${PROJECT_SOURCE_DIR}/src/client/*.cpp")
-file(GLOB_RECURSE SERVER_SOURCES "${PROJECT_SOURCE_DIR}/src/server/*.cpp")
+file(GLOB_RECURSE CLIENT_SOURCES "${PROJECT_SOURCE_DIR}/src/client/*.cpp" "${PROJECT_SOURCE_DIR}/src/engine/*.cpp")
+file(GLOB_RECURSE SERVER_SOURCES "${PROJECT_SOURCE_DIR}/src/server/*.cpp" "${PROJECT_SOURCE_DIR}/src/engine/*.cpp")
 
 file(GLOB IMGUI_SOURCES
     libs/include/imgui/imgui.cpp
@@ -57,21 +57,15 @@ add_executable(server ${SERVER_SOURCES})
 
 # Include directories
 target_include_directories(client PRIVATE
-    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/src/
     ${PROJECT_SOURCE_DIR}/src/client
-    ${PROJECT_SOURCE_DIR}/src/engine
-    ${INCLUDE_DIR}
+    ${CMAKE_SOURCE_DIR}/libs/include
     ${CMAKE_SOURCE_DIR}/libs/include/bullet
-    ${CMAKE_SOURCE_DIR}/libs/include/glm
-    ${CMAKE_SOURCE_DIR}/libs/include/assimp
-    ${CMAKE_SOURCE_DIR}/libs/include/imgui
 )
 target_include_directories(server PRIVATE
-    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/src/
     ${PROJECT_SOURCE_DIR}/src/server
-    ${PROJECT_SOURCE_DIR}/src/engine
-    ${INCLUDE_DIR}
-    ${CMAKE_SOURCE_DIR}/libs/include/bullet
+    ${CMAKE_SOURCE_DIR}/libs/include
 )
 
 # Link prebuilt compiled libraries

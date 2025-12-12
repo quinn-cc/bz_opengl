@@ -4,10 +4,7 @@
 #include <glm/glm.hpp>
 #include <map>
 #include <string>
-#include "engine/common/timeutils.hpp"
-
-// Define render_id to be an int
-typedef unsigned int render_id;
+#include "engine/types.hpp"
 
 class Render {
 private:

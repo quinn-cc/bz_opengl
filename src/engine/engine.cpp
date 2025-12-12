@@ -39,11 +39,6 @@ Engine::~Engine() {
 }
 
 void Engine::update() {
-    std::chrono::time_point<std::chrono::system_clock> currTime = std::chrono::system_clock::now();  
-    TimeUtils::duration deltaTime = TimeUtils::GetElapsedTime(lastFrameTime, TimeUtils::GetCurrentTime());
-    deltaTime = std::max(deltaTime, 0.0001f);
-    lastFrameTime = currTime;
-
     if (mode == MODE_CLIENT) {
         clientNetwork->update();
         input->update();

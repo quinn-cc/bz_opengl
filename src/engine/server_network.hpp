@@ -1,5 +1,5 @@
 #pragma once
-#include "engine/common/netmsg.hpp"
+#include "engine/types.hpp"
 #include <string>
 #include <cstdint>
 #include <enet.h>

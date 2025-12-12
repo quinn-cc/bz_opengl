@@ -1,10 +1,17 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <string>
-#include "engine/common/geometry.hpp"
+#include "engine/types.hpp"
+
+class Game;
 
 class Player {
 private:
+    Game &game;
+
+    physics_id physicsId;
+    render_id renderId;
+
     std::string name;
     Location position;
     glm::vec3 velocity;
@@ -12,8 +19,8 @@ private:
     bool canSpawn;
 
 public:
-    Player() = default;
-    ~Player() = default;
+    Player(Game &game);
+    ~Player();
 
     void update();
 };

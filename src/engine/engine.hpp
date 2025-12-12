@@ -14,7 +14,6 @@ enum Mode {
 class Engine {
 private:
     GLFWwindow *window;
-    TimeUtils::time lastFrameTime;
     Mode mode;
 
 public:
@@ -28,5 +27,5 @@ public:
     Engine(Mode mode, GLFWwindow *window);
     ~Engine();
 
-    void update();
+    void update(TimeUtils::duration deltaTime);
 };

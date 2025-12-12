@@ -1,15 +1,12 @@
-#include "engine/renderer.hpp"
-#include "engine/physics.hpp"
-#include "engine/player.hpp"
-#include "engine/client.hpp"
-#include "engine/shot.hpp"
-#include "engine/client_network.hpp"
+#include <GLFW/glfw3.h>
+#include "spdlog/spdlog.h"
+#include "engine/engine.hpp"
+#include "game.hpp"
 
-std::vector<Client *> clients;
-std::vector<Shot *> shots;
+TimeUtils::time lastFrameTime;
 
 int main() {
-    window = glfwCreateWindow(800, 600, "BZFlag v3", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(800, 600, "BZFlag v3", nullptr, nullptr);
     //glfwSetWindowUserPointer(window, userPointer);
     if (!window) {
         spdlog::error("GLFW window failed to create");
@@ -19,12 +16,17 @@ int main() {
     glfwMakeContextCurrent(window);
 
     Engine engine(MODE_CLIENT, window);
-    
+    Game game(engine);
+
+    lastFrameTime = TimeUtils::GetCurrentTime();
 
     while (true) {
-        engine.update();
+        TimeUtils::time currTime = TimeUtils::GetCurrentTime();  
+        TimeUtils::duration deltaTime = TimeUtils::GetElapsedTime(lastFrameTime, TimeUtils::GetCurrentTime());
+        deltaTime = std::max(deltaTime, 0.0001f);
+        lastFrameTime = currTime;
 
-        // Does minimal possible to link network messages to game 
-        
+        engine.update(deltaTime);
+        game.update(deltaTime);
     }
 }

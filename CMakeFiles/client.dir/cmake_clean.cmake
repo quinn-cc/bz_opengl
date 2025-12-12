@@ -1,0 +1,31 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.o"
+  "CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_glfw.cpp.o.d"
+  "CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.o"
+  "CMakeFiles/client.dir/libs/include/imgui/backends/imgui_impl_opengl3.cpp.o.d"
+  "CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.o"
+  "CMakeFiles/client.dir/libs/include/imgui/imgui.cpp.o.d"
+  "CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.o"
+  "CMakeFiles/client.dir/libs/include/imgui/imgui_draw.cpp.o.d"
+  "CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.o"
+  "CMakeFiles/client.dir/libs/include/imgui/imgui_tables.cpp.o.d"
+  "CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.o"
+  "CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.o.d"
+  "CMakeFiles/client.dir/src/client/game.cpp.o"
+  "CMakeFiles/client.dir/src/client/game.cpp.o.d"
+  "CMakeFiles/client.dir/src/client/main.cpp.o"
+  "CMakeFiles/client.dir/src/client/main.cpp.o.d"
+  "CMakeFiles/client.dir/src/client/player.cpp.o"
+  "CMakeFiles/client.dir/src/client/player.cpp.o.d"
+  "CMakeFiles/client.dir/src/client/world.cpp.o"
+  "CMakeFiles/client.dir/src/client/world.cpp.o.d"
+  "CMakeFiles/client.dir/src/engine/engine.cpp.o"
+  "CMakeFiles/client.dir/src/engine/engine.cpp.o.d"
+  "client"
+  "client.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/client.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
