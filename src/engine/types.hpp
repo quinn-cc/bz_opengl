@@ -7,6 +7,14 @@
 #include <string>
 #include <chrono>
 
+typedef struct InputState {
+    bool fire;
+    bool spawn;
+    bool jump;
+    bool quickQuit;
+    glm::vec2 movement;
+} InputState;
+
 namespace TimeUtils {
     using time = std::chrono::time_point<std::chrono::system_clock>;
     using duration = float;

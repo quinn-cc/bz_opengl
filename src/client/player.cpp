@@ -7,7 +7,7 @@ Player::Player(Game &game) : game(game) {
     alive = true;
     canSpawn = true;
 
-    physics_id physicsId = game.engine.physics->create(glm::vec3(1.0f, 2.0f, 1.0f), 1.0f);
+    physics_id physicsId = game.engine.physics->createPlayer(glm::vec3(1.0f, 2.0f, 1.0f), 1.0f);
     render_id renderId = game.engine.render->create("data/models/player.glb");
 }
 
@@ -18,10 +18,10 @@ Player::~Player() {
 
 void Player::update() {
     glm::vec2 movement = game.engine.input->getInputState().movement;
-    float speed = game.world->getPlayerSpeed();
-    float turnSpeed = game.world->getPlayerTurnSpeed();
+    float speed = game.world->getSettings().playerSpeed;
+    float turnSpeed = game.world->getSettings().playerTurnSpeed;
 
-    game.engine.physics->move(physicsId, glm::vec3(
+    game.engine.physics->setVelocity(physicsId, glm::vec3(
         movement.y * speed,
         0.0f,
         -movement.x * speed

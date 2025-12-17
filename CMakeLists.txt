@@ -48,9 +48,6 @@ prebuilt_lib(BULLET_DYNAMICS_LIB BulletDynamics)
 prebuilt_lib(BULLET_COLLISION_LIB BulletCollision)
 prebuilt_lib(BULLET_LINEAR_LIB LinearMath)
 
-# Include directories for all libraries
-set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/libs/include)
-
 # Create executables
 add_executable(client ${CLIENT_SOURCES} ${IMGUI_SOURCES})
 add_executable(server ${SERVER_SOURCES})
@@ -61,6 +58,7 @@ target_include_directories(client PRIVATE
     ${PROJECT_SOURCE_DIR}/src/client
     ${CMAKE_SOURCE_DIR}/libs/include
     ${CMAKE_SOURCE_DIR}/libs/include/bullet
+    ${CMAKE_SOURCE_DIR}/libs/include/imgui
 )
 target_include_directories(server PRIVATE
     ${PROJECT_SOURCE_DIR}/src/

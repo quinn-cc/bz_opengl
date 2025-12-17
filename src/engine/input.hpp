@@ -1,24 +1,20 @@
 #pragma once
 #include <GLFW/glfw3.h>
 #include <glm/vec2.hpp>
-
-typedef struct InputState {
-    bool fire;
-    bool spawn;
-    bool jump;
-    bool quickQuit;
-    glm::vec2 movement;
-} InputState;
+#include "engine/types.hpp"
 
 class Input {
-private:
-    void update();
-
     friend class Engine;
 
-public:
+private:
+    InputState inputState;
+    GLFWwindow *window;
+
     Input(GLFWwindow *window);
-    ~Input();
-    
+    ~Input() = default;
+
+    void update();
+
+public:
     const InputState &getInputState() const;
 };

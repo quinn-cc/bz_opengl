@@ -1,23 +1,25 @@
 #pragma once
 #include <string>
+#include "engine/types.hpp"
 
 class Game;
+
+struct WorldSettings {
+    float playerSpeed;
+    float playerTurnSpeed;
+    float gravity;
+};
 
 class World {
 private:
     Game &game;
-
     render_id renderId;
-
-    float playerSpeed;
-    float playerTurnSpeed;
+    WorldSettings settings;
 
 public:
     World(Game &game);
-    ~World() = default;
+    ~World();
 
     void load(std::string worldPath);
-
-    float getPlayerSpeed() const;
-    float getPlayerTurnSpeed() const;
+    const WorldSettings &getSettings() const;
 };

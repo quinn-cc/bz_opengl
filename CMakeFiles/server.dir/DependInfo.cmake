@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/quinn/Documents/bz_opengl/src/engine/engine.cpp" "CMakeFiles/server.dir/src/engine/engine.cpp.o" "gcc" "CMakeFiles/server.dir/src/engine/engine.cpp.o.d"
-  "/home/quinn/Documents/bz_opengl/src/server/main.cpp" "CMakeFiles/server.dir/src/server/main.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/main.cpp.o.d"
+  "/home/quinn/Desktop/bz_opengl/src/engine/engine.cpp" "CMakeFiles/server.dir/src/engine/engine.cpp.o" "gcc" "CMakeFiles/server.dir/src/engine/engine.cpp.o.d"
+  "/home/quinn/Desktop/bz_opengl/src/server/main.cpp" "CMakeFiles/server.dir/src/server/main.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/main.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

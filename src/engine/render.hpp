@@ -7,16 +7,16 @@
 #include "engine/types.hpp"
 
 class Render {
-private:
-    void beginFrame();
-    void endFrame();
-
     friend class Engine;
 
-public:
+private:
     Render(GLFWwindow *window);
     ~Render();
 
+    void beginFrame();
+    void endFrame();
+
+public:
     render_id create(std::string modelPath);
     void destroy(render_id id);
     void setPosition(render_id id, const glm::vec3 &position);

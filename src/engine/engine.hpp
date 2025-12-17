@@ -25,6 +25,9 @@ public:
     GUI *gui = nullptr;
 
     Engine(Mode mode, GLFWwindow *window);
+    Engine(Mode mode, GLFWwindow *window, uint16_t serverPort,
+        std::function<void(client_id)> connectionCallback, 
+        std::function<void(client_id)> disconnectionCallback);
     ~Engine();
 
     void update(TimeUtils::duration deltaTime);

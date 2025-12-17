@@ -1,8 +1,12 @@
 #include "engine/engine.hpp"
+#include "engine/types.hpp"
 #include "spdlog/spdlog.h"
+#include <functional>
 
-Engine::Engine(Mode mode, GLFWwindow *window,
-        std::optional<uint16_t> serverPort) {
+/*
+ * Client constructor
+ */
+Engine::Engine(Mode mode, GLFWwindow *window) {
     this->mode = mode;
     this->window = window;
 
@@ -17,15 +21,30 @@ Engine::Engine(Mode mode, GLFWwindow *window,
             spdlog::error("Client mode requires a valid GLFWwindow pointer.");
             return;
         }
-    } else if (mode == MODE_SERVER) {
-        if (!serverPort.has_value()) {
-            spdlog::error("Server mode requires a server port.");
-            return;
-        }
+    } else {
+        spdlog::error("Server mode requires server port and callbacks. Use the other constructor.");
+    }
+}
+
+/*
+ * Server constructor
+ */
+Engine::Engine(Mode mode, GLFWwindow *window, uint16_t serverPort,
+    std::function<void(client_id)> connectionCallback, 
+    std::function<void(client_id)> disconnectionCallback) {
+
+    this->mode = MODE_CLIENT;
+    this->window = nullptr;
+
+    if (mode == MODE_SERVER) {
         serverNetwork = new ServerNetwork(
-            serverPort.value(),
+            serverPort,
+            connectionCallback,
+            disconnectionCallback
         );
         physics = new Physics();
+    } else {
+        spdlog::error("Client mode requires a valid GLFWwindow pointer. Use the other constructor.");
     }
 }
 
@@ -38,7 +57,7 @@ Engine::~Engine() {
     delete gui;
 }
 
-void Engine::update() {
+void Engine::update(TimeUtils::duration deltaTime) {
     if (mode == MODE_CLIENT) {
         clientNetwork->update();
         input->update();

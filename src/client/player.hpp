@@ -13,7 +13,7 @@ private:
     render_id renderId;
 
     std::string name;
-    Location position;
+    Location location;
     glm::vec3 velocity;
     bool alive;
     bool canSpawn;

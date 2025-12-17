@@ -1,7 +1,6 @@
 #pragma once
 #include <cstdint>
-
-using client_id = uint32_t;
+#include "engine/types.hpp"
 
 class Client {
 private:
