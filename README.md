@@ -2,7 +2,7 @@
 I think BZFlag is on version 2, so this is version 3. Whatever.
 
 ## Install
-`sudo apt install cmake build-essential xorg-dev libgl1-mesa-dev zlib1g-dev freeglut3-dev liblzma-dev`
+`sudo apt install cmake build-essential xorg-dev libgl1-mesa-dev zlib1g-dev freeglut3-dev liblzma-dev libglfw3-dev`
 
 ## Overview
 Here are the list of libaries currently used for each task:

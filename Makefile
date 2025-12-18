@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/quinn/Desktop/bz_opengl
+CMAKE_SOURCE_DIR = /home/quinn/Documents/bz_opengl
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/quinn/Desktop/bz_opengl
+CMAKE_BINARY_DIR = /home/quinn/Documents/bz_opengl
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Desktop/bz_opengl/CMakeFiles /home/quinn/Desktop/bz_opengl//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Documents/bz_opengl/CMakeFiles /home/quinn/Documents/bz_opengl//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Desktop/bz_opengl/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Documents/bz_opengl/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -409,6 +409,87 @@ src/engine/engine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/engine/engine.cpp.s
 .PHONY : src/engine/engine.cpp.s
 
+src/engine/input.o: src/engine/input.cpp.o
+.PHONY : src/engine/input.o
+
+# target to build an object file
+src/engine/input.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/engine/input.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/engine/input.cpp.o
+.PHONY : src/engine/input.cpp.o
+
+src/engine/input.i: src/engine/input.cpp.i
+.PHONY : src/engine/input.i
+
+# target to preprocess a source file
+src/engine/input.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/engine/input.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/engine/input.cpp.i
+.PHONY : src/engine/input.cpp.i
+
+src/engine/input.s: src/engine/input.cpp.s
+.PHONY : src/engine/input.s
+
+# target to generate assembly for a file
+src/engine/input.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/engine/input.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/engine/input.cpp.s
+.PHONY : src/engine/input.cpp.s
+
+src/engine/physics.o: src/engine/physics.cpp.o
+.PHONY : src/engine/physics.o
+
+# target to build an object file
+src/engine/physics.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/engine/physics.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/engine/physics.cpp.o
+.PHONY : src/engine/physics.cpp.o
+
+src/engine/physics.i: src/engine/physics.cpp.i
+.PHONY : src/engine/physics.i
+
+# target to preprocess a source file
+src/engine/physics.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/engine/physics.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/engine/physics.cpp.i
+.PHONY : src/engine/physics.cpp.i
+
+src/engine/physics.s: src/engine/physics.cpp.s
+.PHONY : src/engine/physics.s
+
+# target to generate assembly for a file
+src/engine/physics.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/engine/physics.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/engine/physics.cpp.s
+.PHONY : src/engine/physics.cpp.s
+
+src/engine/render.o: src/engine/render.cpp.o
+.PHONY : src/engine/render.o
+
+# target to build an object file
+src/engine/render.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/engine/render.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/engine/render.cpp.o
+.PHONY : src/engine/render.cpp.o
+
+src/engine/render.i: src/engine/render.cpp.i
+.PHONY : src/engine/render.i
+
+# target to preprocess a source file
+src/engine/render.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/engine/render.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/engine/render.cpp.i
+.PHONY : src/engine/render.cpp.i
+
+src/engine/render.s: src/engine/render.cpp.s
+.PHONY : src/engine/render.s
+
+# target to generate assembly for a file
+src/engine/render.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/engine/render.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/engine/render.cpp.s
+.PHONY : src/engine/render.cpp.s
+
 src/server/main.o: src/server/main.cpp.o
 .PHONY : src/server/main.o
 
@@ -476,6 +557,15 @@ help:
 	@echo "... src/engine/engine.o"
 	@echo "... src/engine/engine.i"
 	@echo "... src/engine/engine.s"
+	@echo "... src/engine/input.o"
+	@echo "... src/engine/input.i"
+	@echo "... src/engine/input.s"
+	@echo "... src/engine/physics.o"
+	@echo "... src/engine/physics.i"
+	@echo "... src/engine/physics.s"
+	@echo "... src/engine/render.o"
+	@echo "... src/engine/render.i"
+	@echo "... src/engine/render.s"
 	@echo "... src/server/main.o"
 	@echo "... src/server/main.i"
 	@echo "... src/server/main.s"

@@ -4,17 +4,21 @@
 #include <glm/glm.hpp>
 #include <map>
 #include <string>
+#include <map>
 #include "engine/types.hpp"
 
 class Render {
     friend class Engine;
 
 private:
+    // Scene
+    threepp::GLRenderer renderer;
+    std::shared_ptr<threepp::Scene> scene;
+    std::shared_ptr<threepp::PerspectiveCamera> camera;
+    std::map<render_id, std::shared_ptr<threepp::Group>> objects;
+
     Render(GLFWwindow *window);
     ~Render();
-
-    void beginFrame();
-    void endFrame();
 
 public:
     render_id create(std::string modelPath);
@@ -22,6 +26,6 @@ public:
     void setPosition(render_id id, const glm::vec3 &position);
     void setRotation(render_id id, const glm::quat &rotation);
     void setVisible(render_id id, bool visible);
-
-    unsigned int getRadarTextureId();
+    void setCameraPosition(const glm::vec3 &position);
+    void setCameraRotation(const glm::quat &rotation);
 };  

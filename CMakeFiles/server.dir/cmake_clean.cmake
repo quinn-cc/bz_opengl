@@ -1,6 +1,12 @@
 file(REMOVE_RECURSE
   "CMakeFiles/server.dir/src/engine/engine.cpp.o"
   "CMakeFiles/server.dir/src/engine/engine.cpp.o.d"
+  "CMakeFiles/server.dir/src/engine/input.cpp.o"
+  "CMakeFiles/server.dir/src/engine/input.cpp.o.d"
+  "CMakeFiles/server.dir/src/engine/physics.cpp.o"
+  "CMakeFiles/server.dir/src/engine/physics.cpp.o.d"
+  "CMakeFiles/server.dir/src/engine/render.cpp.o"
+  "CMakeFiles/server.dir/src/engine/render.cpp.o.d"
   "CMakeFiles/server.dir/src/server/main.cpp.o"
   "CMakeFiles/server.dir/src/server/main.cpp.o.d"
   "server"

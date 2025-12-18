@@ -1,16 +1,14 @@
 #pragma once
 
 class GUI {
-private:
-    void update();
-    void startFrame();
-    void endFrame();
-
     friend class Engine;
 
-public:
+private:
+    void update();
+
     GUI();
     ~GUI();
-    
+
+public:
     void drawTexture(unsigned int textureId);
 };

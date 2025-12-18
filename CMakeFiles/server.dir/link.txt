@@ -1,1 +1,1 @@
-/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/server.dir/src/engine/engine.cpp.o CMakeFiles/server.dir/src/server/main.cpp.o -o server  libs/lib/linux/libenet.a 
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/server.dir/src/engine/engine.cpp.o CMakeFiles/server.dir/src/engine/input.cpp.o CMakeFiles/server.dir/src/engine/physics.cpp.o CMakeFiles/server.dir/src/engine/render.cpp.o CMakeFiles/server.dir/src/server/main.cpp.o -o server  libs/lib/linux/libenet.a 

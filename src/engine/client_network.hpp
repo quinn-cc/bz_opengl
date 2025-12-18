@@ -9,10 +9,10 @@ private:
     ENetHost* client = nullptr;
     ENetPeer* server = nullptr;
 
-public:
     ClientNetwork() = default;
     ~ClientNetwork() = default;
 
+public:
     void connect(const std::string &address, uint16_t port);
     void update();
 

@@ -62,11 +62,8 @@ void Engine::update(TimeUtils::duration deltaTime) {
         clientNetwork->update();
         input->update();
         physics->update(deltaTime);
-        render->beginFrame();
-        gui->startFrame();
-        gui->drawTexture(render->getRadarTextureId());
-        gui->endFrame();
-        render->endFrame();
+        //gui->drawTexture(render->getRadarTextureId());
+        //gui->update();
     } else if (mode == MODE_SERVER) {
         serverNetwork->update();
         physics->update(deltaTime);

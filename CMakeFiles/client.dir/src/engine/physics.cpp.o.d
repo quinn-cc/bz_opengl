@@ -1,9 +1,7 @@
-CMakeFiles/client.dir/src/client/game.cpp.o: \
- /home/quinn/Documents/bz_opengl/src/client/game.cpp \
+CMakeFiles/client.dir/src/engine/physics.cpp.o: \
+ /home/quinn/Documents/bz_opengl/src/engine/physics.cpp \
  /usr/include/stdc-predef.h \
- /home/quinn/Documents/bz_opengl/src/client/game.hpp \
- /home/quinn/Documents/bz_opengl/src/engine/engine.hpp \
- /home/quinn/Documents/bz_opengl/src/engine/server_network.hpp \
+ /home/quinn/Documents/bz_opengl/src/engine/physics.hpp \
  /home/quinn/Documents/bz_opengl/src/engine/types.hpp \
  /home/quinn/Documents/bz_opengl/libs/include/glm/glm.hpp \
  /home/quinn/Documents/bz_opengl/libs/include/glm/detail/_fixes.hpp \
@@ -424,215 +422,12 @@ CMakeFiles/client.dir/src/client/game.cpp.o: \
  /usr/include/c++/13/charconv /usr/include/c++/13/optional \
  /usr/include/c++/13/span /usr/include/c++/13/variant \
  /usr/include/c++/13/bits/ranges_algobase.h \
- /home/quinn/Documents/bz_opengl/libs/include/enet.h \
- /usr/include/c++/13/stdlib.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
- /usr/include/x86_64-linux-gnu/sys/ioctl.h \
- /usr/include/x86_64-linux-gnu/bits/ioctls.h \
- /usr/include/x86_64-linux-gnu/asm/ioctls.h \
- /usr/include/asm-generic/ioctls.h /usr/include/linux/ioctl.h \
- /usr/include/x86_64-linux-gnu/asm/ioctl.h \
- /usr/include/asm-generic/ioctl.h \
- /usr/include/x86_64-linux-gnu/bits/ioctl-types.h \
- /usr/include/x86_64-linux-gnu/sys/ttydefaults.h \
- /usr/include/x86_64-linux-gnu/sys/time.h \
- /usr/include/x86_64-linux-gnu/sys/socket.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
- /usr/include/x86_64-linux-gnu/bits/socket.h \
- /usr/include/x86_64-linux-gnu/bits/socket_type.h \
- /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
- /usr/include/x86_64-linux-gnu/asm/socket.h \
- /usr/include/asm-generic/socket.h /usr/include/linux/posix_types.h \
- /usr/include/linux/stddef.h \
- /usr/include/x86_64-linux-gnu/asm/posix_types.h \
- /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
- /usr/include/asm-generic/posix_types.h \
- /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
- /usr/include/asm-generic/bitsperlong.h \
- /usr/include/x86_64-linux-gnu/asm/sockios.h \
- /usr/include/asm-generic/sockios.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
- /usr/include/x86_64-linux-gnu/bits/socket2.h /usr/include/poll.h \
- /usr/include/x86_64-linux-gnu/sys/poll.h \
- /usr/include/x86_64-linux-gnu/bits/poll.h \
- /usr/include/x86_64-linux-gnu/bits/poll2.h /usr/include/arpa/inet.h \
- /usr/include/netinet/in.h /usr/include/x86_64-linux-gnu/bits/in.h \
- /usr/include/netinet/tcp.h /usr/include/netdb.h /usr/include/rpc/netdb.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
- /usr/include/x86_64-linux-gnu/bits/netdb.h /usr/include/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
- /usr/include/x86_64-linux-gnu/bits/environments.h \
- /usr/include/x86_64-linux-gnu/bits/confname.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
- /usr/include/x86_64-linux-gnu/bits/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/unistd-decl.h \
- /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
- /usr/include/linux/close_range.h /usr/include/string.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/fcntl.h /usr/include/x86_64-linux-gnu/bits/fcntl.h \
- /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
- /usr/include/linux/falloc.h /usr/include/x86_64-linux-gnu/bits/stat.h \
- /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
- /usr/include/x86_64-linux-gnu/bits/fcntl2.h /usr/include/c++/13/map \
- /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
- /usr/include/c++/13/bits/stl_multimap.h \
- /home/quinn/Documents/bz_opengl/src/engine/client_network.hpp \
- /home/quinn/Documents/bz_opengl/src/engine/render.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/threepp.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/constants.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/canvas/Canvas.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/canvas/WindowSize.hpp \
- /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/input/PeripheralsEventSource.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/input/IOCapture.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/input/KeyListener.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/input/MouseListener.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/Vector2.hpp \
- /usr/include/c++/13/filesystem /usr/include/c++/13/bits/fs_fwd.h \
- /usr/include/c++/13/bits/fs_path.h /usr/include/c++/13/codecvt \
- /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
- /usr/include/c++/13/memory \
- /usr/include/c++/13/bits/stl_raw_storage_iter.h \
- /usr/include/c++/13/bits/shared_ptr_atomic.h \
- /usr/include/c++/13/bits/atomic_base.h \
- /usr/include/c++/13/bits/atomic_lockfree_defines.h \
- /usr/include/c++/13/bits/atomic_wait.h /usr/include/syscall.h \
- /usr/include/x86_64-linux-gnu/sys/syscall.h \
- /usr/include/x86_64-linux-gnu/asm/unistd.h \
- /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
- /usr/include/x86_64-linux-gnu/bits/syscall.h \
- /usr/include/c++/13/bits/std_mutex.h \
- /usr/include/c++/13/backward/auto_ptr.h \
- /usr/include/c++/13/bits/ranges_uninitialized.h \
- /usr/include/c++/13/pstl/glue_memory_defs.h \
- /usr/include/c++/13/pstl/execution_defs.h \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/lights/lights.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/lights/AmbientLight.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/lights/Light.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/core/Object3D.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/Euler.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/float_view.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/Matrix3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/Matrix4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/Quaternion.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/float_view.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/Vector3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/core/EventDispatcher.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/core/Layers.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/core/misc.hpp \
- /usr/include/c++/13/any \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/Color.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/lights/DirectionalLight.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/lights/light_interfaces.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/lights/LightShadow.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/cameras/Camera.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/Frustum.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/Plane.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/Vector4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/lights/HemisphereLight.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/lights/PointLight.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/lights/SpotLight.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/MathUtils.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/controls/FlyControls.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/controls/OrbitControls.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/geometries.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/BoxGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/core/BufferGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/Box3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/infinity.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/Sphere.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/core/BufferAttribute.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/core/misc.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/CapsuleGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/LatheGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/CircleGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/ConeGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/CylinderGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/IcosahedronGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/PolyhedronGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/PlaneGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/RingGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/ShapeGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/extras/core/Shape.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/extras/core/Path.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/extras/core/CurvePath.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/extras/core/Curve.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/SphereGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/TorusGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/TubeGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/WireframeGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/scenes/Scene.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/scenes/Fog.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/scenes/FogExp2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/materials/materials.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/materials/Material.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/core/Uniform.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/textures/Texture.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/textures/Image.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/materials/LineBasicMaterial.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/materials/interfaces.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/materials/MeshBasicMaterial.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/materials/MeshLambertMaterial.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/materials/interfaces.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/materials/MeshNormalMaterial.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/materials/Material.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/materials/MeshPhongMaterial.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/materials/MeshStandardMaterial.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/materials/PointsMaterial.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/materials/ShadowMaterial.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/materials/SpriteMaterial.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/helpers/helpers.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/helpers/ArrowHelper.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/objects/Line.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/objects/ObjectWithMaterials.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/objects/Mesh.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/objects/ObjectWithMorphTargetInfluences.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/helpers/AxesHelper.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/objects/LineSegments.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/objects/Line.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/helpers/Box3Helper.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/helpers/GridHelper.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/core/Clock.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/core/Raycaster.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/core/Face3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/math/Ray.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/objects/Group.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/objects/HUD.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/objects/InstancedMesh.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/objects/Mesh.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/objects/Points.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/objects/Sprite.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/objects/Text.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/ExtrudeTextGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/extras/core/Font.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/ExtrudeGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/geometries/TextGeometry.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/cameras/OrthographicCamera.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/cameras/PerspectiveCamera.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/renderers/GLRenderer.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/renderers/gl/GLInfo.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/renderers/gl/GLShadowMap.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/renderers/gl/GLState.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/loaders/loaders.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/loaders/FontLoader.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/loaders/OBJLoader.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/loaders/STLLoader.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/loaders/TextureLoader.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/threepp/utils/TaskManager.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/GLFW/glfw3.h \
- /usr/include/GL/gl.h /usr/include/GL/glext.h \
- /usr/include/KHR/khrplatform.h \
- /home/quinn/Documents/bz_opengl/src/engine/physics.hpp \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/btBulletDynamicsCommon.h \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/btBulletCollisionCommon.h \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btCollisionWorld.h \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/LinearMath/btVector3.h \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/LinearMath/btScalar.h \
- /usr/include/c++/13/math.h \
+ /usr/include/c++/13/math.h /usr/include/c++/13/stdlib.h \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/LinearMath/btMinMax.h \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/LinearMath/btAlignedAllocator.h \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/LinearMath/btTransform.h \
@@ -693,7 +488,9 @@ CMakeFiles/client.dir/src/client/game.cpp.o: \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/LinearMath/btAlignedObjectArray.h \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/LinearMath/btSerializer.h \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/LinearMath/btHashMap.h \
- /usr/include/memory.h \
+ /usr/include/memory.h /usr/include/string.h /usr/include/strings.h \
+ /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
+ /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btScaledBvhTriangleMeshShape.h \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btTriangleMeshShape.h \
@@ -759,9 +556,102 @@ CMakeFiles/client.dir/src/client/game.cpp.o: \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/BulletDynamics/Vehicle/btWheelInfo.h \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btActionInterface.h \
  /home/quinn/Documents/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
- /home/quinn/Documents/bz_opengl/src/engine/input.hpp \
- /home/quinn/Documents/bz_opengl/src/engine/gui.hpp \
- /home/quinn/Documents/bz_opengl/src/client/client.hpp \
- /home/quinn/Documents/bz_opengl/src/client/player.hpp \
- /home/quinn/Documents/bz_opengl/src/client/world.hpp \
- /home/quinn/Documents/bz_opengl/src/client/shot.hpp
+ /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
+ /usr/include/c++/13/bits/stl_map.h \
+ /usr/include/c++/13/bits/stl_multimap.h \
+ /home/quinn/Documents/bz_opengl/src/engine/mesh_loader.hpp \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/spdlog.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/common.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/null_mutex.h \
+ /usr/include/c++/13/atomic /usr/include/c++/13/bits/atomic_base.h \
+ /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/13/bits/atomic_wait.h /usr/include/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd-decl.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h /usr/include/syscall.h \
+ /usr/include/x86_64-linux-gnu/sys/syscall.h \
+ /usr/include/x86_64-linux-gnu/asm/unistd.h \
+ /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
+ /usr/include/x86_64-linux-gnu/bits/syscall.h \
+ /usr/include/c++/13/bits/std_mutex.h /usr/include/c++/13/utility \
+ /usr/include/c++/13/bits/stl_relops.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/tweakme.h \
+ /usr/include/c++/13/memory \
+ /usr/include/c++/13/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/13/bits/shared_ptr_atomic.h \
+ /usr/include/c++/13/backward/auto_ptr.h \
+ /usr/include/c++/13/bits/ranges_uninitialized.h \
+ /usr/include/c++/13/pstl/glue_memory_defs.h \
+ /usr/include/c++/13/pstl/execution_defs.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/fmt/fmt.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/fmt/bundled/format.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/fmt/bundled/base.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/fmt/bundled/format.h \
+ /usr/include/c++/13/cstring \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/fmt/bundled/format-inl.h \
+ /usr/include/c++/13/algorithm /usr/include/c++/13/bits/ranges_algo.h \
+ /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/common-inl.h \
+ /usr/include/c++/13/iterator /usr/include/c++/13/bits/stream_iterator.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/registry.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/periodic_worker.h \
+ /usr/include/c++/13/condition_variable \
+ /usr/include/c++/13/bits/unique_lock.h /usr/include/c++/13/stop_token \
+ /usr/include/c++/13/bits/std_thread.h /usr/include/c++/13/semaphore \
+ /usr/include/c++/13/bits/semaphore_base.h \
+ /usr/include/c++/13/bits/atomic_timed_wait.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h \
+ /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
+ /usr/include/x86_64-linux-gnu/bits/semaphore.h /usr/include/c++/13/mutex \
+ /usr/include/c++/13/thread \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/periodic_worker-inl.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/registry-inl.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/logger.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/backtracer.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/circular_q.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/log_msg_buffer.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/log_msg.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/log_msg-inl.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/os.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/os-inl.h \
+ /usr/include/x86_64-linux-gnu/sys/stat.h \
+ /usr/include/x86_64-linux-gnu/bits/stat.h \
+ /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
+ /usr/include/x86_64-linux-gnu/bits/statx.h /usr/include/linux/stat.h \
+ /usr/include/linux/types.h /usr/include/x86_64-linux-gnu/asm/types.h \
+ /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
+ /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+ /usr/include/asm-generic/posix_types.h \
+ /usr/include/x86_64-linux-gnu/bits/statx-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_statx_timestamp.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h \
+ /usr/include/fcntl.h /usr/include/x86_64-linux-gnu/bits/fcntl.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
+ /usr/include/linux/falloc.h /usr/include/x86_64-linux-gnu/bits/fcntl2.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/log_msg_buffer-inl.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/backtracer-inl.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/logger-inl.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/pattern_formatter.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/formatter.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/pattern_formatter-inl.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/fmt_helper.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/mdc.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/sinks/sink.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/sinks/sink-inl.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/sinks/ansicolor_sink.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/console_globals.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/sinks/ansicolor_sink-inl.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/details/synchronous_factory.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/version.h \
+ /home/quinn/Documents/bz_opengl/libs/include/spdlog/spdlog-inl.h

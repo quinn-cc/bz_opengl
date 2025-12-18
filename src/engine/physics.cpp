@@ -43,14 +43,10 @@ void Physics::update(float deltaTime) {
     world->stepSimulation(deltaTime, NUM_SUBSTEPS, FIXED_TIMESTEP);
 }
 
-void Physics::setGravity(float gravity) {
-    world->setGravity(btVector3(0, gravity, 0));
-}
-
 physics_id Physics::create(std::string meshPath, float mass) {
     physics_id id = getNextId();
     std::vector<btRigidBody*> bodyList;
-    std::vector<MeshData> meshes = MeshLoader::loadGLB(meshPath);
+    std::vector<MeshLoader::MeshData> meshes = MeshLoader::loadGLB(meshPath);
 
     for (auto &mesh : meshes) {
         // Create convex hull shape
@@ -86,6 +82,7 @@ physics_id Physics::create(std::string meshPath, float mass) {
     }
 
     bodies[id] = bodyList;
+    return id;
 }
 
 physics_id Physics::createPlayer(glm::vec3 size, float mass) {
@@ -95,9 +92,9 @@ physics_id Physics::createPlayer(glm::vec3 size, float mass) {
     playerTransform.setIdentity();
     playerTransform.setOrigin(btVector3(0, 2, 0));
 
-    btScalar mass = 1.0f;
+    btScalar bMass = 1.0f;
     btVector3 inertia(0, 0, 0);
-    playerShape->calculateLocalInertia(mass, inertia);
+    playerShape->calculateLocalInertia(bMass, inertia);
 
     btDefaultMotionState* motionState = new btDefaultMotionState(playerTransform);
     btRigidBody::btRigidBodyConstructionInfo playerInfo(mass, motionState, playerShape, inertia);
@@ -117,9 +114,11 @@ physics_id Physics::createPlayer(glm::vec3 size, float mass) {
     std::vector<btRigidBody*> bodyList;
     bodyList.push_back(playerBody);
     bodies[0] = bodyList;
+
+    return 0;
 }
 
-void destroy(physics_id id) {
+void Physics::destroy(physics_id id) {
     auto it = bodies.find(id);
     if (it != bodies.end()) {
         for (btRigidBody* body : it->second) {
@@ -132,7 +131,7 @@ void destroy(physics_id id) {
     }
 }
 
-void setGravity(float gravity) {
+void Physics::setGravity(float gravity) {
     world->setGravity(btVector3(0, gravity, 0));
 }
 
