@@ -1,20 +1,21 @@
 #pragma once
-#include "engine/engine.hpp"
-#include "client.hpp"
+#include <vector>
+#include "engine/types.hpp"
+#include "engine/client_engine.hpp"
 #include "player.hpp"
 #include "world.hpp"
 #include "shot.hpp"
 
 class Game {
 public:
-    Engine &engine;
+    ClientEngine &engine;
 
     Player *player;
     World *world;
     std::vector<Client *> clients;
     std::vector<Shot *> shots;
 
-    Game(Engine &engine);
+    Game(ClientEngine &engine);
     ~Game();
 
     void update(TimeUtils::duration deltaTime);

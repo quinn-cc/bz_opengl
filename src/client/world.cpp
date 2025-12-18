@@ -1,5 +1,4 @@
 #include "world.hpp"
-#include "engine/engine.hpp"
 #include "game.hpp"
 
 World::World(Game &game) : game(game) {

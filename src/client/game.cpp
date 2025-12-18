@@ -1,6 +1,6 @@
 #include "game.hpp"
 
-Game::Game(Engine &engine) : engine(engine) {
+Game::Game(ClientEngine &engine) : engine(engine) {
     player = new Player(*this);
     world = new World(*this);
 };

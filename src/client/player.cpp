@@ -1,5 +1,5 @@
 #include "player.hpp"
-#include "engine/engine.hpp"
+#include "engine/client_engine.hpp"
 #include "engine/types.hpp"
 #include "game.hpp"
 
@@ -8,7 +8,7 @@ Player::Player(Game &game) : game(game) {
     canSpawn = true;
 
     physics_id physicsId = game.engine.physics->createPlayer(glm::vec3(1.0f, 2.0f, 1.0f), 1.0f);
-    render_id renderId = game.engine.render->create("data/models/player.glb");
+    render_id renderId = game.engine.render->create("data/models/tank/tank.glb");
 }
 
 Player::~Player() {
