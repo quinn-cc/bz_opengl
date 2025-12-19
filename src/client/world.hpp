@@ -14,6 +14,7 @@ class World {
 private:
     Game &game;
     render_id renderId;
+    physics_id physicsId;
     WorldSettings settings;
 
 public:

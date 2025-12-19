@@ -1,13 +1,34 @@
 #include "engine/components/render.hpp"
 #include "threepp/loaders/AssimpLoader.hpp"
 #include "spdlog/spdlog.h"
+#include "engine/user_pointer.hpp"
 
 Render::Render(GLFWwindow *window) : renderer({800, 600}) {
+    scene = threepp::Scene::create();
+    camera = threepp::PerspectiveCamera::create(CAMERA_FOV, SCREEN_WIDTH/SCREEN_HEIGHT, 0.1f, 1000.f);
+
+    
+    
     this->window = window;
     renderer.setClearColor(threepp::Color(0x3399ff));
     renderer.shadowMap().enabled = true;
     renderer.shadowMap().type = threepp::ShadowMap::PFCSoft;
     renderer.toneMapping = threepp::ToneMapping::ACESFilmic;
+
+    auto light = threepp::AmbientLight::create(0xffffff, 0.5f);
+    scene->add(light);
+
+    auto dir = threepp::DirectionalLight::create(threepp::Color(0xffffff), 1.0f); // white, full intensity
+    dir->position.set(150, 50, 150);
+    dir->castShadow = true;
+    dir->shadow->mapSize.set(2048, 2048);
+    auto shadowCam = dynamic_cast<threepp::OrthographicCamera*>(dir->shadow->camera.get());
+    shadowCam->left   = -50;
+    shadowCam->right  =  50;
+    shadowCam->top    =  50;
+    shadowCam->bottom = -50;
+    shadowCam->updateProjectionMatrix();
+    scene->add(dir);
 }
 
 Render::~Render() {
@@ -16,7 +37,19 @@ Render::~Render() {
     }
 }
 
+void Render::update() {
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+    renderer.setSize({width, height});
+    renderer.setRenderTarget(nullptr);
+    renderer.setViewport(0, 0, width, height);
+    renderer.setClearColor(threepp::Color::skyblue);
+    renderer.render(*scene, *camera);
+}
+
 render_id Render::create(std::string modelPath) {
+    spdlog::trace("Render::create: Loading model from path {}", modelPath);
+
     // Load model and add to scene
     static render_id nextId = 1;
     render_id id = nextId++;
@@ -25,12 +58,13 @@ render_id Render::create(std::string modelPath) {
 
     try {
         auto model = loader.load(modelPath);
-        model->scale.set(0.5f, 0.5f, 0.5f);
+        spdlog::trace("Render::create: Model loaded successfully from path {}", modelPath);
         model->traverseType<threepp::Mesh>([&](threepp::Mesh& child) {
             child.castShadow = true;
             child.receiveShadow = true;
         });
         scene->add(model);
+        spdlog::trace("Render::create: Model added to scene from path {}", modelPath);
         objects[id] = model;
     } catch (...) {
         spdlog::error("Render::create: Failed to load model at path {}", modelPath);
@@ -76,4 +110,12 @@ void Render::setVisible(render_id id, bool visible) {
     } else {
         spdlog::error("Render::setVisible: Invalid render_id {}", id);
     }
+}
+
+void Render::setCameraPosition(const glm::vec3 &position) {
+    camera->position.set(position.x, position.y, position.z);
+}
+
+void Render::setCameraRotation(const glm::quat &rotation) {
+    camera->quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
 }

@@ -150,7 +150,7 @@ void Physics::Update(float deltaTime) {
             btQuaternion(locationSet.rotation.x, locationSet.rotation.y, locationSet.rotation.z, locationSet.rotation.w),
             btVector3(locationSet.position.x, locationSet.position.y, locationSet.position.z)
         ));
-        playerBody->setLinearVelocity(btVector3(0, 0, 0)); // clear velocity
+        playerBody->setLinearVelocity(btVector3(0, 0, 0));  // clear velocity
         playerBody->setAngularVelocity(btVector3(0, 0, 0));
         locationIsSet = false;
     }

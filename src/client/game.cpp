@@ -11,5 +11,5 @@ Game::~Game() {
 }
 
 void Game::update(TimeUtils::duration deltaTime) {
-    
+    player->update();
 }

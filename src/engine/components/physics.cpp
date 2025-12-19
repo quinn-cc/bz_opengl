@@ -85,7 +85,7 @@ physics_id Physics::create(std::string meshPath, float mass) {
     return id;
 }
 
-physics_id Physics::createPlayer(glm::vec3 size, float mass) {
+physics_id Physics::createPlayer(glm::vec3 size) {
     // Player (dynamic box)
     btBoxShape *playerShape = new btBoxShape(btVector3(size.x / 2, size.y / 2, size.z / 2));
     btTransform playerTransform;
@@ -97,7 +97,7 @@ physics_id Physics::createPlayer(glm::vec3 size, float mass) {
     playerShape->calculateLocalInertia(bMass, inertia);
 
     btDefaultMotionState* motionState = new btDefaultMotionState(playerTransform);
-    btRigidBody::btRigidBodyConstructionInfo playerInfo(mass, motionState, playerShape, inertia);
+    btRigidBody::btRigidBodyConstructionInfo playerInfo(bMass, motionState, playerShape, inertia);
     btRigidBody* playerBody = new btRigidBody(playerInfo);
 
     // Disable inertia/rotation for arcade-style instant movement
@@ -140,7 +140,7 @@ void Physics::setGravity(float gravity) {
 glm::vec3 Physics::getPosition(physics_id id) {
     // Just return position of first body
     auto bodiesList = getBodies(id);
-    if (bodiesList.size() == 1) { spdlog::error("This function only works for single-body physics_ids"); }
+    if (bodiesList.size() != 1) { spdlog::error("This function only works for single-body physics_ids"); }
     btRigidBody* body = bodiesList.front();
     btTransform transform;
     body->getMotionState()->getWorldTransform(transform);
@@ -151,7 +151,7 @@ glm::vec3 Physics::getPosition(physics_id id) {
 glm::quat Physics::getRotation(physics_id id) {
     // Just return rotation of first body
     auto bodiesList = getBodies(id);
-    if (bodiesList.size() == 1) { spdlog::error("This function only works for single-body physics_ids"); }
+    if (bodiesList.size() != 1) { spdlog::error("This function only works for single-body physics_ids"); }
     btRigidBody* body = bodiesList.front();
     btTransform transform;
     body->getMotionState()->getWorldTransform(transform);
@@ -162,7 +162,7 @@ glm::quat Physics::getRotation(physics_id id) {
 glm::vec3 Physics::getVelocity(physics_id id) {
     // Just return velocity of first body
     auto bodiesList = getBodies(id);
-    if (bodiesList.size() == 1) { spdlog::error("This function only works for single-body physics_ids"); }
+    if (bodiesList.size() != 1) { spdlog::error("This function only works for single-body physics_ids"); }
     btRigidBody* body = bodiesList.front();
     btVector3 vel = body->getLinearVelocity();
     return glm::vec3(vel.x(), vel.y(), vel.z());
@@ -171,15 +171,28 @@ glm::vec3 Physics::getVelocity(physics_id id) {
 glm::vec3 Physics::getAngularVelocity(physics_id id) {
     // Just return angular velocity of first body
     auto bodiesList = getBodies(id);
-    if (bodiesList.size() == 1) { spdlog::error("This function only works for single-body physics_ids"); }
+    if (bodiesList.size() != 1) { spdlog::error("This function only works for single-body physics_ids"); }
     btRigidBody* body = bodiesList.front();
     btVector3 vel = body->getAngularVelocity();
     return glm::vec3(vel.x(), vel.y(), vel.z());
 }
 
+glm::vec3 Physics::getForwardVector(physics_id id) {
+    // Just return forward vector of first body
+    auto bodiesList = getBodies(id);
+    if (bodiesList.size() != 1) { spdlog::error("This function only works for single-body physics_ids"); }
+    btRigidBody* body = bodiesList.front();
+    btTransform transform;
+    body->getMotionState()->getWorldTransform(transform);
+    btMatrix3x3 rot = transform.getBasis();
+    btVector3 forward = rot * btVector3(0, 0, -1); // Assuming -Z is forward
+    glm::vec3 ret = glm::vec3(forward.x(), forward.y(), forward.z());
+    return glm::normalize(ret);
+}
+
 void Physics::setPosition(physics_id id, const glm::vec3 &position) {
     auto bodiesList = getBodies(id);
-    if (bodiesList.size() == 1) { spdlog::error("This function only works for single-body physics_ids"); }
+    if (bodiesList.size() != 1) { spdlog::error("This function only works for single-body physics_ids"); }
     btRigidBody* body = bodiesList.front();
     btTransform transform;
     body->getMotionState()->getWorldTransform(transform);
@@ -191,7 +204,7 @@ void Physics::setPosition(physics_id id, const glm::vec3 &position) {
 
 void Physics::setRotation(physics_id id, const glm::quat &rotation) {
     auto bodiesList = getBodies(id);
-    if (bodiesList.size() == 1) { spdlog::error("This function only works for single-body physics_ids"); }
+    if (bodiesList.size() != 1) { spdlog::error("This function only works for single-body physics_ids"); }
     btRigidBody* body = bodiesList.front();
     btTransform transform;
     body->getMotionState()->getWorldTransform(transform);
@@ -203,7 +216,7 @@ void Physics::setRotation(physics_id id, const glm::quat &rotation) {
 
 void Physics::setVelocity(physics_id id, const glm::vec3 &velocity) {
     auto bodiesList = getBodies(id);
-    if (bodiesList.size() == 1) { spdlog::error("This function only works for single-body physics_ids"); }
+    if (bodiesList.size() != 1) { spdlog::error("This function only works for single-body physics_ids"); }
     btRigidBody* body = bodiesList.front();
     body->setLinearVelocity(btVector3(velocity.x, velocity.y, velocity.z));
     body->activate();
@@ -211,7 +224,7 @@ void Physics::setVelocity(physics_id id, const glm::vec3 &velocity) {
 
 void Physics::setAngularVelocity(physics_id id, const glm::vec3 &angularVelocity) {
     auto bodiesList = getBodies(id);
-    if (bodiesList.size() == 1) { spdlog::error("This function only works for single-body physics_ids"); }
+    if (bodiesList.size() != 1) { spdlog::error("This function only works for single-body physics_ids"); }
     btRigidBody* body = bodiesList.front();
     body->setAngularVelocity(btVector3(angularVelocity.x, angularVelocity.y, angularVelocity.z));
     body->activate();

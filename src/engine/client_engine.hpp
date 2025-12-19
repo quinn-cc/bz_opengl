@@ -5,11 +5,13 @@
 #include "engine/components/physics.hpp"
 #include "engine/components/input.hpp"
 #include "engine/components/gui.hpp"
+#include "engine/user_pointer.hpp"
 #include <string>
 
 class ClientEngine {
 private:
     GLFWwindow *window;
+    GLFWUserPointer *userPointer;
 
 public:
     ClientNetwork *network;
@@ -21,5 +23,6 @@ public:
     ClientEngine(GLFWwindow *window);
     ~ClientEngine();
 
-    void update(TimeUtils::duration deltaTime);
+    void earlyUpdate(TimeUtils::duration deltaTime);
+    void lateUpdate(TimeUtils::duration deltaTime);
 };

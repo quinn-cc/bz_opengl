@@ -9,6 +9,9 @@ ClientEngine::ClientEngine(GLFWwindow *window) {
     physics = new Physics();
     input = new Input(window);
     gui = new GUI(window);
+
+    userPointer = new GLFWUserPointer();
+    glfwSetWindowUserPointer(window, userPointer);
 }
 
 ClientEngine::~ClientEngine() {
@@ -19,8 +22,14 @@ ClientEngine::~ClientEngine() {
     delete gui;
 }
 
-void ClientEngine::update(TimeUtils::duration deltaTime) {
-    network->update();
+void ClientEngine::earlyUpdate(TimeUtils::duration deltaTime) {
     input->update();
+    network->update();
+}
+
+void ClientEngine::lateUpdate(TimeUtils::duration deltaTime) {
     physics->update(deltaTime);
+    render->update();
+
+    glfwSwapBuffers(window);
 }

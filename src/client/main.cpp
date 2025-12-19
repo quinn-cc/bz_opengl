@@ -43,11 +43,12 @@ int main() {
 
     while (true) {
         TimeUtils::time currTime = TimeUtils::GetCurrentTime();  
-        TimeUtils::duration deltaTime = TimeUtils::GetElapsedTime(lastFrameTime, TimeUtils::GetCurrentTime());
+        TimeUtils::duration deltaTime = TimeUtils::GetElapsedTime(lastFrameTime, currTime);
         deltaTime = std::max(deltaTime, 0.0001f);
         lastFrameTime = currTime;
 
-        engine.update(deltaTime);
+        engine.earlyUpdate(deltaTime);
         game.update(deltaTime);
+        engine.lateUpdate(deltaTime);
     }
 }

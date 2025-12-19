@@ -7,6 +7,10 @@
 #include <map>
 #include "engine/types.hpp"
 
+#define CAMERA_FOV 60.0f
+#define SCREEN_WIDTH 800.0f
+#define SCREEN_HEIGHT 600.0f
+
 class Render {
     friend class ClientEngine;
 
@@ -20,6 +24,9 @@ private:
 
     Render(GLFWwindow *window);
     ~Render();
+
+    void update();
+    void resizeCallback(int width, int height);
 
 public:
     render_id create(std::string modelPath);
