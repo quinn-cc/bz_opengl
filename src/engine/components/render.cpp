@@ -7,7 +7,15 @@ Render::Render(GLFWwindow *window) : renderer({800, 600}) {
     scene = threepp::Scene::create();
     camera = threepp::PerspectiveCamera::create(CAMERA_FOV, SCREEN_WIDTH/SCREEN_HEIGHT, 0.1f, 1000.f);
 
-    
+    auto* userPointer = static_cast<GLFWUserPointer*>(glfwGetWindowUserPointer(window));
+    userPointer->resizeCallback = [this](int width, int height) {
+        this->resizeCallback(width, height);
+    };
+
+    glfwSetFramebufferSizeCallback(window, [](GLFWwindow* w, int width, int height) {
+        auto* userPointer = static_cast<GLFWUserPointer*>(glfwGetWindowUserPointer(w));
+        userPointer->resizeCallback(width, height);
+    });
     
     this->window = window;
     renderer.setClearColor(threepp::Color(0x3399ff));
@@ -35,6 +43,12 @@ Render::~Render() {
     for (auto& [id, object] : objects) {
         destroy(id);
     }
+}
+
+void Render::resizeCallback(int width, int height) {
+    renderer.setSize({width, height});
+    camera->aspect = static_cast<float>(width) / static_cast<float>(height);
+    camera->updateProjectionMatrix();
 }
 
 void Render::update() {

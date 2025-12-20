@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/quinn/Documents/bz_opengl
+CMAKE_SOURCE_DIR = /home/quinn/Desktop/bz_opengl
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/quinn/Documents/bz_opengl
+CMAKE_BINARY_DIR = /home/quinn/Desktop/bz_opengl
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Documents/bz_opengl/CMakeFiles /home/quinn/Documents/bz_opengl//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Desktop/bz_opengl/CMakeFiles /home/quinn/Desktop/bz_opengl//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Documents/bz_opengl/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Desktop/bz_opengl/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -604,6 +604,54 @@ src/engine/server_engine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/engine/server_engine.cpp.s
 .PHONY : src/engine/server_engine.cpp.s
 
+src/server/client.o: src/server/client.cpp.o
+.PHONY : src/server/client.o
+
+# target to build an object file
+src/server/client.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/client.cpp.o
+.PHONY : src/server/client.cpp.o
+
+src/server/client.i: src/server/client.cpp.i
+.PHONY : src/server/client.i
+
+# target to preprocess a source file
+src/server/client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/client.cpp.i
+.PHONY : src/server/client.cpp.i
+
+src/server/client.s: src/server/client.cpp.s
+.PHONY : src/server/client.s
+
+# target to generate assembly for a file
+src/server/client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/client.cpp.s
+.PHONY : src/server/client.cpp.s
+
+src/server/game.o: src/server/game.cpp.o
+.PHONY : src/server/game.o
+
+# target to build an object file
+src/server/game.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/game.cpp.o
+.PHONY : src/server/game.cpp.o
+
+src/server/game.i: src/server/game.cpp.i
+.PHONY : src/server/game.i
+
+# target to preprocess a source file
+src/server/game.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/game.cpp.i
+.PHONY : src/server/game.cpp.i
+
+src/server/game.s: src/server/game.cpp.s
+.PHONY : src/server/game.s
+
+# target to generate assembly for a file
+src/server/game.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/game.cpp.s
+.PHONY : src/server/game.cpp.s
+
 src/server/main.o: src/server/main.cpp.o
 .PHONY : src/server/main.o
 
@@ -695,6 +743,12 @@ help:
 	@echo "... src/engine/server_engine.o"
 	@echo "... src/engine/server_engine.i"
 	@echo "... src/engine/server_engine.s"
+	@echo "... src/server/client.o"
+	@echo "... src/server/client.i"
+	@echo "... src/server/client.s"
+	@echo "... src/server/game.o"
+	@echo "... src/server/game.i"
+	@echo "... src/server/game.s"
 	@echo "... src/server/main.o"
 	@echo "... src/server/main.i"
 	@echo "... src/server/main.s"

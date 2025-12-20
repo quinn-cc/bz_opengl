@@ -46,7 +46,5 @@ public:
     void setRotation(physics_id id, const glm::quat &rotation);
     void setVelocity(physics_id id, const glm::vec3 &velocity);
     void setAngularVelocity(physics_id id, const glm::vec3 &angularVelocity);
-    bool isGrounded(physics_id id);
-
-    void move(physics_id id, glm::vec3 movement);
+    bool isGrounded(physics_id id, glm::vec3 boxSize);
 };

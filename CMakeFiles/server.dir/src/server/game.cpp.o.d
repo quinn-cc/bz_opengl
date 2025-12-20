@@ -1,7 +1,7 @@
-CMakeFiles/server.dir/src/engine/components/server_network.cpp.o: \
- /home/quinn/Desktop/bz_opengl/src/engine/components/server_network.cpp \
+CMakeFiles/server.dir/src/server/game.cpp.o: \
+ /home/quinn/Desktop/bz_opengl/src/server/game.cpp \
  /usr/include/stdc-predef.h \
- /home/quinn/Desktop/bz_opengl/src/engine/components/server_network.hpp \
+ /home/quinn/Desktop/bz_opengl/src/server/game.hpp \
  /home/quinn/Desktop/bz_opengl/src/engine/types.hpp \
  /home/quinn/Desktop/bz_opengl/libs/include/glm/glm.hpp \
  /home/quinn/Desktop/bz_opengl/libs/include/glm/detail/_fixes.hpp \
@@ -422,6 +422,8 @@ CMakeFiles/server.dir/src/engine/components/server_network.cpp.o: \
  /usr/include/c++/13/charconv /usr/include/c++/13/optional \
  /usr/include/c++/13/span /usr/include/c++/13/variant \
  /usr/include/c++/13/bits/ranges_algobase.h \
+ /home/quinn/Desktop/bz_opengl/src/engine/server_engine.hpp \
+ /home/quinn/Desktop/bz_opengl/src/engine/components/server_network.hpp \
  /home/quinn/Desktop/bz_opengl/libs/include/enet.h \
  /usr/include/c++/13/stdlib.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
@@ -478,6 +480,140 @@ CMakeFiles/server.dir/src/engine/components/server_network.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/fcntl2.h /usr/include/c++/13/map \
  /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
  /usr/include/c++/13/bits/stl_multimap.h \
+ /home/quinn/Desktop/bz_opengl/src/engine/components/physics.hpp \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/btBulletDynamicsCommon.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/btBulletCollisionCommon.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btCollisionWorld.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btVector3.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btScalar.h \
+ /usr/include/c++/13/math.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btMinMax.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btAlignedAllocator.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btTransform.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btMatrix3x3.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btVector3.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btQuaternion.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btQuadWord.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btCollisionObject.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btMotionState.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btTransform.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btAlignedAllocator.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btAlignedObjectArray.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btCollisionDispatcher.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/BroadphaseCollision/btDispatcher.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btScalar.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/NarrowPhaseCollision/btPersistentManifold.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/NarrowPhaseCollision/btManifoldPoint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btTransformUtil.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btManifoldResult.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btCollisionObject.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/BroadphaseCollision/btBroadphaseProxy.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btCollisionCreateFunc.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/BroadphaseCollision/btOverlappingPairCache.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/BroadphaseCollision/btBroadphaseInterface.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/BroadphaseCollision/btBroadphaseProxy.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/BroadphaseCollision/btOverlappingPairCallback.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btCollisionObject.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btBoxShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btPolyhedralConvexShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btMatrix3x3.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btConvexInternalShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btConvexShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btCollisionShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btCollisionMargin.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btAabbUtil2.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btMinMax.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btSphereShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btCapsuleShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btCylinderShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btBoxShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btConeShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btStaticPlaneShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btConcaveShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btTriangleCallback.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btConvexHullShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btTriangleMesh.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btTriangleIndexVertexArray.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btStridingMeshInterface.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btConvexTriangleMeshShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btTriangleMeshShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btOptimizedBvh.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/BroadphaseCollision/btQuantizedBvh.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btTriangleInfoMap.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btHashMap.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btAlignedObjectArray.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btSerializer.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btHashMap.h \
+ /usr/include/memory.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btScaledBvhTriangleMeshShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btTriangleMeshShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btTriangleIndexVertexArray.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btCompoundShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btTetrahedronShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btEmptyShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btMultiSphereShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionShapes/btUniformScalingShape.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btCollisionCreateFunc.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btCollisionConfiguration.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btCollisionDispatcher.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/BroadphaseCollision/btSimpleBroadphase.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/BroadphaseCollision/btOverlappingPairCache.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/BroadphaseCollision/btAxisSweep3.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/BroadphaseCollision/btDbvtBroadphase.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/BroadphaseCollision/btDbvt.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/BroadphaseCollision/btAxisSweep3Internal.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/BroadphaseCollision/btDbvtBroadphase.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btQuaternion.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btTransform.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btDefaultMotionState.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btMotionState.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btQuickprof.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btIDebugDraw.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btSerializer.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btDynamicsWorld.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/CollisionDispatch/btCollisionWorld.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btContactSolverInfo.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/LinearMath/btThreads.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btSimpleDynamicsWorld.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btJacobianEntry.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btTypedConstraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btSolverConstraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btSolverBody.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btHingeConstraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btConeTwistConstraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btSliderConstraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btUniversalConstraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btHinge2Constraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btGearConstraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btTypedConstraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btFixedConstraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btSolverBody.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btSolverConstraint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletCollision/NarrowPhaseCollision/btManifoldPoint.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/ConstraintSolver/btConstraintSolver.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Vehicle/btRaycastVehicle.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Vehicle/btVehicleRaycaster.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Vehicle/btWheelInfo.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btActionInterface.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
+ /home/quinn/Desktop/bz_opengl/src/server/client.hpp \
  /home/quinn/Desktop/bz_opengl/libs/include/spdlog/spdlog.h \
  /home/quinn/Desktop/bz_opengl/libs/include/spdlog/common.h \
  /home/quinn/Desktop/bz_opengl/libs/include/spdlog/details/null_mutex.h \

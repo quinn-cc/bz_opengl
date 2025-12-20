@@ -1,9 +1,38 @@
 #include "engine/components/input.hpp"
 #include "engine/types.hpp"
+#include "engine/user_pointer.hpp"
 
 Input::Input(GLFWwindow *window) {
     this->window = window;
     this->inputState = {};
+
+    auto* userPointer = static_cast<GLFWUserPointer*>(glfwGetWindowUserPointer(window));
+    userPointer->keyCallback = [this](GLFWwindow* window, int key, int scancode, int action, int mods) {
+        this->keyCallback(window, key, scancode, action, mods);
+    };
+
+    glfwSetKeyCallback(window, [](GLFWwindow* w, int key, int scancode, int action, int mods) {
+        auto* userPointer = static_cast<GLFWUserPointer*>(glfwGetWindowUserPointer(w));
+        userPointer->keyCallback(w, key, scancode, action, mods);
+    });
+}
+
+void Input::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    if (action == GLFW_PRESS) {
+        // Fire
+        if (key == GLFW_KEY_F || key == GLFW_KEY_E) {
+            inputState.fire = true;
+        }
+
+        // Spawn
+        if (key == GLFW_KEY_U) {
+            inputState.spawn = true;
+        }
+
+        if (key == GLFW_KEY_F12) {
+            inputState.quickQuit = true;
+        }
+    }
 }
 
 void Input::update() {

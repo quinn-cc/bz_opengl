@@ -2,16 +2,8 @@
 #include "engine/types.hpp"
 #include <functional>
 
-ServerEngine::ServerEngine(
-    uint16_t serverPort,
-    std::function<void(client_id)> connectionCallback,
-    std::function<void(client_id)> disconnectionCallback
-) {
-    network = new ServerNetwork(
-        serverPort,
-        connectionCallback,
-        disconnectionCallback
-    );
+ServerEngine::ServerEngine(uint16_t serverPort) {
+    network = new ServerNetwork(serverPort);
     physics = new Physics();
 }
 

@@ -2,6 +2,13 @@
 #include "spdlog/spdlog.h"
 
 ClientNetwork::ClientNetwork() {
+    if (enet_initialize() != 0) {
+        spdlog::error("Failed to initialize ENet");
+        exit(1);
+    }
+
+    atexit(enet_deinitialize);
+
     client = enet_host_create(nullptr, 1, 2, 0, 0);
     if (client == nullptr) {
         spdlog::error("ClientNetwork::connect: Failed to create ENet client host.");
@@ -22,13 +29,7 @@ void ClientNetwork::update() {
         switch (event.type) {
         case ENET_EVENT_TYPE_RECEIVE: {
             ServerMsg *msg = reinterpret_cast<ServerMsg*>(event.packet->data);
-
-            void *raw = malloc(event.packet->dataLength);
-            memcpy(raw, event.packet->data, event.packet->dataLength);
-            ServerMsg *msgCopy = reinterpret_cast<ServerMsg*>(raw);
-            receivedMessages.push_back(msgCopy);
-
-            enet_packet_destroy(event.packet);
+            receivedMessages.push_back({ event.packet, msg });
             break;
         }
         case ENET_EVENT_TYPE_DISCONNECT: {
@@ -45,7 +46,18 @@ void ClientNetwork::update() {
     }
 }
 
-void ClientNetwork::connect(const std::string &addr, uint16_t port) {
+void ClientNetwork::popMessage(ServerMsg* msg) {
+    for (auto it = receivedMessages.begin(); it != receivedMessages.end(); ++it) {
+        if (it->msg == msg) {
+            enet_packet_destroy(it->packet);
+            receivedMessages.erase(it);
+            break;
+        }
+    }
+}
+
+bool ClientNetwork::connect(const std::string &addr, uint16_t port, int timeoutMs) {
+    bool ret = false;
     // Set up the server address
     ENetAddress address;
     enet_address_set_host(&address, addr.c_str());
@@ -60,8 +72,9 @@ void ClientNetwork::connect(const std::string &addr, uint16_t port) {
 
     // Wait for the connection to succeed (with timeout)
     ENetEvent event;
-    if (enet_host_service(client, &event, 5000) > 0 && event.type == ENET_EVENT_TYPE_CONNECT) {
+    if (enet_host_service(client, &event, timeoutMs) > 0 && event.type == ENET_EVENT_TYPE_CONNECT) {
         spdlog::debug("Connected to server.");
+        ret = true;
     } else {
         spdlog::info("Connection to server failed.");
         enet_peer_reset(server);
@@ -69,12 +82,6 @@ void ClientNetwork::connect(const std::string &addr, uint16_t port) {
     }
 
     enet_host_flush(client);
+    return ret;
 }
 
-void ClientNetwork::pop(ServerMsg* msg) {
-    auto it = std::find(receivedMessages.begin(), receivedMessages.end(), msg);
-    if (it != receivedMessages.end()) {
-        receivedMessages.erase(it);
-        delete msg;
-    }
-}

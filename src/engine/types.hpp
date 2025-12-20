@@ -26,6 +26,10 @@ namespace TimeUtils {
     inline time GetCurrentTime() {
         return std::chrono::system_clock::now();
     }
+
+    inline duration getDuration(float seconds) {
+        return seconds;
+    }
 }
 
 typedef struct Location {
@@ -61,45 +65,63 @@ typedef struct ServerMsg {
 } ServerMsg;
 
 typedef struct ServerMsg_Location : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_LOCATION;
+    ServerMsg_Location() { type = Type; }
     client_id clientId;
     Location location;
 } ServerMsg_Location;
 
 typedef struct ServerMsg_Connection : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_CONNECTION;
+    ServerMsg_Connection() { type = Type; }
     client_id clientId;
     char name[256];
 } ServerMsg_Connection;
 
 typedef struct ServerMsg_Disconnection : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_DISCONNECTION;
+    ServerMsg_Disconnection() { type = Type; }
     client_id clientId;
 } ServerMsg_Disconnection;
 
 typedef struct ServerMsg_Shot : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_SHOT;
+    ServerMsg_Shot() { type = Type; }
     shot_id globalShotId;
     glm::vec3 position;
     glm::vec3 velocity;
 } ServerMsg_Shot;
 
 typedef struct ServerMsg_RemoveShot : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_REMOVE_SHOT;
+    ServerMsg_RemoveShot() { type = Type; }
     client_id clientId;
     shot_id shotId;
 } ServerMsg_RemoveShot;
 
 typedef struct ServerMsg_AllowSpawn : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_ALLOW_SPAWN;
+    ServerMsg_AllowSpawn() { type = Type; }
     bool allow;
     Location location;
 } ServerMsg_AllowSpawn;
 
 typedef struct ServerMsg_Spawn : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_SPAWN;
+    ServerMsg_Spawn() { type = Type; }
     client_id clientId;
     Location location;
 } ServerMsg_Spawn;
 
 typedef struct ServerMsg_Death : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_DEATH;
+    ServerMsg_Death() { type = Type; }
     client_id clientId;
 } ServerMsg_Death;
 
 typedef struct ServerMsg_PlayerState : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_PLAYER_STATE;
+    ServerMsg_PlayerState() { type = Type; }
     client_id clientId;
     char name[256];
     Location location;
@@ -111,6 +133,8 @@ typedef struct ServerMsg_PlayerState : ServerMsg {
  */
 
 enum ClientMsg_Type {
+    ClientMsg_Type_CONNECTION,
+    ClientMsg_Type_DISCONNECTION,
     ClientMsg_Type_INIT,
     ClientMsg_Type_REQUEST_SPAWN,
     ClientMsg_Type_LOCATION,
@@ -119,20 +143,40 @@ enum ClientMsg_Type {
 
 typedef struct ClientMsg {
     ClientMsg_Type type;
+    client_id clientId;
 } ClientMsg;
 
-typedef struct ClientMsg_Init : ClientMsg {
+typedef struct ClientMsg_Connection : ClientMsg {
+    static constexpr ClientMsg_Type Type = ClientMsg_Type_CONNECTION;
+    ClientMsg_Connection() { type = Type; }
+    char ip[64];
+} ClientMsg_Connection;
+
+typedef struct ClientMsg_Disconnection : ClientMsg {
+    static constexpr ClientMsg_Type Type = ClientMsg_Type_DISCONNECTION;
+    ClientMsg_Disconnection() { type = Type; }
+} ClientMsg_Disconnection;
+
+typedef struct ClientMsg_Init: ClientMsg {
+    static constexpr ClientMsg_Type Type = ClientMsg_Type_INIT;
+    ClientMsg_Init() { type = Type; }
     char name[256];
 } ClientMsg_Init;
 
 typedef struct ClientMsg_RequestSpawn : ClientMsg {
+    static constexpr ClientMsg_Type Type = ClientMsg_Type_REQUEST_SPAWN;
+    ClientMsg_RequestSpawn() { type = Type; }
 } ClientMsg_RequestSpawn;
 
 typedef struct ClientMsg_Location : ClientMsg {
+    static constexpr ClientMsg_Type Type = ClientMsg_Type_LOCATION;
+    ClientMsg_Location() { type = Type; }
     Location location;
 } ClientMsg_Location;
 
 typedef struct ClientMsg_Shot : ClientMsg {
+    static constexpr ClientMsg_Type Type = ClientMsg_Type_SHOT;
+    ClientMsg_Shot() { type = Type; }
     shot_id localShotId;
     glm::vec3 position;
     glm::vec3 velocity;
@@ -145,43 +189,3 @@ concept ServerMsgSubType = std::is_base_of_v<ServerMsg, T>;
 
 template <typename V>
 concept ClientMsgSubType = std::is_base_of_v<ClientMsg, V>;
-
-inline std::string Debug_ClientMsgToString(const ClientMsg &msg) {
-    switch (msg.type) {
-    case ClientMsg_Type_INIT:
-        return "ClientMsg_Init";
-    case ClientMsg_Type_REQUEST_SPAWN:
-        return "ClientMsg_RequestSpawn";
-    case ClientMsg_Type_LOCATION:
-        return "ClientMsg_Location";
-    case ClientMsg_Type_SHOT:
-        return "ClientMsg_Shot";
-    default:
-        return "Unknown ClientMsg";
-    }
-}
-
-inline std::string Debug_ServerMsgToString(const ServerMsg &msg) {
-    switch (msg.type) {
-    case ServerMsg_Type_CONNECTION:
-        return "ServerMsg_Connection";
-    case ServerMsg_Type_DISCONNECTION:
-        return "ServerMsg_Disconnection";
-    case ServerMsg_Type_LOCATION:
-        return "ServerMsg_Location";
-    case ServerMsg_Type_SHOT:
-        return "ServerMsg_Shot";
-    case ServerMsg_Type_REMOVE_SHOT:
-        return "ServerMsg_RemoveShot";
-    case ServerMsg_Type_ALLOW_SPAWN:
-        return "ServerMsg_AllowSpawn";
-    case ServerMsg_Type_SPAWN:
-        return "ServerMsg_Spawn";
-    case ServerMsg_Type_DEATH:
-        return "ServerMsg_Death";
-    case ServerMsg_Type_PLAYER_STATE:
-        return "ServerMsg_PlayerState";
-    default:
-        return "Unknown ServerMsg";
-    }
-}

@@ -7,6 +7,7 @@ class Game;
 struct WorldSettings {
     float playerSpeed;
     float playerTurnSpeed;
+    float playerJumpSpeed;
     float gravity;
 };
 

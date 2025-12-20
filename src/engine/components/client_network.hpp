@@ -11,7 +11,12 @@ private:
     ENetHost* client = nullptr;
     ENetPeer* server = nullptr;
 
-    std::vector<ServerMsg*> receivedMessages;
+    struct MsgData {
+        ENetPacket* packet;
+        ServerMsg* msg;
+    };
+
+    std::vector<MsgData> receivedMessages;
 
     ClientNetwork();
     ~ClientNetwork();
@@ -19,19 +24,24 @@ private:
     void update();
 
 public:
-    void connect(const std::string &address, uint16_t port);
+    bool connect(const std::string &address, uint16_t port, int timeoutMs = 5000);
 
-    template<typename T> std::optional<T*> peek() const {
+    template<typename T> T* peekMessage(std::function<bool(const T&)> predicate = [](const T&) { return true; }) const {
         static_assert(std::is_base_of_v<ServerMsg, T>, "T must be a subclass of ServerMsg");
 
-        for (auto msg : receivedMessages) {
-            if (msg->type == T::Type) {
-                return reinterpret_cast<T*>(msg);
+        for (auto msgData : receivedMessages) {
+            if (msgData.msg->type == T::Type) {
+                auto* casted = static_cast<T*>(msgData.msg);
+                if (predicate(*casted)) {
+                    return casted;
+                }
             }
         }
 
-        return std::nullopt;
+        return nullptr;
     };
+
+    void popMessage(ServerMsg* msg);
 
     template<typename T> void send(const T &msg, bool flush = false) {
         static_assert(std::is_base_of_v<ClientMsg, T>, "T must be a subclass of ClientMsg");
@@ -50,5 +60,5 @@ public:
         }
     };
 
-    void pop(ServerMsg* msg);
+    
 };

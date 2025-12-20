@@ -112,6 +112,14 @@ if (UNIX AND NOT APPLE)
         dl         # dynamic loader
         m          # math library
     )
+    target_link_libraries(server PRIVATE
+        z          # zlib
+        bz2        # bzip2
+        lzma       # lzma/xz
+        pthread    # threading
+        dl         # dynamic loader
+        m          # math library
+    )
 elseif(APPLE)
     find_library(COCOA Cocoa)
     find_library(IOKIT IOKit)

@@ -8,11 +8,7 @@ public:
     ServerNetwork *network;
     Physics *physics;
 
-    ServerEngine(
-        uint16_t serverPort,
-        std::function<void(client_id)> connectionCallback,
-        std::function<void(client_id)> disconnectionCallback
-    );
+    ServerEngine(uint16_t serverPort);
     ~ServerEngine();
 
     void update(TimeUtils::duration deltaTime);

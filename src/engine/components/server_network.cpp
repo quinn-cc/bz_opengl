@@ -1,13 +1,13 @@
 #include "engine/components/server_network.hpp"
 #include "spdlog/spdlog.h"
 
-ServerNetwork::ServerNetwork(uint16_t port,
-    std::function<void(client_id)> connectionCallback,
-    std::function<void(client_id)> disconnectionCallback,
-    int maxClients, int numChannels) {
+ServerNetwork::ServerNetwork(uint16_t port, int maxClients, int numChannels) {
+    if (enet_initialize() != 0) {
+        spdlog::error("Failed to initialize ENet");
+        exit(1);
+    }
 
-    this->connectionCallback = connectionCallback;
-    this->disconnectionCallback = disconnectionCallback;
+    atexit(enet_deinitialize);
 
     ENetAddress address;
     address.host = ENET_HOST_ANY;
@@ -52,42 +52,44 @@ void ServerNetwork::update() {
         switch (event.type) {
         case ENET_EVENT_TYPE_RECEIVE: {
             ClientMsg *msg = reinterpret_cast<ClientMsg*>(event.packet->data);
-
-            void *raw = malloc(event.packet->dataLength);
-            memcpy(raw, event.packet->data, event.packet->dataLength);
-            ClientMsg *msgCopy = reinterpret_cast<ClientMsg*>(raw);
-            receivedMessages.push_back(msgCopy);
-
+            msg->clientId = getClient(event.peer);
+            receivedMessages.push_back({ event.packet, msg });
             break;
         }
         case ENET_EVENT_TYPE_CONNECT: {
             client_id newClientId = getNextClientId();
-            void *peer = malloc(sizeof(ENetPeer));
-            memcpy(peer, event.peer, sizeof(ENetPeer));
-            clients[newClientId] = reinterpret_cast<ENetPeer*>(peer);
-            connectionCallback(newClientId);
+            clients[newClientId] = event.peer;
+            ClientMsg_Connection* connMsg = new ClientMsg_Connection();
+            connMsg->clientId = newClientId;
+            enet_address_get_host_ip(&event.peer->address, connMsg->ip, sizeof(connMsg->ip));
+            receivedMessages.push_back({ nullptr, connMsg });
             break;
         }
         case ENET_EVENT_TYPE_DISCONNECT: {
             client_id discClientId = getClient(event.peer);
-            disconnectionCallback(discClientId);
-            free(clients[discClientId]);
             clients.erase(discClientId);
+            ClientMsg_Disconnection* discMsg = new ClientMsg_Disconnection();
+            discMsg->clientId = discClientId;
+            receivedMessages.push_back({ nullptr, discMsg });
             break;
         }
         default:
             break;
         }
-    
-        enet_packet_destroy(event.packet);
     }
 }
 
-void ServerNetwork::pop(ClientMsg* msg) {
-    auto it = std::find(receivedMessages.begin(), receivedMessages.end(), msg);
-    if (it != receivedMessages.end()) {
-        receivedMessages.erase(it);
-        delete msg;
+void ServerNetwork::popMessage(ClientMsg* msg) {
+    for (auto it = receivedMessages.begin(); it != receivedMessages.end(); ++it) {
+        if (it->msg == msg) {
+            if (it->packet != nullptr) {
+                enet_packet_destroy(it->packet);
+            } else {
+                delete it->msg;
+            }
+            receivedMessages.erase(it);
+            break;
+        }
     }
 }
 

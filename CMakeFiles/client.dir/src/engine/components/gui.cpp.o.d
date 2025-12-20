@@ -1,8 +1,8 @@
 CMakeFiles/client.dir/src/engine/components/gui.cpp.o: \
- /home/quinn/Documents/bz_opengl/src/engine/components/gui.cpp \
+ /home/quinn/Desktop/bz_opengl/src/engine/components/gui.cpp \
  /usr/include/stdc-predef.h \
- /home/quinn/Documents/bz_opengl/src/engine/components/gui.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/GLFW/glfw3.h \
+ /home/quinn/Desktop/bz_opengl/src/engine/components/gui.hpp \
+ /home/quinn/Desktop/bz_opengl/libs/include/GLFW/glfw3.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
@@ -21,9 +21,9 @@ CMakeFiles/client.dir/src/engine/components/gui.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h /usr/include/GL/gl.h \
  /usr/include/GL/glext.h /usr/include/KHR/khrplatform.h \
- /home/quinn/Documents/bz_opengl/libs/include/imgui/backends/imgui_impl_glfw.h \
- /home/quinn/Documents/bz_opengl/libs/include/imgui/imgui.h \
- /home/quinn/Documents/bz_opengl/libs/include/imgui/imconfig.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_glfw.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/imgui/imgui.h \
+ /home/quinn/Desktop/bz_opengl/libs/include/imgui/imconfig.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h /usr/include/string.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
@@ -32,4 +32,4 @@ CMakeFiles/client.dir/src/engine/components/gui.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
  /usr/include/assert.h \
- /home/quinn/Documents/bz_opengl/libs/include/imgui/backends/imgui_impl_opengl3.h
+ /home/quinn/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_opengl3.h

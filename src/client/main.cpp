@@ -2,16 +2,27 @@
 #include "spdlog/spdlog.h"
 #include "engine/client_engine.hpp"
 #include "game.hpp"
+#include "cxxopts.hpp"
 
 TimeUtils::time lastFrameTime;
 
-int main() {
+int main(int argc, char *argv[]) {
     spdlog::set_level(spdlog::level::trace);
 
     if (!glfwInit()) {
         spdlog::error("GLFW failed to initialize");
         exit(1);
     }
+
+    cxxopts::Options options("BZ", "This is the client.");
+    options.add_options()
+        ("a,addr", "Connection address", cxxopts::value<std::string>()->default_value("localhost"));
+    options.add_options()
+        ("p,port", "Connection port", cxxopts::value<uint16_t>()->default_value("1234"));
+    
+    auto result = options.parse(argc, argv);
+    std::string connectAddr = result["addr"].as<std::string>();
+    uint16_t connectPort = result["port"].as<uint16_t>();
 
     spdlog::trace("GLFW initialized successfully");
 
@@ -37,11 +48,19 @@ int main() {
     Game game(engine);
     spdlog::trace("Game initialized successfully");
 
+    if (engine.network->connect(connectAddr, connectPort, 50)) {
+        spdlog::info("Connected to server at {}:{}", connectAddr, connectPort);
+    } else {
+        spdlog::error("Failed to connect to server at {}:{}", connectAddr, connectPort);
+    }
+
     lastFrameTime = TimeUtils::GetCurrentTime();
 
     spdlog::trace("Starting main loop");
 
-    while (true) {
+    while (!glfwWindowShouldClose(window)) {
+        glfwPollEvents();
+
         TimeUtils::time currTime = TimeUtils::GetCurrentTime();  
         TimeUtils::duration deltaTime = TimeUtils::GetElapsedTime(lastFrameTime, currTime);
         deltaTime = std::max(deltaTime, 0.0001f);
@@ -50,5 +69,10 @@ int main() {
         engine.earlyUpdate(deltaTime);
         game.update(deltaTime);
         engine.lateUpdate(deltaTime);
+
+        glfwSwapBuffers(window);
     }
+
+    glfwDestroyWindow(window);
+    glfwTerminate();
 }

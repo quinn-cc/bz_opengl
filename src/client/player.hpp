@@ -10,13 +10,16 @@ private:
     Game &game;
 
     physics_id physicsId;
-    render_id renderId;
+
+    TimeUtils::time lastJumpTime;
+    TimeUtils::duration jumpCooldown;
 
     std::string name;
     Location location;
     glm::vec3 velocity;
     bool alive;
     bool canSpawn;
+    bool grounded;
 
 public:
     Player(Game &game);

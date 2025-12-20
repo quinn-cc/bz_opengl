@@ -229,3 +229,25 @@ void Physics::setAngularVelocity(physics_id id, const glm::vec3 &angularVelocity
     body->setAngularVelocity(btVector3(angularVelocity.x, angularVelocity.y, angularVelocity.z));
     body->activate();
 }
+
+bool Physics::isGrounded(physics_id id, glm::vec3 boxSize) {
+    if (getBodies(id).size() != 1) { spdlog::error("This function only works for single-body physics_ids"); }
+    btRigidBody* playerBody = getBodies(id).front();
+    
+    btVector3 halfExtents(boxSize.x * 0.5f, boxSize.y * 0.5f, boxSize.z * 0.5f);
+    btBoxShape boxShape(halfExtents);
+
+    btTransform from = playerBody->getWorldTransform();
+    btTransform to = from;
+    to.setOrigin(from.getOrigin() - btVector3(0, 0.1f, 0));  // small downward distance
+
+    // Setup callback
+    btCollisionWorld::ClosestConvexResultCallback cb(from.getOrigin(), to.getOrigin());
+    cb.m_collisionFilterGroup = playerBody->getBroadphaseHandle()->m_collisionFilterGroup;
+    cb.m_collisionFilterMask  = playerBody->getBroadphaseHandle()->m_collisionFilterMask;
+
+    // Sweep
+    world->convexSweepTest(&boxShape, from, to, cb);
+
+    return (cb.hasHit() && cb.m_hitNormalWorld.dot(btVector3(0,1,0)) > 0.7f);
+}
