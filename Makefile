@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/quinn/Documents/bz_opengl
+CMAKE_SOURCE_DIR = /home/irie/Desktop/bz_opengl
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/quinn/Documents/bz_opengl
+CMAKE_BINARY_DIR = /home/irie/Desktop/bz_opengl
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Documents/bz_opengl/CMakeFiles /home/quinn/Documents/bz_opengl//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/irie/Desktop/bz_opengl/CMakeFiles /home/irie/Desktop/bz_opengl//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Documents/bz_opengl/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/irie/Desktop/bz_opengl/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -285,6 +285,54 @@ libs/include/imgui/imgui_widgets.s: libs/include/imgui/imgui_widgets.cpp.s
 libs/include/imgui/imgui_widgets.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.s
 .PHONY : libs/include/imgui/imgui_widgets.cpp.s
+
+src/client/client.o: src/client/client.cpp.o
+.PHONY : src/client/client.o
+
+# target to build an object file
+src/client/client.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/client.cpp.o
+.PHONY : src/client/client.cpp.o
+
+src/client/client.i: src/client/client.cpp.i
+.PHONY : src/client/client.i
+
+# target to preprocess a source file
+src/client/client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/client.cpp.i
+.PHONY : src/client/client.cpp.i
+
+src/client/client.s: src/client/client.cpp.s
+.PHONY : src/client/client.s
+
+# target to generate assembly for a file
+src/client/client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/client.cpp.s
+.PHONY : src/client/client.cpp.s
+
+src/client/console.o: src/client/console.cpp.o
+.PHONY : src/client/console.o
+
+# target to build an object file
+src/client/console.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/console.cpp.o
+.PHONY : src/client/console.cpp.o
+
+src/client/console.i: src/client/console.cpp.i
+.PHONY : src/client/console.i
+
+# target to preprocess a source file
+src/client/console.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/console.cpp.i
+.PHONY : src/client/console.cpp.i
+
+src/client/console.s: src/client/console.cpp.s
+.PHONY : src/client/console.s
+
+# target to generate assembly for a file
+src/client/console.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/console.cpp.s
+.PHONY : src/client/console.cpp.s
 
 src/client/game.o: src/client/game.cpp.o
 .PHONY : src/client/game.o
@@ -704,6 +752,12 @@ help:
 	@echo "... libs/include/imgui/imgui_widgets.o"
 	@echo "... libs/include/imgui/imgui_widgets.i"
 	@echo "... libs/include/imgui/imgui_widgets.s"
+	@echo "... src/client/client.o"
+	@echo "... src/client/client.i"
+	@echo "... src/client/client.s"
+	@echo "... src/client/console.o"
+	@echo "... src/client/console.i"
+	@echo "... src/client/console.s"
 	@echo "... src/client/game.o"
 	@echo "... src/client/game.i"
 	@echo "... src/client/game.s"

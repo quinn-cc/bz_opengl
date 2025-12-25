@@ -1,7 +1,7 @@
 CMakeFiles/server.dir/src/engine/mesh_loader.cpp.o: \
- /home/quinn/Documents/bz_opengl/src/engine/mesh_loader.cpp \
+ /home/irie/Desktop/bz_opengl/src/engine/mesh_loader.cpp \
  /usr/include/stdc-predef.h \
- /home/quinn/Documents/bz_opengl/src/engine/mesh_loader.hpp \
+ /home/irie/Desktop/bz_opengl/src/engine/mesh_loader.hpp \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -59,8 +59,8 @@ CMakeFiles/server.dir/src/engine/mesh_loader.cpp.o: \
  /usr/include/c++/13/bits/ranges_util.h \
  /usr/include/c++/13/bits/ranges_base.h \
  /usr/include/c++/13/bits/max_size_type.h /usr/include/c++/13/numbers \
- /home/quinn/Documents/bz_opengl/libs/include/glm/glm.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/detail/_fixes.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/glm.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/detail/_fixes.hpp \
  /usr/include/c++/13/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \
@@ -122,9 +122,9 @@ CMakeFiles/server.dir/src/engine/mesh_loader.cpp.o: \
  /usr/include/c++/13/tr1/poly_hermite.tcc \
  /usr/include/c++/13/tr1/poly_laguerre.tcc \
  /usr/include/c++/13/tr1/riemann_zeta.tcc \
- /home/quinn/Documents/bz_opengl/libs/include/glm/detail/setup.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/detail/setup.hpp \
  /usr/include/c++/13/cassert /usr/include/assert.h \
- /home/quinn/Documents/bz_opengl/libs/include/glm/detail/../simd/platform.h \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/detail/../simd/platform.h \
  /usr/include/c++/13/cstdint \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -141,32 +141,32 @@ CMakeFiles/server.dir/src/engine/mesh_loader.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
  /usr/include/x86_64-linux-gnu/bits/uio_lim.h /usr/include/c++/13/cfloat \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
- /home/quinn/Documents/bz_opengl/libs/include/glm/fwd.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/detail/qualifier.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/detail/setup.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/vec2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_bool2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/type_vec2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/type_vec2.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/./compute_vector_relational.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/./setup.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_bool2_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_float2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_float2_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_double2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_double2_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_int2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_int2_sized.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../ext/scalar_int_sized.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../ext/../detail/setup.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_uint2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_uint2_sized.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../ext/scalar_uint_sized.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/vec3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_bool3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/type_vec3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/type_vec3.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/compute_vector_decl.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/fwd.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/detail/qualifier.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/detail/setup.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/vec2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_bool2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/type_vec2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/type_vec2.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/./compute_vector_relational.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/./setup.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_bool2_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_float2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_float2_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_double2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_double2_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_int2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_int2_sized.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../ext/scalar_int_sized.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../ext/../detail/setup.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_uint2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_uint2_sized.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../ext/scalar_uint_sized.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/vec3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_bool3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/type_vec3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/type_vec3.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/compute_vector_decl.hpp \
  /usr/include/c++/13/functional /usr/include/c++/13/bits/std_function.h \
  /usr/include/c++/13/typeinfo /usr/include/c++/13/unordered_map \
  /usr/include/c++/13/bits/unordered_map.h \
@@ -181,118 +181,118 @@ CMakeFiles/server.dir/src/engine/mesh_loader.cpp.o: \
  /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/uniform_int_dist.h \
  /usr/include/c++/13/bits/stl_tempbuf.h /usr/include/c++/13/cstdlib \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/_vectorize.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_bool3_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_float3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_float3_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_double3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_double3_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_int3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_int3_sized.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_uint3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_uint3_sized.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/vec4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_bool4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/type_vec4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/type_vec4.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_bool4_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_float4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_float4_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_double4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_double4_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/setup.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_int4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_int4_sized.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_uint4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/vector_uint4_sized.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/mat2x2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/matrix_double2x2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/type_mat2x2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/type_mat2x2.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/../matrix.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/../detail/setup.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/../mat2x3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double2x3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat2x3.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double2x3_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float2x3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float2x3_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/../mat2x4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double2x4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat2x4.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double2x4_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float2x4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float2x4_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/../mat3x2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double3x2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat3x2.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double3x2_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float3x2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float3x2_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/../mat3x3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double3x3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat3x3.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../common.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/_fixes.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/func_common.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/../vector_relational.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/../detail/setup.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/../detail/func_vector_relational.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/compute_common.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/setup.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/type_vec1.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/type_vec1.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double3x3_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float3x3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float3x3_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/../mat3x4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double3x4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat3x4.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double3x4_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float3x4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float3x4_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/../mat4x2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double4x2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat4x2.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double4x2_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float4x2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float4x2_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/../mat4x3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double4x3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat4x3.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double4x3_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float4x3.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float4x3_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/../mat4x4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double4x4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat4x4.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../geometric.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/func_geometric.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/../exponential.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/../detail/func_exponential.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double4x4_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float4x4.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float4x4_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/../detail/../detail/func_matrix.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/matrix_double2x2_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/matrix_float2x2.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/./ext/matrix_float2x2_precision.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/trigonometric.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/detail/func_trigonometric.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/packing.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/detail/func_packing.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/detail/type_half.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/detail/type_half.inl \
- /home/quinn/Documents/bz_opengl/libs/include/glm/integer.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/glm/detail/func_integer.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/_vectorize.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_bool3_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_float3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_float3_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_double3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_double3_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_int3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_int3_sized.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_uint3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_uint3_sized.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/vec4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_bool4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/type_vec4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/type_vec4.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_bool4_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_float4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_float4_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_double4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_double4_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/setup.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_int4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_int4_sized.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_uint4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/vector_uint4_sized.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/mat2x2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/matrix_double2x2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/type_mat2x2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/type_mat2x2.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/../matrix.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/../detail/setup.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/../mat2x3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double2x3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat2x3.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double2x3_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float2x3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float2x3_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/../mat2x4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double2x4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat2x4.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double2x4_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float2x4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float2x4_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/../mat3x2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double3x2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat3x2.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double3x2_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float3x2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float3x2_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/../mat3x3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double3x3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat3x3.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../common.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/_fixes.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/func_common.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/../vector_relational.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/../detail/setup.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/../detail/func_vector_relational.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/compute_common.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/setup.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/type_vec1.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/type_vec1.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double3x3_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float3x3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float3x3_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/../mat3x4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double3x4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat3x4.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double3x4_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float3x4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float3x4_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/../mat4x2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double4x2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat4x2.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double4x2_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float4x2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float4x2_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/../mat4x3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double4x3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat4x3.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double4x3_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float4x3.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float4x3_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/../mat4x4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double4x4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/type_mat4x4.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../geometric.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/func_geometric.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/../exponential.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/../detail/../detail/../detail/func_exponential.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_double4x4_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float4x4.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/.././ext/matrix_float4x4_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/../detail/../detail/func_matrix.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/matrix_double2x2_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/matrix_float2x2.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/./ext/matrix_float2x2_precision.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/trigonometric.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/detail/func_trigonometric.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/packing.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/detail/func_packing.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_half.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/detail/type_half.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/integer.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/detail/func_integer.inl \
  /usr/include/c++/13/string /usr/include/c++/13/bits/stringfwd.h \
  /usr/include/c++/13/bits/char_traits.h \
  /usr/include/c++/13/bits/postypes.h /usr/include/c++/13/cwchar \
@@ -328,46 +328,46 @@ CMakeFiles/server.dir/src/engine/mesh_loader.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/basic_string.tcc \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/Importer.hpp \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/types.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/Importer.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/types.h \
  /usr/include/string.h /usr/include/strings.h \
  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/defs.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/config.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/vector2.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/vector3.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/color4.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/matrix3x3.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/matrix4x4.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/quaternion.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/defs.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/config.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/vector2.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/vector3.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/color4.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/matrix3x3.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/matrix4x4.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/quaternion.h \
  /usr/include/c++/13/cstring \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/vector2.inl \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/vector3.inl \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/color4.inl \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/matrix3x3.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/vector2.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/vector3.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/color4.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/matrix3x3.inl \
  /usr/include/c++/13/algorithm /usr/include/c++/13/bits/ranges_algo.h \
  /usr/include/c++/13/bits/ranges_algobase.h \
  /usr/include/c++/13/pstl/glue_algorithm_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/matrix4x4.inl \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/MathFunctions.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/quaternion.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/matrix4x4.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/MathFunctions.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/quaternion.inl \
  /usr/include/c++/13/exception /usr/include/c++/13/bits/exception_ptr.h \
  /usr/include/c++/13/bits/cxxabi_init_exception.h \
  /usr/include/c++/13/bits/nested_exception.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/scene.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/texture.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/Compiler/pushpack1.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/Compiler/poppack1.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/mesh.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/aabb.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/scene.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/texture.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/Compiler/pushpack1.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/Compiler/poppack1.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/mesh.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/aabb.h \
  /usr/include/c++/13/unordered_set \
  /usr/include/c++/13/bits/unordered_set.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/light.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/camera.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/material.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/material.inl \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/anim.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/metadata.h \
- /home/quinn/Documents/bz_opengl/libs/include/assimp/postprocess.h
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/light.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/camera.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/material.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/material.inl \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/anim.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/metadata.h \
+ /home/irie/Desktop/bz_opengl/libs/include/assimp/postprocess.h

@@ -1,11 +1,8 @@
-CMakeFiles/client.dir/src/engine/client_engine.cpp.o: \
- /home/irie/Desktop/bz_opengl/src/engine/client_engine.cpp \
+CMakeFiles/client.dir/src/client/client.cpp.o: \
+ /home/irie/Desktop/bz_opengl/src/client/client.cpp \
  /usr/include/stdc-predef.h \
- /home/irie/Desktop/bz_opengl/src/engine/client_engine.hpp \
- /home/irie/Desktop/bz_opengl/src/engine/types.hpp \
- /home/irie/Desktop/bz_opengl/libs/include/glm/glm.hpp \
- /home/irie/Desktop/bz_opengl/libs/include/glm/detail/_fixes.hpp \
- /usr/include/c++/13/cmath /usr/include/c++/13/bits/requires_hosted.h \
+ /home/irie/Desktop/bz_opengl/src/client/client.hpp \
+ /usr/include/c++/13/cstdint \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -17,12 +14,21 @@ CMakeFiles/client.dir/src/engine/client_engine.cpp.o: \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
  /usr/include/c++/13/pstl/pstl_config.h \
- /usr/include/c++/13/bits/cpp_type_traits.h \
- /usr/include/c++/13/ext/type_traits.h /usr/include/math.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \
  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
  /usr/include/x86_64-linux-gnu/bits/time64.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
+ /home/irie/Desktop/bz_opengl/src/engine/types.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/glm.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/glm/detail/_fixes.hpp \
+ /usr/include/c++/13/cmath /usr/include/c++/13/bits/requires_hosted.h \
+ /usr/include/c++/13/bits/cpp_type_traits.h \
+ /usr/include/c++/13/ext/type_traits.h /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
  /usr/include/x86_64-linux-gnu/bits/floatn.h \
@@ -44,8 +50,7 @@ CMakeFiles/client.dir/src/engine/client_engine.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h /usr/include/endian.h \
+ /usr/include/x86_64-linux-gnu/bits/types/timer_t.h /usr/include/endian.h \
  /usr/include/x86_64-linux-gnu/bits/endian.h \
  /usr/include/x86_64-linux-gnu/bits/endianness.h \
  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
@@ -103,11 +108,6 @@ CMakeFiles/client.dir/src/engine/client_engine.cpp.o: \
  /usr/include/c++/13/cassert /usr/include/assert.h \
  /usr/include/c++/13/cstddef \
  /home/irie/Desktop/bz_opengl/libs/include/glm/detail/../simd/platform.h \
- /usr/include/c++/13/cstdint \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
  /usr/include/c++/13/climits \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
@@ -422,6 +422,8 @@ CMakeFiles/client.dir/src/engine/client_engine.cpp.o: \
  /usr/include/c++/13/charconv /usr/include/c++/13/optional \
  /usr/include/c++/13/span /usr/include/c++/13/variant \
  /usr/include/c++/13/bits/ranges_algobase.h \
+ /home/irie/Desktop/bz_opengl/src/client/game.hpp \
+ /home/irie/Desktop/bz_opengl/src/engine/client_engine.hpp \
  /home/irie/Desktop/bz_opengl/src/engine/components/client_network.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/enet.h \
  /usr/include/c++/13/stdlib.h \
@@ -760,6 +762,10 @@ CMakeFiles/client.dir/src/engine/client_engine.cpp.o: \
  /home/irie/Desktop/bz_opengl/src/engine/components/input.hpp \
  /home/irie/Desktop/bz_opengl/src/engine/components/gui.hpp \
  /home/irie/Desktop/bz_opengl/src/engine/user_pointer.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/player.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/world.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/shot.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/console.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog.h \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/common.h \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/null_mutex.h \

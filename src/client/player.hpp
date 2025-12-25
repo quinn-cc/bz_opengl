@@ -3,6 +3,9 @@
 #include <string>
 #include "engine/types.hpp"
 
+#define POSITION_UPDATE_THRESHOLD 0.01f
+#define ROTATION_UPDATE_THRESHOLD 0.01f
+
 class Game;
 
 class Player {
@@ -25,6 +28,8 @@ private:
 public:
     Player(Game &game, const std::string name);
     ~Player();
+
+    std::string getName() const { return name; }
 
     void update();
 };

@@ -27,8 +27,9 @@ int main(int argc, char *argv[]) {
         deltaTime = std::max(deltaTime, 0.0001f);
         lastFrameTime = currTime;
 
-        engine.update(deltaTime);
+        engine.earlyUpdate(deltaTime);
         game.update(deltaTime);
+        engine.lateUpdate(deltaTime);
     }
 
     return 0;

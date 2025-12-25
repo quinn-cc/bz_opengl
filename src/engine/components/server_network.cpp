@@ -26,6 +26,28 @@ ServerNetwork::~ServerNetwork() {
     enet_host_destroy(server);
 }
 
+void ServerNetwork::flushPeekedMessages() {
+    receivedMessages.erase(
+        std::remove_if(
+            receivedMessages.begin(),
+            receivedMessages.end(),
+            [](const MsgData& msgData) {
+                if (msgData.peeked) {
+                    if (msgData.packet == nullptr) {
+                        // For connection/disconnection messages
+                        // we allocated the message on the heap
+                        delete msgData.msg;
+                    } else {
+                        enet_packet_destroy(msgData.packet);
+                    }
+                }
+                return msgData.peeked;
+            }
+        ),
+        receivedMessages.end()
+    );
+}
+
 client_id ServerNetwork::getClient(ENetPeer *peer) {
     for (const auto& [id, p] : clients) {
         if (p == peer) {
@@ -38,7 +60,7 @@ client_id ServerNetwork::getClient(ENetPeer *peer) {
 }
 
 client_id ServerNetwork::getNextClientId() {
-    client_id id = 0;
+    client_id id = 1;
     while (clients.find(id) != clients.end()) {
         ++id;
     }
@@ -74,20 +96,6 @@ void ServerNetwork::update() {
             break;
         }
         default:
-            break;
-        }
-    }
-}
-
-void ServerNetwork::popMessage(ClientMsg* msg) {
-    for (auto it = receivedMessages.begin(); it != receivedMessages.end(); ++it) {
-        if (it->msg == msg) {
-            if (it->packet != nullptr) {
-                enet_packet_destroy(it->packet);
-            } else {
-                delete it->msg;
-            }
-            receivedMessages.erase(it);
             break;
         }
     }

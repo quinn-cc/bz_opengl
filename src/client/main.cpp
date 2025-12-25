@@ -64,8 +64,6 @@ int main(int argc, char *argv[]) {
     spdlog::trace("Starting main loop");
 
     while (!glfwWindowShouldClose(window)) {
-        glfwPollEvents();
-
         TimeUtils::time currTime = TimeUtils::GetCurrentTime();  
         TimeUtils::duration deltaTime = TimeUtils::GetElapsedTime(lastFrameTime, currTime);
         deltaTime = std::max(deltaTime, 0.0001f);

@@ -1,4 +1,4 @@
-/home/quinn/Documents/bz_opengl/CMakeFiles/client.dir
-/home/quinn/Documents/bz_opengl/CMakeFiles/server.dir
-/home/quinn/Documents/bz_opengl/CMakeFiles/edit_cache.dir
-/home/quinn/Documents/bz_opengl/CMakeFiles/rebuild_cache.dir
+/home/irie/Desktop/bz_opengl/CMakeFiles/client.dir
+/home/irie/Desktop/bz_opengl/CMakeFiles/server.dir
+/home/irie/Desktop/bz_opengl/CMakeFiles/edit_cache.dir
+/home/irie/Desktop/bz_opengl/CMakeFiles/rebuild_cache.dir

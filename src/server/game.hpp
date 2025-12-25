@@ -5,10 +5,15 @@
 #include <vector>
 
 class Game {
+private:
+    std::vector<Client *> clients;
+    void addClient(Client *client);
+    void removeClient(client_id id);
+    Client *getClient(client_id id);
+
 public:
     ServerEngine &engine;
-
-    std::vector<Client *> clients;
+    const std::vector<Client *> &getClients() const { return clients; }
 
     Game(class ServerEngine &engine);
     ~Game() = default;

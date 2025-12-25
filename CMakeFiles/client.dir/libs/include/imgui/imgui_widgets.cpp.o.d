@@ -1,8 +1,8 @@
 CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.o: \
- /home/quinn/Documents/bz_opengl/libs/include/imgui/imgui_widgets.cpp \
+ /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui_widgets.cpp \
  /usr/include/stdc-predef.h \
- /home/quinn/Documents/bz_opengl/libs/include/imgui/imgui.h \
- /home/quinn/Documents/bz_opengl/libs/include/imgui/imconfig.h \
+ /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui.h \
+ /home/irie/Desktop/bz_opengl/libs/include/imgui/imconfig.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h /usr/include/string.h \
@@ -20,7 +20,7 @@ CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
  /usr/include/assert.h \
- /home/quinn/Documents/bz_opengl/libs/include/imgui/imgui_internal.h \
+ /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui_internal.h \
  /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types.h \
  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
  /usr/include/x86_64-linux-gnu/bits/time64.h \
@@ -223,4 +223,4 @@ CMakeFiles/client.dir/libs/include/imgui/imgui_widgets.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
- /home/quinn/Documents/bz_opengl/libs/include/imgui/imstb_textedit.h
+ /home/irie/Desktop/bz_opengl/libs/include/imgui/imstb_textedit.h

@@ -12,6 +12,8 @@ typedef struct InputState {
     bool spawn;
     bool jump;
     bool quickQuit;
+    bool chat;
+    bool escape;
     glm::vec2 movement;
 } InputState;
 
@@ -37,6 +39,20 @@ typedef struct Location {
     glm::quat rotation;
 } Location;
 
+inline float angleBetween(const glm::quat& a, const glm::quat& b, bool degrees = true) {
+    glm::quat qa = glm::normalize(a);
+    glm::quat qb = glm::normalize(b);
+
+    float d = glm::dot(qa, qb);
+    d = glm::clamp(glm::abs(d), -1.0f, 1.0f);
+
+    float ret = 2.0f * std::acos(d); // radians
+    if (degrees) {
+        ret = glm::degrees(ret);
+    }
+    return ret;
+}
+
 using client_id = uint32_t;
 using shot_id = uint32_t;
 using physics_id = uint32_t;
@@ -57,7 +73,7 @@ enum ServerMsg_Type {
     ServerMsg_Type_ALLOW_SPAWN,
     ServerMsg_Type_SPAWN,
     ServerMsg_Type_DEATH,
-    ServerMsg_Type_PLAYER_STATE
+    ServerMsg_Type_CHAT
 };
 
 typedef struct ServerMsg {
@@ -76,6 +92,8 @@ typedef struct ServerMsg_Connection : ServerMsg {
     ServerMsg_Connection() { type = Type; }
     client_id clientId;
     char name[256];
+    Location location;
+    bool alive;
 } ServerMsg_Connection;
 
 typedef struct ServerMsg_Disconnection : ServerMsg {
@@ -119,14 +137,13 @@ typedef struct ServerMsg_Death : ServerMsg {
     client_id clientId;
 } ServerMsg_Death;
 
-typedef struct ServerMsg_PlayerState : ServerMsg {
-    static constexpr ServerMsg_Type Type = ServerMsg_Type_PLAYER_STATE;
-    ServerMsg_PlayerState() { type = Type; }
-    client_id clientId;
+typedef struct ServerMsg_Chat : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_CHAT;
+    ServerMsg_Chat() { type = Type; }
     char name[256];
-    Location location;
-    bool alive;
-} ServerMsg_PlayerState;
+    char text[512];
+} ServerMsg_Chat;
+
 
 /*
  * Client messages
@@ -138,7 +155,8 @@ enum ClientMsg_Type {
     ClientMsg_Type_INIT,
     ClientMsg_Type_REQUEST_SPAWN,
     ClientMsg_Type_LOCATION,
-    ClientMsg_Type_SHOT
+    ClientMsg_Type_SHOT,
+    ClientMsg_Type_CHAT
 };
 
 typedef struct ClientMsg {
@@ -182,10 +200,10 @@ typedef struct ClientMsg_Shot : ClientMsg {
     glm::vec3 velocity;
 } ClientMsg_Shot;
 
+typedef struct ClientMsg_Chat : ClientMsg {
+    static constexpr ClientMsg_Type Type = ClientMsg_Type_CHAT;
+    ClientMsg_Chat() { type = Type; }
+    char text[512];
+} ClientMsg_Chat;
+
 #pragma pack(pop)
-
-template <typename T>
-concept ServerMsgSubType = std::is_base_of_v<ServerMsg, T>;
-
-template <typename V>
-concept ClientMsgSubType = std::is_base_of_v<ClientMsg, V>;

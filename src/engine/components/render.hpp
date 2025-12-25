@@ -33,6 +33,7 @@ public:
     void destroy(render_id id);
     void setPosition(render_id id, const glm::vec3 &position);
     void setRotation(render_id id, const glm::quat &rotation);
+    void setScale(render_id id, const glm::vec3 &scale);
     void setVisible(render_id id, bool visible);
     void setCameraPosition(const glm::vec3 &position);
     void setCameraRotation(const glm::quat &rotation);

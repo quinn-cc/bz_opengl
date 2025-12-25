@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include "backends/imgui_impl_glfw.h"      // your platform backend
 #include "backends/imgui_impl_opengl3.h"   // your renderer backend
+#include "spdlog/spdlog.h"
 
 GUI::GUI(GLFWwindow *window) {
     // Initialize ImGui context
@@ -27,13 +28,164 @@ GUI::~GUI() {
     ImGui::DestroyContext();
 }
 
-void update() {
+void GUI::update() {
+    submittedInputBuffer.clear();
+    hasNewInputBuffer = false;
+
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
     // Render here
 
+    // Set position and size
+    ImGui::SetNextWindowPos(ImVec2(20, 20));       // top-left corner
+    ImGui::SetNextWindowSize(ImVec2(500, 200));   // optional, just enough for your text
+    ImGui::SetNextWindowBgAlpha(0.0f);           // make window background transparent
+
+    // Begin window with no decorations
+    ImGui::Begin("TopLeftText", nullptr, 
+        ImGuiWindowFlags_NoTitleBar | 
+        ImGuiWindowFlags_NoResize | 
+        ImGuiWindowFlags_NoMove | 
+        ImGuiWindowFlags_NoScrollbar | 
+        ImGuiWindowFlags_NoSavedSettings
+    );
+
+    // Add text
+    std::string players = "";
+    for (const auto& name : scoreboardPlayerNames) {
+        players += name + "\n";
+    }
+
+    ImGui::Text("%s", players.c_str());
+
+    // End window
+    ImGui::End();
+
+    drawConsolePanel();
+
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void GUI::setScoreboardPlayerNames(const std::vector<std::string> &names) {
+    scoreboardPlayerNames = names;
+}
+
+void GUI::drawConsolePanel() {
+    ImGuiIO& io = ImGui::GetIO();
+    ImGuiViewport* vp = ImGui::GetMainViewport();
+
+    const float margin = 12.0f;
+    const float panelHeight = 260.0f;     // tweak
+    const float inputHeight = 34.0f;      // tweak
+
+    ImVec2 vpPos  = vp->Pos;        // usually (0,0)
+    ImVec2 vpSize = vp->Size;
+
+    ImVec2 pos  = ImVec2(vpPos.x + margin, vpPos.y + vpSize.y - margin - panelHeight);
+    ImVec2 size = ImVec2(vpSize.x - 2.0f * margin, panelHeight);
+
+    ImGui::SetNextWindowPos(pos, ImGuiCond_Always);
+    ImGui::SetNextWindowSize(size, ImGuiCond_Always);
+    ImGui::SetNextWindowBgAlpha(0.70f);
+
+    ImGuiWindowFlags flags =
+        ImGuiWindowFlags_NoTitleBar |
+        ImGuiWindowFlags_NoResize |
+        ImGuiWindowFlags_NoMove |
+        ImGuiWindowFlags_NoSavedSettings;
+
+    
+
+    ImGui::Begin("##BottomConsole", nullptr, flags);
+
+    // Split area: scroll region above, input hint below
+    const float footer = inputHeight;
+    ImGui::BeginChild("##ConsoleScroll",
+                      ImVec2(0, -footer),
+                      true,
+                      ImGuiWindowFlags_HorizontalScrollbar);
+
+    // Auto-scroll logic: keep at bottom unless user scrolls up.
+    // Call this bool member variable in your GUI class (persist between frames):
+    // bool consoleAutoScroll = true;
+    // Or use a static for quick testing:
+    static bool autoScroll = true;
+
+    // If user scrolls up, disable auto-scroll until they return to bottom
+    const float scrollY = ImGui::GetScrollY();
+    const float scrollMaxY = ImGui::GetScrollMaxY();
+    const float atBottomEpsilon = 2.0f;
+    if (scrollMaxY > 0.0f) {
+        if (scrollY < scrollMaxY - atBottomEpsilon) {
+            autoScroll = false;
+        } else {
+            autoScroll = true;
+        }
+    }
+
+    // Render lines
+    // Replace consoleLines with your storage (old messages, console logs, etc.)
+    for (const std::string& line : consoleLines) {
+        ImGui::TextUnformatted(line.c_str());
+    }
+
+    // If auto-scroll, pin to bottom AFTER adding items
+    if (autoScroll) {
+        ImGui::SetScrollHereY(1.0f);
+    }
+
+    ImGui::EndChild();
+
+    // Footer hint / fake input box
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::Spacing();
+
+    ImGui::InvisibleButton("##focus_sink", ImVec2(1, 1));
+
+    if (chatFocus) { 
+        ImGui::SetKeyboardFocusHere();
+        spdlog::trace("GUI::drawConsolePanel: Chat focus enabled");
+    } else {
+        spdlog::trace("GUI::drawConsolePanel: Chat focus disabled");
+        // Clear focus to prevent capturing input when not in chat
+        ImGui::SetKeyboardFocusHere(-1);
+    }
+
+    ImGui::PushItemWidth(-1);
+    ImGui::PushStyleVar(ImGuiStyleVar_Alpha, 0.75f);
+    bool submitted = ImGui::InputTextWithHint("##ChatHint", "press T to type", inputBuf.data(), inputBuf.size(),
+                             ImGuiInputTextFlags_EnterReturnsTrue);
+    ImGui::PopStyleVar();
+    ImGui::PopItemWidth();
+
+    ImGui::End();
+
+    if (submitted) {
+        // Handle input submission
+        submittedInputBuffer = std::string(inputBuf.data());
+        hasNewInputBuffer = true;
+    }
+}
+
+void GUI::addConsoleLine(const std::string &playerName, const std::string &line) {
+    std::string fullLine = playerName + ": " + line;
+    consoleLines.push_back(fullLine);
+}
+
+std::string GUI::getChatInputBuffer() const {
+    return submittedInputBuffer;
+}
+
+bool GUI::hasChatInputBuffer() const {
+    return hasNewInputBuffer;
+}
+
+void GUI::setChatInputFocus(bool focus) {
+    if (focus == false)
+        inputBuf.fill(0);
+    chatFocus = focus;
 }

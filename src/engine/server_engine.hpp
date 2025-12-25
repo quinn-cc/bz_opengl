@@ -11,5 +11,6 @@ public:
     ServerEngine(uint16_t serverPort);
     ~ServerEngine();
 
-    void update(TimeUtils::duration deltaTime);
+    void earlyUpdate(TimeUtils::duration deltaTime);
+    void lateUpdate(TimeUtils::duration deltaTime);
 };

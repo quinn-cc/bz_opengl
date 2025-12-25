@@ -36,4 +36,5 @@ void ClientEngine::earlyUpdate(TimeUtils::duration deltaTime) {
 void ClientEngine::lateUpdate(TimeUtils::duration deltaTime) {
     physics->update(deltaTime);
     render->update();
+    gui->update();
 }

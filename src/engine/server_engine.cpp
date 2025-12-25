@@ -12,7 +12,11 @@ ServerEngine::~ServerEngine() {
     delete physics;
 }
 
-void ServerEngine::update(TimeUtils::duration deltaTime) {
+void ServerEngine::earlyUpdate(TimeUtils::duration deltaTime) {
     network->update();
+}
+
+void ServerEngine::lateUpdate(TimeUtils::duration deltaTime) {
     physics->update(deltaTime);
+    network->flushPeekedMessages();
 }

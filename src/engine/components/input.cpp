@@ -32,15 +32,20 @@ void Input::keyCallback(GLFWwindow* window, int key, int scancode, int action, i
         if (key == GLFW_KEY_F12) {
             inputState.quickQuit = true;
         }
+
+        if (key == GLFW_KEY_T) {
+            // Start chat
+            inputState.chat = true;
+        }
+
+        if (key == GLFW_KEY_ESCAPE) {
+            inputState.escape = true;
+        }
     }
 }
 
 void Input::update() {
-    inputState.movement = { 0, 0 };
-    inputState.fire = false;
-    inputState.jump = false;
-    inputState.spawn = false;
-    inputState.quickQuit = false;
+    inputState = { 0 };
 
     if (glfwGetKey(window, GLFW_KEY_LEFT) || glfwGetKey(window, GLFW_KEY_J))
         inputState.movement.x -= 1;

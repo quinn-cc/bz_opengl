@@ -117,6 +117,15 @@ void Render::setRotation(render_id id, const glm::quat &rotation) {
     }
 }
 
+void Render::setScale(render_id id, const glm::vec3 &scale) {
+    auto it = objects.find(id);
+    if (it != objects.end()) {
+        it->second->scale.set(scale.x, scale.y, scale.z);
+    } else {
+        spdlog::error("Render::setScale: Invalid render_id {}", id);
+    }
+}
+
 void Render::setVisible(render_id id, bool visible) {
     auto it = objects.find(id);
     if (it != objects.end()) {

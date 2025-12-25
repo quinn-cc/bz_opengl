@@ -16,8 +16,9 @@ private:
 
 public:
     Client(Game &game, client_id id, std::string ip);
-    ~Client() = default;
+    ~Client();
 
-    bool isClient(client_id cid) const;
+    bool isEqual(client_id cid) const;
+    std::string getName() const;
     void update();
 };
