@@ -15,6 +15,7 @@ private:
     TimeUtils::duration jumpCooldown;
 
     std::string name;
+    Location lastLocation;
     Location location;
     glm::vec3 velocity;
     bool alive;
@@ -22,7 +23,7 @@ private:
     bool grounded;
 
 public:
-    Player(Game &game);
+    Player(Game &game, const std::string name);
     ~Player();
 
     void update();

@@ -16,11 +16,14 @@ int main(int argc, char *argv[]) {
 
     cxxopts::Options options("BZ", "This is the client.");
     options.add_options()
+        ("n,name", "Player name", cxxopts::value<std::string>()->default_value("Player"));
+    options.add_options()
         ("a,addr", "Connection address", cxxopts::value<std::string>()->default_value("localhost"));
     options.add_options()
         ("p,port", "Connection port", cxxopts::value<uint16_t>()->default_value("1234"));
     
     auto result = options.parse(argc, argv);
+    std::string playerName = result["name"].as<std::string>();
     std::string connectAddr = result["addr"].as<std::string>();
     uint16_t connectPort = result["port"].as<uint16_t>();
 
@@ -45,14 +48,16 @@ int main(int argc, char *argv[]) {
 
     ClientEngine engine(window);
     spdlog::trace("ClientEngine initialized successfully");
-    Game game(engine);
-    spdlog::trace("Game initialized successfully");
+    
 
     if (engine.network->connect(connectAddr, connectPort, 50)) {
         spdlog::info("Connected to server at {}:{}", connectAddr, connectPort);
     } else {
         spdlog::error("Failed to connect to server at {}:{}", connectAddr, connectPort);
     }
+
+    Game game(engine, playerName);
+    spdlog::trace("Game initialized successfully");
 
     lastFrameTime = TimeUtils::GetCurrentTime();
 

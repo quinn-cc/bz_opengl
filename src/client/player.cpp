@@ -2,8 +2,10 @@
 #include "engine/client_engine.hpp"
 #include "engine/types.hpp"
 #include "game.hpp"
+#include <string>
 
-Player::Player(Game &game) : game(game) {
+Player::Player(Game &game, const std::string name) : game(game) {
+    this->name = name;
     alive = true;
     canSpawn = true;
     grounded = false;
@@ -11,6 +13,11 @@ Player::Player(Game &game) : game(game) {
     jumpCooldown = TimeUtils::getDuration(0.1f);
 
     physicsId = game.engine.physics->createPlayer(glm::vec3(1.0f, 2.0f, 1.0f));
+
+    ClientMsg_Init initMsg;
+    strncpy(initMsg.name, this->name.c_str(), this->name.size());
+    initMsg.name[sizeof(initMsg.name) - 1] = '\0';
+    game.engine.network->send<ClientMsg_Init>(initMsg);
 }
 
 Player::~Player() {
@@ -51,6 +58,14 @@ void Player::update() {
 
     this->location.position = position;
     this->location.rotation = rotation;
+
+    if (this->location.position != this->lastLocation.position ||
+        this->location.rotation != this->lastLocation.rotation) {
+        ClientMsg_Location locMsg;
+        locMsg.location = this->location;
+        game.engine.network->send<ClientMsg_Location>(locMsg);
+        this->lastLocation = this->location;
+    }
 
     game.engine.render->setCameraPosition(position + glm::vec3(0.0f, 0.0f, 0.0f));
     game.engine.render->setCameraRotation(rotation);

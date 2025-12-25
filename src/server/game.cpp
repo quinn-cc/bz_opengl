@@ -10,7 +10,7 @@ void Game::update(TimeUtils::duration deltaTime) {
 
     if (connMsg) {
         spdlog::info("Game::update: New client connected with id {} at ip {}", connMsg->clientId, connMsg->ip);
-        clients.push_back(Client(connMsg->clientId, std::string(connMsg->ip)));
+        clients.push_back(new Client(*this, connMsg->clientId, std::string(connMsg->ip)));
         engine.network->popMessage(connMsg);
     }
 
@@ -22,10 +22,21 @@ void Game::update(TimeUtils::duration deltaTime) {
             std::remove_if(
                 clients.begin(),
                 clients.end(),
-                [disconnMsg](const Client &c) { return c.isClient(disconnMsg->clientId); }
+                [disconnMsg](const Client *c) {
+                    if (c->isClient(disconnMsg->clientId)) {
+                        delete c;
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             ),
             clients.end()
         );
         engine.network->popMessage(disconnMsg);
+    }
+
+    for (Client *client : clients) {
+        client->update();
     }
 }

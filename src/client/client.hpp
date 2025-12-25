@@ -4,11 +4,12 @@
 
 class Client {
 private:
+    bool initialized;
     client_id id;
 
 public:
-    Client(client_id id) : id(id) {}
-    ~Client() = default;
+    Client(client_id id);
+    ~Client();
 
     void update();
 };

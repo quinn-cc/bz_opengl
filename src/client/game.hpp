@@ -15,7 +15,7 @@ public:
     std::vector<Client *> clients;
     std::vector<Shot *> shots;
 
-    Game(ClientEngine &engine);
+    Game(ClientEngine &engine, std::string playerName);
     ~Game();
 
     void update(TimeUtils::duration deltaTime);
