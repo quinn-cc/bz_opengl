@@ -29,9 +29,6 @@ GUI::~GUI() {
 }
 
 void GUI::update() {
-    submittedInputBuffer.clear();
-    hasNewInputBuffer = false;
-
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
@@ -148,26 +145,38 @@ void GUI::drawConsolePanel() {
 
     if (chatFocus) { 
         ImGui::SetKeyboardFocusHere();
-        spdlog::trace("GUI::drawConsolePanel: Chat focus enabled");
     } else {
-        spdlog::trace("GUI::drawConsolePanel: Chat focus disabled");
-        // Clear focus to prevent capturing input when not in chat
         ImGui::SetKeyboardFocusHere(-1);
     }
 
     ImGui::PushItemWidth(-1);
     ImGui::PushStyleVar(ImGuiStyleVar_Alpha, 0.75f);
-    bool submitted = ImGui::InputTextWithHint("##ChatHint", "press T to type", inputBuf.data(), inputBuf.size(),
-                             ImGuiInputTextFlags_EnterReturnsTrue);
+    bool submitted = ImGui::InputTextWithHint(
+        "##ChatHint",
+        "press T to type",
+        chatInputBuffer.data(),
+        chatInputBuffer.size(),
+        ImGuiInputTextFlags_EnterReturnsTrue
+    );
+
+    // Escape handling (same frame)
+    if (ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+        chatInputBuffer.fill(0);
+        submittedInputBuffer.clear();
+        chatFocus = false;
+        spdlog::trace("GUI::drawConsolePanel: Chat input cancelled with Escape.");
+    }
+    
     ImGui::PopStyleVar();
     ImGui::PopItemWidth();
 
     ImGui::End();
 
     if (submitted) {
-        // Handle input submission
-        submittedInputBuffer = std::string(inputBuf.data());
-        hasNewInputBuffer = true;
+        submittedInputBuffer = std::string(chatInputBuffer.data());
+        chatInputBuffer.fill(0); 
+        chatFocus = false;
+        spdlog::trace("GUI::drawConsolePanel: Submitted chat input: {}", submittedInputBuffer);
     }
 }
 
@@ -180,12 +189,14 @@ std::string GUI::getChatInputBuffer() const {
     return submittedInputBuffer;
 }
 
-bool GUI::hasChatInputBuffer() const {
-    return hasNewInputBuffer;
+void GUI::clearChatInputBuffer() {
+    submittedInputBuffer.clear();
 }
 
-void GUI::setChatInputFocus(bool focus) {
-    if (focus == false)
-        inputBuf.fill(0);
-    chatFocus = focus;
+void GUI::focusChatInput() {
+    chatFocus = true;
+}
+
+bool GUI::getChatInputFocus() const {
+    return chatFocus;
 }

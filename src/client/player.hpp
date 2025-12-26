@@ -30,6 +30,9 @@ public:
     ~Player();
 
     std::string getName() const { return name; }
-
+    glm::vec3 getPosition() const { return location.position; }
+    glm::vec3 getVelocity() const { return velocity; }
+    glm::quat getRotation() const { return location.rotation; }
+    glm::vec3 getForwardVector() const;
     void update();
 };

@@ -35,6 +35,7 @@ public:
     void setRotation(render_id id, const glm::quat &rotation);
     void setScale(render_id id, const glm::vec3 &scale);
     void setVisible(render_id id, bool visible);
+    void setTransparency(render_id id, bool transparency);
     void setCameraPosition(const glm::vec3 &position);
     void setCameraRotation(const glm::quat &rotation);
 };  

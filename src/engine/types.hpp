@@ -68,7 +68,7 @@ enum ServerMsg_Type {
     ServerMsg_Type_LOCATION,
     ServerMsg_Type_DISCONNECTION,
     ServerMsg_Type_CONNECTION,
-    ServerMsg_Type_SHOT,
+    ServerMsg_Type_CREATE_SHOT,
     ServerMsg_Type_REMOVE_SHOT,
     ServerMsg_Type_ALLOW_SPAWN,
     ServerMsg_Type_SPAWN,
@@ -102,13 +102,13 @@ typedef struct ServerMsg_Disconnection : ServerMsg {
     client_id clientId;
 } ServerMsg_Disconnection;
 
-typedef struct ServerMsg_Shot : ServerMsg {
-    static constexpr ServerMsg_Type Type = ServerMsg_Type_SHOT;
-    ServerMsg_Shot() { type = Type; }
+typedef struct ServerMsg_CreateShot : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_CREATE_SHOT;
+    ServerMsg_CreateShot() { type = Type; }
     shot_id globalShotId;
     glm::vec3 position;
     glm::vec3 velocity;
-} ServerMsg_Shot;
+} ServerMsg_CreateShot;
 
 typedef struct ServerMsg_RemoveShot : ServerMsg {
     static constexpr ServerMsg_Type Type = ServerMsg_Type_REMOVE_SHOT;
@@ -155,7 +155,7 @@ enum ClientMsg_Type {
     ClientMsg_Type_INIT,
     ClientMsg_Type_REQUEST_SPAWN,
     ClientMsg_Type_LOCATION,
-    ClientMsg_Type_SHOT,
+    ClientMsg_Type_CREATE_SHOT,
     ClientMsg_Type_CHAT
 };
 
@@ -192,13 +192,13 @@ typedef struct ClientMsg_Location : ClientMsg {
     Location location;
 } ClientMsg_Location;
 
-typedef struct ClientMsg_Shot : ClientMsg {
-    static constexpr ClientMsg_Type Type = ClientMsg_Type_SHOT;
-    ClientMsg_Shot() { type = Type; }
+typedef struct ClientMsg_CreateShot : ClientMsg {
+    static constexpr ClientMsg_Type Type = ClientMsg_Type_CREATE_SHOT;
+    ClientMsg_CreateShot() { type = Type; }
     shot_id localShotId;
     glm::vec3 position;
     glm::vec3 velocity;
-} ClientMsg_Shot;
+} ClientMsg_CreateShot;
 
 typedef struct ClientMsg_Chat : ClientMsg {
     static constexpr ClientMsg_Type Type = ClientMsg_Type_CHAT;

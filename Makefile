@@ -406,6 +406,30 @@ src/client/player.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/player.cpp.s
 .PHONY : src/client/player.cpp.s
 
+src/client/shot.o: src/client/shot.cpp.o
+.PHONY : src/client/shot.o
+
+# target to build an object file
+src/client/shot.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/shot.cpp.o
+.PHONY : src/client/shot.cpp.o
+
+src/client/shot.i: src/client/shot.cpp.i
+.PHONY : src/client/shot.i
+
+# target to preprocess a source file
+src/client/shot.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/shot.cpp.i
+.PHONY : src/client/shot.cpp.i
+
+src/client/shot.s: src/client/shot.cpp.s
+.PHONY : src/client/shot.s
+
+# target to generate assembly for a file
+src/client/shot.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/client/shot.cpp.s
+.PHONY : src/client/shot.cpp.s
+
 src/client/world.o: src/client/world.cpp.o
 .PHONY : src/client/world.o
 
@@ -767,6 +791,9 @@ help:
 	@echo "... src/client/player.o"
 	@echo "... src/client/player.i"
 	@echo "... src/client/player.s"
+	@echo "... src/client/shot.o"
+	@echo "... src/client/shot.i"
+	@echo "... src/client/shot.s"
 	@echo "... src/client/world.o"
 	@echo "... src/client/world.i"
 	@echo "... src/client/world.s"

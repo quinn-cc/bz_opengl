@@ -764,8 +764,8 @@ CMakeFiles/client.dir/src/client/player.cpp.o: \
  /home/irie/Desktop/bz_opengl/src/client/game.hpp \
  /home/irie/Desktop/bz_opengl/src/client/world.hpp \
  /home/irie/Desktop/bz_opengl/src/client/shot.hpp \
- /home/irie/Desktop/bz_opengl/src/client/client.hpp \
  /home/irie/Desktop/bz_opengl/src/client/console.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/client.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog.h \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/common.h \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/null_mutex.h \

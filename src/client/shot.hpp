@@ -1,14 +1,21 @@
 #pragma once
-#include "client.hpp"
+#include "engine/types.hpp"
+
+class Game;
 
 class Shot {
 private:
+    Game &game;
     shot_id id;
     client_id ownerId;
+    glm::vec3 position;
+    glm::vec3 velocity;
+
+    render_id renderId;
 
 public:
-    Shot(shot_id id, client_id ownerId) : id(id), ownerId(ownerId) {}
-    ~Shot() = default;
+    Shot(Game &game, shot_id id, client_id ownerId, glm::vec3 position, glm::vec3 velocity);
+    ~Shot();
 
-    void update();
+    void update(TimeUtils::duration deltaTime);
 };

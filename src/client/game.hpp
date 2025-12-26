@@ -6,6 +6,7 @@
 #include "world.hpp"
 #include "shot.hpp"
 #include "console.hpp"
+#include "client.hpp"
 
 enum FOCUS_STATE {
     FOCUS_STATE_GAME,
@@ -25,6 +26,10 @@ public:
 
     std::vector<Client *> clients;
     std::vector<Shot *> shots;
+    shot_id getNextLocalShotId() {
+        static shot_id nextId = 1;
+        return nextId++;
+    }
 
     FOCUS_STATE getFocusState() const { return focusState; }
 

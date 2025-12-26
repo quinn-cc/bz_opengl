@@ -22,4 +22,5 @@ public:
     
     void update();
     bool isChatInFocus() const { return chatInFocus; }
+    void focusChatInput();
 };

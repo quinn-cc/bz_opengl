@@ -73,7 +73,7 @@ bool ClientNetwork::connect(const std::string &addr, uint16_t port, int timeoutM
     // Wait for the connection to succeed (with timeout)
     ENetEvent event;
     if (enet_host_service(client, &event, timeoutMs) > 0 && event.type == ENET_EVENT_TYPE_CONNECT) {
-        spdlog::debug("Connected to server.");
+        spdlog::info("Connected to server.");
         ret = true;
     } else {
         spdlog::info("Connection to server failed.");

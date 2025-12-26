@@ -24,12 +24,15 @@ Game::~Game() {
 void Game::update(TimeUtils::duration deltaTime) {
     if (focusState == FOCUS_STATE_GAME && engine.input->getInputState().chat) {
         focusState = FOCUS_STATE_CONSOLE;
+        spdlog::trace("Game: Switching focus to console");
+        console->focusChatInput();
     }
 
     console->update();
 
     if (focusState == FOCUS_STATE_CONSOLE && !console->isChatInFocus()) {
         focusState = FOCUS_STATE_GAME;
+        spdlog::trace("Game: Returning focus to game");
     }
 
     player->update();
@@ -58,8 +61,27 @@ void Game::update(TimeUtils::duration deltaTime) {
         engine.network->popMessage(msg);
     }
 
+
+    if (focusState == FOCUS_STATE_GAME) {
+        if (engine.input->getInputState().fire) {
+            glm::vec3 position = player->getPosition();
+            glm::vec3 velocity = player->getVelocity();
+            glm::vec3 forward = player->getForwardVector();
+
+            glm::vec3 shotPosition = position + forward * 2.0f;
+            glm::vec3 shotVelocity = forward * world->getSettings().shotSpeed + velocity;
+
+            Shot *shot = new Shot(*this, getNextLocalShotId(), 0, shotPosition, shotVelocity);
+            shots.push_back(shot);
+        }
+    }
+
     for (Client *client : clients) {
         client->update();
+    }
+
+    for (Shot *shot : shots) {
+        shot->update(deltaTime);
     }
 
     std::vector<std::string> scoreboardNames;

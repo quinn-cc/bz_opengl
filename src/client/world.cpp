@@ -6,6 +6,7 @@ World::World(Game &game) : game(game) {
     settings.playerTurnSpeed = 2.0f;
     settings.gravity = -9.8f;
     settings.playerJumpSpeed = 5.0f;
+    settings.shotSpeed = 25.0f;
 
     renderId = game.engine.render->create("data/world2.glb");
     physicsId = game.engine.physics->create("data/world2.glb", 0.0f);

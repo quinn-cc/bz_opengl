@@ -12,9 +12,9 @@ private:
     void update();
     std::vector<std::string> scoreboardPlayerNames;
     std::vector<std::string> consoleLines;
-    std::array<char, 256> inputBuf{};
+
+    std::array<char, 256> chatInputBuffer{};
     std::string submittedInputBuffer;
-    bool hasNewInputBuffer = false;
     bool chatFocus = false;
 
     void drawTexture(unsigned int textureId);
@@ -27,6 +27,7 @@ public:
     void setScoreboardPlayerNames(const std::vector<std::string> &names);
     void addConsoleLine(const std::string &playerName, const std::string &line);
     std::string getChatInputBuffer() const;
-    bool hasChatInputBuffer() const;
-    void setChatInputFocus(bool focus);
+    void clearChatInputBuffer();
+    void focusChatInput();
+    bool getChatInputFocus() const;
 };

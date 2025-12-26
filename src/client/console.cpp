@@ -6,26 +6,28 @@ Console::Console(Game &game) : game(game) {
 
 }
 
+void Console::focusChatInput() {
+    game.engine.gui->focusChatInput();
+    chatInFocus = true;
+}
+
 void Console::update() {
-    if (game.getFocusState() == FOCUS_STATE_CONSOLE) {
-        game.engine.gui->setChatInputFocus(true);
-        chatInFocus = true;
-    } else if (game.getFocusState() == FOCUS_STATE_CONSOLE && game.engine.input->getInputState().escape) {
-        game.engine.gui->setChatInputFocus(false);
-        chatInFocus = false;
-    }
+    if (chatInFocus) {
+        if (game.engine.gui->getChatInputBuffer().length() > 0) {
+            spdlog::trace("Console::update: Processing submitted chat input");
+            std::string message = game.engine.gui->getChatInputBuffer();
 
-    if (game.engine.gui->hasChatInputBuffer() && game.engine.gui->getChatInputBuffer().length() > 0) {
-        std::string message = game.engine.gui->getChatInputBuffer();
+            game.engine.gui->addConsoleLine(game.player->getName(), message);
 
-        game.engine.gui->addConsoleLine(game.player->getName(), message);
+            ClientMsg_Chat chatMsg;
+            strcpy(chatMsg.text, message.c_str());
+            game.engine.network->send<ClientMsg_Chat>(chatMsg);
+            game.engine.gui->clearChatInputBuffer();
+        }
 
-        ClientMsg_Chat chatMsg;
-        strcpy(chatMsg.text, message.c_str());
-        game.engine.network->send<ClientMsg_Chat>(chatMsg);
-        game.engine.gui->setChatInputFocus(false);
-        chatInFocus = false;
-        spdlog::trace("Console::update: Chat focus disabled");
+        if (!game.engine.gui->getChatInputFocus()) {
+            chatInFocus = false;
+        }
     }
 
     if (auto msg = game.engine.network->peekMessage<ServerMsg_Chat>()) {

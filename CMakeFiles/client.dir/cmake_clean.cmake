@@ -21,6 +21,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/client.dir/src/client/main.cpp.o.d"
   "CMakeFiles/client.dir/src/client/player.cpp.o"
   "CMakeFiles/client.dir/src/client/player.cpp.o.d"
+  "CMakeFiles/client.dir/src/client/shot.cpp.o"
+  "CMakeFiles/client.dir/src/client/shot.cpp.o.d"
   "CMakeFiles/client.dir/src/client/world.cpp.o"
   "CMakeFiles/client.dir/src/client/world.cpp.o.d"
   "CMakeFiles/client.dir/src/engine/client_engine.cpp.o"

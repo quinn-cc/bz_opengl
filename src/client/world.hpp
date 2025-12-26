@@ -9,6 +9,7 @@ struct WorldSettings {
     float playerTurnSpeed;
     float playerJumpSpeed;
     float gravity;
+    float shotSpeed;
 };
 
 class World {

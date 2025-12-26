@@ -135,6 +135,31 @@ void Render::setVisible(render_id id, bool visible) {
     }
 }
 
+void Render::setTransparency(render_id id, bool transparency) {
+    auto it = objects.find(id);
+    if (it != objects.end()) {
+        // First get the Object3D
+        auto *object = it->second.get();
+        object->traverse([](threepp::Object3D& obj) {
+            // Then traverse to find all Meshes and set their material transparencymodel->traverse([](threepp::Object3D& obj) {
+            if (auto mesh = obj.as<threepp::Mesh>()) {
+                for (auto& mat : mesh->materials()) {
+                    mat->transparent = true;
+                    if (true) {
+                        mat->alphaTest = 0.01f; // important
+                        mat->depthWrite = false; // prevents sorting artifacts
+                    } else {
+                        mat->alphaTest = 0.0f;
+                        mat->depthWrite = true;
+                    }
+                }
+            }
+        });
+    } else {
+        spdlog::error("Render::setTransparency: Invalid render_id {}", id);
+    }
+}
+
 void Render::setCameraPosition(const glm::vec3 &position) {
     camera->position.set(position.x, position.y, position.z);
 }

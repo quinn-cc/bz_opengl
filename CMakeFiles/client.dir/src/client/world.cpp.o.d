@@ -766,5 +766,5 @@ CMakeFiles/client.dir/src/client/world.cpp.o: \
  /home/irie/Desktop/bz_opengl/src/engine/user_pointer.hpp \
  /home/irie/Desktop/bz_opengl/src/client/player.hpp \
  /home/irie/Desktop/bz_opengl/src/client/shot.hpp \
- /home/irie/Desktop/bz_opengl/src/client/client.hpp \
- /home/irie/Desktop/bz_opengl/src/client/console.hpp
+ /home/irie/Desktop/bz_opengl/src/client/console.hpp \
+ /home/irie/Desktop/bz_opengl/src/client/client.hpp

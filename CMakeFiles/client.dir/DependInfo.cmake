@@ -19,6 +19,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/irie/Desktop/bz_opengl/src/client/game.cpp" "CMakeFiles/client.dir/src/client/game.cpp.o" "gcc" "CMakeFiles/client.dir/src/client/game.cpp.o.d"
   "/home/irie/Desktop/bz_opengl/src/client/main.cpp" "CMakeFiles/client.dir/src/client/main.cpp.o" "gcc" "CMakeFiles/client.dir/src/client/main.cpp.o.d"
   "/home/irie/Desktop/bz_opengl/src/client/player.cpp" "CMakeFiles/client.dir/src/client/player.cpp.o" "gcc" "CMakeFiles/client.dir/src/client/player.cpp.o.d"
+  "/home/irie/Desktop/bz_opengl/src/client/shot.cpp" "CMakeFiles/client.dir/src/client/shot.cpp.o" "gcc" "CMakeFiles/client.dir/src/client/shot.cpp.o.d"
   "/home/irie/Desktop/bz_opengl/src/client/world.cpp" "CMakeFiles/client.dir/src/client/world.cpp.o" "gcc" "CMakeFiles/client.dir/src/client/world.cpp.o.d"
   "/home/irie/Desktop/bz_opengl/src/engine/client_engine.cpp" "CMakeFiles/client.dir/src/engine/client_engine.cpp.o" "gcc" "CMakeFiles/client.dir/src/engine/client_engine.cpp.o.d"
   "/home/irie/Desktop/bz_opengl/src/engine/components/client_network.cpp" "CMakeFiles/client.dir/src/engine/components/client_network.cpp.o" "gcc" "CMakeFiles/client.dir/src/engine/components/client_network.cpp.o.d"
