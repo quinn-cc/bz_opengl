@@ -1,5 +1,7 @@
 #pragma once
 #include <GLFW/glfw3.h>
+#include "backends/imgui_impl_glfw.h"      // your platform backend
+#include "backends/imgui_impl_opengl3.h"   // your renderer backend
 #include <vector>
 #include <string>
 #include <array>
@@ -9,6 +11,8 @@ class GUI {
 
 private:
     GLFWwindow *window;
+    ImFont* bigFont;
+
     void update();
     std::vector<std::string> scoreboardPlayerNames;
     std::vector<std::string> consoleLines;
@@ -19,6 +23,8 @@ private:
 
     void drawTexture(unsigned int textureId);
     void drawConsolePanel();
+    void drawDeathScreen();
+    bool drawDeathScreenFlag = false;
 
     GUI(GLFWwindow *window);
     ~GUI();
@@ -30,4 +36,5 @@ public:
     void clearChatInputBuffer();
     void focusChatInput();
     bool getChatInputFocus() const;
+    void displayDeathScreen(bool show);
 };

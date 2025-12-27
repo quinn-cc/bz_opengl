@@ -5,6 +5,7 @@
 
 Client::Client(Game &game, client_id id) : game(game), id(id) {
     initialized = false;
+    alive = false;
 
     renderId = game.engine.render->create("data/models/tank/tank.glb");
 
@@ -22,6 +23,7 @@ Client::Client(Game &game, client_id id) : game(game), id(id) {
     game.engine.render->setPosition(renderId, location.position + glm::vec3(0.0f, -0.9f, 0.0f));
     game.engine.render->setRotation(renderId, location.rotation * glm::angleAxis(glm::pi<float>(), glm::vec3(0, 1, 0)));
     game.engine.render->setScale(renderId, glm::vec3(0.5f, 0.5f, 0.5f));
+    game.engine.render->setVisible(renderId, alive);
 }
 
 Client::~Client() {
@@ -39,8 +41,35 @@ void Client::update() {
         spdlog::trace("Client::update: Updated location for client id {}", id);
     }
 
-    game.engine.render->setPosition(renderId, location.position + glm::vec3(0.0f, -0.8f, 0.0f));
-    game.engine.render->setRotation(renderId, location.rotation * glm::angleAxis(glm::pi<float>(), glm::vec3(0, 1, 0)));
+    if (alive) {
+        game.engine.render->setPosition(renderId, location.position + glm::vec3(0.0f, -0.8f, 0.0f));
+        game.engine.render->setRotation(renderId, location.rotation * glm::angleAxis(glm::pi<float>(), glm::vec3(0, 1, 0)));
+
+        // If receiving a death message
+        if (auto msg = game.engine.network->peekMessage<ServerMsg_Death>(
+            [this](const ServerMsg_Death &msg) {
+                return msg.clientId == this->id;
+            }
+        )) {
+            alive = false;
+            game.engine.render->setVisible(renderId, false);
+            game.engine.network->popMessage(msg);
+            spdlog::trace("Client::update: Client id {} has died", id);
+        }
+    } else {
+        // If receiving a spawn message
+        if (auto msg = game.engine.network->peekMessage<ServerMsg_Spawn>(
+            [this](const ServerMsg_Spawn &msg) {
+                return msg.clientId == this->id;
+            }
+        )) {
+            location = msg->location;
+            alive = true;
+            game.engine.render->setVisible(renderId, true);
+            game.engine.network->popMessage(msg);
+            spdlog::trace("Client::update: Client id {} has spawned", id);
+        }
+    }
 }
 
 bool Client::isEqual(client_id otherId) {

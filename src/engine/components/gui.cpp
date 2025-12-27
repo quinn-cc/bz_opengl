@@ -19,6 +19,13 @@ GUI::GUI(GLFWwindow *window) {
     // Load fonts
     ImGuiIO& io = ImGui::GetIO();
     io.Fonts->AddFontDefault();
+
+    bigFont = io.Fonts->AddFontFromFileTTF(
+        "data/fonts/share_tech_mono_regular.ttf",
+        100.0f   // font size in pixels
+    );
+
+    io.Fonts->Build();
 }
 
 GUI::~GUI() {
@@ -62,8 +69,46 @@ void GUI::update() {
 
     drawConsolePanel();
 
+    if (drawDeathScreenFlag)
+        drawDeathScreen();
+
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void GUI::drawDeathScreen() {
+    ImGuiIO& io = ImGui::GetIO();
+    ImVec2 screenCenter = ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f);
+
+    ImGui::PushFont(bigFont);
+
+    const char* text = "Press U to spawn";
+
+    // Calculate text size
+    ImVec2 textSize = ImGui::CalcTextSize(text);
+
+    // Position cursor so text is centered
+    ImGui::SetNextWindowPos(
+        ImVec2(screenCenter.x - textSize.x * 0.5f,
+            screenCenter.y - textSize.y * 0.5f),
+        ImGuiCond_Always
+    );
+
+    // Invisible window
+    ImGui::Begin(
+        "##SpawnHint",
+        nullptr,
+        ImGuiWindowFlags_NoDecoration |
+        ImGuiWindowFlags_NoInputs |
+        ImGuiWindowFlags_NoBackground |
+        ImGuiWindowFlags_AlwaysAutoResize
+    );
+
+    ImGui::TextUnformatted(text);
+
+    ImGui::PopFont();
+
+    ImGui::End();
 }
 
 void GUI::setScoreboardPlayerNames(const std::vector<std::string> &names) {
@@ -199,4 +244,8 @@ void GUI::focusChatInput() {
 
 bool GUI::getChatInputFocus() const {
     return chatFocus;
+}
+
+void GUI::displayDeathScreen(bool show) {
+    drawDeathScreenFlag = show;
 }

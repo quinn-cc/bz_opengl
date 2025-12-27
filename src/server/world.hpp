@@ -14,4 +14,5 @@ public:
     
     void setSetting(std::string key, float value);
     float getSetting(std::string key) const;
+    Location getSpawnLocation() const;
 };

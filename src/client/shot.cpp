@@ -1,5 +1,6 @@
 #include "shot.hpp"
 #include "game.hpp"
+#include "spdlog/spdlog.h"
 
 Shot::Shot(Game &game, shot_id id, bool isGlobalId, glm::vec3 position, glm::vec3 velocity) : game(game) {
     this->id = id;

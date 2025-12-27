@@ -2,6 +2,7 @@
 #include "engine/types.hpp"
 
 class Game;
+class Client;
 
 class Shot {
 private:
@@ -22,4 +23,5 @@ public:
     ~Shot();
 
     void update(TimeUtils::duration deltaTime);
+    bool hits(Client *client);
 };

@@ -22,7 +22,6 @@ private:
     Location location;
     glm::vec3 velocity;
     bool alive;
-    bool canSpawn;
     bool grounded;
 
 public:

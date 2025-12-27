@@ -24,3 +24,10 @@ float World::getSetting(std::string key) const {
         throw std::runtime_error("Key not found in World settings: " + key);
     }
 }
+
+Location World::getSpawnLocation() const {
+    Location spawnLocation;
+    spawnLocation.position = glm::vec3(0.0f, 10.0f, 0.0f);
+    spawnLocation.rotation = glm::quat(glm::vec3(0.0f, 0.0f, 0.0f));
+    return spawnLocation;
+}

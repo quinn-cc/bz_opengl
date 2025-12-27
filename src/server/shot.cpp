@@ -1,5 +1,6 @@
 #include "shot.hpp"
 #include "game.hpp"
+#include "spdlog/spdlog.h"
 
 Shot::Shot(Game &game, client_id ownerId, shot_id localShotId, glm::vec3 position, glm::vec3 velocity) : game(game) {
     this->ownerId = ownerId;
@@ -32,4 +33,12 @@ Shot::~Shot() {
 
 void Shot::update(TimeUtils::duration deltaTime) {
     position += velocity * deltaTime;
+}
+
+bool Shot::hits(Client *client) {
+    if (glm::distance(position, client->getPosition()) < 0.5f) {
+        return true;
+    } else {
+        return false;
+    }
 }

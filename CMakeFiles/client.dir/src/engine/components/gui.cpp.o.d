@@ -21,6 +21,18 @@ CMakeFiles/client.dir/src/engine/components/gui.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h /usr/include/GL/gl.h \
  /usr/include/GL/glext.h /usr/include/KHR/khrplatform.h \
+ /home/irie/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_glfw.h \
+ /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui.h \
+ /home/irie/Desktop/bz_opengl/libs/include/imgui/imconfig.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h /usr/include/string.h \
+ /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+ /usr/include/strings.h \
+ /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
+ /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
+ /usr/include/assert.h \
+ /home/irie/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_opengl3.h \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -75,14 +87,11 @@ CMakeFiles/client.dir/src/engine/components/gui.cpp.o: \
  /usr/include/c++/13/bits/postypes.h /usr/include/c++/13/cwchar \
  /usr/include/wchar.h /usr/include/x86_64-linux-gnu/bits/floatn.h \
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/wchar2-decl.h \
  /usr/include/x86_64-linux-gnu/bits/wchar2.h \
  /usr/include/c++/13/bits/localefwd.h \
@@ -138,15 +147,6 @@ CMakeFiles/client.dir/src/engine/components/gui.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/basic_string.tcc /usr/include/c++/13/array \
- /home/irie/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_glfw.h \
- /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui.h \
- /home/irie/Desktop/bz_opengl/libs/include/imgui/imconfig.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h /usr/include/string.h \
- /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /usr/include/assert.h \
- /home/irie/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_opengl3.h \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog.h \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/common.h \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/null_mutex.h \

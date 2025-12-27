@@ -70,8 +70,6 @@ void Game::update(TimeUtils::duration deltaTime) {
         removeClient(disconnMsg->clientId);
     }
 
-    
-
     // Listen for incoming shots
     if (auto *shotMsg = engine.network->peekMessage<ClientMsg_CreateShot>()) {
         Shot *newShot = new Shot(
@@ -82,5 +80,21 @@ void Game::update(TimeUtils::duration deltaTime) {
             shotMsg->velocity
         );
         shots.push_back(newShot);
+    }
+
+    for (Shot *shot : shots) {
+        shot->update(deltaTime);
+
+        for (Client *client : clients) {
+            if (shot->hits(client)) {
+                client->die();
+
+                shots.erase(
+                    std::remove(shots.begin(), shots.end(), shot),
+                    shots.end()
+                );
+                delete shot;
+            }
+        }
     }
 }

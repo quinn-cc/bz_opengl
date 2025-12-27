@@ -3,6 +3,8 @@
 #include "game.hpp"
 #include "cxxopts.hpp"
 
+#define MIN_FRAME_HZ (1.0f / 120.0f)
+
 int main(int argc, char *argv[]) {
     spdlog::set_level(spdlog::level::trace);
 
@@ -24,7 +26,11 @@ int main(int argc, char *argv[]) {
     while (true) {
         TimeUtils::time currTime = TimeUtils::GetCurrentTime();  
         TimeUtils::duration deltaTime = TimeUtils::GetElapsedTime(lastFrameTime, currTime);
-        deltaTime = std::max(deltaTime, 0.0001f);
+        
+        if (deltaTime < MIN_FRAME_HZ) {
+            continue;
+        }
+
         lastFrameTime = currTime;
 
         engine.earlyUpdate(deltaTime);

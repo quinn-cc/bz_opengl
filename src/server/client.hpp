@@ -9,6 +9,7 @@ private:
     Game &game;
     
     bool initialized;
+    bool alive;
     std::string ip;
     std::string name;
     client_id id;
@@ -21,4 +22,6 @@ public:
     bool isEqual(client_id cid) const;
     std::string getName() const;
     void update();
+    glm::vec3 getPosition() const { return location.position; }
+    void die();
 };
