@@ -676,6 +676,30 @@ src/engine/server_engine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/engine/server_engine.cpp.s
 .PHONY : src/engine/server_engine.cpp.s
 
+src/server/chat.o: src/server/chat.cpp.o
+.PHONY : src/server/chat.o
+
+# target to build an object file
+src/server/chat.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/chat.cpp.o
+.PHONY : src/server/chat.cpp.o
+
+src/server/chat.i: src/server/chat.cpp.i
+.PHONY : src/server/chat.i
+
+# target to preprocess a source file
+src/server/chat.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/chat.cpp.i
+.PHONY : src/server/chat.cpp.i
+
+src/server/chat.s: src/server/chat.cpp.s
+.PHONY : src/server/chat.s
+
+# target to generate assembly for a file
+src/server/chat.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/chat.cpp.s
+.PHONY : src/server/chat.cpp.s
+
 src/server/client.o: src/server/client.cpp.o
 .PHONY : src/server/client.o
 
@@ -772,6 +796,30 @@ src/server/shot.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/shot.cpp.s
 .PHONY : src/server/shot.cpp.s
 
+src/server/world.o: src/server/world.cpp.o
+.PHONY : src/server/world.o
+
+# target to build an object file
+src/server/world.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/world.cpp.o
+.PHONY : src/server/world.cpp.o
+
+src/server/world.i: src/server/world.cpp.i
+.PHONY : src/server/world.i
+
+# target to preprocess a source file
+src/server/world.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/world.cpp.i
+.PHONY : src/server/world.cpp.i
+
+src/server/world.s: src/server/world.cpp.s
+.PHONY : src/server/world.s
+
+# target to generate assembly for a file
+src/server/world.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/world.cpp.s
+.PHONY : src/server/world.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -848,6 +896,9 @@ help:
 	@echo "... src/engine/server_engine.o"
 	@echo "... src/engine/server_engine.i"
 	@echo "... src/engine/server_engine.s"
+	@echo "... src/server/chat.o"
+	@echo "... src/server/chat.i"
+	@echo "... src/server/chat.s"
 	@echo "... src/server/client.o"
 	@echo "... src/server/client.i"
 	@echo "... src/server/client.s"
@@ -860,6 +911,9 @@ help:
 	@echo "... src/server/shot.o"
 	@echo "... src/server/shot.i"
 	@echo "... src/server/shot.s"
+	@echo "... src/server/world.o"
+	@echo "... src/server/world.i"
+	@echo "... src/server/world.s"
 .PHONY : help
 
 

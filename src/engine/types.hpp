@@ -6,6 +6,7 @@
 #include <cstddef>
 #include <string>
 #include <chrono>
+#include <unordered_map>
 
 typedef struct InputState {
     bool fire;
@@ -16,6 +17,16 @@ typedef struct InputState {
     bool escape;
     glm::vec2 movement;
 } InputState;
+
+using WorldSettingsMap = std::unordered_map<std::string, float>;
+
+inline const WorldSettingsMap DEFAULT_WORLD_SETTINGS = {
+    {"playerSpeed", 5.0f},
+    {"playerTurnSpeed", 2.0f},
+    {"playerJumpSpeed", 5.0f},
+    {"gravity", -9.81f},
+    {"shotSpeed", 25.0f}
+};
 
 namespace TimeUtils {
     using time = std::chrono::time_point<std::chrono::system_clock>;
@@ -73,7 +84,8 @@ enum ServerMsg_Type {
     ServerMsg_Type_ALLOW_SPAWN,
     ServerMsg_Type_SPAWN,
     ServerMsg_Type_DEATH,
-    ServerMsg_Type_CHAT
+    ServerMsg_Type_CHAT,
+    ServerMsg_Type_WORLD_SETTING_CHANGE
 };
 
 typedef struct ServerMsg {
@@ -143,6 +155,13 @@ typedef struct ServerMsg_Chat : ServerMsg {
     char name[256];
     char text[512];
 } ServerMsg_Chat;
+
+typedef struct ServerMsg_WorldSettingChange : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_WORLD_SETTING_CHANGE;
+    ServerMsg_WorldSettingChange() { type = Type; }
+    char key[64];
+    float value;
+} ServerMsg_WorldSettingChange;
 
 
 /*

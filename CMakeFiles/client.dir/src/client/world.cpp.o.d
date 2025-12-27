@@ -767,4 +767,62 @@ CMakeFiles/client.dir/src/client/world.cpp.o: \
  /home/irie/Desktop/bz_opengl/src/client/player.hpp \
  /home/irie/Desktop/bz_opengl/src/client/shot.hpp \
  /home/irie/Desktop/bz_opengl/src/client/console.hpp \
- /home/irie/Desktop/bz_opengl/src/client/client.hpp
+ /home/irie/Desktop/bz_opengl/src/client/client.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/common.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/null_mutex.h \
+ /usr/include/c++/13/atomic \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/tweakme.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/fmt.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/format.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/base.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/format.h \
+ /usr/include/c++/13/cstring \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/format-inl.h \
+ /usr/include/c++/13/algorithm /usr/include/c++/13/bits/ranges_algo.h \
+ /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/common-inl.h \
+ /usr/include/c++/13/iterator /usr/include/c++/13/bits/stream_iterator.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/registry.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/periodic_worker.h \
+ /usr/include/c++/13/condition_variable \
+ /usr/include/c++/13/bits/unique_lock.h /usr/include/c++/13/stop_token \
+ /usr/include/c++/13/bits/std_thread.h /usr/include/c++/13/semaphore \
+ /usr/include/c++/13/bits/semaphore_base.h \
+ /usr/include/c++/13/bits/atomic_timed_wait.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h /usr/include/semaphore.h \
+ /usr/include/x86_64-linux-gnu/bits/semaphore.h /usr/include/c++/13/mutex \
+ /usr/include/c++/13/thread \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/periodic_worker-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/registry-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/logger.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/backtracer.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/circular_q.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg_buffer.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/os.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/os-inl.h \
+ /usr/include/x86_64-linux-gnu/sys/stat.h \
+ /usr/include/x86_64-linux-gnu/bits/statx.h /usr/include/linux/stat.h \
+ /usr/include/linux/types.h /usr/include/x86_64-linux-gnu/asm/types.h \
+ /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
+ /usr/include/x86_64-linux-gnu/bits/statx-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_statx_timestamp.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg_buffer-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/backtracer-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/logger-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/pattern_formatter.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/formatter.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/pattern_formatter-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/fmt_helper.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/mdc.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/sink.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/sink-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/ansicolor_sink.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/console_globals.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/ansicolor_sink-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/synchronous_factory.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/version.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog-inl.h

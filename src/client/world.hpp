@@ -4,25 +4,20 @@
 
 class Game;
 
-struct WorldSettings {
-    float playerSpeed;
-    float playerTurnSpeed;
-    float playerJumpSpeed;
-    float gravity;
-    float shotSpeed;
-};
-
 class World {
 private:
     Game &game;
     render_id renderId;
     physics_id physicsId;
-    WorldSettings settings;
+    WorldSettingsMap settings;
+
+    void setSetting(const std::string &key, float value);
 
 public:
     World(Game &game);
     ~World();
 
     void load(std::string worldPath);
-    const WorldSettings &getSettings() const;
+    float getSetting(const std::string &key) const;
+    void update();
 };

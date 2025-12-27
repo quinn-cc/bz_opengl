@@ -6625,6 +6625,43 @@ CMakeFiles/client.dir/src/client/world.cpp.o: src/client/world.cpp \
   libs/include/glm/vec2.hpp \
   libs/include/glm/vec3.hpp \
   libs/include/glm/vec4.hpp \
+  libs/include/spdlog/common-inl.h \
+  libs/include/spdlog/common.h \
+  libs/include/spdlog/details/backtracer-inl.h \
+  libs/include/spdlog/details/backtracer.h \
+  libs/include/spdlog/details/circular_q.h \
+  libs/include/spdlog/details/console_globals.h \
+  libs/include/spdlog/details/fmt_helper.h \
+  libs/include/spdlog/details/log_msg-inl.h \
+  libs/include/spdlog/details/log_msg.h \
+  libs/include/spdlog/details/log_msg_buffer-inl.h \
+  libs/include/spdlog/details/log_msg_buffer.h \
+  libs/include/spdlog/details/null_mutex.h \
+  libs/include/spdlog/details/os-inl.h \
+  libs/include/spdlog/details/os.h \
+  libs/include/spdlog/details/periodic_worker-inl.h \
+  libs/include/spdlog/details/periodic_worker.h \
+  libs/include/spdlog/details/registry-inl.h \
+  libs/include/spdlog/details/registry.h \
+  libs/include/spdlog/details/synchronous_factory.h \
+  libs/include/spdlog/fmt/bundled/base.h \
+  libs/include/spdlog/fmt/bundled/format-inl.h \
+  libs/include/spdlog/fmt/bundled/format.h \
+  libs/include/spdlog/fmt/fmt.h \
+  libs/include/spdlog/formatter.h \
+  libs/include/spdlog/logger-inl.h \
+  libs/include/spdlog/logger.h \
+  libs/include/spdlog/mdc.h \
+  libs/include/spdlog/pattern_formatter-inl.h \
+  libs/include/spdlog/pattern_formatter.h \
+  libs/include/spdlog/sinks/ansicolor_sink-inl.h \
+  libs/include/spdlog/sinks/ansicolor_sink.h \
+  libs/include/spdlog/sinks/sink-inl.h \
+  libs/include/spdlog/sinks/sink.h \
+  libs/include/spdlog/spdlog-inl.h \
+  libs/include/spdlog/spdlog.h \
+  libs/include/spdlog/tweakme.h \
+  libs/include/spdlog/version.h \
   libs/include/threepp/cameras/Camera.hpp \
   libs/include/threepp/cameras/OrthographicCamera.hpp \
   libs/include/threepp/cameras/PerspectiveCamera.hpp \
@@ -6762,14 +6799,18 @@ CMakeFiles/client.dir/src/client/world.cpp.o: src/client/world.cpp \
   /usr/include/asm-generic/bitsperlong.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
+  /usr/include/asm-generic/int-ll64.h \
   /usr/include/asm-generic/ioctl.h \
   /usr/include/asm-generic/ioctls.h \
   /usr/include/asm-generic/posix_types.h \
   /usr/include/asm-generic/socket.h \
   /usr/include/asm-generic/sockios.h \
+  /usr/include/asm-generic/types.h \
   /usr/include/assert.h \
+  /usr/include/c++/13/algorithm \
   /usr/include/c++/13/any \
   /usr/include/c++/13/array \
+  /usr/include/c++/13/atomic \
   /usr/include/c++/13/backward/auto_ptr.h \
   /usr/include/c++/13/backward/binders.h \
   /usr/include/c++/13/bit \
@@ -6780,6 +6821,7 @@ CMakeFiles/client.dir/src/client/world.cpp.o: src/client/world.cpp \
   /usr/include/c++/13/bits/allocator.h \
   /usr/include/c++/13/bits/atomic_base.h \
   /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+  /usr/include/c++/13/bits/atomic_timed_wait.h \
   /usr/include/c++/13/bits/atomic_wait.h \
   /usr/include/c++/13/bits/basic_ios.h \
   /usr/include/c++/13/bits/basic_ios.tcc \
@@ -6835,6 +6877,7 @@ CMakeFiles/client.dir/src/client/world.cpp.o: src/client/world.cpp \
   /usr/include/c++/13/bits/ptr_traits.h \
   /usr/include/c++/13/bits/quoted_string.h \
   /usr/include/c++/13/bits/range_access.h \
+  /usr/include/c++/13/bits/ranges_algo.h \
   /usr/include/c++/13/bits/ranges_algobase.h \
   /usr/include/c++/13/bits/ranges_base.h \
   /usr/include/c++/13/bits/ranges_cmp.h \
@@ -6842,6 +6885,7 @@ CMakeFiles/client.dir/src/client/world.cpp.o: src/client/world.cpp \
   /usr/include/c++/13/bits/ranges_util.h \
   /usr/include/c++/13/bits/refwrap.h \
   /usr/include/c++/13/bits/requires_hosted.h \
+  /usr/include/c++/13/bits/semaphore_base.h \
   /usr/include/c++/13/bits/shared_ptr.h \
   /usr/include/c++/13/bits/shared_ptr_atomic.h \
   /usr/include/c++/13/bits/shared_ptr_base.h \
@@ -6850,6 +6894,7 @@ CMakeFiles/client.dir/src/client/world.cpp.o: src/client/world.cpp \
   /usr/include/c++/13/bits/std_abs.h \
   /usr/include/c++/13/bits/std_function.h \
   /usr/include/c++/13/bits/std_mutex.h \
+  /usr/include/c++/13/bits/std_thread.h \
   /usr/include/c++/13/bits/stl_algo.h \
   /usr/include/c++/13/bits/stl_algobase.h \
   /usr/include/c++/13/bits/stl_bvector.h \
@@ -6868,11 +6913,14 @@ CMakeFiles/client.dir/src/client/world.cpp.o: src/client/world.cpp \
   /usr/include/c++/13/bits/stl_tree.h \
   /usr/include/c++/13/bits/stl_uninitialized.h \
   /usr/include/c++/13/bits/stl_vector.h \
+  /usr/include/c++/13/bits/stream_iterator.h \
   /usr/include/c++/13/bits/streambuf.tcc \
   /usr/include/c++/13/bits/streambuf_iterator.h \
   /usr/include/c++/13/bits/string_view.tcc \
   /usr/include/c++/13/bits/stringfwd.h \
+  /usr/include/c++/13/bits/this_thread_sleep.h \
   /usr/include/c++/13/bits/uniform_int_dist.h \
+  /usr/include/c++/13/bits/unique_lock.h \
   /usr/include/c++/13/bits/unique_ptr.h \
   /usr/include/c++/13/bits/unordered_map.h \
   /usr/include/c++/13/bits/uses_allocator.h \
@@ -6891,10 +6939,12 @@ CMakeFiles/client.dir/src/client/world.cpp.o: src/client/world.cpp \
   /usr/include/c++/13/codecvt \
   /usr/include/c++/13/compare \
   /usr/include/c++/13/concepts \
+  /usr/include/c++/13/condition_variable \
   /usr/include/c++/13/cstddef \
   /usr/include/c++/13/cstdint \
   /usr/include/c++/13/cstdio \
   /usr/include/c++/13/cstdlib \
+  /usr/include/c++/13/cstring \
   /usr/include/c++/13/ctime \
   /usr/include/c++/13/cwchar \
   /usr/include/c++/13/cwctype \
@@ -6916,27 +6966,33 @@ CMakeFiles/client.dir/src/client/world.cpp.o: src/client/world.cpp \
   /usr/include/c++/13/ios \
   /usr/include/c++/13/iosfwd \
   /usr/include/c++/13/istream \
+  /usr/include/c++/13/iterator \
   /usr/include/c++/13/limits \
   /usr/include/c++/13/locale \
   /usr/include/c++/13/map \
   /usr/include/c++/13/math.h \
   /usr/include/c++/13/memory \
+  /usr/include/c++/13/mutex \
   /usr/include/c++/13/new \
   /usr/include/c++/13/numbers \
   /usr/include/c++/13/optional \
   /usr/include/c++/13/ostream \
   /usr/include/c++/13/pstl/execution_defs.h \
+  /usr/include/c++/13/pstl/glue_algorithm_defs.h \
   /usr/include/c++/13/pstl/glue_memory_defs.h \
   /usr/include/c++/13/pstl/pstl_config.h \
   /usr/include/c++/13/ratio \
+  /usr/include/c++/13/semaphore \
   /usr/include/c++/13/span \
   /usr/include/c++/13/sstream \
   /usr/include/c++/13/stdexcept \
   /usr/include/c++/13/stdlib.h \
+  /usr/include/c++/13/stop_token \
   /usr/include/c++/13/streambuf \
   /usr/include/c++/13/string \
   /usr/include/c++/13/string_view \
   /usr/include/c++/13/system_error \
+  /usr/include/c++/13/thread \
   /usr/include/c++/13/tr1/bessel_function.tcc \
   /usr/include/c++/13/tr1/beta_function.tcc \
   /usr/include/c++/13/tr1/ell_integral.tcc \
@@ -6970,7 +7026,9 @@ CMakeFiles/client.dir/src/client/world.cpp.o: src/client/world.cpp \
   /usr/include/linux/ioctl.h \
   /usr/include/linux/limits.h \
   /usr/include/linux/posix_types.h \
+  /usr/include/linux/stat.h \
   /usr/include/linux/stddef.h \
+  /usr/include/linux/types.h \
   /usr/include/locale.h \
   /usr/include/math.h \
   /usr/include/memory.h \
@@ -6981,6 +7039,7 @@ CMakeFiles/client.dir/src/client/world.cpp.o: src/client/world.cpp \
   /usr/include/pthread.h \
   /usr/include/rpc/netdb.h \
   /usr/include/sched.h \
+  /usr/include/semaphore.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
@@ -7000,6 +7059,7 @@ CMakeFiles/client.dir/src/client/world.cpp.o: src/client/world.cpp \
   /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
   /usr/include/x86_64-linux-gnu/asm/socket.h \
   /usr/include/x86_64-linux-gnu/asm/sockios.h \
+  /usr/include/x86_64-linux-gnu/asm/types.h \
   /usr/include/x86_64-linux-gnu/asm/unistd.h \
   /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
@@ -7046,12 +7106,15 @@ CMakeFiles/client.dir/src/client/world.cpp.o: src/client/world.cpp \
   /usr/include/x86_64-linux-gnu/bits/select-decl.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
   /usr/include/x86_64-linux-gnu/bits/select2.h \
+  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
   /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
   /usr/include/x86_64-linux-gnu/bits/socket.h \
   /usr/include/x86_64-linux-gnu/bits/socket2.h \
   /usr/include/x86_64-linux-gnu/bits/socket_type.h \
   /usr/include/x86_64-linux-gnu/bits/stat.h \
+  /usr/include/x86_64-linux-gnu/bits/statx-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/statx.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
@@ -7096,6 +7159,8 @@ CMakeFiles/client.dir/src/client/world.cpp.o: src/client/world.cpp \
   /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_statx_timestamp.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
@@ -7137,6 +7202,7 @@ CMakeFiles/client.dir/src/client/world.cpp.o: src/client/world.cpp \
   /usr/include/x86_64-linux-gnu/sys/select.h \
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
   /usr/include/x86_64-linux-gnu/sys/socket.h \
+  /usr/include/x86_64-linux-gnu/sys/stat.h \
   /usr/include/x86_64-linux-gnu/sys/syscall.h \
   /usr/include/x86_64-linux-gnu/sys/time.h \
   /usr/include/x86_64-linux-gnu/sys/ttydefaults.h \

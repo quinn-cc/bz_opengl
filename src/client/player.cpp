@@ -35,8 +35,8 @@ void Player::update() {
         glm::vec2 movement(0.0f);
         if (game.getFocusState() == FOCUS_STATE_GAME)
             movement = game.engine.input->getInputState().movement;
-        float speed = game.world->getSettings().playerSpeed;
-        float turnSpeed = game.world->getSettings().playerTurnSpeed;
+        float speed = game.world->getSetting("playerSpeed");
+        float turnSpeed = game.world->getSetting("playerTurnSpeed");
 
         glm::vec3 movementVector = game.engine.physics->getForwardVector(physicsId);
         movementVector *= movement.y * speed;
@@ -53,7 +53,7 @@ void Player::update() {
         if (game.getFocusState() == FOCUS_STATE_GAME) {
             if (grounded && game.engine.input->getInputState().jump && TimeUtils::GetElapsedTime(lastJumpTime, TimeUtils::GetCurrentTime()) >= jumpCooldown) {
                 glm::vec3 velocity = game.engine.physics->getVelocity(physicsId);
-                velocity.y = game.world->getSettings().playerJumpSpeed;
+                velocity.y = game.world->getSetting("playerJumpSpeed");
                 game.engine.physics->setVelocity(physicsId, velocity);
                 lastJumpTime = TimeUtils::GetCurrentTime();
                 grounded = false;

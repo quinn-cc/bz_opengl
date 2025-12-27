@@ -1,8 +1,8 @@
-CMakeFiles/server.dir/src/server/client.cpp.o: \
- /home/irie/Desktop/bz_opengl/src/server/client.cpp \
+CMakeFiles/server.dir/src/server/chat.cpp.o: \
+ /home/irie/Desktop/bz_opengl/src/server/chat.cpp \
  /usr/include/stdc-predef.h \
- /home/irie/Desktop/bz_opengl/src/server/client.hpp \
- /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
+ /home/irie/Desktop/bz_opengl/src/server/chat.hpp \
+ /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -14,15 +14,58 @@ CMakeFiles/server.dir/src/server/client.cpp.o: \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
  /usr/include/c++/13/pstl/pstl_config.h \
- /usr/include/c++/13/bits/stringfwd.h \
+ /usr/include/c++/13/bits/stl_algobase.h \
+ /usr/include/c++/13/bits/functexcept.h \
+ /usr/include/c++/13/bits/exception_defines.h \
+ /usr/include/c++/13/bits/cpp_type_traits.h \
+ /usr/include/c++/13/ext/type_traits.h \
+ /usr/include/c++/13/ext/numeric_traits.h \
+ /usr/include/c++/13/bits/stl_pair.h /usr/include/c++/13/type_traits \
+ /usr/include/c++/13/bits/move.h /usr/include/c++/13/bits/utility.h \
+ /usr/include/c++/13/compare /usr/include/c++/13/concepts \
+ /usr/include/c++/13/bits/stl_iterator_base_types.h \
+ /usr/include/c++/13/bits/iterator_concepts.h \
+ /usr/include/c++/13/bits/ptr_traits.h \
+ /usr/include/c++/13/bits/ranges_cmp.h \
+ /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
+ /usr/include/c++/13/bits/concept_check.h \
+ /usr/include/c++/13/debug/assertions.h \
+ /usr/include/c++/13/bits/stl_iterator.h /usr/include/c++/13/new \
+ /usr/include/c++/13/bits/exception.h \
+ /usr/include/c++/13/bits/stl_construct.h \
+ /usr/include/c++/13/debug/debug.h \
+ /usr/include/c++/13/bits/predefined_ops.h /usr/include/c++/13/bit \
+ /usr/include/c++/13/bits/allocator.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
+ /usr/include/c++/13/bits/new_allocator.h \
  /usr/include/c++/13/bits/memoryfwd.h \
+ /usr/include/c++/13/bits/stl_uninitialized.h \
+ /usr/include/c++/13/ext/alloc_traits.h \
+ /usr/include/c++/13/bits/alloc_traits.h \
+ /usr/include/c++/13/bits/stl_vector.h \
+ /usr/include/c++/13/initializer_list \
+ /usr/include/c++/13/bits/stl_bvector.h \
+ /usr/include/c++/13/bits/functional_hash.h \
+ /usr/include/c++/13/bits/hash_bytes.h /usr/include/c++/13/bits/refwrap.h \
+ /usr/include/c++/13/bits/invoke.h \
+ /usr/include/c++/13/bits/stl_function.h \
+ /usr/include/c++/13/backward/binders.h \
+ /usr/include/c++/13/bits/range_access.h \
+ /usr/include/c++/13/bits/vector.tcc \
+ /usr/include/c++/13/bits/memory_resource.h /usr/include/c++/13/cstddef \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+ /usr/include/c++/13/bits/uses_allocator.h \
+ /usr/include/c++/13/bits/uses_allocator_args.h /usr/include/c++/13/tuple \
+ /usr/include/c++/13/bits/ranges_util.h \
+ /usr/include/c++/13/bits/ranges_base.h \
+ /usr/include/c++/13/bits/max_size_type.h /usr/include/c++/13/numbers \
+ /usr/include/c++/13/string /usr/include/c++/13/bits/stringfwd.h \
  /usr/include/c++/13/bits/char_traits.h \
  /usr/include/c++/13/bits/postypes.h /usr/include/c++/13/cwchar \
  /usr/include/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/x86_64-linux-gnu/bits/floatn.h \
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
@@ -34,23 +77,6 @@ CMakeFiles/server.dir/src/server/client.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/wchar2-decl.h \
  /usr/include/x86_64-linux-gnu/bits/wchar2.h \
- /usr/include/c++/13/type_traits /usr/include/c++/13/compare \
- /usr/include/c++/13/concepts /usr/include/c++/13/bits/stl_construct.h \
- /usr/include/c++/13/new /usr/include/c++/13/bits/exception.h \
- /usr/include/c++/13/bits/move.h \
- /usr/include/c++/13/bits/stl_iterator_base_types.h \
- /usr/include/c++/13/bits/iterator_concepts.h \
- /usr/include/c++/13/bits/ptr_traits.h \
- /usr/include/c++/13/bits/ranges_cmp.h \
- /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
- /usr/include/c++/13/bits/concept_check.h \
- /usr/include/c++/13/debug/assertions.h \
- /usr/include/c++/13/bits/allocator.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h \
- /usr/include/c++/13/bits/new_allocator.h \
- /usr/include/c++/13/bits/functexcept.h \
- /usr/include/c++/13/bits/exception_defines.h \
- /usr/include/c++/13/bits/cpp_type_traits.h \
  /usr/include/c++/13/bits/localefwd.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
  /usr/include/c++/13/clocale /usr/include/locale.h \
@@ -63,25 +89,7 @@ CMakeFiles/server.dir/src/server/client.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/endianness.h \
  /usr/include/c++/13/bits/ostream_insert.h \
  /usr/include/c++/13/bits/cxxabi_forced.h \
- /usr/include/c++/13/bits/stl_iterator.h \
- /usr/include/c++/13/ext/type_traits.h \
- /usr/include/c++/13/bits/stl_function.h \
- /usr/include/c++/13/backward/binders.h \
- /usr/include/c++/13/ext/numeric_traits.h \
- /usr/include/c++/13/bits/stl_algobase.h \
- /usr/include/c++/13/bits/stl_pair.h /usr/include/c++/13/bits/utility.h \
- /usr/include/c++/13/debug/debug.h \
- /usr/include/c++/13/bits/predefined_ops.h /usr/include/c++/13/bit \
- /usr/include/c++/13/bits/refwrap.h /usr/include/c++/13/bits/invoke.h \
- /usr/include/c++/13/bits/range_access.h \
- /usr/include/c++/13/initializer_list \
- /usr/include/c++/13/bits/basic_string.h \
- /usr/include/c++/13/ext/alloc_traits.h \
- /usr/include/c++/13/bits/alloc_traits.h /usr/include/c++/13/string_view \
- /usr/include/c++/13/bits/functional_hash.h \
- /usr/include/c++/13/bits/hash_bytes.h \
- /usr/include/c++/13/bits/ranges_base.h \
- /usr/include/c++/13/bits/max_size_type.h /usr/include/c++/13/numbers \
+ /usr/include/c++/13/bits/basic_string.h /usr/include/c++/13/string_view \
  /usr/include/c++/13/bits/string_view.tcc \
  /usr/include/c++/13/ext/string_conversions.h /usr/include/c++/13/cstdlib \
  /usr/include/stdlib.h /usr/include/x86_64-linux-gnu/bits/waitflags.h \
@@ -126,10 +134,7 @@ CMakeFiles/server.dir/src/server/client.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/basic_string.tcc \
- /usr/include/c++/13/bits/memory_resource.h /usr/include/c++/13/cstddef \
- /usr/include/c++/13/bits/uses_allocator.h \
- /usr/include/c++/13/bits/uses_allocator_args.h /usr/include/c++/13/tuple \
- /usr/include/c++/13/bits/ranges_util.h \
+ /home/irie/Desktop/bz_opengl/src/server/game.hpp \
  /home/irie/Desktop/bz_opengl/src/engine/types.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/glm/glm.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/glm/detail/_fixes.hpp \
@@ -208,11 +213,7 @@ CMakeFiles/server.dir/src/server/client.cpp.o: \
  /usr/include/c++/13/ext/aligned_buffer.h \
  /usr/include/c++/13/bits/enable_special_members.h \
  /usr/include/c++/13/bits/node_handle.h \
- /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/vector \
- /usr/include/c++/13/bits/stl_uninitialized.h \
- /usr/include/c++/13/bits/stl_vector.h \
- /usr/include/c++/13/bits/stl_bvector.h \
- /usr/include/c++/13/bits/vector.tcc /usr/include/c++/13/array \
+ /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/array \
  /usr/include/c++/13/bits/stl_algo.h \
  /usr/include/c++/13/bits/algorithmfwd.h \
  /usr/include/c++/13/bits/stl_heap.h \
@@ -424,108 +425,6 @@ CMakeFiles/server.dir/src/server/client.cpp.o: \
  /usr/include/c++/13/charconv /usr/include/c++/13/optional \
  /usr/include/c++/13/span /usr/include/c++/13/variant \
  /usr/include/c++/13/bits/ranges_algobase.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/common.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/null_mutex.h \
- /usr/include/c++/13/atomic /usr/include/c++/13/bits/atomic_base.h \
- /usr/include/c++/13/bits/atomic_lockfree_defines.h \
- /usr/include/c++/13/bits/atomic_wait.h /usr/include/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
- /usr/include/x86_64-linux-gnu/bits/environments.h \
- /usr/include/x86_64-linux-gnu/bits/confname.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
- /usr/include/x86_64-linux-gnu/bits/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/unistd-decl.h \
- /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
- /usr/include/linux/close_range.h /usr/include/syscall.h \
- /usr/include/x86_64-linux-gnu/sys/syscall.h \
- /usr/include/x86_64-linux-gnu/asm/unistd.h \
- /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
- /usr/include/x86_64-linux-gnu/bits/syscall.h \
- /usr/include/c++/13/bits/std_mutex.h /usr/include/c++/13/utility \
- /usr/include/c++/13/bits/stl_relops.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/tweakme.h \
- /usr/include/c++/13/memory \
- /usr/include/c++/13/bits/stl_raw_storage_iter.h \
- /usr/include/c++/13/bits/shared_ptr_atomic.h \
- /usr/include/c++/13/backward/auto_ptr.h \
- /usr/include/c++/13/bits/ranges_uninitialized.h \
- /usr/include/c++/13/pstl/glue_memory_defs.h \
- /usr/include/c++/13/pstl/execution_defs.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/fmt.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/format.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/base.h \
- /usr/include/string.h /usr/include/strings.h \
- /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
- /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/format.h \
- /usr/include/c++/13/cstring \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/format-inl.h \
- /usr/include/c++/13/algorithm /usr/include/c++/13/bits/ranges_algo.h \
- /usr/include/c++/13/pstl/glue_algorithm_defs.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/common-inl.h \
- /usr/include/c++/13/iterator /usr/include/c++/13/bits/stream_iterator.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/registry.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/periodic_worker.h \
- /usr/include/c++/13/condition_variable \
- /usr/include/c++/13/bits/unique_lock.h /usr/include/c++/13/stop_token \
- /usr/include/c++/13/bits/std_thread.h /usr/include/c++/13/semaphore \
- /usr/include/c++/13/bits/semaphore_base.h \
- /usr/include/c++/13/bits/atomic_timed_wait.h \
- /usr/include/c++/13/bits/this_thread_sleep.h \
- /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
- /usr/include/x86_64-linux-gnu/bits/semaphore.h /usr/include/c++/13/mutex \
- /usr/include/c++/13/thread \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/periodic_worker-inl.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/registry-inl.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/logger.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/backtracer.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/circular_q.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg_buffer.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg-inl.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/os.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/os-inl.h \
- /usr/include/x86_64-linux-gnu/sys/stat.h \
- /usr/include/x86_64-linux-gnu/bits/stat.h \
- /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
- /usr/include/x86_64-linux-gnu/bits/statx.h /usr/include/linux/stat.h \
- /usr/include/linux/types.h /usr/include/x86_64-linux-gnu/asm/types.h \
- /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
- /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
- /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
- /usr/include/linux/stddef.h \
- /usr/include/x86_64-linux-gnu/asm/posix_types.h \
- /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
- /usr/include/asm-generic/posix_types.h \
- /usr/include/x86_64-linux-gnu/bits/statx-generic.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_statx_timestamp.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h \
- /usr/include/fcntl.h /usr/include/x86_64-linux-gnu/bits/fcntl.h \
- /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
- /usr/include/linux/falloc.h /usr/include/x86_64-linux-gnu/bits/fcntl2.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg_buffer-inl.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/backtracer-inl.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/logger-inl.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/pattern_formatter.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/formatter.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/pattern_formatter-inl.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/fmt_helper.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/mdc.h \
- /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
- /usr/include/c++/13/bits/stl_map.h \
- /usr/include/c++/13/bits/stl_multimap.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/sink.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/sink-inl.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/ansicolor_sink.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/console_globals.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/ansicolor_sink-inl.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/synchronous_factory.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/version.h \
- /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog-inl.h \
- /home/irie/Desktop/bz_opengl/src/server/game.hpp \
  /home/irie/Desktop/bz_opengl/src/engine/server_engine.hpp \
  /home/irie/Desktop/bz_opengl/src/engine/components/server_network.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/enet.h \
@@ -539,12 +438,20 @@ CMakeFiles/server.dir/src/server/client.cpp.o: \
  /usr/include/asm-generic/ioctl.h \
  /usr/include/x86_64-linux-gnu/bits/ioctl-types.h \
  /usr/include/x86_64-linux-gnu/sys/ttydefaults.h \
+ /usr/include/x86_64-linux-gnu/sys/time.h \
  /usr/include/x86_64-linux-gnu/sys/socket.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
  /usr/include/x86_64-linux-gnu/bits/socket.h \
  /usr/include/x86_64-linux-gnu/bits/socket_type.h \
  /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
  /usr/include/x86_64-linux-gnu/asm/socket.h \
- /usr/include/asm-generic/socket.h \
+ /usr/include/asm-generic/socket.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+ /usr/include/asm-generic/posix_types.h \
+ /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h \
  /usr/include/x86_64-linux-gnu/asm/sockios.h \
  /usr/include/asm-generic/sockios.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
@@ -556,7 +463,26 @@ CMakeFiles/server.dir/src/server/client.cpp.o: \
  /usr/include/netinet/tcp.h /usr/include/netdb.h /usr/include/rpc/netdb.h \
  /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
- /usr/include/x86_64-linux-gnu/bits/netdb.h \
+ /usr/include/x86_64-linux-gnu/bits/netdb.h /usr/include/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd-decl.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h /usr/include/string.h \
+ /usr/include/strings.h \
+ /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
+ /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
+ /usr/include/fcntl.h /usr/include/x86_64-linux-gnu/bits/fcntl.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
+ /usr/include/linux/falloc.h /usr/include/x86_64-linux-gnu/bits/stat.h \
+ /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl2.h /usr/include/c++/13/map \
+ /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
+ /usr/include/c++/13/bits/stl_multimap.h \
  /home/irie/Desktop/bz_opengl/src/engine/components/physics.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/btBulletDynamicsCommon.h \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/btBulletCollisionCommon.h \
@@ -690,6 +616,79 @@ CMakeFiles/server.dir/src/server/client.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Vehicle/btWheelInfo.h \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btActionInterface.h \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
+ /home/irie/Desktop/bz_opengl/src/server/client.hpp \
  /home/irie/Desktop/bz_opengl/src/server/shot.hpp \
  /home/irie/Desktop/bz_opengl/src/server/world.hpp \
- /home/irie/Desktop/bz_opengl/src/server/chat.hpp
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/common.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/null_mutex.h \
+ /usr/include/c++/13/atomic /usr/include/c++/13/bits/atomic_base.h \
+ /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/13/bits/atomic_wait.h /usr/include/syscall.h \
+ /usr/include/x86_64-linux-gnu/sys/syscall.h \
+ /usr/include/x86_64-linux-gnu/asm/unistd.h \
+ /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
+ /usr/include/x86_64-linux-gnu/bits/syscall.h \
+ /usr/include/c++/13/bits/std_mutex.h /usr/include/c++/13/utility \
+ /usr/include/c++/13/bits/stl_relops.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/tweakme.h \
+ /usr/include/c++/13/memory \
+ /usr/include/c++/13/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/13/bits/shared_ptr_atomic.h \
+ /usr/include/c++/13/backward/auto_ptr.h \
+ /usr/include/c++/13/bits/ranges_uninitialized.h \
+ /usr/include/c++/13/pstl/glue_memory_defs.h \
+ /usr/include/c++/13/pstl/execution_defs.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/fmt.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/format.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/base.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/format.h \
+ /usr/include/c++/13/cstring \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/fmt/bundled/format-inl.h \
+ /usr/include/c++/13/algorithm /usr/include/c++/13/bits/ranges_algo.h \
+ /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/common-inl.h \
+ /usr/include/c++/13/iterator /usr/include/c++/13/bits/stream_iterator.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/registry.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/periodic_worker.h \
+ /usr/include/c++/13/condition_variable \
+ /usr/include/c++/13/bits/unique_lock.h /usr/include/c++/13/stop_token \
+ /usr/include/c++/13/bits/std_thread.h /usr/include/c++/13/semaphore \
+ /usr/include/c++/13/bits/semaphore_base.h \
+ /usr/include/c++/13/bits/atomic_timed_wait.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h /usr/include/semaphore.h \
+ /usr/include/x86_64-linux-gnu/bits/semaphore.h /usr/include/c++/13/mutex \
+ /usr/include/c++/13/thread \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/periodic_worker-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/registry-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/logger.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/backtracer.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/circular_q.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg_buffer.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/os.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/os-inl.h \
+ /usr/include/x86_64-linux-gnu/sys/stat.h \
+ /usr/include/x86_64-linux-gnu/bits/statx.h /usr/include/linux/stat.h \
+ /usr/include/linux/types.h /usr/include/x86_64-linux-gnu/asm/types.h \
+ /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
+ /usr/include/x86_64-linux-gnu/bits/statx-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_statx_timestamp.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/log_msg_buffer-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/backtracer-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/logger-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/pattern_formatter.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/formatter.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/pattern_formatter-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/fmt_helper.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/mdc.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/sink.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/sink-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/ansicolor_sink.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/console_globals.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/sinks/ansicolor_sink-inl.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/synchronous_factory.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/version.h \
+ /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog-inl.h

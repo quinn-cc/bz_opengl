@@ -614,4 +614,6 @@ CMakeFiles/server.dir/src/server/shot.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Vehicle/btWheelInfo.h \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btActionInterface.h \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
- /home/irie/Desktop/bz_opengl/src/server/client.hpp
+ /home/irie/Desktop/bz_opengl/src/server/client.hpp \
+ /home/irie/Desktop/bz_opengl/src/server/world.hpp \
+ /home/irie/Desktop/bz_opengl/src/server/chat.hpp

@@ -22,6 +22,8 @@ Game::~Game() {
 }
 
 void Game::update(TimeUtils::duration deltaTime) {
+    world->update();
+
     if (focusState == FOCUS_STATE_GAME && engine.input->getInputState().chat) {
         focusState = FOCUS_STATE_CONSOLE;
         spdlog::trace("Game: Switching focus to console");
@@ -81,7 +83,7 @@ void Game::update(TimeUtils::duration deltaTime) {
             glm::vec3 forward = player->getForwardVector();
 
             glm::vec3 shotPosition = position + forward * 2.0f;
-            glm::vec3 shotVelocity = forward * world->getSettings().shotSpeed + velocity;
+            glm::vec3 shotVelocity = forward * world->getSetting("shotSpeed") + velocity;
 
             Shot *shot = new Shot(*this, shotPosition, shotVelocity);
             shots.push_back(shot);

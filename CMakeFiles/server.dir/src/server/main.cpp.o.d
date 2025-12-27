@@ -688,6 +688,8 @@ CMakeFiles/server.dir/src/server/main.cpp.o: \
  /home/irie/Desktop/bz_opengl/src/server/game.hpp \
  /home/irie/Desktop/bz_opengl/src/server/client.hpp \
  /home/irie/Desktop/bz_opengl/src/server/shot.hpp \
+ /home/irie/Desktop/bz_opengl/src/server/world.hpp \
+ /home/irie/Desktop/bz_opengl/src/server/chat.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/cxxopts.hpp \
  /usr/include/c++/13/unordered_set \
  /usr/include/c++/13/bits/unordered_set.h /usr/include/c++/13/regex \

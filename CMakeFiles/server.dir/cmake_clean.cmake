@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/server.dir/src/engine/mesh_loader.cpp.o.d"
   "CMakeFiles/server.dir/src/engine/server_engine.cpp.o"
   "CMakeFiles/server.dir/src/engine/server_engine.cpp.o.d"
+  "CMakeFiles/server.dir/src/server/chat.cpp.o"
+  "CMakeFiles/server.dir/src/server/chat.cpp.o.d"
   "CMakeFiles/server.dir/src/server/client.cpp.o"
   "CMakeFiles/server.dir/src/server/client.cpp.o.d"
   "CMakeFiles/server.dir/src/server/game.cpp.o"
@@ -15,6 +17,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/server.dir/src/server/main.cpp.o.d"
   "CMakeFiles/server.dir/src/server/shot.cpp.o"
   "CMakeFiles/server.dir/src/server/shot.cpp.o.d"
+  "CMakeFiles/server.dir/src/server/world.cpp.o"
+  "CMakeFiles/server.dir/src/server/world.cpp.o.d"
   "server"
   "server.pdb"
 )

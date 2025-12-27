@@ -33,10 +33,28 @@ Client *Game::getClient(client_id id) {
 }
 
 Game::Game(ServerEngine &engine) : engine(engine) {
-    
+    world = new World(*this);
+    chat = new Chat(*this);
+}
+
+Game::~Game() {
+    for (Client *client : clients) {
+        delete client;
+    }
+    clients.clear();
+
+    for (Shot *shot : shots) {
+        delete shot;
+    }
+    shots.clear();
+
+    delete world;
+    delete chat;
 }
 
 void Game::update(TimeUtils::duration deltaTime) {
+    chat->update();
+
     for (Client *client : clients) {
         client->update();
     }
@@ -52,15 +70,7 @@ void Game::update(TimeUtils::duration deltaTime) {
         removeClient(disconnMsg->clientId);
     }
 
-    // Listen for incoming chat
-    if (auto *chatMsg = engine.network->peekMessage<ClientMsg_Chat>()) {
-        spdlog::info("Game::update: Received chat message from client id {}: {}", chatMsg->clientId, chatMsg->text);
-
-        ServerMsg_Chat serverChatMsg;
-        strcpy(serverChatMsg.name, getClient(chatMsg->clientId)->getName().c_str());
-        strcpy(serverChatMsg.text, chatMsg->text);
-        engine.network->sendExcept<ServerMsg_Chat>(chatMsg->clientId, serverChatMsg);
-    }
+    
 
     // Listen for incoming shots
     if (auto *shotMsg = engine.network->peekMessage<ClientMsg_CreateShot>()) {

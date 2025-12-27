@@ -12,10 +12,12 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/irie/Desktop/bz_opengl/src/engine/components/server_network.cpp" "CMakeFiles/server.dir/src/engine/components/server_network.cpp.o" "gcc" "CMakeFiles/server.dir/src/engine/components/server_network.cpp.o.d"
   "/home/irie/Desktop/bz_opengl/src/engine/mesh_loader.cpp" "CMakeFiles/server.dir/src/engine/mesh_loader.cpp.o" "gcc" "CMakeFiles/server.dir/src/engine/mesh_loader.cpp.o.d"
   "/home/irie/Desktop/bz_opengl/src/engine/server_engine.cpp" "CMakeFiles/server.dir/src/engine/server_engine.cpp.o" "gcc" "CMakeFiles/server.dir/src/engine/server_engine.cpp.o.d"
+  "/home/irie/Desktop/bz_opengl/src/server/chat.cpp" "CMakeFiles/server.dir/src/server/chat.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/chat.cpp.o.d"
   "/home/irie/Desktop/bz_opengl/src/server/client.cpp" "CMakeFiles/server.dir/src/server/client.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/client.cpp.o.d"
   "/home/irie/Desktop/bz_opengl/src/server/game.cpp" "CMakeFiles/server.dir/src/server/game.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/game.cpp.o.d"
   "/home/irie/Desktop/bz_opengl/src/server/main.cpp" "CMakeFiles/server.dir/src/server/main.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/main.cpp.o.d"
   "/home/irie/Desktop/bz_opengl/src/server/shot.cpp" "CMakeFiles/server.dir/src/server/shot.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/shot.cpp.o.d"
+  "/home/irie/Desktop/bz_opengl/src/server/world.cpp" "CMakeFiles/server.dir/src/server/world.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/world.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
