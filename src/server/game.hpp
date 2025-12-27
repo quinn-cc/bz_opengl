@@ -2,6 +2,7 @@
 #include "engine/types.hpp"
 #include "engine/server_engine.hpp"
 #include "client.hpp"
+#include "shot.hpp"
 #include <vector>
 
 class Game {
@@ -10,6 +11,8 @@ private:
     void addClient(Client *client);
     void removeClient(client_id id);
     Client *getClient(client_id id);
+
+    std::vector<Shot *> shots;
 
 public:
     ServerEngine &engine;

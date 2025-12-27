@@ -748,6 +748,30 @@ src/server/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/main.cpp.s
 .PHONY : src/server/main.cpp.s
 
+src/server/shot.o: src/server/shot.cpp.o
+.PHONY : src/server/shot.o
+
+# target to build an object file
+src/server/shot.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/shot.cpp.o
+.PHONY : src/server/shot.cpp.o
+
+src/server/shot.i: src/server/shot.cpp.i
+.PHONY : src/server/shot.i
+
+# target to preprocess a source file
+src/server/shot.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/shot.cpp.i
+.PHONY : src/server/shot.cpp.i
+
+src/server/shot.s: src/server/shot.cpp.s
+.PHONY : src/server/shot.s
+
+# target to generate assembly for a file
+src/server/shot.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/shot.cpp.s
+.PHONY : src/server/shot.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -833,6 +857,9 @@ help:
 	@echo "... src/server/main.o"
 	@echo "... src/server/main.i"
 	@echo "... src/server/main.s"
+	@echo "... src/server/shot.o"
+	@echo "... src/server/shot.i"
+	@echo "... src/server/shot.s"
 .PHONY : help
 
 

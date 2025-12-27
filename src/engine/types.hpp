@@ -113,8 +113,8 @@ typedef struct ServerMsg_CreateShot : ServerMsg {
 typedef struct ServerMsg_RemoveShot : ServerMsg {
     static constexpr ServerMsg_Type Type = ServerMsg_Type_REMOVE_SHOT;
     ServerMsg_RemoveShot() { type = Type; }
-    client_id clientId;
     shot_id shotId;
+    bool isGlobalId;
 } ServerMsg_RemoveShot;
 
 typedef struct ServerMsg_AllowSpawn : ServerMsg {

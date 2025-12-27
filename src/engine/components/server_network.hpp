@@ -81,5 +81,13 @@ public:
         }
     };
 
+    template<typename T> void sendAll(const T &msg, bool flush = false) {
+        static_assert(std::is_base_of_v<ServerMsg, T>, "T must be a subclass of ServerMsg");
+
+        for (const auto& [id, peer] : clients) {
+            send<T>(id, msg, flush);
+        }
+    };
+
     std::vector<client_id> getClients() const;
 };

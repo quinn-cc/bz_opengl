@@ -7,14 +7,24 @@ class Shot {
 private:
     Game &game;
     shot_id id;
-    client_id ownerId;
+    bool isGlobalId;
     glm::vec3 position;
     glm::vec3 velocity;
 
     render_id renderId;
+    shot_id getNextLocalShotId() {
+        static shot_id nextId = 1;
+        return nextId++;
+    };
+
+    Shot(Game &game, shot_id id, bool isGlobalId, glm::vec3 position, glm::vec3 velocity);
 
 public:
-    Shot(Game &game, shot_id id, client_id ownerId, glm::vec3 position, glm::vec3 velocity);
+    // Local Id shots
+    Shot(Game &game, glm::vec3 position, glm::vec3 velocity);
+    // Global Id shots
+    Shot(Game &game, shot_id globalId, glm::vec3 position, glm::vec3 velocity);
+    
     ~Shot();
 
     void update(TimeUtils::duration deltaTime);

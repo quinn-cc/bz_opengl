@@ -26,10 +26,6 @@ public:
 
     std::vector<Client *> clients;
     std::vector<Shot *> shots;
-    shot_id getNextLocalShotId() {
-        static shot_id nextId = 1;
-        return nextId++;
-    }
 
     FOCUS_STATE getFocusState() const { return focusState; }
 

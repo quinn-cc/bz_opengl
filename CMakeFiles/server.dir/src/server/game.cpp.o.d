@@ -614,6 +614,7 @@ CMakeFiles/server.dir/src/server/game.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btActionInterface.h \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
  /home/irie/Desktop/bz_opengl/src/server/client.hpp \
+ /home/irie/Desktop/bz_opengl/src/server/shot.hpp \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/spdlog.h \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/common.h \
  /home/irie/Desktop/bz_opengl/libs/include/spdlog/details/null_mutex.h \

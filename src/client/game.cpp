@@ -61,7 +61,19 @@ void Game::update(TimeUtils::duration deltaTime) {
         engine.network->popMessage(msg);
     }
 
+    // Listen for incoming shots (they will always be global ids)
+    if (auto msg = engine.network->peekMessage<ServerMsg_CreateShot>()) {
+        Shot *newShot = new Shot(
+            *this,
+            msg->globalShotId,
+            msg->position,
+            msg->velocity
+        );
+        shots.push_back(newShot);
+        engine.network->popMessage(msg);
+    }
 
+    // TODO: move this to player
     if (focusState == FOCUS_STATE_GAME) {
         if (engine.input->getInputState().fire) {
             glm::vec3 position = player->getPosition();
@@ -71,7 +83,7 @@ void Game::update(TimeUtils::duration deltaTime) {
             glm::vec3 shotPosition = position + forward * 2.0f;
             glm::vec3 shotVelocity = forward * world->getSettings().shotSpeed + velocity;
 
-            Shot *shot = new Shot(*this, getNextLocalShotId(), 0, shotPosition, shotVelocity);
+            Shot *shot = new Shot(*this, shotPosition, shotVelocity);
             shots.push_back(shot);
         }
     }

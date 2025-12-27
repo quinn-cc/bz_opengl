@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/irie/Desktop/bz_opengl/src/server/client.cpp" "CMakeFiles/server.dir/src/server/client.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/client.cpp.o.d"
   "/home/irie/Desktop/bz_opengl/src/server/game.cpp" "CMakeFiles/server.dir/src/server/game.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/game.cpp.o.d"
   "/home/irie/Desktop/bz_opengl/src/server/main.cpp" "CMakeFiles/server.dir/src/server/main.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/main.cpp.o.d"
+  "/home/irie/Desktop/bz_opengl/src/server/shot.cpp" "CMakeFiles/server.dir/src/server/shot.cpp.o" "gcc" "CMakeFiles/server.dir/src/server/shot.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

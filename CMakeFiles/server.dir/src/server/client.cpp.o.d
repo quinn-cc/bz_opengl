@@ -689,4 +689,5 @@ CMakeFiles/server.dir/src/server/client.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Vehicle/btVehicleRaycaster.h \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Vehicle/btWheelInfo.h \
  /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btActionInterface.h \
- /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btRigidBody.h
+ /home/irie/Desktop/bz_opengl/libs/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
+ /home/irie/Desktop/bz_opengl/src/server/shot.hpp

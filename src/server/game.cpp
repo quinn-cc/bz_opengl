@@ -61,4 +61,16 @@ void Game::update(TimeUtils::duration deltaTime) {
         strcpy(serverChatMsg.text, chatMsg->text);
         engine.network->sendExcept<ServerMsg_Chat>(chatMsg->clientId, serverChatMsg);
     }
+
+    // Listen for incoming shots
+    if (auto *shotMsg = engine.network->peekMessage<ClientMsg_CreateShot>()) {
+        Shot *newShot = new Shot(
+            *this,
+            shotMsg->clientId,
+            shotMsg->localShotId,
+            shotMsg->position,
+            shotMsg->velocity
+        );
+        shots.push_back(newShot);
+    }
 }
