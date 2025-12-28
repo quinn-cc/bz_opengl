@@ -28,6 +28,7 @@ int main(int argc, char *argv[]) {
         TimeUtils::duration deltaTime = TimeUtils::GetElapsedTime(lastFrameTime, currTime);
         
         if (deltaTime < MIN_FRAME_HZ) {
+            TimeUtils::sleep(MIN_FRAME_HZ - deltaTime);
             continue;
         }
 

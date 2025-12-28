@@ -6,6 +6,8 @@
 
 TimeUtils::time lastFrameTime;
 
+#define MIN_DELTA_TIME (1.0f / 120.0f)
+
 int main(int argc, char *argv[]) {
     spdlog::set_level(spdlog::level::trace);
 
@@ -34,7 +36,7 @@ int main(int argc, char *argv[]) {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_SAMPLES, 4);
 
-    glEnable(GL_MULTISAMPLE);
+    
 
     GLFWwindow *window = glfwCreateWindow(800, 600, "BZFlag v3", nullptr, nullptr);
     //glfwSetWindowUserPointer(window, userPointer);
@@ -44,9 +46,25 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
+
     spdlog::trace("GLFW window created successfully");
     glfwMakeContextCurrent(window);
     spdlog::trace("GLFW context made current");
+
+    glEnable(GL_MULTISAMPLE);
+    glfwSwapInterval(1); // Enable vsync
+
+
+    spdlog::info("GLFW_SAMPLES attrib = {}", glfwGetWindowAttrib(window, GLFW_SAMPLES));
+
+    spdlog::info("GL_VENDOR   = {}", (const char*)glGetString(GL_VENDOR));
+    spdlog::info("GL_RENDERER = {}", (const char*)glGetString(GL_RENDERER));
+    spdlog::info("GL_VERSION  = {}", (const char*)glGetString(GL_VERSION));
+
+    int sb = 0, s = 0;
+    glGetIntegerv(GL_SAMPLE_BUFFERS, &sb);
+    glGetIntegerv(GL_SAMPLES, &s);
+    spdlog::info("GL_SAMPLE_BUFFERS={}, GL_SAMPLES={}", sb, s);
 
     ClientEngine engine(window);
     spdlog::trace("ClientEngine initialized successfully");
@@ -68,7 +86,12 @@ int main(int argc, char *argv[]) {
     while (!glfwWindowShouldClose(window)) {
         TimeUtils::time currTime = TimeUtils::GetCurrentTime();  
         TimeUtils::duration deltaTime = TimeUtils::GetElapsedTime(lastFrameTime, currTime);
-        deltaTime = std::max(deltaTime, 0.0001f);
+
+        if (deltaTime < MIN_DELTA_TIME) {
+            TimeUtils::sleep(MIN_DELTA_TIME - deltaTime);
+            continue;
+        }
+
         lastFrameTime = currTime;
 
         engine.earlyUpdate(deltaTime);

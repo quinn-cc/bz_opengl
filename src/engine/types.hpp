@@ -7,6 +7,7 @@
 #include <string>
 #include <chrono>
 #include <unordered_map>
+#include <thread>
 
 typedef struct InputState {
     bool fire;
@@ -43,6 +44,10 @@ namespace TimeUtils {
 
     inline duration getDuration(float seconds) {
         return seconds;
+    }
+
+    inline void sleep(duration seconds) {
+        std::this_thread::sleep_for(std::chrono::duration<float>(seconds));
     }
 }
 
