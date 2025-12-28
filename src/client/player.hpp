@@ -16,6 +16,7 @@ private:
     audio_id jumpAudioId;
     audio_id dieAudioId;
     audio_id spawnAudioId;
+    audio_id landAudioId;
 
     TimeUtils::time lastJumpTime;
     TimeUtils::duration jumpCooldown;

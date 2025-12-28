@@ -17,6 +17,7 @@ Player::Player(Game &game, const std::string name) : game(game) {
     jumpAudioId = game.engine.audio->create("data/audio/jump.wav", 5);
     dieAudioId = game.engine.audio->create("data/audio/die.wav", 1);
     spawnAudioId = game.engine.audio->create("data/audio/spawn.wav", 1);
+    landAudioId = game.engine.audio->create("data/audio/land.wav", 1);
 
     ClientMsg_Init initMsg;
     strcpy(initMsg.name, this->name.c_str());
@@ -34,6 +35,8 @@ glm::vec3 Player::getForwardVector() const {
 void Player::earlyUpdate() {
     if (alive) {
         game.engine.gui->displayDeathScreen(false);
+
+        bool wasGrounded = grounded;
         grounded = game.engine.physics->isGrounded(physicsId, glm::vec3(1.0f, 2.0f, 1.0f));       
         
         if (grounded) {
@@ -64,6 +67,10 @@ void Player::earlyUpdate() {
                     grounded = false;
                     game.engine.audio->play(jumpAudioId, location.position);
                 }
+            }
+
+            if (wasGrounded == false) {
+                game.engine.audio->play(landAudioId, location.position);
             }
         }
 
