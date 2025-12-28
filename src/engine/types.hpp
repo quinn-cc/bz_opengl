@@ -25,7 +25,8 @@ inline const WorldSettingsMap DEFAULT_WORLD_SETTINGS = {
     {"playerTurnSpeed", 2.0f},
     {"playerJumpSpeed", 5.0f},
     {"gravity", -9.81f},
-    {"shotSpeed", 25.0f}
+    {"shotSpeed", 25.0f},
+    {"shotLifetime", 5.0f}
 };
 
 namespace TimeUtils {

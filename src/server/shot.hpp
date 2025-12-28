@@ -12,6 +12,7 @@ private:
     shot_id globalId;
     glm::vec3 position;
     glm::vec3 velocity;
+    TimeUtils::time creationTime;
 
     shot_id getNextGlobalShotId() {
         static shot_id nextId = 1;
@@ -24,4 +25,5 @@ public:
 
     void update(TimeUtils::duration deltaTime);
     bool hits(Client *client);
+    bool isExpired() const;
 };

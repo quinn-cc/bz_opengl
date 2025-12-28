@@ -15,6 +15,8 @@ Shot::Shot(Game &game, client_id ownerId, shot_id localShotId, glm::vec3 positio
     serverShotMsg.position = position;
     serverShotMsg.velocity = velocity;
     game.engine.network->sendExcept<ServerMsg_CreateShot>(ownerId, serverShotMsg);
+
+    creationTime = TimeUtils::GetCurrentTime();
 }
 
 Shot::~Shot() {
@@ -32,11 +34,24 @@ Shot::~Shot() {
 }
 
 void Shot::update(TimeUtils::duration deltaTime) {
+    glm::vec3 hitPoint, hitNormal;
+    if (game.engine.physics->raycast(position, position + velocity * deltaTime, hitPoint, hitNormal)) {
+        velocity = glm::reflect(velocity, hitNormal);
+    }
+    
     position += velocity * deltaTime;
 }
 
 bool Shot::hits(Client *client) {
     if (glm::distance(position, client->getPosition()) < 0.5f) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Shot::isExpired() const {
+    if (TimeUtils::GetElapsedTime(creationTime, TimeUtils::GetCurrentTime()) > game.world->getSetting("shotLifetime")) {
         return true;
     } else {
         return false;

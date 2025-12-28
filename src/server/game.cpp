@@ -85,6 +85,15 @@ void Game::update(TimeUtils::duration deltaTime) {
     for (Shot *shot : shots) {
         shot->update(deltaTime);
 
+        if (shot->isExpired()) {
+            shots.erase(
+                std::remove(shots.begin(), shots.end(), shot),
+                shots.end()
+            );
+            delete shot;
+            continue;
+        }
+
         for (Client *client : clients) {
             if (shot->hits(client)) {
                 client->die();
@@ -94,6 +103,7 @@ void Game::update(TimeUtils::duration deltaTime) {
                     shots.end()
                 );
                 delete shot;
+                break;
             }
         }
     }

@@ -75,6 +75,21 @@ void Game::update(TimeUtils::duration deltaTime) {
         engine.network->popMessage(msg);
     }
 
+    // Listen for remove shot messages
+    if (auto msg = engine.network->peekMessage<ServerMsg_RemoveShot>()) {
+        for (Shot *shot : shots) {
+            if (shot->isEqual(msg->shotId, msg->isGlobalId)) {
+                shots.erase(
+                    std::remove(shots.begin(), shots.end(), shot),
+                    shots.end()
+                );
+                delete shot;
+                break;
+            }
+        }
+        engine.network->popMessage(msg);
+    }
+
     // TODO: move this to player
     if (focusState == FOCUS_STATE_GAME) {
         if (engine.input->getInputState().fire) {

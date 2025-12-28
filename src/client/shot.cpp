@@ -31,8 +31,16 @@ Shot::~Shot() {
 }
 
 void Shot::update(TimeUtils::duration deltaTime) {
+    glm::vec3 hitPoint, hitNormal;
+    if (game.engine.physics->raycast(position, position + velocity * deltaTime, hitPoint, hitNormal)) {
+        velocity = glm::reflect(velocity, hitNormal);
+    }
+
     position += velocity * deltaTime;
 
     game.engine.render->setPosition(renderId, position);
 }
 
+bool Shot::isEqual(shot_id otherId, bool otherIsGlobalId) {
+    return (id == otherId) && (isGlobalId == otherIsGlobalId);
+}

@@ -28,4 +28,5 @@ public:
     ~Shot();
 
     void update(TimeUtils::duration deltaTime);
+    bool isEqual(shot_id otherId, bool otherIsGlobalId);
 };

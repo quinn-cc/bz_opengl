@@ -34,6 +34,8 @@ int main(int argc, char *argv[]) {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_SAMPLES, 4);
 
+    glEnable(GL_MULTISAMPLE);
+
     GLFWwindow *window = glfwCreateWindow(800, 600, "BZFlag v3", nullptr, nullptr);
     //glfwSetWindowUserPointer(window, userPointer);
     if (!window) {

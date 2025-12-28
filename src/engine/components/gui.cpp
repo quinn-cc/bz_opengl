@@ -72,6 +72,33 @@ void GUI::update() {
     if (drawDeathScreenFlag)
         drawDeathScreen();
 
+    // Small box
+
+    ImGuiIO& io = ImGui::GetIO();
+
+    const float boxSize = 50.0f;
+    ImVec2 center(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f);
+
+    ImVec2 p0(
+        center.x - boxSize * 0.5f,
+        center.y - boxSize * 0.5f
+    );
+
+    ImVec2 p1(
+        center.x + boxSize * 0.5f,
+        center.y + boxSize * 0.5f
+    );
+
+    // Draw on top of everything, no window, no fill
+    ImGui::GetForegroundDrawList()->AddRect(
+        p0,
+        p1,
+        IM_COL32(200, 200, 200, 180), // color
+        0.0f,                         // rounding
+        0,                            // flags
+        1.0f                          // thickness
+    );
+
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

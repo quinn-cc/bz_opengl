@@ -251,3 +251,21 @@ bool Physics::isGrounded(physics_id id, glm::vec3 boxSize) {
 
     return (cb.hasHit() && cb.m_hitNormalWorld.dot(btVector3(0,1,0)) > 0.7f);
 }
+
+bool Physics::raycast(const glm::vec3 &from, const glm::vec3 &to, glm::vec3 &hitPoint, glm::vec3 &hitNormal) {
+    btVector3 btFrom(from.x, from.y, from.z);
+    btVector3 btTo(to.x, to.y, to.z);
+
+    btCollisionWorld::ClosestRayResultCallback rayCallback(btFrom, btTo);
+    world->rayTest(btFrom, btTo, rayCallback);
+
+    if (rayCallback.hasHit()) {
+        btVector3 hitPos = rayCallback.m_hitPointWorld;
+        btVector3 hitNorm = rayCallback.m_hitNormalWorld;
+
+        hitPoint = glm::vec3(hitPos.x(), hitPos.y(), hitPos.z());
+        hitNormal = glm::vec3(hitNorm.x(), hitNorm.y(), hitNorm.z());
+        return true;
+    }
+    return false;
+}
