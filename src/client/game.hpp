@@ -32,5 +32,6 @@ public:
     Game(ClientEngine &engine, std::string playerName);
     ~Game();
 
-    void update(TimeUtils::duration deltaTime);
+    void earlyUpdate(TimeUtils::duration deltaTime);
+    void lateUpdate(TimeUtils::duration deltaTime);
 };

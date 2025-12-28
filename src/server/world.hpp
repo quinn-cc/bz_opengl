@@ -7,10 +7,11 @@ class World {
 private:
     Game &game;
     WorldSettingsMap settings;
+    physics_id physicsId;
 
 public:
     World(Game &game);
-    ~World() = default;
+    ~World();
     
     void setSetting(std::string key, float value);
     float getSetting(std::string key) const;

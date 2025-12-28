@@ -96,15 +96,17 @@ void Client::update() {
 }
 
 void Client::die() {
-    alive = false;
+    if (alive) {
+        alive = false;
 
-    // Tell this client to die
-    ServerMsg_Death deathRespMsg;
-    deathRespMsg.clientId = 0;
-    game.engine.network->send<ServerMsg_Death>(id, deathRespMsg);
+        // Tell this client to die
+        ServerMsg_Death deathRespMsg;
+        deathRespMsg.clientId = 0;
+        game.engine.network->send<ServerMsg_Death>(id, deathRespMsg);
 
-    // Broadcast to everyone else
-    ServerMsg_Death deathMsg;
-    deathMsg.clientId = id;
-    game.engine.network->sendExcept<ServerMsg_Death>(id, deathMsg);
+        // Broadcast to everyone else
+        ServerMsg_Death deathMsg;
+        deathMsg.clientId = id;
+        game.engine.network->sendExcept<ServerMsg_Death>(id, deathMsg);
+    }
 }

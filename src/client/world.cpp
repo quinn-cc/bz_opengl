@@ -41,6 +41,5 @@ void World::update() {
         std::string key = std::string(settingChangeMsg->key);
         float value = settingChangeMsg->value;
         setSetting(key, value);
-        game.engine.network->popMessage(settingChangeMsg);
     }
 }

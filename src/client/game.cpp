@@ -21,7 +21,7 @@ Game::~Game() {
     spdlog::trace("Game: Console destroyed successfully");
 }
 
-void Game::update(TimeUtils::duration deltaTime) {
+void Game::earlyUpdate(TimeUtils::duration deltaTime) {
     world->update();
 
     if (focusState == FOCUS_STATE_GAME && engine.input->getInputState().chat) {
@@ -37,14 +37,12 @@ void Game::update(TimeUtils::duration deltaTime) {
         spdlog::trace("Game: Returning focus to game");
     }
 
-    player->update();
+    player->earlyUpdate();
 
     if (auto msg = engine.network->peekMessage<ServerMsg_Connection>()) {
         Client *client = new Client(*this, msg->clientId);
         clients.push_back(client);
         spdlog::trace("Game: New client connected with ID {}", msg->clientId);
-
-        engine.network->popMessage(msg);
     }
 
     if (auto msg = engine.network->peekMessage<ServerMsg_Disconnection>()) {
@@ -59,8 +57,6 @@ void Game::update(TimeUtils::duration deltaTime) {
             clients.erase(it);
             spdlog::trace("Game: Client disconnected with ID {}", msg->clientId);
         }
-
-        engine.network->popMessage(msg);
     }
 
     // Listen for incoming shots (they will always be global ids)
@@ -72,7 +68,6 @@ void Game::update(TimeUtils::duration deltaTime) {
             msg->velocity
         );
         shots.push_back(newShot);
-        engine.network->popMessage(msg);
     }
 
     // Listen for remove shot messages
@@ -87,7 +82,6 @@ void Game::update(TimeUtils::duration deltaTime) {
                 break;
             }
         }
-        engine.network->popMessage(msg);
     }
 
     // TODO: move this to player
@@ -104,6 +98,10 @@ void Game::update(TimeUtils::duration deltaTime) {
             shots.push_back(shot);
         }
     }
+}
+
+void Game::lateUpdate(TimeUtils::duration deltaTime) {
+    player->lateUpdate();
 
     for (Client *client : clients) {
         client->update();

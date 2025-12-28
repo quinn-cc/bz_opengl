@@ -32,6 +32,5 @@ void Console::update() {
 
     if (auto msg = game.engine.network->peekMessage<ServerMsg_Chat>()) {
         game.engine.gui->addConsoleLine(std::string(msg->name), std::string(msg->text));
-        game.engine.network->popMessage(msg);
     }
 }

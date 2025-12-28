@@ -771,6 +771,8 @@ CMakeFiles/client.dir/src/client/client.cpp.o: \
  /home/irie/Desktop/bz_opengl/libs/include/imgui/imgui.h \
  /home/irie/Desktop/bz_opengl/libs/include/imgui/imconfig.h \
  /home/irie/Desktop/bz_opengl/libs/include/imgui/backends/imgui_impl_opengl3.h \
+ /home/irie/Desktop/bz_opengl/src/engine/components/audio.hpp \
+ /home/irie/Desktop/bz_opengl/libs/include/miniaudio.h \
  /home/irie/Desktop/bz_opengl/src/engine/user_pointer.hpp \
  /home/irie/Desktop/bz_opengl/src/client/player.hpp \
  /home/irie/Desktop/bz_opengl/src/client/world.hpp \

@@ -5,6 +5,7 @@
 #include "engine/components/physics.hpp"
 #include "engine/components/input.hpp"
 #include "engine/components/gui.hpp"
+#include "engine/components/audio.hpp"
 #include "engine/user_pointer.hpp"
 #include <string>
 
@@ -19,10 +20,12 @@ public:
     Physics *physics;
     Input *input;
     GUI *gui;
+    Audio *audio;
 
     ClientEngine(GLFWwindow *window);
     ~ClientEngine();
 
     void earlyUpdate(TimeUtils::duration deltaTime);
+    void step(TimeUtils::duration deltaTime);
     void lateUpdate(TimeUtils::duration deltaTime);
 };

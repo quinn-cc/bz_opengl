@@ -27,6 +27,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/client.dir/src/client/world.cpp.o.d"
   "CMakeFiles/client.dir/src/engine/client_engine.cpp.o"
   "CMakeFiles/client.dir/src/engine/client_engine.cpp.o.d"
+  "CMakeFiles/client.dir/src/engine/components/audio.cpp.o"
+  "CMakeFiles/client.dir/src/engine/components/audio.cpp.o.d"
   "CMakeFiles/client.dir/src/engine/components/client_network.cpp.o"
   "CMakeFiles/client.dir/src/engine/components/client_network.cpp.o.d"
   "CMakeFiles/client.dir/src/engine/components/gui.cpp.o"

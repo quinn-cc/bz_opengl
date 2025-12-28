@@ -6,6 +6,7 @@
 #include <optional>
 #include <map>
 #include <functional>
+#include "spdlog/spdlog.h"
 
 class ServerNetwork {
     friend class ServerEngine;
@@ -56,18 +57,22 @@ public:
     template<typename T> void send(client_id clientId, const T &msg, bool flush = false) {
         static_assert(std::is_base_of_v<ServerMsg, T>, "T must be a subclass of ServerMsg");
 
-        ENetPeer *client = clients[clientId];
-        ENetPacketFlag flag = ENET_PACKET_FLAG_RELIABLE;
+        if (clients.find(clientId) == clients.end()) {
+            spdlog::debug("ServerNetwork::send: Attempted to send message to non-existent client id {}", clientId);
+        } else {
+            ENetPeer *client = clients[clientId];
+            ENetPacketFlag flag = ENET_PACKET_FLAG_RELIABLE;
 
-        if constexpr (std::is_same_v<T, ClientMsg_Location>) {
-            flag = ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT;
-        }
+            if constexpr (std::is_same_v<T, ClientMsg_Location>) {
+                flag = ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT;
+            }
 
-        ENetPacket* packet = enet_packet_create(reinterpret_cast<const void*>(&msg), sizeof(T), flag);
-        enet_peer_send(client, 0, packet);
+            ENetPacket* packet = enet_packet_create(reinterpret_cast<const void*>(&msg), sizeof(T), flag);
+            enet_peer_send(client, 0, packet);
 
-        if (flush) {
-            enet_host_flush(server);
+            if (flush) {
+                enet_host_flush(server);
+            }
         }
     };
 

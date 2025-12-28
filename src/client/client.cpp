@@ -37,7 +37,6 @@ void Client::update() {
         }
     )) {
         location = msg->location;
-        game.engine.network->popMessage(msg);
         spdlog::trace("Client::update: Updated location for client id {}", id);
     }
 
@@ -53,7 +52,6 @@ void Client::update() {
         )) {
             alive = false;
             game.engine.render->setVisible(renderId, false);
-            game.engine.network->popMessage(msg);
             spdlog::trace("Client::update: Client id {} has died", id);
         }
     } else {
@@ -66,7 +64,8 @@ void Client::update() {
             location = msg->location;
             alive = true;
             game.engine.render->setVisible(renderId, true);
-            game.engine.network->popMessage(msg);
+            game.engine.render->setPosition(renderId, location.position + glm::vec3(0.0f, -0.8f, 0.0f));
+            game.engine.render->setRotation(renderId, location.rotation * glm::angleAxis(glm::pi<float>(), glm::vec3(0, 1, 0)));
             spdlog::trace("Client::update: Client id {} has spawned", id);
         }
     }

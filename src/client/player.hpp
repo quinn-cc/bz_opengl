@@ -13,6 +13,9 @@ private:
     Game &game;
 
     physics_id physicsId;
+    audio_id jumpAudioId;
+    audio_id dieAudioId;
+    audio_id spawnAudioId;
 
     TimeUtils::time lastJumpTime;
     TimeUtils::duration jumpCooldown;
@@ -33,5 +36,7 @@ public:
     glm::vec3 getVelocity() const { return velocity; }
     glm::quat getRotation() const { return location.rotation; }
     glm::vec3 getForwardVector() const;
-    void update();
+
+    void earlyUpdate();
+    void lateUpdate();
 };

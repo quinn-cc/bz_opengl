@@ -4,6 +4,12 @@
 
 World::World(Game &game) : game(game) {
     settings = DEFAULT_WORLD_SETTINGS;
+
+    physicsId = game.engine.physics->create("data/world2.glb", 0.0f);
+}
+
+World::~World() {
+    game.engine.physics->destroy(physicsId);
 }
 
 void World::setSetting(std::string key, float value) {
@@ -26,8 +32,14 @@ float World::getSetting(std::string key) const {
 }
 
 Location World::getSpawnLocation() const {
-    Location spawnLocation;
-    spawnLocation.position = glm::vec3(0.0f, 10.0f, 0.0f);
-    spawnLocation.rotation = glm::quat(glm::vec3(0.0f, 0.0f, 0.0f));
-    return spawnLocation;
+    // Make x random between -10 and 10 and make z random between -10 and 10
+    // and make z random between 10 and 15, and y rotation random between 0 and 2pi
+    float x = static_cast<float>(rand() % 2001 - 1000) / 100.0f;
+    float z = static_cast<float>(rand() % 2001 - 1000) / 100.0f;
+    float y = static_cast<float>(rand() % 501 + 1000) / 100.0f;
+    float rotY = static_cast<float>(rand() % 6283) / 1000.0f;
+    return Location{
+        .position = glm::vec3(x, y, z),
+        .rotation = glm::angleAxis(rotY, glm::vec3(0, 1, 0))
+    };
 }

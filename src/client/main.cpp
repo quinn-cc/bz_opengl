@@ -95,7 +95,9 @@ int main(int argc, char *argv[]) {
         lastFrameTime = currTime;
 
         engine.earlyUpdate(deltaTime);
-        game.update(deltaTime);
+        game.earlyUpdate(deltaTime);
+        engine.step(deltaTime);
+        game.lateUpdate(deltaTime);
         engine.lateUpdate(deltaTime);
 
         glfwSwapBuffers(window);

@@ -22,6 +22,28 @@ ClientNetwork::~ClientNetwork() {
     enet_host_destroy(client);
 }
 
+void ClientNetwork::flushPeekedMessages() {
+    receivedMessages.erase(
+        std::remove_if(
+            receivedMessages.begin(),
+            receivedMessages.end(),
+            [](const MsgData& msgData) {
+                if (msgData.peeked) {
+                    if (msgData.packet == nullptr) {
+                        // For connection/disconnection messages
+                        // we allocated the message on the heap
+                        delete msgData.msg;
+                    } else {
+                        enet_packet_destroy(msgData.packet);
+                    }
+                }
+                return msgData.peeked;
+            }
+        ),
+        receivedMessages.end()
+    );
+}
+
 void ClientNetwork::update() {
     ENetEvent event;
     
@@ -41,16 +63,6 @@ void ClientNetwork::update() {
             break;
         }
         default:
-            break;
-        }
-    }
-}
-
-void ClientNetwork::popMessage(ServerMsg* msg) {
-    for (auto it = receivedMessages.begin(); it != receivedMessages.end(); ++it) {
-        if (it->msg == msg) {
-            enet_packet_destroy(it->packet);
-            receivedMessages.erase(it);
             break;
         }
     }

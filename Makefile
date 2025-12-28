@@ -478,6 +478,30 @@ src/engine/client_engine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/engine/client_engine.cpp.s
 .PHONY : src/engine/client_engine.cpp.s
 
+src/engine/components/audio.o: src/engine/components/audio.cpp.o
+.PHONY : src/engine/components/audio.o
+
+# target to build an object file
+src/engine/components/audio.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/engine/components/audio.cpp.o
+.PHONY : src/engine/components/audio.cpp.o
+
+src/engine/components/audio.i: src/engine/components/audio.cpp.i
+.PHONY : src/engine/components/audio.i
+
+# target to preprocess a source file
+src/engine/components/audio.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/engine/components/audio.cpp.i
+.PHONY : src/engine/components/audio.cpp.i
+
+src/engine/components/audio.s: src/engine/components/audio.cpp.s
+.PHONY : src/engine/components/audio.s
+
+# target to generate assembly for a file
+src/engine/components/audio.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/engine/components/audio.cpp.s
+.PHONY : src/engine/components/audio.cpp.s
+
 src/engine/components/client_network.o: src/engine/components/client_network.cpp.o
 .PHONY : src/engine/components/client_network.o
 
@@ -872,6 +896,9 @@ help:
 	@echo "... src/engine/client_engine.o"
 	@echo "... src/engine/client_engine.i"
 	@echo "... src/engine/client_engine.s"
+	@echo "... src/engine/components/audio.o"
+	@echo "... src/engine/components/audio.i"
+	@echo "... src/engine/components/audio.s"
 	@echo "... src/engine/components/client_network.o"
 	@echo "... src/engine/components/client_network.i"
 	@echo "... src/engine/components/client_network.s"

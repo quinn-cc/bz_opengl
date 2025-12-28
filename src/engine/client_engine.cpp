@@ -18,6 +18,8 @@ ClientEngine::ClientEngine(GLFWwindow *window) {
     spdlog::trace("ClientEngine: Input initialized successfully");
     gui = new GUI(window);
     spdlog::trace("ClientEngine: GUI initialized successfully");
+    audio = new Audio();
+    spdlog::trace("ClientEngine: Audio initialized successfully");
 }
 
 ClientEngine::~ClientEngine() {
@@ -26,6 +28,7 @@ ClientEngine::~ClientEngine() {
     delete physics;
     delete input;
     delete gui;
+    delete audio;
 }
 
 void ClientEngine::earlyUpdate(TimeUtils::duration deltaTime) {
@@ -33,8 +36,12 @@ void ClientEngine::earlyUpdate(TimeUtils::duration deltaTime) {
     network->update();
 }
 
-void ClientEngine::lateUpdate(TimeUtils::duration deltaTime) {
+void ClientEngine::step(TimeUtils::duration deltaTime) {
     physics->update(deltaTime);
+}
+
+void ClientEngine::lateUpdate(TimeUtils::duration deltaTime) {
     render->update();
     gui->update();
+    network->flushPeekedMessages();
 }

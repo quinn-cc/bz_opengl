@@ -18,6 +18,7 @@ set(ENGINE_CLIENT_SOURCES
     ${PROJECT_SOURCE_DIR}/src/engine/components/input.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/gui.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/physics.cpp
+    ${PROJECT_SOURCE_DIR}/src/engine/components/audio.cpp
 )
 set(ENGINE_SERVER_SOURCES
     ${PROJECT_SOURCE_DIR}/src/engine/server_engine.cpp

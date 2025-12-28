@@ -12,6 +12,9 @@ private:
     glm::vec3 velocity;
 
     render_id renderId;
+    inline static audio_id fireAudioId = 0;
+    inline static audio_id ricochetAudioId = 0;
+
     shot_id getNextLocalShotId() {
         static shot_id nextId = 1;
         return nextId++;
