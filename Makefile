@@ -700,6 +700,30 @@ src/engine/server_engine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/engine/server_engine.cpp.s
 .PHONY : src/engine/server_engine.cpp.s
 
+src/plugins/slash_commands.o: src/plugins/slash_commands.cpp.o
+.PHONY : src/plugins/slash_commands.o
+
+# target to build an object file
+src/plugins/slash_commands.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/plugins/slash_commands.cpp.o
+.PHONY : src/plugins/slash_commands.cpp.o
+
+src/plugins/slash_commands.i: src/plugins/slash_commands.cpp.i
+.PHONY : src/plugins/slash_commands.i
+
+# target to preprocess a source file
+src/plugins/slash_commands.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/plugins/slash_commands.cpp.i
+.PHONY : src/plugins/slash_commands.cpp.i
+
+src/plugins/slash_commands.s: src/plugins/slash_commands.cpp.s
+.PHONY : src/plugins/slash_commands.s
+
+# target to generate assembly for a file
+src/plugins/slash_commands.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/plugins/slash_commands.cpp.s
+.PHONY : src/plugins/slash_commands.cpp.s
+
 src/server/chat.o: src/server/chat.cpp.o
 .PHONY : src/server/chat.o
 
@@ -795,6 +819,30 @@ src/server/main.s: src/server/main.cpp.s
 src/server/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/main.cpp.s
 .PHONY : src/server/main.cpp.s
+
+src/server/plugin.o: src/server/plugin.cpp.o
+.PHONY : src/server/plugin.o
+
+# target to build an object file
+src/server/plugin.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/plugin.cpp.o
+.PHONY : src/server/plugin.cpp.o
+
+src/server/plugin.i: src/server/plugin.cpp.i
+.PHONY : src/server/plugin.i
+
+# target to preprocess a source file
+src/server/plugin.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/plugin.cpp.i
+.PHONY : src/server/plugin.cpp.i
+
+src/server/plugin.s: src/server/plugin.cpp.s
+.PHONY : src/server/plugin.s
+
+# target to generate assembly for a file
+src/server/plugin.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/server/plugin.cpp.s
+.PHONY : src/server/plugin.cpp.s
 
 src/server/shot.o: src/server/shot.cpp.o
 .PHONY : src/server/shot.o
@@ -923,6 +971,9 @@ help:
 	@echo "... src/engine/server_engine.o"
 	@echo "... src/engine/server_engine.i"
 	@echo "... src/engine/server_engine.s"
+	@echo "... src/plugins/slash_commands.o"
+	@echo "... src/plugins/slash_commands.i"
+	@echo "... src/plugins/slash_commands.s"
 	@echo "... src/server/chat.o"
 	@echo "... src/server/chat.i"
 	@echo "... src/server/chat.s"
@@ -935,6 +986,9 @@ help:
 	@echo "... src/server/main.o"
 	@echo "... src/server/main.i"
 	@echo "... src/server/main.s"
+	@echo "... src/server/plugin.o"
+	@echo "... src/server/plugin.i"
+	@echo "... src/server/plugin.s"
 	@echo "... src/server/shot.o"
 	@echo "... src/server/shot.i"
 	@echo "... src/server/shot.s"

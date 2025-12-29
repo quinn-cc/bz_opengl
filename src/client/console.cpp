@@ -20,6 +20,7 @@ void Console::update() {
             game.engine.gui->addConsoleLine(game.player->getName(), message);
 
             ClientMsg_Chat chatMsg;
+            chatMsg.toId = BROADCAST_CLIENT_ID;
             strcpy(chatMsg.text, message.c_str());
             game.engine.network->send<ClientMsg_Chat>(chatMsg);
             game.engine.gui->clearChatInputBuffer();
@@ -31,6 +32,22 @@ void Console::update() {
     }
 
     if (auto msg = game.engine.network->peekMessage<ServerMsg_Chat>()) {
-        game.engine.gui->addConsoleLine(std::string(msg->name), std::string(msg->text));
+        std::string name = "";
+
+        if (game.getClientById(msg->fromId) == nullptr) {
+            if (msg->fromId == THIS_CLIENT_ID) {
+                name = "YOU";
+            } else if (msg->fromId == SERVER_CLIENT_ID) {
+                name = "SERVER";
+            } else {
+                name = "UNKNOWN";
+            }
+        }
+
+        if (msg->toId == THIS_CLIENT_ID) {
+            name = "[" + name + " -> YOU]";
+        }
+
+        game.engine.gui->addConsoleLine(name, std::string(msg->text));
     }
 }

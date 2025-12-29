@@ -84,20 +84,7 @@ void Game::earlyUpdate(TimeUtils::duration deltaTime) {
         }
     }
 
-    // TODO: move this to player
-    if (focusState == FOCUS_STATE_GAME) {
-        if (engine.input->getInputState().fire) {
-            glm::vec3 position = player->getPosition();
-            glm::vec3 velocity = player->getVelocity();
-            glm::vec3 forward = player->getForwardVector();
-
-            glm::vec3 shotPosition = position + forward * 2.0f;
-            glm::vec3 shotVelocity = forward * world->getSetting("shotSpeed") + velocity;
-
-            Shot *shot = new Shot(*this, shotPosition, shotVelocity);
-            shots.push_back(shot);
-        }
-    }
+    
 }
 
 void Game::lateUpdate(TimeUtils::duration deltaTime) {
@@ -117,4 +104,13 @@ void Game::lateUpdate(TimeUtils::duration deltaTime) {
     }
     scoreboardNames.push_back(player->getName());
     engine.gui->setScoreboardPlayerNames(scoreboardNames);
+}
+
+Client *Game::getClientById(client_id id) {
+    for (Client *client : clients) {
+        if (client->isEqual(id)) {
+            return client;
+        }
+    }
+    return nullptr;
 }

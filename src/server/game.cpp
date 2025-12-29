@@ -32,8 +32,17 @@ Client *Game::getClient(client_id id) {
     return nullptr;
 }
 
-Game::Game(ServerEngine &engine) : engine(engine) {
-    world = new World(*this);
+Client *Game::getClientByName(const std::string &name) {
+    for (Client *client : clients) {
+        if (client->isEqual(name)) {
+            return client;
+        }
+    }
+    return nullptr;
+}
+
+Game::Game(ServerEngine &engine, std::string worldDir) : engine(engine) {
+    world = new World(*this, worldDir);
     chat = new Chat(*this);
 }
 
@@ -60,7 +69,6 @@ void Game::update(TimeUtils::duration deltaTime) {
     }
 
     if (ClientMsg_Connection *connMsg = engine.network->peekMessage<ClientMsg_Connection>()) {
-        spdlog::info("Game::update: New client connected with id {} at ip {}", connMsg->clientId, connMsg->ip);
         Client *newClient = new Client(*this, connMsg->clientId, std::string(connMsg->ip));
         addClient(newClient);
     }

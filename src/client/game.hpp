@@ -34,4 +34,8 @@ public:
 
     void earlyUpdate(TimeUtils::duration deltaTime);
     void lateUpdate(TimeUtils::duration deltaTime);
+
+    void addShot(Shot *shot) { shots.push_back(shot); }
+
+    Client *getClientById(client_id id);
 };

@@ -2,10 +2,10 @@
 #include "game.hpp"
 #include <string>
 
-World::World(Game &game) : game(game) {
+World::World(Game &game, std::string worldDir) : game(game) {
     settings = DEFAULT_WORLD_SETTINGS;
 
-    physicsId = game.engine.physics->create("data/world2.glb", 0.0f);
+    physicsId = game.engine.physics->create(worldDir + "/world.glb", 0.0f);
 }
 
 World::~World() {

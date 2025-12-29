@@ -70,6 +70,11 @@ inline float angleBetween(const glm::quat& a, const glm::quat& b, bool degrees =
     return ret;
 }
 
+#define THIS_CLIENT_ID 0
+#define SERVER_CLIENT_ID 1
+#define BROADCAST_CLIENT_ID 2
+#define FIRST_CLIENT_ID 3
+
 using client_id = uint32_t;
 using shot_id = uint32_t;
 using physics_id = uint32_t;
@@ -92,7 +97,8 @@ enum ServerMsg_Type {
     ServerMsg_Type_SPAWN,
     ServerMsg_Type_DEATH,
     ServerMsg_Type_CHAT,
-    ServerMsg_Type_WORLD_SETTING_CHANGE
+    ServerMsg_Type_WORLD_SETTING_CHANGE,
+    ServerMsg_Type_ASSET
 };
 
 typedef struct ServerMsg {
@@ -159,7 +165,8 @@ typedef struct ServerMsg_Death : ServerMsg {
 typedef struct ServerMsg_Chat : ServerMsg {
     static constexpr ServerMsg_Type Type = ServerMsg_Type_CHAT;
     ServerMsg_Chat() { type = Type; }
-    char name[256];
+    client_id fromId;
+    client_id toId;
     char text[512];
 } ServerMsg_Chat;
 
@@ -169,6 +176,16 @@ typedef struct ServerMsg_WorldSettingChange : ServerMsg {
     char key[64];
     float value;
 } ServerMsg_WorldSettingChange;
+
+typedef struct ServerMsg_Asset : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_ASSET;
+    ServerMsg_Asset() { type = Type; }
+    char name[128];
+    uint32_t assetSize;
+    uint32_t chunkSize;
+    uint32_t chunkIndex;
+    char chunk[16384]; // Chunk of asset data
+} ServerMsg_Asset;
 
 
 /*
@@ -229,6 +246,7 @@ typedef struct ClientMsg_CreateShot : ClientMsg {
 typedef struct ClientMsg_Chat : ClientMsg {
     static constexpr ClientMsg_Type Type = ClientMsg_Type_CHAT;
     ClientMsg_Chat() { type = Type; }
+    client_id toId;
     char text[512];
 } ClientMsg_Chat;
 

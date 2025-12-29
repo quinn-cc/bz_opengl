@@ -63,9 +63,9 @@ void Client::update() {
         )) {
             location = msg->location;
             alive = true;
-            game.engine.render->setVisible(renderId, true);
             game.engine.render->setPosition(renderId, location.position + glm::vec3(0.0f, -0.8f, 0.0f));
             game.engine.render->setRotation(renderId, location.rotation * glm::angleAxis(glm::pi<float>(), glm::vec3(0, 1, 0)));
+            game.engine.render->setVisible(renderId, true);
             spdlog::trace("Client::update: Client id {} has spawned", id);
         }
     }

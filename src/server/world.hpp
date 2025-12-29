@@ -10,7 +10,7 @@ private:
     physics_id physicsId;
 
 public:
-    World(Game &game);
+    World(Game &game, std::string worldDir);
     ~World();
     
     void setSetting(std::string key, float value);

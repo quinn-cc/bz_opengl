@@ -9,6 +9,7 @@ set(BUILD_SHARED_LIBS OFF)
 # Gather sources
 file(GLOB_RECURSE CLIENT_SOURCES "${PROJECT_SOURCE_DIR}/src/client/*.cpp")
 file(GLOB_RECURSE SERVER_SOURCES "${PROJECT_SOURCE_DIR}/src/server/*.cpp")
+file(GLOB_RECURSE PLUGIN_SOURCES "${PROJECT_SOURCE_DIR}/src/plugins/*.cpp")
 ## Separate engine sources for client and server to avoid over-linking
 set(ENGINE_CLIENT_SOURCES
     ${PROJECT_SOURCE_DIR}/src/engine/client_engine.cpp
@@ -67,7 +68,7 @@ prebuilt_lib(BULLET_LINEAR_LIB LinearMath)
 
 # Create executables
 add_executable(client ${CLIENT_SOURCES} ${ENGINE_CLIENT_SOURCES} ${IMGUI_SOURCES})
-add_executable(server ${SERVER_SOURCES} ${ENGINE_SERVER_SOURCES})
+add_executable(server ${SERVER_SOURCES} ${ENGINE_SERVER_SOURCES} ${PLUGIN_SOURCES})
 
 # Include directories
 target_include_directories(client PRIVATE
@@ -82,6 +83,7 @@ target_include_directories(server PRIVATE
     ${PROJECT_SOURCE_DIR}/src/server
     ${CMAKE_SOURCE_DIR}/libs/include
     ${CMAKE_SOURCE_DIR}/libs/include/bullet
+    ${PROJECT_SOURCE_DIR}/src/plugins
 )
 
 # Link prebuilt compiled libraries

@@ -1,0 +1,13 @@
+{
+    "worldSettings": {
+        "playerSpeed": 5.0,
+        "playerTurnSpeed": 2.0,
+        "playerJumpSpeed": 5.0,
+        "gravity": -9.81,
+        "shotSpeed": 25.0,
+        "shotLifetime": 5.0
+    },
+    "assets": {
+        "world": "world.glb"
+    }
+}

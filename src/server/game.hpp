@@ -15,6 +15,11 @@ private:
 
     std::vector<Shot *> shots;
 
+    client_id getNextClientId() {
+        static client_id nextId = 4;
+        return nextId++;
+    }
+
 public:
     ServerEngine &engine;
     World *world;
@@ -22,8 +27,10 @@ public:
 
     const std::vector<Client *> &getClients() const { return clients; }
     Client *getClient(client_id id);
+    Client *getClientByName(const std::string &name);
+    
 
-    Game(class ServerEngine &engine);
+    Game(class ServerEngine &engine, std::string worldDir);
     ~Game();
 
     void update(TimeUtils::duration deltaTime);

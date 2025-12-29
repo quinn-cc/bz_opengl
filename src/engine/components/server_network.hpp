@@ -57,6 +57,11 @@ public:
     template<typename T> void send(client_id clientId, const T &msg, bool flush = false) {
         static_assert(std::is_base_of_v<ServerMsg, T>, "T must be a subclass of ServerMsg");
 
+        if (clientId == BROADCAST_CLIENT_ID) {
+            sendAll<T>(msg, flush);
+            return;
+        }
+
         if (clients.find(clientId) == clients.end()) {
             spdlog::debug("ServerNetwork::send: Attempted to send message to non-existent client id {}", clientId);
         } else {

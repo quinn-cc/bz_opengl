@@ -60,7 +60,7 @@ client_id ServerNetwork::getClient(ENetPeer *peer) {
 }
 
 client_id ServerNetwork::getNextClientId() {
-    client_id id = 1;
+    client_id id = FIRST_CLIENT_ID;
     while (clients.find(id) != clients.end()) {
         ++id;
     }

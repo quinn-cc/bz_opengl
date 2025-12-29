@@ -4,6 +4,7 @@
 #include "game.hpp"
 #include <string>
 #include "spdlog/spdlog.h"
+#include "shot.hpp"
 
 Player::Player(Game &game, const std::string name) : game(game) {
     this->name = name;
@@ -71,6 +72,16 @@ void Player::earlyUpdate() {
 
             if (wasGrounded == false) {
                 game.engine.audio->play(landAudioId, location.position);
+            }
+        }
+
+        if (game.getFocusState() == FOCUS_STATE_GAME) {
+            if (game.engine.input->getInputState().fire) {
+                glm::vec3 shotPosition = location.position + getForwardVector() * 2.0f;
+                glm::vec3 shotVelocity = getForwardVector() * game.world->getSetting("shotSpeed") + getVelocity();
+
+                Shot *shot = new Shot(game, shotPosition, shotVelocity);
+                game.addShot(shot);
             }
         }
 

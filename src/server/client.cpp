@@ -2,7 +2,7 @@
 #include "spdlog/spdlog.h"
 #include "game.hpp"
 
-Client::Client(Game &game, client_id id, std::string ip) : game(game), id(id), ip(ip) {
+Client::Client(Game &game, client_id id, std::string ip) : game(game), id(id), ip(ip) { 
     initialized = false;
     alive = false;
 }
