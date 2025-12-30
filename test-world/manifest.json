@@ -1,13 +1,40 @@
 {
-    "worldSettings": {
-        "playerSpeed": 5.0,
-        "playerTurnSpeed": 2.0,
-        "playerJumpSpeed": 5.0,
+    "config": {
+        "serverName": "Test World Server",
+        "maxPlayers": 20,
+        "hostPort": 4322
+    },
+    "settings": {
+        "speed": 5.0,
+        "turnSpeed": 2.0,
+        "jumpSpeed": 5.0,
         "gravity": -9.81,
         "shotSpeed": 25.0,
         "shotLifetime": 5.0
     },
     "assets": {
-        "world": "world.glb"
+        "world": "world.glb",
+        "skybox": "skybox.png",
+        "playerModel": "player.glb"
+    },
+    "teams": [
+        {
+            "name": "Red",
+            "color": "#FF0000",
+            "model": "playerModel",
+            "maxPlayers": 8
+        },
+        {
+            "name": "Blue",
+            "color": "#0000FF",
+            "model": "playerModel",
+            "maxPlayers": 10
+        }
+    ],
+    "flags": {
+
+    },
+    "plugins": {
+        "slash_commands.py": {}
     }
 }
