@@ -23,7 +23,7 @@ void Chat::update() {
         std::string message = std::string(chatMsg->text);
         messages.push_back(message);
 
-        bool handled = PluginRegistry::handleEvent(*chatMsg);
+        bool handled = g_runPluginCallbacks<ClientMsg_Chat>(*chatMsg);
 
         if (!handled) {
             ServerMsg_Chat serverChatMsg;

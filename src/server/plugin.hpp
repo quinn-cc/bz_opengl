@@ -1,11 +1,45 @@
 #pragma once
 #include "engine/types.hpp"
+#include "spdlog/spdlog.h"
 #include <vector>
 #include <memory>
+#include <map>
+#include <pybind11/pybind11.h>
+
+namespace py = pybind11;
+extern std::map<ClientMsg_Type, std::vector<pybind11::function>> g_pluginCallbacks;
+
+template<typename T> inline bool g_runPluginCallbacks(T &msg) {
+    // Make sure that T of type ClientMsg or substruct (static assert)
+    static_assert(std::is_base_of<ClientMsg, T>::value, "T must be derived from ClientMsg");
+
+    py::gil_scoped_acquire gil;
+    bool ret = false;
+
+    if (g_pluginCallbacks.find(T::Type) != g_pluginCallbacks.end()) {
+        for (auto& callback : g_pluginCallbacks[T::Type]) {
+            try {
+                if (T::Type == ClientMsg_Type::ClientMsg_Type_CHAT) {
+                    auto& chatMsg = static_cast<ClientMsg_Chat&>(msg);
+                    bool handled = callback(chatMsg.clientId, chatMsg.toId, std::string(chatMsg.text)).template cast<bool>();
+                    if (handled) {
+                        ret = true;
+                    }
+                } else {    
+                    spdlog::warn("Plugin callback for message type {} not implemented", static_cast<int>(T::Type));
+                }
+            } catch (const std::exception &e) {
+                spdlog::error("Exception in plugin callback: {}", e.what());
+            }
+        }
+    }
+
+    return ret;
+}
 
 namespace PluginAPI {
-    std::vector<std::string> tokenizeMessage(const std::string &message);
-
+    void registerCallback(ClientMsg_Type type, pybind11::function func);
+    
     void sendChatMessage(client_id fromId, client_id toId, const std::string &text);
     void setWorldSetting(const std::string &key, float value);
     void killPlayer(client_id targetId);
@@ -15,52 +49,3 @@ namespace PluginAPI {
     std::string getPlayerName(client_id id);
     std::string getPlayerIP(client_id id);
 }
-
-class Plugin {
-public:
-    virtual ~Plugin() = default;
-    virtual bool event_Chat(const ClientMsg_Chat &msg) = 0;
-};
-
-class PluginRegistry {
-private:
-    static std::vector<std::unique_ptr<Plugin>> plugins;
-
-public:
-    static inline void registerPlugin(std::unique_ptr<Plugin> plugin) {
-        plugins.push_back(std::move(plugin));
-    }
-
-    static inline std::vector<std::unique_ptr<Plugin>>& getPlugins() {
-        return plugins;
-    }
-
-    template <typename T> static inline bool handleEvent(const T &event) {
-        // Assert that T is a subclass of ClientMsg
-        static_assert(std::is_base_of_v<ClientMsg, T>, "T must be a subclass of ClientMsg");
-        bool ret = false;
-
-        for (const auto &plugin : plugins) {
-            if constexpr (std::is_same_v<T, ClientMsg_Chat>) {
-                if (plugin->event_Chat(event)) {
-                    ret = true;
-                }
-            }
-        }
-
-        return ret;
-    }
-};
-
-#ifndef REGISTER_PLUGIN
-#define REGISTER_PLUGIN(ClassName) \
-    namespace { \
-        class ClassName##_Registrar { \
-        public: \
-            ClassName##_Registrar() { \
-                PluginRegistry::registerPlugin(std::make_unique<ClassName>()); \
-            } \
-        }; \
-        static ClassName##_Registrar ClassName##_instance; \
-    }
-#endif

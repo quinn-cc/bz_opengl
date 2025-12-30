@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/irie/Desktop/bz_opengl
+CMAKE_SOURCE_DIR = /home/quinn/Documents/bz_opengl
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/irie/Desktop/bz_opengl
+CMAKE_BINARY_DIR = /home/quinn/Documents/bz_opengl
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/irie/Desktop/bz_opengl/CMakeFiles /home/irie/Desktop/bz_opengl//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Documents/bz_opengl/CMakeFiles /home/quinn/Documents/bz_opengl//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/irie/Desktop/bz_opengl/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/quinn/Documents/bz_opengl/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -700,30 +700,6 @@ src/engine/server_engine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/engine/server_engine.cpp.s
 .PHONY : src/engine/server_engine.cpp.s
 
-src/plugins/slash_commands.o: src/plugins/slash_commands.cpp.o
-.PHONY : src/plugins/slash_commands.o
-
-# target to build an object file
-src/plugins/slash_commands.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/plugins/slash_commands.cpp.o
-.PHONY : src/plugins/slash_commands.cpp.o
-
-src/plugins/slash_commands.i: src/plugins/slash_commands.cpp.i
-.PHONY : src/plugins/slash_commands.i
-
-# target to preprocess a source file
-src/plugins/slash_commands.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/plugins/slash_commands.cpp.i
-.PHONY : src/plugins/slash_commands.cpp.i
-
-src/plugins/slash_commands.s: src/plugins/slash_commands.cpp.s
-.PHONY : src/plugins/slash_commands.s
-
-# target to generate assembly for a file
-src/plugins/slash_commands.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/plugins/slash_commands.cpp.s
-.PHONY : src/plugins/slash_commands.cpp.s
-
 src/server/chat.o: src/server/chat.cpp.o
 .PHONY : src/server/chat.o
 
@@ -971,9 +947,6 @@ help:
 	@echo "... src/engine/server_engine.o"
 	@echo "... src/engine/server_engine.i"
 	@echo "... src/engine/server_engine.s"
-	@echo "... src/plugins/slash_commands.o"
-	@echo "... src/plugins/slash_commands.i"
-	@echo "... src/plugins/slash_commands.s"
 	@echo "... src/server/chat.o"
 	@echo "... src/server/chat.i"
 	@echo "... src/server/chat.s"
