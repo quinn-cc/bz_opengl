@@ -5,3 +5,4 @@ Makefile
 vcpkg_installed/
 build/
 _deps/
+vcpkg/
