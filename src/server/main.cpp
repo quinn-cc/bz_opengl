@@ -15,6 +15,12 @@ std::atomic<bool> g_running{true};
 
 namespace py = pybind11;
 
+/**
+ * Signal handler for graceful shutdown.
+ *
+ * @param signum The signal number.
+ * 
+ */
 void signalHandler(int signum) {
     spdlog::info("Interrupt signal ({}) received. Shutting down...", signum);
     g_running = false;
