@@ -54,7 +54,7 @@ public:
         return nullptr;
     };
 
-    template<typename T> void send(client_id clientId, const T &msg, bool flush = false) {
+    template<typename T> void send(client_id clientId, const T *msg, bool flush = false) {
         static_assert(std::is_base_of_v<ServerMsg, T>, "T must be a subclass of ServerMsg");
 
         if (clientId == BROADCAST_CLIENT_ID) {
@@ -71,8 +71,15 @@ public:
             if constexpr (std::is_same_v<T, ClientMsg_Location>) {
                 flag = ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT;
             }
+            
+            ENetPacket* packet;
 
-            ENetPacket* packet = enet_packet_create(reinterpret_cast<const void*>(&msg), sizeof(T), flag);
+            if constexpr (std::is_same_v<T, ServerMsg_Init>) {
+                size_t totalSize = sizeof(ServerMsg_Init) - sizeof(std::byte) + msg->dataSize;
+                packet = enet_packet_create(reinterpret_cast<const void*>(msg), totalSize, flag);
+            } else {
+                packet = enet_packet_create(reinterpret_cast<const void*>(msg), sizeof(T), flag);
+            }
             enet_peer_send(client, 0, packet);
 
             if (flush) {
@@ -81,7 +88,7 @@ public:
         }
     };
 
-    template<typename T> void sendExcept(client_id client, const T &msg, bool flush = false) {
+    template<typename T> void sendExcept(client_id client, const T *msg, bool flush = false) {
         static_assert(std::is_base_of_v<ServerMsg, T>, "T must be a subclass of ServerMsg");
 
         for (const auto& [id, peer] : clients) {
@@ -91,7 +98,7 @@ public:
         }
     };
 
-    template<typename T> void sendAll(const T &msg, bool flush = false) {
+    template<typename T> void sendAll(const T *msg, bool flush = false) {
         static_assert(std::is_base_of_v<ServerMsg, T>, "T must be a subclass of ServerMsg");
 
         for (const auto& [id, peer] : clients) {

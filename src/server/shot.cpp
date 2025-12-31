@@ -14,7 +14,7 @@ Shot::Shot(Game &game, client_id ownerId, shot_id localShotId, glm::vec3 positio
     serverShotMsg.globalShotId = globalId;
     serverShotMsg.position = position;
     serverShotMsg.velocity = velocity;
-    game.engine.network->sendExcept<ServerMsg_CreateShot>(ownerId, serverShotMsg);
+    game.engine.network->sendExcept<ServerMsg_CreateShot>(ownerId, &serverShotMsg);
 
     creationTime = TimeUtils::GetCurrentTime();
 }
@@ -24,13 +24,13 @@ Shot::~Shot() {
     ServerMsg_RemoveShot localRemoveMsg;
     localRemoveMsg.isGlobalId = false;
     localRemoveMsg.shotId = localId;
-    game.engine.network->send<ServerMsg_RemoveShot>(ownerId, localRemoveMsg);
+    game.engine.network->send<ServerMsg_RemoveShot>(ownerId, &localRemoveMsg);
 
     // Global remove message to everyone else
     ServerMsg_RemoveShot globalRemoveMsg;
     globalRemoveMsg.isGlobalId = true;
     globalRemoveMsg.shotId = globalId;
-    game.engine.network->sendExcept<ServerMsg_RemoveShot>(ownerId, globalRemoveMsg);
+    game.engine.network->sendExcept<ServerMsg_RemoveShot>(ownerId, &globalRemoveMsg);
 }
 
 void Shot::update(TimeUtils::duration deltaTime) {

@@ -10,7 +10,7 @@ Client::Client(Game &game, client_id id, std::string ip) : game(game), id(id), i
 Client::~Client() {
     ServerMsg_Disconnection serverDisconnMsg;
     serverDisconnMsg.clientId = id;
-    game.engine.network->sendExcept<ServerMsg_Disconnection>(id, serverDisconnMsg);
+    game.engine.network->sendExcept<ServerMsg_Disconnection>(id, &serverDisconnMsg);
 }
 
 bool Client::isEqual(client_id cid) const {
@@ -39,7 +39,7 @@ void Client::update() {
             connMsg.alive = alive;
             strcpy(connMsg.name, name.c_str());
             connMsg.location = this->location;
-            game.engine.network->sendExcept<ServerMsg_Connection>(id, connMsg);
+            game.engine.network->sendExcept<ServerMsg_Connection>(id, &connMsg);
         }
     }
 
@@ -53,7 +53,7 @@ void Client::update() {
             ServerMsg_Location updateMsg;
             updateMsg.clientId = id;
             updateMsg.location = this->location;
-            game.engine.network->sendExcept<ServerMsg_Location>(id, updateMsg);
+            game.engine.network->sendExcept<ServerMsg_Location>(id, &updateMsg);
         }
 
         // If another client joins then send them the connection message of this client
@@ -65,7 +65,7 @@ void Client::update() {
             connMsg.alive = alive;
             strcpy(connMsg.name, name.c_str());
             connMsg.location = this->location;
-            game.engine.network->send<ServerMsg_Connection>(msg->clientId, connMsg);
+            game.engine.network->send<ServerMsg_Connection>(msg->clientId, &connMsg);
         }
     }
 
@@ -82,13 +82,13 @@ void Client::update() {
             ServerMsg_Spawn spawnRespMsg;
             spawnRespMsg.clientId = 0;
             spawnRespMsg.location = this->location;
-            game.engine.network->send<ServerMsg_Spawn>(id, spawnRespMsg);
+            game.engine.network->send<ServerMsg_Spawn>(id, &spawnRespMsg);
 
             // Send to all other clients
             ServerMsg_Spawn spawnBroadcastMsg;
             spawnBroadcastMsg.clientId = id;
             spawnBroadcastMsg.location = this->location;
-            game.engine.network->sendExcept<ServerMsg_Spawn>(id, spawnBroadcastMsg);
+            game.engine.network->sendExcept<ServerMsg_Spawn>(id, &spawnBroadcastMsg);
 
             alive = true;
         }
@@ -102,11 +102,11 @@ void Client::die() {
         // Tell this client to die
         ServerMsg_Death deathRespMsg;
         deathRespMsg.clientId = 0;
-        game.engine.network->send<ServerMsg_Death>(id, deathRespMsg);
+        game.engine.network->send<ServerMsg_Death>(id, &deathRespMsg);
 
         // Broadcast to everyone else
         ServerMsg_Death deathMsg;
         deathMsg.clientId = id;
-        game.engine.network->sendExcept<ServerMsg_Death>(id, deathMsg);
+        game.engine.network->sendExcept<ServerMsg_Death>(id, &deathMsg);
     }
 }

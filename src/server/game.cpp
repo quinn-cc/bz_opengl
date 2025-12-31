@@ -115,4 +115,6 @@ void Game::update(TimeUtils::duration deltaTime) {
             }
         }
     }
+
+    world->update();
 }

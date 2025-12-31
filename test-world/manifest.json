@@ -10,14 +10,12 @@
         "jumpSpeed": 5.0,
         "gravity": -9.81,
         "shotSpeed": 25.0,
-        "shotLifetime": 5.0,
-        "color": "default"
-        
+        "shotLifetime": 5.0
     },
     "assets": {
-        "world": "world.glb",
-        "skybox": "skybox.png",
-        "playerModel": "player.glb"
+        "world": "models/world.glb",
+        "skybox": "models/skybox.png",
+        "playerModel": "models/player.glb"
     },
     "teams": [
         {

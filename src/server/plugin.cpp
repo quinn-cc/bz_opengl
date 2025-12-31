@@ -21,7 +21,7 @@ void PluginAPI::sendChatMessage(client_id fromId, client_id toId, const std::str
     serverChatMsg.fromId = fromId;
     serverChatMsg.toId = toId;
     strcpy(serverChatMsg.text, text.c_str());
-    g_engine->network->send<ServerMsg_Chat>(toId, serverChatMsg);
+    g_engine->network->send<ServerMsg_Chat>(toId, &serverChatMsg);
 }
 
 void PluginAPI::setWorldSetting(const std::string &key, float value) {

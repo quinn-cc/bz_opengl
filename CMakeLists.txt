@@ -55,6 +55,22 @@ find_package(OpenGL REQUIRED)
 find_package(cxxopts REQUIRED)
 find_package(imgui REQUIRED)
 find_package(spdlog REQUIRED)
+find_package(miniz REQUIRED)
+find_package(nlohmann_json REQUIRED)
+find_package(Protobuf REQUIRED)
+
+# Compile protobuf files
+set(PROTO_FILES ${PROJECT_SOURCE_DIR}/src/protos/messages.proto)
+set(PROTO_OUTPUT_DIR ${CMAKE_BINARY_DIR}/generated)
+file(MAKE_DIRECTORY ${PROTO_OUTPUT_DIR})
+
+# Generate protobuf sources
+protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_FILES})
+
+# Create a library for proto files
+add_library(proto_lib STATIC ${PROTO_SRCS} ${PROTO_HDRS})
+target_link_libraries(proto_lib PUBLIC protobuf::libprotobuf)
+target_include_directories(proto_lib PUBLIC ${CMAKE_BINARY_DIR})
 
 # Gather sources
 file(GLOB_RECURSE CLIENT_SOURCES "${PROJECT_SOURCE_DIR}/src/client/*.cpp")
@@ -108,6 +124,9 @@ target_link_libraries(client PRIVATE
     cxxopts::cxxopts
     imgui::imgui
     spdlog::spdlog
+    miniz::miniz
+    nlohmann_json::nlohmann_json
+    proto_lib
 )
 
 target_link_libraries(server PRIVATE
@@ -118,6 +137,9 @@ target_link_libraries(server PRIVATE
     pybind11::embed
     cxxopts::cxxopts
     spdlog::spdlog
+    miniz::miniz
+    nlohmann_json::nlohmann_json
+    proto_lib
 )
 
 # System libraries (platform-specific)

@@ -8,6 +8,7 @@
     "assimp",
     "opengl",
     "miniaudio",
+    "miniz",
     "cxxopts",
     {
       "name": "imgui",
@@ -17,7 +18,9 @@
         "opengl3-binding"
       ]
     },
-    "spdlog"
+    "spdlog",
+    "nlohmann-json",
+    "protobuf"
   ],
   "builtin-baseline": "76a382b7b8ce7ed30bbf976aa9aecae868594d5e"
 }

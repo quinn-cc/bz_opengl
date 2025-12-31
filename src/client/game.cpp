@@ -24,6 +24,10 @@ Game::~Game() {
 void Game::earlyUpdate(TimeUtils::duration deltaTime) {
     world->update();
 
+    if (!world->isInitialized()) {
+        return;
+    }
+
     if (focusState == FOCUS_STATE_GAME && engine.input->getInputState().chat) {
         focusState = FOCUS_STATE_CONSOLE;
         spdlog::trace("Game: Switching focus to console");
@@ -83,11 +87,13 @@ void Game::earlyUpdate(TimeUtils::duration deltaTime) {
             }
         }
     }
-
-    
 }
 
 void Game::lateUpdate(TimeUtils::duration deltaTime) {
+    if (!world->isInitialized()) {
+        return;
+    }
+
     player->lateUpdate();
 
     for (Client *client : clients) {
