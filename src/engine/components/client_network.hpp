@@ -3,6 +3,7 @@
 #include <string>
 #include <cstdint>
 #include <enet.h>
+#include "messages.pb.h"
 
 class ClientNetwork {
     friend class ClientEngine;
@@ -44,6 +45,22 @@ public:
 
         return nullptr;
     };
+
+    void sendInit(const std::string &playerName);
+    void sendLocation(const Location &location);
+    void sendChat(const std::string &text, client_id toId = BROADCAST_CLIENT_ID);
+    void sendRequestSpawn();
+    void sendCreateShot(const glm::vec3 &position, const glm::vec3 &velocity);
+
+    bool receiveLocation(client_id id, const Location &location);
+    bool receivePlayerJoin(client_id id, const std::string &name, const Location &location, bool alive);
+    bool receivePlayerState(client_id id, SettingsMap settings);
+    bool receivePlayerLeave(client_id id);
+    bool receiveChat(client_id &fromId, client_id &toId, const std::string &text);
+    bool receiveCreateShot(client_id &ownerId, uint32_t &globalShotId, const glm::vec3 &position, const glm::vec3 &velocity);
+    bool receiveRemoveShot(shot_id id, bool &isGlobalId);
+    bool receiveSpawn(client_id id, const Location &location);
+    bool receiveDeath(client_id id);
 
     template<typename T> void send(const T &msg, bool flush = false) {
         static_assert(std::is_base_of_v<ClientMsg, T>, "T must be a subclass of ClientMsg");

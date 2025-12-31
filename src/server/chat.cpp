@@ -32,9 +32,9 @@ void Chat::update() {
             strcpy(serverChatMsg.text, chatMsg->text);
 
             if (chatMsg->toId == BROADCAST_CLIENT_ID) {
-                game.engine.network->sendExcept<ServerMsg_Chat>(chatMsg->clientId, serverChatMsg);
+                game.engine.network->sendExcept<ServerMsg_Chat>(chatMsg->clientId, &serverChatMsg);
             } else {
-                game.engine.network->send<ServerMsg_Chat>(chatMsg->toId, serverChatMsg);
+                game.engine.network->send<ServerMsg_Chat>(chatMsg->toId, &serverChatMsg);
             }
         }
     }

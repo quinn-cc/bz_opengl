@@ -3,12 +3,8 @@
 #include "spdlog/spdlog.h"
 
 World::World(Game &game) : game(game) {
-    settings = DEFAULT_WORLD_SETTINGS;
-
     renderId = game.engine.render->create("data/world2.glb");
     physicsId = game.engine.physics->create("data/world2.glb", 0.0f);
-
-    game.engine.physics->setGravity(getSetting("gravity"));
 }
 
 World::~World() {
@@ -35,7 +31,26 @@ void World::setSetting(const std::string &key, float value) {
     }
 }
 
+bool World::isInitialized() const {
+    return initialized;
+}
+
 void World::update() {
+    if (auto *initMsg = game.engine.network->peekMessage<ServerMsg_Init>()) {
+        spdlog::trace("World::update: Received init message from server");
+        // Load settings from init message
+        settings = initMsg->settings;
+
+        // Update all settings
+        for (const auto& [key, value] : settings) {
+            setSetting(key, value);
+        }
+
+        spdlog::info("World::update: World initialized from server");
+        initialized = true;
+        return;
+    }
+
     // Listen for incoming world setting changes
     if (auto *settingChangeMsg = game.engine.network->peekMessage<ServerMsg_WorldSettingChange>()) {
         std::string key = std::string(settingChangeMsg->key);

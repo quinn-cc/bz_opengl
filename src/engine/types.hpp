@@ -19,16 +19,8 @@ typedef struct InputState {
     glm::vec2 movement;
 } InputState;
 
-using WorldSettingsMap = std::unordered_map<std::string, float>;
-
-inline const WorldSettingsMap DEFAULT_WORLD_SETTINGS = {
-    {"playerSpeed", 5.0f},
-    {"playerTurnSpeed", 2.0f},
-    {"playerJumpSpeed", 5.0f},
-    {"gravity", -9.81f},
-    {"shotSpeed", 25.0f},
-    {"shotLifetime", 5.0f}
-};
+using SettingsMap = std::unordered_map<std::string, float>;
+using ConfigMap = std::unordered_map<std::string, float>;
 
 namespace TimeUtils {
     using time = std::chrono::time_point<std::chrono::system_clock>;
@@ -98,7 +90,7 @@ enum ServerMsg_Type {
     ServerMsg_Type_DEATH,
     ServerMsg_Type_CHAT,
     ServerMsg_Type_WORLD_SETTING_CHANGE,
-    ServerMsg_Type_ASSET
+    ServerMsg_Type_INIT
 };
 
 typedef struct ServerMsg {
@@ -177,22 +169,22 @@ typedef struct ServerMsg_WorldSettingChange : ServerMsg {
     float value;
 } ServerMsg_WorldSettingChange;
 
-typedef struct ServerMsg_Asset : ServerMsg {
-    static constexpr ServerMsg_Type Type = ServerMsg_Type_ASSET;
-    ServerMsg_Asset() { type = Type; }
-    char name[128];
-    uint32_t assetSize;
-    uint32_t chunkSize;
-    uint32_t chunkIndex;
-    char chunk[16384]; // Chunk of asset data
-} ServerMsg_Asset;
-
+typedef struct ServerMsg_Init : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_INIT;
+    ServerMsg_Init() { type = Type; }
+    client_id clientId;
+    char serverName[256];
+    SettingsMap settings;
+    uint32_t dataSize;
+    std::byte data[1]; // Flexible array member for additional data
+} ServerMsg_Init;
 
 /*
  * Client messages
  */
 
 enum ClientMsg_Type {
+    ClientMsg_Type_REQUEST_CONNECTION,
     ClientMsg_Type_CONNECTION,
     ClientMsg_Type_DISCONNECTION,
     ClientMsg_Type_INIT,
