@@ -1,4 +1,10 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.20)
+
+# Set vcpkg toolchain BEFORE project()
+if(NOT CMAKE_TOOLCHAIN_FILE AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
+    set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
+endif()
+
 project(BZ)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -7,12 +13,48 @@ set(CMAKE_BUILD_TYPE Release)
 set(BUILD_SHARED_LIBS OFF)
 
 include(FetchContent)
+
+find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+
 FetchContent_Declare(
     pybind11
     GIT_REPOSITORY https://github.com/pybind/pybind11.git
     GIT_TAG v2.11.1
 )
 FetchContent_MakeAvailable(pybind11)
+
+FetchContent_Declare(
+    threepp
+    GIT_REPOSITORY https://github.com/markaren/threepp.git
+    GIT_TAG master
+)
+set(THREEPP_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(THREEPP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(THREEPP_WITH_AUDIO OFF CACHE BOOL "" FORCE)
+set(THREEPP_USE_EXTERNAL_GLFW ON CACHE BOOL "" FORCE)
+set(THREEPP_FETCH_ASSIMP OFF CACHE BOOL "" FORCE)
+
+FetchContent_MakeAvailable(threepp)
+
+FetchContent_Declare(
+    enet
+    GIT_REPOSITORY https://github.com/zpl-c/enet.git
+    GIT_TAG master
+)
+set(ENET_TEST OFF CACHE BOOL "" FORCE)
+set(ENET_SHARED OFF CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(enet)
+
+
+# Find external packages
+find_package(glfw3 REQUIRED)
+find_package(glm REQUIRED)
+find_package(Bullet REQUIRED)
+find_package(assimp REQUIRED)
+find_package(OpenGL REQUIRED)
+find_package(cxxopts REQUIRED)
+find_package(imgui REQUIRED)
+find_package(spdlog REQUIRED)
 
 # Gather sources
 file(GLOB_RECURSE CLIENT_SOURCES "${PROJECT_SOURCE_DIR}/src/client/*.cpp")
@@ -35,106 +77,60 @@ set(ENGINE_SERVER_SOURCES
     ${PROJECT_SOURCE_DIR}/src/engine/components/physics.cpp
 )
 
-file(GLOB IMGUI_SOURCES
-    libs/include/imgui/imgui.cpp
-    libs/include/imgui/imgui_draw.cpp
-    libs/include/imgui/imgui_tables.cpp
-    libs/include/imgui/imgui_widgets.cpp
-    libs/include/imgui/backends/imgui_impl_glfw.cpp
-    libs/include/imgui/backends/imgui_impl_opengl3.cpp
-)
-
-# Platform-specific library folder
-if (WIN32)
-    set(LIB_DIR ${CMAKE_SOURCE_DIR}/libs/lib/windows)
-    set(LIB_EXT .lib)
-elseif(APPLE)
-    set(LIB_DIR ${CMAKE_SOURCE_DIR}/libs/lib/mac)
-    set(LIB_EXT .a)
-else()
-    set(LIB_DIR ${CMAKE_SOURCE_DIR}/libs/lib/linux)
-    set(LIB_EXT .a)
-endif()
-
-# Helper macro to pick platform-specific lib files
-function(prebuilt_lib out_name lib_base)
-    if (WIN32)
-        set(${out_name} "${LIB_DIR}/${lib_base}.lib" PARENT_SCOPE)
-    else()
-        set(${out_name} "${LIB_DIR}/lib${lib_base}.a" PARENT_SCOPE)
-    endif()
-endfunction()
-
-# Pick library files
-prebuilt_lib(ENET_LIB enet)
-prebuilt_lib(THREEPP_LIB threepp)
-prebuilt_lib(ASSIMP_LIB assimp)
-prebuilt_lib(BULLET_DYNAMICS_LIB BulletDynamics)
-prebuilt_lib(BULLET_COLLISION_LIB BulletCollision)
-prebuilt_lib(BULLET_LINEAR_LIB LinearMath)
-
 # Create executables
-add_executable(client ${CLIENT_SOURCES} ${ENGINE_CLIENT_SOURCES} ${IMGUI_SOURCES})
+add_executable(client ${CLIENT_SOURCES} ${ENGINE_CLIENT_SOURCES})
 add_executable(server ${SERVER_SOURCES} ${ENGINE_SERVER_SOURCES})
 
 # Include directories
 target_include_directories(client PRIVATE
     ${PROJECT_SOURCE_DIR}/src/
     ${PROJECT_SOURCE_DIR}/src/client
-    ${CMAKE_SOURCE_DIR}/libs/include
-    ${CMAKE_SOURCE_DIR}/libs/include/bullet
-    ${CMAKE_SOURCE_DIR}/libs/include/imgui
+    ${BULLET_INCLUDE_DIRS}
+    ${enet_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/include/client
 )
 target_include_directories(server PRIVATE
     ${PROJECT_SOURCE_DIR}/src/
     ${PROJECT_SOURCE_DIR}/src/server
-    ${CMAKE_SOURCE_DIR}/libs/include
-    ${CMAKE_SOURCE_DIR}/libs/include/bullet
+    ${BULLET_INCLUDE_DIRS}
+    ${enet_SOURCE_DIR}/include
 )
 
-# Link prebuilt compiled libraries
+# Link libraries
 target_link_libraries(client PRIVATE
-    ${ENET_LIB}
-    ${THREEPP_LIB}
-    ${ASSIMP_LIB}
-    ${BULLET_DYNAMICS_LIB}
-    ${BULLET_COLLISION_LIB}
-    ${BULLET_LINEAR_LIB}
+    glfw
+    glm::glm
+    ${BULLET_LIBRARIES}
+    enet_static
+    assimp::assimp
+    OpenGL::OpenGL
+    threepp::threepp
+    cxxopts::cxxopts
+    imgui::imgui
+    spdlog::spdlog
 )
 
 target_link_libraries(server PRIVATE
-    ${ENET_LIB}
-    ${ASSIMP_LIB}
-    ${BULLET_DYNAMICS_LIB}
-    ${BULLET_COLLISION_LIB}
-    ${BULLET_LINEAR_LIB}
+    glm::glm
+    ${BULLET_LIBRARIES}
+    enet_static
+    assimp::assimp
     pybind11::embed
+    cxxopts::cxxopts
+    spdlog::spdlog
 )
 
-# System libraries for threepp/OpenGL
+# System libraries (platform-specific)
 if (UNIX AND NOT APPLE)
-    target_link_libraries(client PRIVATE GL glfw X11 pthread dl)
-    target_link_libraries(client PRIVATE
-        z          # zlib
-        bz2        # bzip2
-        lzma       # lzma/xz
-        pthread    # threading
-        dl         # dynamic loader
-        m          # math library
-    )
-    target_link_libraries(server PRIVATE
-        z          # zlib
-        bz2        # bzip2
-        lzma       # lzma/xz
-        pthread    # threading
-        dl         # dynamic loader
-        m          # math library
-    )
+    target_link_libraries(client PRIVATE pthread dl m)
+    target_link_libraries(server PRIVATE pthread dl m)
 elseif(APPLE)
     find_library(COCOA Cocoa)
     find_library(IOKIT IOKit)
     find_library(COREVIDEO CoreVideo)
-    target_link_libraries(client PRIVATE glfw OpenGL ${COCOA} ${IOKIT} ${COREVIDEO})
+    target_link_libraries(client PRIVATE ${COCOA} ${IOKIT} ${COREVIDEO})
+    target_link_libraries(server PRIVATE ${COCOA})
 elseif(WIN32)
-    target_link_libraries(client PRIVATE glfw opengl32)
+    target_link_libraries(client PRIVATE ws2_32)
+    target_link_libraries(server PRIVATE ws2_32)
 endif()

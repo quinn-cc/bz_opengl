@@ -1,5 +1,6 @@
 #include "engine/components/audio.hpp"
-#include "miniaudio.h"
+#define MINIAUDIO_IMPLEMENTATION
+#include <miniaudio.h>
 #include "spdlog/spdlog.h"
 
 Audio::Audio() : nextAudioId(1) {

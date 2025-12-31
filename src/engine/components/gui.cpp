@@ -1,7 +1,5 @@
 #include "engine/components/gui.hpp"
 #include <GLFW/glfw3.h>
-#include "backends/imgui_impl_glfw.h"      // your platform backend
-#include "backends/imgui_impl_opengl3.h"   // your renderer backend
 #include "spdlog/spdlog.h"
 
 GUI::GUI(GLFWwindow *window) {

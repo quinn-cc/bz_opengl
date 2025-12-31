@@ -1,7 +1,9 @@
 #pragma once
 #include <GLFW/glfw3.h>
-#include "backends/imgui_impl_glfw.h"      // your platform backend
-#include "backends/imgui_impl_opengl3.h"   // your renderer backend
+#include <imgui.h>
+#include <imgui_internal.h>
+#include <imgui_impl_glfw.h>      // your platform backend
+#include <imgui_impl_opengl3.h>   // your renderer backend
 #include <vector>
 #include <string>
 #include <array>
