@@ -46,22 +46,6 @@ public:
         return nullptr;
     };
 
-    void sendInit(const std::string &playerName);
-    void sendLocation(const Location &location);
-    void sendChat(const std::string &text, client_id toId = BROADCAST_CLIENT_ID);
-    void sendRequestSpawn();
-    void sendCreateShot(const glm::vec3 &position, const glm::vec3 &velocity);
-
-    bool receiveLocation(client_id id, const Location &location);
-    bool receivePlayerJoin(client_id id, const std::string &name, const Location &location, bool alive);
-    bool receivePlayerState(client_id id, SettingsMap settings);
-    bool receivePlayerLeave(client_id id);
-    bool receiveChat(client_id &fromId, client_id &toId, const std::string &text);
-    bool receiveCreateShot(client_id &ownerId, uint32_t &globalShotId, const glm::vec3 &position, const glm::vec3 &velocity);
-    bool receiveRemoveShot(shot_id id, bool &isGlobalId);
-    bool receiveSpawn(client_id id, const Location &location);
-    bool receiveDeath(client_id id);
-
     template<typename T> void send(const T &msg, bool flush = false) {
         static_assert(std::is_base_of_v<ClientMsg, T>, "T must be a subclass of ClientMsg");
 
@@ -71,7 +55,50 @@ public:
             flag = ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT;
         }
 
-        ENetPacket* packet = enet_packet_create(reinterpret_cast<const void*>(&msg), sizeof(T), flag);
+        ENetPacket* packet;
+        bz::ServerMsg msg;
+
+        if (constexpr (std::is_same_v<T, ClientMsg_Init)) {
+            msg.mutable_init_msg();
+            msg->set_name(msg->name);
+        } else if (constexpr (std::is_same_v<T, ClientMsg_Chat)) {
+            msg.mutable_chat_msg();
+            msg->set_toid(msg->toId);
+            msg->set_text(msg->text);
+        } else if (constexpr (std::is_same_v<T, ClientMsg_Location)) {
+            msg.mutable_location_msg();
+            msg->mutable_location_msg()->mutable_position()->set_x(msg->position.x);
+            msg.mutable_location_msg()->mutable_position()->set_y(msg->position.y);
+            msg.mutable_location_msg()->mutable_position()->set_z(msg->position.z);
+            msg.mutable_location_msg()->mutable_rotation()->set_w(msg->rotation.w);
+            msg.mutable_location_msg()->mutable_rotation()->set_x(msg->rotation.x);
+            msg.mutable_location_msg()->mutable_rotation()->set_y(msg->rotation.y);
+            msg.mutable_location_msg()->mutable_rotation()->set_z(msg->rotation.z);
+        } else if (constexpr (std::is_same_v<T, ClientMsg_RequestSpawn)) {
+            msg.mutable_request_spawn_msg();
+        } else if (constexpr (std::is_same_v<T, ClientMsg_CreateShot>)) {
+            msg.mutable_create_shot_msg();
+            msg->mutable_create_shot_msg()->set_localshotid(msg->localShotId);
+            msg->mutable_create_shot_msg()->mutable_position()->set_x(msg->position.x);
+            msg->mutable_create_shot_msg()->mutable_position()->set_y(msg->position.y);
+            msg->mutable_create_shot_msg()->mutable_position()->set_z(msg->position.z);
+            msg->mutable_create_shot_msg()->mutable_velocity()->set_x(msg->velocity.x);
+            msg->mutable_create_shot_msg()->mutable_velocity()->set_y(msg->velocity.y);
+            msg->mutable_create_shot_msg()->mutable_velocity()->set_z(msg->velocity.z);
+        } else {
+            spdlog::error("ServerNetwork::send: Unsupported message type");
+            return;
+        }
+        
+        std::string buffer;
+        msg.SerializeToString(&buffer);
+
+        ENetPacket* packet = enet_packet_create(
+            buffer.data(),
+            buffer.size(),
+            flag
+        );
+
         enet_peer_send(server, 0, packet);
 
         if (flush) {
