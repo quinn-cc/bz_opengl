@@ -73,24 +73,91 @@ void ServerNetwork::update() {
     while (enet_host_service(server, &event, 0) > 0) {
         switch (event.type) {
         case ENET_EVENT_TYPE_RECEIVE: {
-            ClientMsg *msg = reinterpret_cast<ClientMsg*>(event.packet->data);
-            msg->clientId = getClient(event.peer);
-            receivedMessages.push_back({ event.packet, msg });
+            bz::ClientMsg msg;
+
+            if (!msg.ParseFromArray(event.packet->data, event.packet->dataLength)) {
+                spdlog::error("Failed to parse ServerMsg");
+                return;
+            }
+
+            switch (msg.payload_case()) {
+            
+            case bz::ClientMsg::kInitMsg: {
+                ClientMsg_Init* initMsg = new ClientMsg_Init();
+                initMsg->clientId = getClient(event.peer);
+                initMsg->name = msg.init_msg().name();
+                receivedMessages.push_back({ event.packet, initMsg });
+                break;
+            }
+
+            case bz::ClientMsg::kChatMsg: {
+                ClientMsg_Chat* chatMsg = new ClientMsg_Chat();
+                chatMsg->clientId = getClient(event.peer);
+                chatMsg->toId = msg.chat_msg().toid();
+                chatMsg->text = msg.chat_msg().text();
+                receivedMessages.push_back({ event.packet, chatMsg });
+                break;
+            }
+
+            case bz::ClientMsg::kLocationMsg: {
+                ClientMsg_Location* locMsg = new ClientMsg_Location();
+                locMsg->clientId = getClient(event.peer);
+                locMsg->position.x = msg.location_msg().position().x();
+                locMsg->position.y = msg.location_msg().position().y();
+                locMsg->position.z = msg.location_msg().position().z();
+                locMsg->rotation.w = msg.location_msg().rotation().w();
+                locMsg->rotation.x = msg.location_msg().rotation().x();
+                locMsg->rotation.y = msg.location_msg().rotation().y();
+                locMsg->rotation.z = msg.location_msg().rotation().z();
+                receivedMessages.push_back({ event.packet, locMsg });
+                break;
+            }
+
+            case bz::ClientMsg::kRequestSpawnMsg: {
+                ClientMsg_RequestSpawn* spawnMsg = new ClientMsg_RequestSpawn();
+                spawnMsg->clientId = getClient(event.peer);
+                receivedMessages.push_back({ event.packet, spawnMsg });
+                break;
+            }
+
+            case bz::ClientMsg::kCreateShotMsg: {
+                ClientMsg_CreateShot* shotMsg = new ClientMsg_CreateShot();
+                shotMsg->clientId = getClient(event.peer);
+                shotMsg->localShotId = msg.create_shot_msg().localshotid();
+                shotMsg->position.x = msg.create_shot_msg().position().x();
+                shotMsg->position.y = msg.create_shot_msg().position().y();
+                shotMsg->position.z = msg.create_shot_msg().position().z();
+                shotMsg->velocity.x = msg.create_shot_msg().velocity().x();
+                shotMsg->velocity.y = msg.create_shot_msg().velocity().y();
+                shotMsg->velocity.z = msg.create_shot_msg().velocity().z();
+                receivedMessages.push_back({ event.packet, shotMsg });
+                break;
+            }
+
+            default:
+                spdlog::warn("Received unknown ClientMsg type");
+                enet_packet_destroy(event.packet);
+                break;
+
+            }
+            
             break;
         }
         case ENET_EVENT_TYPE_CONNECT: {
             client_id newClientId = getNextClientId();
             clients[newClientId] = event.peer;
-            ClientMsg_Connection* connMsg = new ClientMsg_Connection();
+            ClientMsg_Join* connMsg = new ClientMsg_Join();
             connMsg->clientId = newClientId;
-            enet_address_get_host_ip(&event.peer->address, connMsg->ip, sizeof(connMsg->ip));
+            char ip[64];
+            enet_address_get_host_ip(&event.peer->address, ip, sizeof(ip));
+            connMsg->ip = std::string(ip);
             receivedMessages.push_back({ nullptr, connMsg });
             break;
         }
         case ENET_EVENT_TYPE_DISCONNECT: {
             client_id discClientId = getClient(event.peer);
             clients.erase(discClientId);
-            ClientMsg_Disconnection* discMsg = new ClientMsg_Disconnection();
+            ClientMsg_Leave* discMsg = new ClientMsg_Leave();
             discMsg->clientId = discClientId;
             receivedMessages.push_back({ nullptr, discMsg });
             break;

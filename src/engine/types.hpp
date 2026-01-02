@@ -75,50 +75,90 @@ using audio_id = uint32_t;
 
 #pragma pack(push, 1)
 
+typedef struct PlayerState {
+    glm::vec3 position;
+    glm::vec3 rotation;
+    bool alive;
+    float speed;
+    float jumpSpeed;
+    float shotSpeed;
+} PlayerState;
+
 /*
  * Server messages
  */
 
 enum ServerMsg_Type {
-    ServerMsg_Type_LOCATION,
-    ServerMsg_Type_DISCONNECTION,
-    ServerMsg_Type_CONNECTION,
+    ServerMsg_Type_PLAYER_JOIN,
+    ServerMsg_Type_PLAYER_LEAVE,
+    ServerMsg_Type_PLAYER_STATE,
+    ServerMsg_Type_DEFAULT_PLAYER_STATE_CHANGE,
+    ServerMsg_Type_PLAYER_LOCATION,
+    ServerMsg_Type_PLAYER_SPAWN,
+    ServerMsg_Type_PLAYER_DEATH,
     ServerMsg_Type_CREATE_SHOT,
     ServerMsg_Type_REMOVE_SHOT,
-    ServerMsg_Type_ALLOW_SPAWN,
-    ServerMsg_Type_SPAWN,
-    ServerMsg_Type_DEATH,
-    ServerMsg_Type_CHAT,
-    ServerMsg_Type_WORLD_SETTING_CHANGE,
-    ServerMsg_Type_INIT
+    ServerMsg_Type_INIT,
+    ServerMsg_Type_CHAT
 };
 
 typedef struct ServerMsg {
     ServerMsg_Type type;
 } ServerMsg;
 
-typedef struct ServerMsg_Location : ServerMsg {
-    static constexpr ServerMsg_Type Type = ServerMsg_Type_LOCATION;
-    ServerMsg_Location() { type = Type; }
+typedef struct ServerMsg_PlayerJoin : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_PLAYER_JOIN;
+    ServerMsg_PlayerJoin() { type = Type; }
     client_id clientId;
-    Location location;
-} ServerMsg_Location;
+    std::string name;
+    PlayerState state;
+} ServerMsg_PlayerJoin;
 
-typedef struct ServerMsg_Connection : ServerMsg {
-    static constexpr ServerMsg_Type Type = ServerMsg_Type_CONNECTION;
-    ServerMsg_Connection() { type = Type; }
+typedef struct ServerMsg_PlayerLeave : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_PLAYER_LEAVE;
+    ServerMsg_PlayerLeave() { type = Type; }
     client_id clientId;
-    char name[256];
-    Location location;
-    bool alive;
-} ServerMsg_Connection;
+} ServerMsg_PlayerLeave;
 
-typedef struct ServerMsg_Disconnection : ServerMsg {
-    static constexpr ServerMsg_Type Type = ServerMsg_Type_DISCONNECTION;
-    ServerMsg_Disconnection() { type = Type; }
+typedef struct ServerMsg_PlayerState : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_PLAYER_STATE;
+    ServerMsg_PlayerState() { type = Type; }
     client_id clientId;
-} ServerMsg_Disconnection;
+    PlayerState state;
+} ServerMsg_PlayerState;
 
+typedef struct ServerMsg_DefaultPlayerStateChange : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_DEFAULT_PLAYER_STATE_CHANGE;
+    ServerMsg_DefaultPlayerStateChange() { type = Type; }
+    client_id clientId;
+    std::string key;
+    float value;
+} ServerMsg_DefaultPlayerStateChange;
+
+typedef struct ServerMsg_PlayerLocation : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_PLAYER_LOCATION;
+    ServerMsg_PlayerLocation() { type = Type; }
+    client_id clientId;
+    glm::vec3 position;
+    glm::quat rotation;
+    glm::vec3 velocity;
+} ServerMsg_PlayerLocation;
+
+typedef struct ServerMsg_PlayerSpawn : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_PLAYER_SPAWN;
+    ServerMsg_PlayerSpawn() { type = Type; }
+    client_id clientId;
+    glm::vec3 position;
+    glm::quat rotation;
+    glm::vec3 velocity;
+} ServerMsg_PlayerSpawn;
+
+typedef struct ServerMsg_PlayerDeath : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_PLAYER_DEATH;
+    ServerMsg_PlayerDeath() { type = Type; }
+    client_id clientId;
+} ServerMsg_PlayerDeath;
+    
 typedef struct ServerMsg_CreateShot : ServerMsg {
     static constexpr ServerMsg_Type Type = ServerMsg_Type_CREATE_SHOT;
     ServerMsg_CreateShot() { type = Type; }
@@ -134,49 +174,20 @@ typedef struct ServerMsg_RemoveShot : ServerMsg {
     bool isGlobalId;
 } ServerMsg_RemoveShot;
 
-typedef struct ServerMsg_AllowSpawn : ServerMsg {
-    static constexpr ServerMsg_Type Type = ServerMsg_Type_ALLOW_SPAWN;
-    ServerMsg_AllowSpawn() { type = Type; }
-    bool allow;
-    Location location;
-} ServerMsg_AllowSpawn;
-
-typedef struct ServerMsg_Spawn : ServerMsg {
-    static constexpr ServerMsg_Type Type = ServerMsg_Type_SPAWN;
-    ServerMsg_Spawn() { type = Type; }
-    client_id clientId;
-    Location location;
-} ServerMsg_Spawn;
-
-typedef struct ServerMsg_Death : ServerMsg {
-    static constexpr ServerMsg_Type Type = ServerMsg_Type_DEATH;
-    ServerMsg_Death() { type = Type; }
-    client_id clientId;
-} ServerMsg_Death;
-
 typedef struct ServerMsg_Chat : ServerMsg {
     static constexpr ServerMsg_Type Type = ServerMsg_Type_CHAT;
     ServerMsg_Chat() { type = Type; }
     client_id fromId;
     client_id toId;
-    char text[512];
+    std::string text;
 } ServerMsg_Chat;
-
-typedef struct ServerMsg_WorldSettingChange : ServerMsg {
-    static constexpr ServerMsg_Type Type = ServerMsg_Type_WORLD_SETTING_CHANGE;
-    ServerMsg_WorldSettingChange() { type = Type; }
-    char key[64];
-    float value;
-} ServerMsg_WorldSettingChange;
 
 typedef struct ServerMsg_Init : ServerMsg {
     static constexpr ServerMsg_Type Type = ServerMsg_Type_INIT;
     ServerMsg_Init() { type = Type; }
     client_id clientId;
-    char serverName[256];
-    SettingsMap settings;
-    uint32_t dataSize;
-    std::byte data[1]; // Flexible array member for additional data
+    std::string serverName;
+    std::byte* worldData;
 } ServerMsg_Init;
 
 /*
@@ -184,9 +195,8 @@ typedef struct ServerMsg_Init : ServerMsg {
  */
 
 enum ClientMsg_Type {
-    ClientMsg_Type_REQUEST_CONNECTION,
-    ClientMsg_Type_CONNECTION,
-    ClientMsg_Type_DISCONNECTION,
+    ClientMsg_Type_JOIN,
+    ClientMsg_Type_LEAVE,
     ClientMsg_Type_INIT,
     ClientMsg_Type_REQUEST_SPAWN,
     ClientMsg_Type_LOCATION,
@@ -199,21 +209,21 @@ typedef struct ClientMsg {
     client_id clientId;
 } ClientMsg;
 
-typedef struct ClientMsg_Connection : ClientMsg {
-    static constexpr ClientMsg_Type Type = ClientMsg_Type_CONNECTION;
-    ClientMsg_Connection() { type = Type; }
-    char ip[64];
-} ClientMsg_Connection;
+typedef struct ClientMsg_Join : ClientMsg {
+    static constexpr ClientMsg_Type Type = ClientMsg_Type_JOIN;
+    ClientMsg_Join() { type = Type; }
+    std::string ip;
+} ClientMsg_Join;
 
-typedef struct ClientMsg_Disconnection : ClientMsg {
-    static constexpr ClientMsg_Type Type = ClientMsg_Type_DISCONNECTION;
-    ClientMsg_Disconnection() { type = Type; }
-} ClientMsg_Disconnection;
+typedef struct ClientMsg_Leave : ClientMsg {
+    static constexpr ClientMsg_Type Type = ClientMsg_Type_LEAVE;
+    ClientMsg_Leave() { type = Type; }
+} ClientMsg_Leave;
 
 typedef struct ClientMsg_Init: ClientMsg {
     static constexpr ClientMsg_Type Type = ClientMsg_Type_INIT;
     ClientMsg_Init() { type = Type; }
-    char name[256];
+    std::string name;
 } ClientMsg_Init;
 
 typedef struct ClientMsg_RequestSpawn : ClientMsg {
@@ -224,7 +234,8 @@ typedef struct ClientMsg_RequestSpawn : ClientMsg {
 typedef struct ClientMsg_Location : ClientMsg {
     static constexpr ClientMsg_Type Type = ClientMsg_Type_LOCATION;
     ClientMsg_Location() { type = Type; }
-    Location location;
+    glm::vec3 position;
+    glm::quat rotation;
 } ClientMsg_Location;
 
 typedef struct ClientMsg_CreateShot : ClientMsg {
@@ -239,7 +250,7 @@ typedef struct ClientMsg_Chat : ClientMsg {
     static constexpr ClientMsg_Type Type = ClientMsg_Type_CHAT;
     ClientMsg_Chat() { type = Type; }
     client_id toId;
-    char text[512];
+    std::string text;
 } ClientMsg_Chat;
 
 #pragma pack(pop)

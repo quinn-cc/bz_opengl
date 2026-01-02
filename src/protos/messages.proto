@@ -1,5 +1,12 @@
 syntax = "proto3";
+
 package bz;
+
+// If you generate C++ and want a namespace, uncomment:
+// option csharp_namespace = "BZ";
+// option java_package = "com.example.bz";
+
+// ----- Common types -----
 
 message Vec3 {
   float x = 1;
@@ -7,153 +14,158 @@ message Vec3 {
   float z = 3;
 }
 
-message Location {
-  // Adjust fields to match your C++ Location type:
-  // e.g. Vec3 pos, float yaw, float pitch, etc.
+message Quat {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+  float w = 4;
+}
+
+message PlayerState {
   Vec3 position = 1;
-  Vec3 forward  = 2; // or yaw/pitch/roll, whatever you use
+  Vec3 rotation = 2;   // Keeping as vec3 since your struct uses glm::vec3
+  bool alive = 3;
+  float speed = 4;
+  float jumpSpeed = 5;
+  float shotSpeed = 6;
 }
 
-// Good for your SettingsMap "key -> value" style.
-// If you have mixed types, use oneof or google.protobuf.Value.
-message SettingsMap {
-  map<string, float> floats = 1;
-  // optionally:
-  // map<string, int32> ints = 2;
-  // map<string, string> strings = 3;
+// If these are typedefs in your code, choose an actual wire type.
+// uint32 is typical for ids, uint64 if you might exceed 2^32-1.
+typedef uint32 client_id = 0; // (not valid protobuf; see note below)
+typedef uint32 shot_id   = 0; // (not valid protobuf; see note below)
+
+// Protobuf doesn't support typedefs; so we just use uint32 fields for ids.
+
+// ----- Server messages -----
+
+message ServerMsg_PlayerLocation {
+  uint32 clientId = 1;
+  Vec3 position = 2;
+  Quat rotation = 3;
+  Vec3 velocity = 4;
 }
 
-//
-// ----------- Server messages -----------
-//
-
-message Server_Location {
-  uint32 client_id = 1;
-  Location location = 2;
+message ServerMsg_PlayerJoin {
+  uint32 clientId = 1;
+  string name = 2;
+  PlayerState state = 3;
 }
 
-message Server_Connection {
-  uint32 client_id = 1;
-  string name = 2;          // replaces char[256]
-  Location location = 3;
-  bool alive = 4;
+message ServerMsg_PlayerState {
+  uint32 clientId = 1;
+  PlayerState state = 2;
 }
 
-message Server_Disconnection {
-  uint32 client_id = 1;
+message ServerMsg_DefaultPlayerStateChange {
+  uint32 clientId = 1;
+  string key = 2;
+  float value = 3;
 }
 
-message Server_CreateShot {
-  uint32 global_shot_id = 1;
+message ServerMsg_PlayerLeave {
+  uint32 clientId = 1;
+}
+
+message ServerMsg_PlayerSpawn {
+  uint32 clientId = 1;
+  Vec3 position = 2;
+  Quat rotation = 3;
+  Vec3 velocity = 4;
+}
+
+message ServerMsg_PlayerDeath {
+  uint32 clientId = 1;
+}
+
+message ServerMsg_CreateShot {
+  uint32 globalShotId = 1;
   Vec3 position = 2;
   Vec3 velocity = 3;
 }
 
-message Server_RemoveShot {
-  uint32 shot_id = 1;
-  bool is_global_id = 2;
+message ServerMsg_RemoveShot {
+  uint32 shotId = 1;
+  bool isGlobalId = 2;
 }
 
-message Server_AllowSpawn {
-  bool allow = 1;
-  Location location = 2;
+message ServerMsg_Chat {
+  uint32 fromId = 1;
+  uint32 toId = 2;
+  string text = 3;
 }
 
-message Server_Spawn {
-  uint32 client_id = 1;
-  Location location = 2;
+message ServerMsg_Init {
+  uint32 clientId = 1;
+  string serverName = 2;
+  bytes worldData = 3; // replaces std::byte* worldData
 }
 
-message Server_Death {
-  uint32 client_id = 1;
-}
-
-message Server_Chat {
-  uint32 from_id = 1;
-  uint32 to_id = 2;
-  string text = 3;          // replaces char[512]
-}
-
-message Server_WorldSettingChange {
-  string key = 1;
-  float value = 2;
-}
-
-message Server_Init {
-  uint32 client_id = 1;
-  string server_name = 2;
-  SettingsMap settings = 3;
-
-  // replaces (dataSize + data[1]) flexible array:
-  bytes data = 4;
-}
-
-message ServerPacket {
+// Envelope
+message ServerMsg {
   oneof payload {
-    Server_Location location = 1;
-    Server_Disconnection disconnection = 2;
-    Server_Connection connection = 3;
-    Server_CreateShot create_shot = 4;
-    Server_RemoveShot remove_shot = 5;
-    Server_AllowSpawn allow_spawn = 6;
-    Server_Spawn spawn = 7;
-    Server_Death death = 8;
-    Server_Chat chat = 9;
-    Server_WorldSettingChange world_setting_change = 10;
-    Server_Init init = 11;
+    ServerMsg_PlayerLocation player_location = 1;
+    ServerMsg_PlayerLeave player_leave = 2;
+    ServerMsg_PlayerJoin player_join = 3;
+    ServerMsg_PlayerState player_state = 4;
+    ServerMsg_DefaultPlayerStateChange default_player_state_change = 5;
+    ServerMsg_PlayerSpawn player_spawn = 6;
+    ServerMsg_PlayerDeath player_death = 7;
+    ServerMsg_CreateShot create_shot = 8;
+    ServerMsg_RemoveShot remove_shot = 9;
+    ServerMsg_Init init = 10;
+    ServerMsg_Chat chat = 11;
   }
 }
 
-//
-// ----------- Client messages -----------
-//
+// ----- Client messages -----
 
-message Client_Connection {
-  uint32 client_id = 1;  // you had this in ClientMsg base struct
+message ClientMsg_Join {
+  uint32 clientId = 1;
   string ip = 2;
 }
 
-message Client_Disconnection {
-  uint32 client_id = 1;
+message ClientMsg_Leave {
+  uint32 clientId = 1;
 }
 
-message Client_Init {
-  uint32 client_id = 1;
+message ClientMsg_Init {
+  uint32 clientId = 1;
   string name = 2;
 }
 
-message Client_RequestSpawn {
-  uint32 client_id = 1;
+message ClientMsg_RequestSpawn {
+  uint32 clientId = 1;
 }
 
-message Client_Location {
-  uint32 client_id = 1;
-  Location location = 2;
+message ClientMsg_Location {
+  uint32 clientId = 1;
+  Vec3 position = 2;
+  Quat rotation = 3;
 }
 
-message Client_CreateShot {
-  uint32 client_id = 1;
-  uint32 local_shot_id = 2;
+message ClientMsg_CreateShot {
+  uint32 clientId = 1;
+  uint32 localShotId = 2;
   Vec3 position = 3;
   Vec3 velocity = 4;
 }
 
-message Client_Chat {
-  uint32 client_id = 1;
-  uint32 to_id = 2;
+message ClientMsg_Chat {
+  uint32 clientId = 1;
+  uint32 toId = 2;
   string text = 3;
 }
 
-message ClientPacket {
+// Envelope
+message ClientMsg {
   oneof payload {
-    // If you truly have "REQUEST_CONNECTION" distinct from "CONNECTION",
-    // make a separate message for it here.
-    Client_Connection connection = 1;
-    Client_Disconnection disconnection = 2;
-    Client_Init init = 3;
-    Client_RequestSpawn request_spawn = 4;
-    Client_Location location = 5;
-    Client_CreateShot create_shot = 6;
-    Client_Chat chat = 7;
+    ClientMsg_Join join = 1;
+    ClientMsg_Leave leave = 2;
+    ClientMsg_Init init = 3;
+    ClientMsg_RequestSpawn request_spawn = 4;
+    ClientMsg_Location location = 5;
+    ClientMsg_CreateShot create_shot = 6;
+    ClientMsg_Chat chat = 7;
   }
 }
