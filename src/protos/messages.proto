@@ -30,12 +30,8 @@ message PlayerState {
   float shotSpeed = 6;
 }
 
-// If these are typedefs in your code, choose an actual wire type.
-// uint32 is typical for ids, uint64 if you might exceed 2^32-1.
-typedef uint32 client_id = 0; // (not valid protobuf; see note below)
-typedef uint32 shot_id   = 0; // (not valid protobuf; see note below)
-
-// Protobuf doesn't support typedefs; so we just use uint32 fields for ids.
+// Note: For client_id and shot_id, we just use uint32 fields directly
+// since protobuf doesn't support typedefs.
 
 // ----- Server messages -----
 

@@ -62,10 +62,9 @@ inline float angleBetween(const glm::quat& a, const glm::quat& b, bool degrees =
     return ret;
 }
 
-#define THIS_CLIENT_ID 0
-#define SERVER_CLIENT_ID 1
-#define BROADCAST_CLIENT_ID 2
-#define FIRST_CLIENT_ID 3
+#define SERVER_CLIENT_ID 0
+#define BROADCAST_CLIENT_ID 1
+#define FIRST_CLIENT_ID 2
 
 using client_id = uint32_t;
 using shot_id = uint32_t;
@@ -75,13 +74,24 @@ using audio_id = uint32_t;
 
 #pragma pack(push, 1)
 
-typedef struct PlayerState {
-    glm::vec3 position;
-    glm::vec3 rotation;
-    bool alive;
+typedef struct PlayerParameters {
     float speed;
     float jumpSpeed;
     float shotSpeed;
+    float gravity;
+    float forwardSpeedMultiplier;
+    float backwardSpeedMultiplier;
+    float leftTurnSpeedMultiplier;
+    float rightTurnSpeedMultiplier;
+} PlayerParams;
+
+typedef struct PlayerState {
+    std::string name;
+    glm::vec3 position;
+    glm::quat rotation;
+    glm::vec3 velocity;
+    bool alive;
+    PlayerParameters params;
 } PlayerState;
 
 /*
@@ -92,7 +102,7 @@ enum ServerMsg_Type {
     ServerMsg_Type_PLAYER_JOIN,
     ServerMsg_Type_PLAYER_LEAVE,
     ServerMsg_Type_PLAYER_STATE,
-    ServerMsg_Type_DEFAULT_PLAYER_STATE_CHANGE,
+    ServerMsg_Type_PLAYER_PARAMETERS,
     ServerMsg_Type_PLAYER_LOCATION,
     ServerMsg_Type_PLAYER_SPAWN,
     ServerMsg_Type_PLAYER_DEATH,
@@ -110,7 +120,6 @@ typedef struct ServerMsg_PlayerJoin : ServerMsg {
     static constexpr ServerMsg_Type Type = ServerMsg_Type_PLAYER_JOIN;
     ServerMsg_PlayerJoin() { type = Type; }
     client_id clientId;
-    std::string name;
     PlayerState state;
 } ServerMsg_PlayerJoin;
 
@@ -127,13 +136,12 @@ typedef struct ServerMsg_PlayerState : ServerMsg {
     PlayerState state;
 } ServerMsg_PlayerState;
 
-typedef struct ServerMsg_DefaultPlayerStateChange : ServerMsg {
-    static constexpr ServerMsg_Type Type = ServerMsg_Type_DEFAULT_PLAYER_STATE_CHANGE;
-    ServerMsg_DefaultPlayerStateChange() { type = Type; }
+typedef struct ServerMsg_PlayerParameters : ServerMsg {
+    static constexpr ServerMsg_Type Type = ServerMsg_Type_PLAYER_PARAMETERS;
+    ServerMsg_PlayerParameters() { type = Type; }
     client_id clientId;
-    std::string key;
-    float value;
-} ServerMsg_DefaultPlayerStateChange;
+    PlayerParameters params;
+} ServerMsg_PlayerParameters;
 
 typedef struct ServerMsg_PlayerLocation : ServerMsg {
     static constexpr ServerMsg_Type Type = ServerMsg_Type_PLAYER_LOCATION;
@@ -187,6 +195,7 @@ typedef struct ServerMsg_Init : ServerMsg {
     ServerMsg_Init() { type = Type; }
     client_id clientId;
     std::string serverName;
+    PlayerParameters defaultPlayerParams;
     std::byte* worldData;
 } ServerMsg_Init;
 

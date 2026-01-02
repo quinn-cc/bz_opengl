@@ -9,12 +9,14 @@ Client::Client(Game &game, client_id id) : game(game), id(id) {
 
     renderId = game.engine.render->create("data/models/tank/tank.glb");
 
-    if (auto msg = game.engine.network->peekMessage<ServerMsg_Connection>(
-        [this](const ServerMsg_Connection &msg) {
+    if (auto msg = game.engine.network->peekMessage<ServerMsg_PlayerJoin>(
+        [this](const ServerMsg_PlayerJoin &msg) {
             return msg.clientId == this->id;
         }
     )) {
-        location = msg->location;
+        location.position = msg->position;
+        location.rotation = msg->rotation;
+        //velocity = msg->location.velocity;
         name = std::string(msg->name);
         alive = msg->alive;
         spdlog::trace("Client::Client: Initialized location for client id {}", id);
@@ -31,8 +33,8 @@ Client::~Client() {
 }
 
 void Client::update() {
-    if (auto msg = game.engine.network->peekMessage<ServerMsg_Location>(
-        [this](const ServerMsg_Location &msg) {
+    if (auto msg = game.engine.network->peekMessage<ServerMsg_PlayerLocation>(
+        [this](const ServerMsg_PlayerLocation &msg) {
             return msg.clientId == this->id;
         }
     )) {
@@ -45,8 +47,8 @@ void Client::update() {
         game.engine.render->setRotation(renderId, location.rotation * glm::angleAxis(glm::pi<float>(), glm::vec3(0, 1, 0)));
 
         // If receiving a death message
-        if (auto msg = game.engine.network->peekMessage<ServerMsg_Death>(
-            [this](const ServerMsg_Death &msg) {
+        if (auto msg = game.engine.network->peekMessage<ServerMsg_PlayerDeath>(
+            [this](const ServerMsg_PlayerDeath &msg) {
                 return msg.clientId == this->id;
             }
         )) {
@@ -56,8 +58,8 @@ void Client::update() {
         }
     } else {
         // If receiving a spawn message
-        if (auto msg = game.engine.network->peekMessage<ServerMsg_Spawn>(
-            [this](const ServerMsg_Spawn &msg) {
+        if (auto msg = game.engine.network->peekMessage<ServerMsg_PlayerSpawn>(
+            [this](const ServerMsg_PlayerSpawn &msg) {
                 return msg.clientId == this->id;
             }
         )) {
