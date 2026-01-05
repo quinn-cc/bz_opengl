@@ -204,11 +204,11 @@ typedef struct ServerMsg_Init : ServerMsg {
  */
 
 enum ClientMsg_Type {
-    ClientMsg_Type_JOIN,
-    ClientMsg_Type_LEAVE,
+    ClientMsg_Type_PLAYER_JOIN,
+    ClientMsg_Type_PLAYER_LEAVE,
     ClientMsg_Type_INIT,
-    ClientMsg_Type_REQUEST_SPAWN,
-    ClientMsg_Type_LOCATION,
+    ClientMsg_Type_REQUEST_PLAYER_SPAWN,
+    ClientMsg_Type_PLAYER_LOCATION,
     ClientMsg_Type_CREATE_SHOT,
     ClientMsg_Type_CHAT
 };
@@ -218,16 +218,16 @@ typedef struct ClientMsg {
     client_id clientId;
 } ClientMsg;
 
-typedef struct ClientMsg_Join : ClientMsg {
-    static constexpr ClientMsg_Type Type = ClientMsg_Type_JOIN;
-    ClientMsg_Join() { type = Type; }
+typedef struct ClientMsg_PlayerJoin : ClientMsg {
+    static constexpr ClientMsg_Type Type = ClientMsg_Type_PLAYER_JOIN;
+    ClientMsg_PlayerJoin() { type = Type; }
     std::string ip;
-} ClientMsg_Join;
+} ClientMsg_PlayerJoin;
 
-typedef struct ClientMsg_Leave : ClientMsg {
-    static constexpr ClientMsg_Type Type = ClientMsg_Type_LEAVE;
-    ClientMsg_Leave() { type = Type; }
-} ClientMsg_Leave;
+typedef struct ClientMsg_PlayerLeave : ClientMsg {
+    static constexpr ClientMsg_Type Type = ClientMsg_Type_PLAYER_LEAVE;
+    ClientMsg_PlayerLeave() { type = Type; }
+} ClientMsg_PlayerLeave;
 
 typedef struct ClientMsg_Init: ClientMsg {
     static constexpr ClientMsg_Type Type = ClientMsg_Type_INIT;
@@ -235,17 +235,17 @@ typedef struct ClientMsg_Init: ClientMsg {
     std::string name;
 } ClientMsg_Init;
 
-typedef struct ClientMsg_RequestSpawn : ClientMsg {
-    static constexpr ClientMsg_Type Type = ClientMsg_Type_REQUEST_SPAWN;
-    ClientMsg_RequestSpawn() { type = Type; }
-} ClientMsg_RequestSpawn;
+typedef struct ClientMsg_RequestPlayerSpawn : ClientMsg {
+    static constexpr ClientMsg_Type Type = ClientMsg_Type_REQUEST_PLAYER_SPAWN;
+    ClientMsg_RequestPlayerSpawn() { type = Type; }
+} ClientMsg_RequestPlayerSpawn;
 
-typedef struct ClientMsg_Location : ClientMsg {
-    static constexpr ClientMsg_Type Type = ClientMsg_Type_LOCATION;
-    ClientMsg_Location() { type = Type; }
+typedef struct ClientMsg_PlayerLocation : ClientMsg {
+    static constexpr ClientMsg_Type Type = ClientMsg_Type_PLAYER_LOCATION;
+    ClientMsg_PlayerLocation() { type = Type; }
     glm::vec3 position;
     glm::quat rotation;
-} ClientMsg_Location;
+} ClientMsg_PlayerLocation;
 
 typedef struct ClientMsg_CreateShot : ClientMsg {
     static constexpr ClientMsg_Type Type = ClientMsg_Type_CREATE_SHOT;

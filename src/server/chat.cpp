@@ -29,7 +29,7 @@ void Chat::update() {
             ServerMsg_Chat serverChatMsg;
             serverChatMsg.fromId = chatMsg->clientId;
             serverChatMsg.toId = chatMsg->toId;
-            strcpy(serverChatMsg.text, chatMsg->text);
+            serverChatMsg.text = chatMsg->text;
 
             if (chatMsg->toId == BROADCAST_CLIENT_ID) {
                 game.engine.network->sendExcept<ServerMsg_Chat>(chatMsg->clientId, &serverChatMsg);

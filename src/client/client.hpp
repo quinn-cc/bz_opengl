@@ -11,9 +11,7 @@ private:
     client_id id;
     render_id renderId;
 
-    Location location;
-    bool alive;
-    std::string name;
+    PlayerState state;
 
 public:
     Client(Game &game, client_id id);
@@ -21,5 +19,5 @@ public:
 
     void update();
     bool isEqual(client_id otherId);
-    std::string getName() const { return name; }
+    std::string getName() const { return state.name; }
 };
