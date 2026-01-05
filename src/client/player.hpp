@@ -11,6 +11,8 @@ class Game;
 class Player {
 private:
     Game &game;
+    client_id clientId;
+    bool grounded;
 
     physics_id physicsId;
     audio_id jumpAudioId;
@@ -21,21 +23,19 @@ private:
     TimeUtils::time lastJumpTime;
     TimeUtils::duration jumpCooldown;
 
-    std::string name;
-    Location lastLocation;
-    Location location;
-    glm::vec3 velocity;
-    bool alive;
-    bool grounded;
+    glm::vec3 lastPosition;
+    glm::quat lastRotation;
+    PlayerState state;
 
 public:
     Player(Game &game, const std::string name);
     ~Player();
 
-    std::string getName() const { return name; }
-    glm::vec3 getPosition() const { return location.position; }
-    glm::vec3 getVelocity() const { return velocity; }
-    glm::quat getRotation() const { return location.rotation; }
+    std::string getName() const { return state.name; }
+    client_id getClientId() const { return clientId; }
+    glm::vec3 getPosition() const { return state.position; }
+    glm::vec3 getVelocity() const { return state.velocity; }
+    glm::quat getRotation() const { return state.rotation; }
     glm::vec3 getForwardVector() const;
 
     void earlyUpdate();

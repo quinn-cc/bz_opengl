@@ -52,18 +52,18 @@ public:
 
         ENetPacketFlag flag = ENET_PACKET_FLAG_RELIABLE;
 
-        if constexpr (std::is_same_v<T, ClientMsg_Location>) {
+        if constexpr (std::is_same_v<T, bz::ClientMsg_Location>) {
             flag = ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT;
         }
 
         bz::ClientMsg msg;
 
-        if constexpr (std::is_same_v<T, ClientMsg_Init>) {
+        if constexpr (std::is_same_v<T, bz::ClientMsg_Init>) {
             msg.mutable_init()->set_name(input.name);
-        } else if constexpr (std::is_same_v<T, ClientMsg_Chat>) {
+        } else if constexpr (std::is_same_v<T, bz::ClientMsg_Chat>) {
             msg.mutable_chat()->set_toid(input.toId);
             msg.mutable_chat()->set_text(input.text);
-        } else if constexpr (std::is_same_v<T, ClientMsg_Location>) {
+        } else if constexpr (std::is_same_v<T, bz::ClientMsg_Location>) {
             auto* loc = msg.mutable_location();
             loc->mutable_position()->set_x(input.position.x);
             loc->mutable_position()->set_y(input.position.y);
@@ -72,9 +72,9 @@ public:
             loc->mutable_rotation()->set_x(input.rotation.x);
             loc->mutable_rotation()->set_y(input.rotation.y);
             loc->mutable_rotation()->set_z(input.rotation.z);
-        } else if constexpr (std::is_same_v<T, ClientMsg_RequestSpawn>) {
+        } else if constexpr (std::is_same_v<T, bz::ClientMsg_RequestSpawn>) {
             msg.mutable_request_spawn();
-        } else if constexpr (std::is_same_v<T, ClientMsg_CreateShot>) {
+        } else if constexpr (std::is_same_v<T, bz::ClientMsg_CreateShot>) {
             auto* shot = msg.mutable_create_shot();
             shot->set_localshotid(input.localShotId);
             shot->mutable_position()->set_x(input.position.x);

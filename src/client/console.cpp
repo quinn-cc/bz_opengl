@@ -21,7 +21,7 @@ void Console::update() {
 
             ClientMsg_Chat chatMsg;
             chatMsg.toId = BROADCAST_CLIENT_ID;
-            strcpy(chatMsg.text, message.c_str());
+            chatMsg.text = message;
             game.engine.network->send<ClientMsg_Chat>(chatMsg);
             game.engine.gui->clearChatInputBuffer();
         }
@@ -35,7 +35,7 @@ void Console::update() {
         std::string name = "";
 
         if (game.getClientById(msg->fromId) == nullptr) {
-            if (msg->fromId == THIS_CLIENT_ID) {
+            if (msg->fromId == game.player->getClientId()) {
                 name = "YOU";
             } else if (msg->fromId == SERVER_CLIENT_ID) {
                 name = "SERVER";
@@ -44,10 +44,10 @@ void Console::update() {
             }
         }
 
-        if (msg->toId == THIS_CLIENT_ID) {
+        if (msg->toId == game.player->getClientId()) {
             name = "[" + name + " -> YOU]";
         }
 
-        game.engine.gui->addConsoleLine(name, std::string(msg->text));
+        game.engine.gui->addConsoleLine(name, msg->text);
     }
 }

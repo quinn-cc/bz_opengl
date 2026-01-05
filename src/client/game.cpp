@@ -43,13 +43,13 @@ void Game::earlyUpdate(TimeUtils::duration deltaTime) {
 
     player->earlyUpdate();
 
-    if (auto msg = engine.network->peekMessage<ServerMsg_Connection>()) {
+    if (auto msg = engine.network->peekMessage<ServerMsg_PlayerJoin>()) {
         Client *client = new Client(*this, msg->clientId);
         clients.push_back(client);
         spdlog::trace("Game: New client connected with ID {}", msg->clientId);
     }
 
-    if (auto msg = engine.network->peekMessage<ServerMsg_Disconnection>()) {
+    if (auto msg = engine.network->peekMessage<ServerMsg_PlayerLeave>()) {
         auto it = std::find_if(clients.begin(), clients.end(),
             [msg](Client *client) {
                 return client->isEqual(msg->clientId);

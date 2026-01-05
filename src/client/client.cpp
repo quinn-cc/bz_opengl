@@ -5,7 +5,6 @@
 
 Client::Client(Game &game, client_id id) : game(game), id(id) {
     initialized = false;
-    alive = false;
 
     renderId = game.engine.render->create("data/models/tank/tank.glb");
 
@@ -14,18 +13,14 @@ Client::Client(Game &game, client_id id) : game(game), id(id) {
             return msg.clientId == this->id;
         }
     )) {
-        location.position = msg->position;
-        location.rotation = msg->rotation;
-        //velocity = msg->location.velocity;
-        name = std::string(msg->name);
-        alive = msg->alive;
+        state = msg->state;
         spdlog::trace("Client::Client: Initialized location for client id {}", id);
     }
 
-    game.engine.render->setPosition(renderId, location.position + glm::vec3(0.0f, -0.9f, 0.0f));
-    game.engine.render->setRotation(renderId, location.rotation * glm::angleAxis(glm::pi<float>(), glm::vec3(0, 1, 0)));
+    game.engine.render->setPosition(renderId, state.position + glm::vec3(0.0f, -0.9f, 0.0f));
+    game.engine.render->setRotation(renderId, state.rotation * glm::angleAxis(glm::pi<float>(), glm::vec3(0, 1, 0)));
     game.engine.render->setScale(renderId, glm::vec3(0.5f, 0.5f, 0.5f));
-    game.engine.render->setVisible(renderId, alive);
+    game.engine.render->setVisible(renderId, state.alive);
 }
 
 Client::~Client() {
@@ -33,18 +28,29 @@ Client::~Client() {
 }
 
 void Client::update() {
+    // Listen for incoming world setting changes
+    if (auto msg = game.engine.network->peekMessage<ServerMsg_PlayerState>(
+        [this](const ServerMsg_PlayerState &msg) {
+            return msg.clientId == this->id;
+        }
+    )) {
+        state = msg->state;
+    }
+
     if (auto msg = game.engine.network->peekMessage<ServerMsg_PlayerLocation>(
         [this](const ServerMsg_PlayerLocation &msg) {
             return msg.clientId == this->id;
         }
     )) {
-        location = msg->location;
+        state.position = msg->position;
+        state.rotation = msg->rotation;
+        state.velocity = msg->velocity;
         spdlog::trace("Client::update: Updated location for client id {}", id);
     }
 
-    if (alive) {
-        game.engine.render->setPosition(renderId, location.position + glm::vec3(0.0f, -0.8f, 0.0f));
-        game.engine.render->setRotation(renderId, location.rotation * glm::angleAxis(glm::pi<float>(), glm::vec3(0, 1, 0)));
+    if (state.alive) {
+        game.engine.render->setPosition(renderId, state.position + glm::vec3(0.0f, -0.8f, 0.0f));
+        game.engine.render->setRotation(renderId, state.rotation * glm::angleAxis(glm::pi<float>(), glm::vec3(0, 1, 0)));
 
         // If receiving a death message
         if (auto msg = game.engine.network->peekMessage<ServerMsg_PlayerDeath>(
@@ -52,7 +58,7 @@ void Client::update() {
                 return msg.clientId == this->id;
             }
         )) {
-            alive = false;
+            state.alive = false;
             game.engine.render->setVisible(renderId, false);
             spdlog::trace("Client::update: Client id {} has died", id);
         }
@@ -63,10 +69,12 @@ void Client::update() {
                 return msg.clientId == this->id;
             }
         )) {
-            location = msg->location;
-            alive = true;
-            game.engine.render->setPosition(renderId, location.position + glm::vec3(0.0f, -0.8f, 0.0f));
-            game.engine.render->setRotation(renderId, location.rotation * glm::angleAxis(glm::pi<float>(), glm::vec3(0, 1, 0)));
+            state.position = msg->position;
+            state.rotation = msg->rotation;
+            state.velocity = msg->velocity;
+            state.alive = true;
+            game.engine.render->setPosition(renderId, state.position + glm::vec3(0.0f, -0.8f, 0.0f));
+            game.engine.render->setRotation(renderId, state.rotation * glm::angleAxis(glm::pi<float>(), glm::vec3(0, 1, 0)));
             game.engine.render->setVisible(renderId, true);
             spdlog::trace("Client::update: Client id {} has spawned", id);
         }

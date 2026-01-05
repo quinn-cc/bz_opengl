@@ -8,9 +8,9 @@ Client::Client(Game &game, client_id id, std::string ip) : game(game), id(id), i
 }
 
 Client::~Client() {
-    ServerMsg_Disconnection serverDisconnMsg;
+    ServerMsg_PlayerLeave serverDisconnMsg;
     serverDisconnMsg.clientId = id;
-    game.engine.network->sendExcept<ServerMsg_Disconnection>(id, &serverDisconnMsg);
+    game.engine.network->sendExcept<ServerMsg_PlayerLeave>(id, &serverDisconnMsg);
 }
 
 bool Client::isEqual(client_id cid) const {
@@ -34,12 +34,13 @@ void Client::update() {
             initialized = true;
 
             // Notify all other clients about this new connection
-            ServerMsg_Connection connMsg;
+            ServerMsg_PlayerJoin connMsg;
             connMsg.clientId = id;
             connMsg.alive = alive;
+            connMsg.state = state;
             strcpy(connMsg.name, name.c_str());
             connMsg.location = this->location;
-            game.engine.network->sendExcept<ServerMsg_Connection>(id, &connMsg);
+            game.engine.network->sendExcept<ServerMsg_PlayerJoin>(id, &connMsg);
         }
     }
 
@@ -100,13 +101,13 @@ void Client::die() {
         alive = false;
 
         // Tell this client to die
-        ServerMsg_Death deathRespMsg;
+        ServerMsg_PlayerDeath deathRespMsg;
         deathRespMsg.clientId = 0;
-        game.engine.network->send<ServerMsg_Death>(id, &deathRespMsg);
+        game.engine.network->send<ServerMsg_PlayerDeath>(id, &deathRespMsg);
 
         // Broadcast to everyone else
-        ServerMsg_Death deathMsg;
+        ServerMsg_PlayerDeath deathMsg;
         deathMsg.clientId = id;
-        game.engine.network->sendExcept<ServerMsg_Death>(id, &deathMsg);
+        game.engine.network->sendExcept<ServerMsg_PlayerDeath>(id, &deathMsg);
     }
 }

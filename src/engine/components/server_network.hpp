@@ -55,7 +55,7 @@ public:
         return nullptr;
     };
 
-    template<typename T> void send(client_id clientId, const T *input, bool flush = false) {
+    template<typename T> void send(client_id clientId, const T *input) {
         static_assert(std::is_base_of_v<ServerMsg, T>, "T must be a subclass of ServerMsg");
 
         if (clientId == BROADCAST_CLIENT_ID) {
@@ -86,12 +86,7 @@ public:
             } else if constexpr (std::is_same_v<T, ServerMsg_PlayerState>) {
                 auto* state = msg.mutable_player_state();
                 state->set_clientid(input->clientId);
-                // TODO: set state properly
-            } else if constexpr (std::is_same_v<T, ServerMsg_DefaultPlayerStateChange>) {
-                auto* change = msg.mutable_default_player_state_change();
-                change->set_clientid(input->clientId);
-                change->set_key(input->key);
-                change->set_value(input->value);
+                *state->mutable_state() = input->state;
             } else if constexpr (std::is_same_v<T, ServerMsg_PlayerLocation>) {
                 auto* loc = msg.mutable_player_location();
                 loc->set_clientid(input->clientId);
@@ -159,28 +154,24 @@ public:
             );
 
             enet_peer_send(peer, 0, packet);
-
-            if (flush) {
-                enet_host_flush(server);
-            }
         }
     };
 
-    template<typename T> void sendExcept(client_id client, const T *input, bool flush = false) {
+    template<typename T> void sendExcept(client_id client, const T *input) {
         static_assert(std::is_base_of_v<ServerMsg, T>, "T must be a subclass of ServerMsg");
 
         for (const auto& [id, peer] : clients) {
             if (id != client) {
-                send<T>(id, input, flush);
+                send<T>(id, input);
             }
         }
     };
 
-    template<typename T> void sendAll(const T *input, bool flush = false) {
+    template<typename T> void sendAll(const T *input) {
         static_assert(std::is_base_of_v<ServerMsg, T>, "T must be a subclass of ServerMsg");
 
         for (const auto& [id, peer] : clients) {
-            send<T>(id, input, flush);
+            send<T>(id, input);
         }
     };
 

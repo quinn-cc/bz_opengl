@@ -9,10 +9,8 @@ private:
     Game &game;
     render_id renderId;
     physics_id physicsId;
-    SettingsMap settings;
+    PlayerParameters defaultPlayerParams;
     bool initialized = false;
-
-    void setSetting(const std::string &key, float value);
 
 public:
     World(Game &game);
@@ -20,6 +18,5 @@ public:
 
     void load(std::string worldPath);
     bool isInitialized() const;
-    float getSetting(const std::string &key) const;
     void update();
 };

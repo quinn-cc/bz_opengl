@@ -2,11 +2,10 @@
 git clone https://github.com/Microsoft/vcpkg.git
 
 # Bootstrap vcpkg
-cd ./vcpkg
-./bootstrap-vcpkg.sh
+./vcpkg/bootstrap-vcpkg.sh
 
 # Install dependencies
-./vcpkg install
+./vcpkg/vcpkg install
 
 # Return to project root
 cd ..
