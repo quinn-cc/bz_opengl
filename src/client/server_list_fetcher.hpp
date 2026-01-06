@@ -6,6 +6,7 @@
 #include <mutex>
 #include <thread>
 #include <atomic>
+#include <cstdint>
 
 class ServerListFetcher {
 public:

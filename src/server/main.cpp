@@ -155,7 +155,7 @@ int main(int argc, char *argv[]) {
     g_game = &game;
     spdlog::trace("Game initialized successfully");
 
-    ServerDiscoveryBeacon discoveryBeacon(listenPort, "BZ Server", worldDir);
+    ServerDiscoveryBeacon discoveryBeacon(port, "BZ Server", worldDir);
 
     spdlog::trace("Loading plugins...");
     py::scoped_interpreter guard{};

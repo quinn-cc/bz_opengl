@@ -157,7 +157,7 @@ void GUI::drawServerBrowser() {
     ImGui::TextWrapped("Select a server to join or enter a custom host and port.");
     ImGui::Spacing();
 
-    if (ImGui::Button("Refresh LAN")) {
+    if (ImGui::Button("Refresh Servers")) {
         serverBrowserRefreshRequested = true;
     }
     ImGui::SameLine();

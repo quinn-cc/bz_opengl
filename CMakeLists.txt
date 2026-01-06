@@ -52,10 +52,10 @@ find_package(OpenGL REQUIRED)
 find_package(cxxopts REQUIRED)
 find_package(imgui REQUIRED)
 find_package(spdlog REQUIRED)
-<<<<<<< HEAD
 find_package(miniz REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(Protobuf REQUIRED)
+find_package(CURL REQUIRED)
 
 # Compile protobuf files
 set(PROTO_FILES ${PROJECT_SOURCE_DIR}/src/protos/messages.proto)
@@ -69,13 +69,12 @@ protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_FILES})
 add_library(proto_lib STATIC ${PROTO_SRCS} ${PROTO_HDRS})
 target_link_libraries(proto_lib PUBLIC protobuf::libprotobuf)
 target_include_directories(proto_lib PUBLIC ${CMAKE_BINARY_DIR})
-=======
-find_package(CURL REQUIRED)
-find_package(nlohmann_json CONFIG REQUIRED)
->>>>>>> 5a3450e (uh oh)
 
 # Gather sources
 file(GLOB_RECURSE CLIENT_SOURCES "${PROJECT_SOURCE_DIR}/src/client/*.cpp")
+list(APPEND CLIENT_SOURCES
+    ${PROJECT_SOURCE_DIR}/src/client/server_browser_controller.cpp
+)
 file(GLOB_RECURSE SERVER_SOURCES "${PROJECT_SOURCE_DIR}/src/server/*.cpp")
 ## Separate engine sources for client and server to avoid over-linking
 set(ENGINE_CLIENT_SOURCES
@@ -126,14 +125,10 @@ target_link_libraries(client PRIVATE
     cxxopts::cxxopts
     imgui::imgui
     spdlog::spdlog
-<<<<<<< HEAD
     miniz::miniz
     nlohmann_json::nlohmann_json
     proto_lib
-=======
     CURL::libcurl
-    nlohmann_json::nlohmann_json
->>>>>>> 5a3450e (uh oh)
 )
 
 target_link_libraries(server PRIVATE
