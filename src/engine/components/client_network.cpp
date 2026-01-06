@@ -30,13 +30,6 @@ void ClientNetwork::flushPeekedMessages() {
             [](const MsgData& msgData) {
                 if (msgData.peeked) {
                     if (msgData.packet == nullptr) {
-                        // For connection/disconnection messages
-                        // we allocated the message on the heap
-                        if (msgData.msg->type == ServerMsg_Type_INIT) {
-                            auto* initMsg = static_cast<ServerMsg_Init*>(msgData.msg);
-                            delete[] reinterpret_cast<std::byte*>(initMsg->worldData);
-                        }
-
                         delete msgData.msg;
                     } else {
                         enet_packet_destroy(msgData.packet);
@@ -203,13 +196,8 @@ void ClientNetwork::update() {
                 
                 // Copy the world data
                 const std::string& worldDataStr = msg.init().world_data();
-                initMsg->worldDataSize = worldDataStr.size();
-                if (initMsg->worldDataSize > 0) {
-                    initMsg->worldData = new std::byte[initMsg->worldDataSize];
-                    std::memcpy(initMsg->worldData, worldDataStr.data(), initMsg->worldDataSize);
-                } else {
-                    initMsg->worldData = nullptr;
-                }
+                const std::byte* dataPtr = reinterpret_cast<const std::byte*>(worldDataStr.data());
+                initMsg->worldData = std::vector<std::byte>(dataPtr, dataPtr + worldDataStr.size());
                 
                 receivedMessages.push_back({ event.packet, initMsg });
                 break;
