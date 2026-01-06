@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <memory>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 #include "client/config_client.hpp"
@@ -16,7 +17,8 @@ class ServerConnector;
 class ServerBrowserController {
 public:
     ServerBrowserController(ClientEngine &engine,
-                            const ClientConfig &clientConfig,
+                            ClientConfig &clientConfig,
+                            const std::string &configPath,
                             const std::string &defaultHost,
                             uint16_t defaultPort,
                             ServerConnector &connector);
@@ -28,12 +30,30 @@ private:
 
     void triggerFullRefresh();
     void rebuildEntries();
+    void refreshGuiServerListOptions();
+    void rebuildServerListFetcher();
+    std::vector<ClientServerListSource> resolveActiveServerLists() const;
+    void handleServerListSelection(int selectedIndex);
+    void handleServerListAddition(const GUI::ServerListOption &option);
+    void updateServerListDisplayNamesFromCache();
+    std::string resolveDisplayNameForSource(const ClientServerListSource &source) const;
+    int getLanOffset() const;
+    int totalListOptionCount() const;
+    bool isLanIndex(int index) const;
+    bool isLanSelected() const;
+    const ClientServerListSource* getSelectedRemoteSource() const;
+    int computeDefaultSelectionIndex(int optionCount) const;
 
     ClientEngine &engine;
+    ClientConfig &clientConfig;
+    std::string clientConfigPath;
     ServerConnector &connector;
     ServerDiscovery discovery;
     std::unique_ptr<ServerListFetcher> serverListFetcher;
     std::vector<ServerListFetcher::ServerRecord> cachedRemoteServers;
+    int activeServerListIndex = -1;
+    std::unordered_map<std::string, std::string> serverListDisplayNames;
+    bool lanAutoRefreshEnabled = false;
 
     SteadyClock::time_point nextAutoScanTime;
     const std::chrono::seconds autoScanInterval{5};

@@ -152,9 +152,19 @@ std::vector<ServerListFetcher::ServerRecord> ServerListFetcher::parseResponse(
 
     try {
         nlohmann::json jsonData = nlohmann::json::parse(body);
+        std::string listName;
+        if (auto nameIt = jsonData.find("name"); nameIt != jsonData.end() && nameIt->is_string()) {
+            listName = nameIt->get<std::string>();
+        }
+
         if (!jsonData.contains("servers") || !jsonData["servers"].is_array()) {
             spdlog::warn("ServerListFetcher: Server list from {} missing 'servers' array", source.url);
             return records;
+        }
+
+        std::string sourceDisplayName = source.name.empty() ? source.url : source.name;
+        if (!listName.empty()) {
+            sourceDisplayName = listName;
         }
 
         for (const auto &server : jsonData["servers"]) {
@@ -167,7 +177,8 @@ std::vector<ServerListFetcher::ServerRecord> ServerListFetcher::parseResponse(
             }
 
             ServerRecord record;
-            record.sourceName = source.name.empty() ? source.url : source.name;
+            record.sourceName = sourceDisplayName;
+            record.sourceUrl = source.url;
             record.host = server.value("host", "");
             std::string portString = server.value("port", "1234");
 

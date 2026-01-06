@@ -4,6 +4,38 @@
 #include <cstdio>
 #include <optional>
 #include <algorithm>
+#include <cctype>
+
+namespace {
+constexpr float kReferenceWindowWidth = 800.0f;
+constexpr float kReferenceWindowHeight = 600.0f;
+
+std::string trimCopy(const std::string &value) {
+    auto begin = std::find_if_not(value.begin(), value.end(), [](unsigned char ch) {
+        return std::isspace(ch) != 0;
+    });
+    auto end = std::find_if_not(value.rbegin(), value.rend(), [](unsigned char ch) {
+        return std::isspace(ch) != 0;
+    }).base();
+
+    if (begin >= end) {
+        return {};
+    }
+
+    return std::string(begin, end);
+}
+
+float calculateFontScale(const ImVec2 &displaySize) {
+    if (displaySize.x <= 0.0f || displaySize.y <= 0.0f) {
+        return 1.0f;
+    }
+
+    const float widthScale = displaySize.x / kReferenceWindowWidth;
+    const float heightScale = displaySize.y / kReferenceWindowHeight;
+    const float scaled = std::min(widthScale, heightScale);
+    return std::max(1.0f, scaled);
+}
+}
 
 GUI::GUI(GLFWwindow *window) {
     // Initialize ImGui context
@@ -39,6 +71,8 @@ GUI::~GUI() {
 void GUI::update() {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
+    ImGuiIO& io = ImGui::GetIO();
+    io.FontGlobalScale = calculateFontScale(io.DisplaySize);
     ImGui::NewFrame();
 
     if (showServerBrowserFlag) {
@@ -71,7 +105,6 @@ void GUI::update() {
             drawDeathScreen();
         }
 
-        ImGuiIO& io = ImGui::GetIO();
         const float boxSize = 50.0f;
         ImVec2 center(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f);
 
@@ -168,6 +201,52 @@ void GUI::drawServerBrowser() {
 
     ImGui::BeginChild("ServerBrowserListPane", ImVec2(listPanelWidth, 0), false);
 
+    auto formatListLabel = [](const ServerListOption &option) {
+        if (!option.name.empty()) {
+            return option.name;
+        }
+        if (!option.url.empty()) {
+            return option.url;
+        }
+        return std::string("Unnamed list");
+    };
+
+    ImGui::TextUnformatted("Server lists");
+    if (serverBrowserListOptions.empty() || serverBrowserListSelectedIndex < 0) {
+        ImGui::TextDisabled("Add a server list below to fetch public servers.");
+    } else {
+        serverBrowserListSelectedIndex = std::clamp(
+            serverBrowserListSelectedIndex,
+            0,
+            static_cast<int>(serverBrowserListOptions.size()) - 1);
+
+        const auto &currentOption = serverBrowserListOptions[serverBrowserListSelectedIndex];
+        std::string comboLabel = formatListLabel(currentOption);
+        if (ImGui::BeginCombo("##ServerListSelector", comboLabel.c_str())) {
+            for (int i = 0; i < static_cast<int>(serverBrowserListOptions.size()); ++i) {
+                const auto &option = serverBrowserListOptions[i];
+                std::string optionLabel = formatListLabel(option);
+                bool selected = (i == serverBrowserListSelectedIndex);
+                if (ImGui::Selectable(optionLabel.c_str(), selected)) {
+                    if (!selected) {
+                        serverBrowserListSelectedIndex = i;
+                        pendingServerBrowserListSelection = i;
+                    }
+                }
+                if (selected) {
+                    ImGui::SetItemDefaultFocus();
+                }
+            }
+            ImGui::EndCombo();
+        }
+
+        if (!currentOption.url.empty()) {
+            ImGui::TextDisabled("%s", currentOption.url.c_str());
+        }
+    }
+
+    ImGui::Spacing();
+
     if (ImGui::Button("Refresh Servers")) {
         serverBrowserRefreshRequested = true;
     }
@@ -189,11 +268,10 @@ void GUI::drawServerBrowser() {
 
     if (serverBrowserEntries.empty()) {
         ImGui::TextDisabled("No saved servers yet.");
-    } else if (ImGui::BeginTable("##ServerBrowserPresets", 4, tableFlags, ImVec2(-1.0f, tableHeight))) {
-        ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_None, 0.35f);
-        ImGui::TableSetupColumn("Host", ImGuiTableColumnFlags_None, 0.30f);
+    } else if (ImGui::BeginTable("##ServerBrowserPresets", 3, tableFlags, ImVec2(-1.0f, tableHeight))) {
+        ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_None, 0.45f);
+        ImGui::TableSetupColumn("Host", ImGuiTableColumnFlags_None, 0.35f);
         ImGui::TableSetupColumn("Port", ImGuiTableColumnFlags_WidthFixed, 70.0f);
-        ImGui::TableSetupColumn("Notes");
         ImGui::TableHeadersRow();
 
         for (int i = 0; i < static_cast<int>(serverBrowserEntries.size()); ++i) {
@@ -220,8 +298,6 @@ void GUI::drawServerBrowser() {
             ImGui::TableSetColumnIndex(2);
             ImGui::Text("%u", entry.port);
 
-            ImGui::TableSetColumnIndex(3);
-            ImGui::TextUnformatted(entry.description.c_str());
         }
 
         ImGui::EndTable();
@@ -248,38 +324,47 @@ void GUI::drawServerBrowser() {
     ImGui::Spacing();
 
     ImGui::Text("Custom server");
-    ImGui::InputText("Hostname", serverBrowserHostBuffer.data(), serverBrowserHostBuffer.size());
-    ImGui::SetNextItemWidth(120.0f);
-    ImGui::InputText("Port", serverBrowserPortBuffer.data(), serverBrowserPortBuffer.size(), ImGuiInputTextFlags_CharsDecimal);
+    ImGui::InputText("Address (host:port)", serverBrowserAddressBuffer.data(), serverBrowserAddressBuffer.size());
 
     if (ImGui::Button("Join Custom")) {
-        std::string hostValue(serverBrowserHostBuffer.data());
-        if (hostValue.empty()) {
-            serverBrowserStatusText = "Enter a hostname before joining.";
+        std::string addressValue = trimCopy(serverBrowserAddressBuffer.data());
+        if (addressValue.empty()) {
+            serverBrowserStatusText = "Enter a server address before joining.";
             serverBrowserStatusIsError = true;
         } else {
-            std::string portString(serverBrowserPortBuffer.data());
-            if (portString.empty()) {
-                serverBrowserStatusText = "Enter a port before joining.";
+            auto colonPos = addressValue.find_last_of(':');
+            if (colonPos == std::string::npos) {
+                serverBrowserStatusText = "Use the format host:port (example: localhost:1234).";
                 serverBrowserStatusIsError = true;
             } else {
-                try {
-                    int portValue = std::stoi(portString);
-                    if (portValue < 1 || portValue > 65535) {
-                        serverBrowserStatusText = "Ports must be between 1 and 65535.";
-                        serverBrowserStatusIsError = true;
-                    } else {
-                        pendingServerBrowserSelection = ServerBrowserSelection{
-                            hostValue,
-                            static_cast<uint16_t>(portValue),
-                            false
-                        };
-                        serverBrowserStatusText.clear();
-                        serverBrowserStatusIsError = false;
-                    }
-                } catch (...) {
-                    serverBrowserStatusText = "Port must be a valid number.";
+                std::string hostPart = trimCopy(addressValue.substr(0, colonPos));
+                std::string portPart = trimCopy(addressValue.substr(colonPos + 1));
+
+                if (hostPart.empty()) {
+                    serverBrowserStatusText = "Hostname cannot be empty.";
                     serverBrowserStatusIsError = true;
+                } else if (portPart.empty()) {
+                    serverBrowserStatusText = "Port cannot be empty.";
+                    serverBrowserStatusIsError = true;
+                } else {
+                    try {
+                        int portValue = std::stoi(portPart);
+                        if (portValue < 1 || portValue > 65535) {
+                            serverBrowserStatusText = "Ports must be between 1 and 65535.";
+                            serverBrowserStatusIsError = true;
+                        } else {
+                            pendingServerBrowserSelection = ServerBrowserSelection{
+                                hostPart,
+                                static_cast<uint16_t>(portValue),
+                                false
+                            };
+                            serverBrowserStatusText.clear();
+                            serverBrowserStatusIsError = false;
+                        }
+                    } catch (...) {
+                        serverBrowserStatusText = "Port must be a valid number.";
+                        serverBrowserStatusIsError = true;
+                    }
                 }
             }
         }
@@ -291,6 +376,33 @@ void GUI::drawServerBrowser() {
             ImVec4(0.93f, 0.36f, 0.36f, 1.0f) :
             ImVec4(0.60f, 0.80f, 0.40f, 1.0f);
         ImGui::TextColored(color, "%s", serverBrowserStatusText.c_str());
+    }
+
+    ImGui::Spacing();
+    ImGui::Separator();
+    ImGui::Spacing();
+
+    ImGui::Text("Add server list");
+    ImGui::InputText("List URL", serverBrowserListUrlBuffer.data(), serverBrowserListUrlBuffer.size());
+
+    if (ImGui::Button("Save Server List")) {
+        std::string urlValue(serverBrowserListUrlBuffer.data());
+        if (urlValue.empty()) {
+            serverBrowserListStatusText = "Enter a URL before saving.";
+            serverBrowserListStatusIsError = true;
+        } else {
+            serverBrowserListStatusText.clear();
+            serverBrowserListStatusIsError = false;
+            pendingServerBrowserNewList = ServerListOption{ std::string{}, urlValue };
+        }
+    }
+
+    if (!serverBrowserListStatusText.empty()) {
+        ImGui::Spacing();
+        ImVec4 listColor = serverBrowserListStatusIsError ?
+            ImVec4(0.93f, 0.36f, 0.36f, 1.0f) :
+            ImVec4(0.60f, 0.80f, 0.40f, 1.0f);
+        ImGui::TextColored(listColor, "%s", serverBrowserListStatusText.c_str());
     }
 
     ImGui::EndChild();
@@ -361,11 +473,13 @@ void GUI::resetServerBrowserBuffers(const std::string &defaultHost, uint16_t def
     std::string hostValue = defaultHost.empty() ? std::string("localhost") : defaultHost;
     uint16_t portValue = defaultPort == 0 ? 1234 : defaultPort;
 
-    serverBrowserHostBuffer.fill(0);
-    serverBrowserPortBuffer.fill(0);
-
-    std::snprintf(serverBrowserHostBuffer.data(), serverBrowserHostBuffer.size(), "%s", hostValue.c_str());
-    std::snprintf(serverBrowserPortBuffer.data(), serverBrowserPortBuffer.size(), "%u", portValue);
+    serverBrowserAddressBuffer.fill(0);
+    std::snprintf(
+        serverBrowserAddressBuffer.data(),
+        serverBrowserAddressBuffer.size(),
+        "%s:%u",
+        hostValue.c_str(),
+        portValue);
 }
 
 void GUI::showServerBrowser(const std::vector<ServerBrowserEntry> &entries,
@@ -376,6 +490,10 @@ void GUI::showServerBrowser(const std::vector<ServerBrowserEntry> &entries,
     pendingServerBrowserSelection.reset();
     serverBrowserStatusText = "Select a server to connect or enter your own.";
     serverBrowserStatusIsError = false;
+    pendingServerBrowserListSelection.reset();
+    pendingServerBrowserNewList.reset();
+    serverBrowserListStatusText.clear();
+    serverBrowserListStatusIsError = false;
     resetServerBrowserBuffers(defaultHost, defaultPort);
 }
 
@@ -390,13 +508,63 @@ void GUI::setServerBrowserEntries(const std::vector<ServerBrowserEntry> &entries
     }
 }
 
+void GUI::setServerBrowserListOptions(const std::vector<ServerListOption> &options, int selectedIndex) {
+    serverBrowserListOptions = options;
+    if (serverBrowserListOptions.empty()) {
+        serverBrowserListSelectedIndex = -1;
+        pendingServerBrowserListSelection.reset();
+        return;
+    }
+
+    if (selectedIndex < 0) {
+        serverBrowserListSelectedIndex = 0;
+    } else if (selectedIndex >= static_cast<int>(serverBrowserListOptions.size())) {
+        serverBrowserListSelectedIndex = static_cast<int>(serverBrowserListOptions.size()) - 1;
+    } else {
+        serverBrowserListSelectedIndex = selectedIndex;
+    }
+}
+
+std::optional<int> GUI::consumeServerBrowserListSelection() {
+    if (!pendingServerBrowserListSelection.has_value()) {
+        return std::nullopt;
+    }
+
+    auto selection = pendingServerBrowserListSelection;
+    pendingServerBrowserListSelection.reset();
+    return selection;
+}
+
+std::optional<GUI::ServerListOption> GUI::consumeServerBrowserNewListRequest() {
+    if (!pendingServerBrowserNewList.has_value()) {
+        return std::nullopt;
+    }
+
+    auto request = pendingServerBrowserNewList;
+    pendingServerBrowserNewList.reset();
+    return request;
+}
+
+void GUI::setServerBrowserListStatus(const std::string &statusText, bool isErrorMessage) {
+    serverBrowserListStatusText = statusText;
+    serverBrowserListStatusIsError = isErrorMessage;
+}
+
+void GUI::clearServerBrowserNewListInputs() {
+    serverBrowserListUrlBuffer.fill(0);
+}
+
 void GUI::hideServerBrowser() {
     showServerBrowserFlag = false;
     serverBrowserStatusText.clear();
     serverBrowserStatusIsError = false;
     pendingServerBrowserSelection.reset();
+    pendingServerBrowserListSelection.reset();
+    pendingServerBrowserNewList.reset();
     serverBrowserRefreshRequested = false;
     serverBrowserScanning = false;
+    serverBrowserListStatusText.clear();
+    serverBrowserListStatusIsError = false;
 }
 
 bool GUI::isServerBrowserVisible() const {

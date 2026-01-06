@@ -12,6 +12,7 @@ class ServerListFetcher {
 public:
     struct ServerRecord {
         std::string sourceName;
+        std::string sourceUrl;
         std::string name;
         std::string host;
         uint16_t port = 0;

@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 
     
 
-    GLFWwindow *window = glfwCreateWindow(800, 600, "BZFlag v3", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(1280, 720, "BZFlag v3", nullptr, nullptr);
     //glfwSetWindowUserPointer(window, userPointer);
     if (!window) {
         spdlog::error("GLFW window failed to create");
@@ -67,7 +67,13 @@ int main(int argc, char *argv[]) {
 
     std::unique_ptr<Game> game;
     ServerConnector serverConnector(engine, cliOptions.playerName, cliOptions.worldDir, game);
-    ServerBrowserController serverBrowser(engine, clientConfig, cliOptions.connectAddr, cliOptions.connectPort, serverConnector);
+    ServerBrowserController serverBrowser(
+        engine,
+        clientConfig,
+        kClientConfigPath,
+        cliOptions.connectAddr,
+        cliOptions.connectPort,
+        serverConnector);
 
     if (cliOptions.addrExplicit) {
         serverConnector.connect(cliOptions.connectAddr, cliOptions.connectPort);

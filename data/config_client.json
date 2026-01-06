@@ -1,8 +1,14 @@
 {
-    "ServerLists": [
-        {
-            "name": "Super Secret Private Community Server",
-            "url": "http://192.168.1.6/servers.json"
-        }
-    ]
+    "serverLists": {
+        "showLAN" : true,
+        "default": "http://192.168.1.6/servers.json",
+        "sources": [
+            {
+                "url": "http://192.168.1.6/servers.json"
+            },
+            {
+                "url": "http://192.168.1.6/tserv.json"
+            }
+        ]
+    }
 }

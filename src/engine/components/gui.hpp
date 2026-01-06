@@ -33,6 +33,11 @@ public:
         bool fromPreset;
     };
 
+    struct ServerListOption {
+        std::string name;
+        std::string url;
+    };
+
 private:
     GLFWwindow *window;
     ImFont* bigFont;
@@ -65,10 +70,15 @@ public:
         const std::string &defaultHost,
         uint16_t defaultPort);
     void setServerBrowserEntries(const std::vector<ServerBrowserEntry> &entries);
+    void setServerBrowserListOptions(const std::vector<ServerListOption> &options, int selectedIndex);
     void hideServerBrowser();
     bool isServerBrowserVisible() const;
     void setServerBrowserStatus(const std::string &statusText, bool isErrorMessage);
     std::optional<ServerBrowserSelection> consumeServerBrowserSelection();
+    std::optional<int> consumeServerBrowserListSelection();
+    std::optional<ServerListOption> consumeServerBrowserNewListRequest();
+    void setServerBrowserListStatus(const std::string &statusText, bool isErrorMessage);
+    void clearServerBrowserNewListInputs();
     bool consumeServerBrowserRefreshRequest();
     void setServerBrowserScanning(bool scanning);
     void displayDeathScreen(bool show);
@@ -77,13 +87,19 @@ private:
     bool showServerBrowserFlag = false;
     std::vector<ServerBrowserEntry> serverBrowserEntries;
     int serverBrowserSelectedIndex = -1;
-    std::array<char, 256> serverBrowserHostBuffer{};
-    std::array<char, 6> serverBrowserPortBuffer{};
+    std::array<char, 256> serverBrowserAddressBuffer{};
     std::string serverBrowserStatusText;
     bool serverBrowserStatusIsError = false;
     std::optional<ServerBrowserSelection> pendingServerBrowserSelection;
+    std::vector<ServerListOption> serverBrowserListOptions;
+    int serverBrowserListSelectedIndex = -1;
+    std::optional<int> pendingServerBrowserListSelection;
+    std::optional<ServerListOption> pendingServerBrowserNewList;
     bool serverBrowserRefreshRequested = false;
     bool serverBrowserScanning = false;
+    std::array<char, 512> serverBrowserListUrlBuffer{};
+    std::string serverBrowserListStatusText;
+    bool serverBrowserListStatusIsError = false;
 
     void resetServerBrowserBuffers(const std::string &defaultHost, uint16_t defaultPort);
 };
