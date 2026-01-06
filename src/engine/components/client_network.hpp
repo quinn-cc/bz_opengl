@@ -52,19 +52,24 @@ public:
 
         ENetPacketFlag flag = ENET_PACKET_FLAG_RELIABLE;
 
-        if constexpr (std::is_same_v<T, bz::ClientMsg_Location>) {
+        if constexpr (std::is_same_v<T, ClientMsg_PlayerLocation>) {
             flag = ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT;
         }
 
         bz::ClientMsg msg;
+        msg.set_client_id(input.clientId);
 
-        if constexpr (std::is_same_v<T, bz::ClientMsg_Init>) {
+        if constexpr (std::is_same_v<T, ClientMsg_Init>) {
+            msg.set_type(bz::ClientMsg::INIT);
             msg.mutable_init()->set_name(input.name);
-        } else if constexpr (std::is_same_v<T, bz::ClientMsg_Chat>) {
-            msg.mutable_chat()->set_toid(input.toId);
-            msg.mutable_chat()->set_text(input.text);
-        } else if constexpr (std::is_same_v<T, bz::ClientMsg_Location>) {
-            auto* loc = msg.mutable_location();
+        } else if constexpr (std::is_same_v<T, ClientMsg_Chat>) {
+            msg.set_type(bz::ClientMsg::CHAT);
+            auto* chat = msg.mutable_chat();
+            chat->set_to_id(input.toId);
+            chat->set_text(input.text);
+        } else if constexpr (std::is_same_v<T, ClientMsg_PlayerLocation>) {
+            msg.set_type(bz::ClientMsg::PLAYER_LOCATION);
+            auto* loc = msg.mutable_player_location();
             loc->mutable_position()->set_x(input.position.x);
             loc->mutable_position()->set_y(input.position.y);
             loc->mutable_position()->set_z(input.position.z);
@@ -72,17 +77,25 @@ public:
             loc->mutable_rotation()->set_x(input.rotation.x);
             loc->mutable_rotation()->set_y(input.rotation.y);
             loc->mutable_rotation()->set_z(input.rotation.z);
-        } else if constexpr (std::is_same_v<T, bz::ClientMsg_RequestSpawn>) {
-            msg.mutable_request_spawn();
-        } else if constexpr (std::is_same_v<T, bz::ClientMsg_CreateShot>) {
+        } else if constexpr (std::is_same_v<T, ClientMsg_RequestPlayerSpawn>) {
+            msg.set_type(bz::ClientMsg::REQUEST_PLAYER_SPAWN);
+            msg.mutable_request_player_spawn();
+        } else if constexpr (std::is_same_v<T, ClientMsg_CreateShot>) {
+            msg.set_type(bz::ClientMsg::CREATE_SHOT);
             auto* shot = msg.mutable_create_shot();
-            shot->set_localshotid(input.localShotId);
+            shot->set_local_shot_id(input.localShotId);
             shot->mutable_position()->set_x(input.position.x);
             shot->mutable_position()->set_y(input.position.y);
             shot->mutable_position()->set_z(input.position.z);
             shot->mutable_velocity()->set_x(input.velocity.x);
             shot->mutable_velocity()->set_y(input.velocity.y);
             shot->mutable_velocity()->set_z(input.velocity.z);
+        } else if constexpr (std::is_same_v<T, ClientMsg_PlayerJoin>) {
+            msg.set_type(bz::ClientMsg::PLAYER_JOIN);
+            msg.mutable_player_join()->set_ip(input.ip);
+        } else if constexpr (std::is_same_v<T, ClientMsg_PlayerLeave>) {
+            msg.set_type(bz::ClientMsg::PLAYER_LEAVE);
+            msg.mutable_player_leave();
         } else {
             spdlog::error("ClientNetwork::send: Unsupported message type");
             return;

@@ -13,26 +13,29 @@ class Game;
 
 class World {
 private:
-    std::string name;
     Game &game;
-    SettingsMap settings;
-    physics_id physicsId;
+
+    std::string name;
+    nlohmann::json settings;
+    nlohmann::json manifest;
     std::string worldDir;
+
+    PlayerParameters defaultPlayerParams;
+    physics_id physicsId;
 
     void zipDirectory(const fs::path& inputDir, const fs::path& outputZip);
     std::vector<std::byte> getData();
-    void readManifest(const fs::path& manifestPath);
+    void loadManifest(const fs::path& manifestPath);
 
 public:
-    World(Game &game, std::string worldDir);
+    World(Game &game, std::string worldName, nlohmann::json settings, std::string worldDir);
     ~World();
 
     void update();
     
-    void setSetting(std::string key, float value);
-    float getSetting(std::string key) const;
-    
-
+    std::string getAssetPath(const std::string &assetName) const;
+    nlohmann::json getManifest() const { return manifest; }
+    const PlayerParameters& getDefaultPlayerParameters() const { return defaultPlayerParams; }
 
     Location getSpawnLocation() const;
 };

@@ -1,16 +1,15 @@
 {
-    "config": {
-        "serverName": "Test World Server",
-        "maxPlayers": 20,
-        "hostPort": 4322
-    },
-    "settings": {
+    "defaultPlayerParameters": {
         "speed": 5.0,
-        "turnSpeed": 2.0,
-        "jumpSpeed": 5.0,
+        "turnSpeed": 3.0,
+        "jumpSpeed": 8.0,
+        "shotSpeed": 20.0,
+        "shotLifetime": 3.0,
         "gravity": -9.81,
-        "shotSpeed": 25.0,
-        "shotLifetime": 5.0
+        "forwardSpeedMultiplier": 1.0,
+        "backwardSpeedMultiplier": 0.8,
+        "leftTurnSpeedMultiplier": 1,
+        "rightTurnSpeedMultiplier": 1
     },
     "assets": {
         "world": "models/world.glb",
@@ -30,11 +29,5 @@
             "model": "playerModel",
             "maxPlayers": 10
         }
-    ],
-    "flags": {
-
-    },
-    "plugins": {
-        "slash_commands.py": {}
-    }
+    ]
 }

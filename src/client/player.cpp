@@ -44,6 +44,7 @@ void Player::earlyUpdate() {
 
     if (auto *msg = game.engine.network->peekMessage<ServerMsg_Init>()) {
         this->clientId = msg->clientId;
+        this->state.params = msg->defaultPlayerParams;
     }
 
     if (state.alive) {
@@ -64,7 +65,7 @@ void Player::earlyUpdate() {
 
             game.engine.physics->setAngularVelocity(physicsId, glm::vec3(
                 0.0f,
-                -movement.x * state.params.speed,
+                -movement.x * state.params.turnSpeed,
                 0.0f
             ));
 

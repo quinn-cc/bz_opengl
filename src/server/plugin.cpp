@@ -20,12 +20,12 @@ void PluginAPI::sendChatMessage(client_id fromId, client_id toId, const std::str
     ServerMsg_Chat serverChatMsg;
     serverChatMsg.fromId = fromId;
     serverChatMsg.toId = toId;
-    strcpy(serverChatMsg.text, text.c_str());
+    serverChatMsg.text = text;
     g_engine->network->send<ServerMsg_Chat>(toId, &serverChatMsg);
 }
 
 void PluginAPI::setWorldSetting(const std::string &key, float value) {
-    g_game->world->setSetting(key, value);
+    //g_game->world->setSetting(key, value);
 }
 
 void PluginAPI::killPlayer(client_id targetId) {
@@ -73,8 +73,8 @@ PYBIND11_EMBEDDED_MODULE(bz_plugins, m) {
 
     pybind11::enum_<ClientMsg_Type>(m, "event_type")
         .value("CHAT", ClientMsg_Type::ClientMsg_Type_CHAT)
-        .value("CONNECTION", ClientMsg_Type::ClientMsg_Type_CONNECTION)
-        .value("DISCONNECTION", ClientMsg_Type::ClientMsg_Type_DISCONNECTION)
+        .value("PLAYER_JOIN", ClientMsg_Type::ClientMsg_Type_PLAYER_JOIN)
+        .value("PLAYER_LEAVE", ClientMsg_Type::ClientMsg_Type_PLAYER_LEAVE)
         .export_values();
 
     // Callback registration function

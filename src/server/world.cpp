@@ -5,8 +5,8 @@
 
 namespace fs = std::filesystem;
 
-World::World(Game &game, std::string worldDir) : game(game), worldDir(worldDir) {
-    physicsId = game.engine.physics->create(worldDir + "/world.glb", 0.0f);
+World::World(Game &game, std::string worldName, nlohmann::json settings, std::string worldDir) : game(game), name(worldName), settings(settings), worldDir(worldDir) {
+    loadManifest(fs::path(worldDir) / "manifest.json");
     
     // World "name" will be the folder name (not including the path)
     size_t lastSlash = worldDir.find_last_of("/\\");
@@ -15,7 +15,7 @@ World::World(Game &game, std::string worldDir) : game(game), worldDir(worldDir) 
     } else {
         name = worldDir.substr(lastSlash + 1);
     }
-    spdlog::info("World::World: Loaded world '{}'", name);
+    spdlog::info("World::World: Loaded world '{}'", worldName);
 
     // Create a zip file of the directory "worldDir", and save it at the same location
     // with the same name but with .zip extension
@@ -24,9 +24,7 @@ World::World(Game &game, std::string worldDir) : game(game), worldDir(worldDir) 
     outputZip += ".zip";
     zipDirectory(inputDir, outputZip);
 
-    // Read the manifest
-    readManifest("data/default_manifest.json");
-    //readManifest(worldDir + "/manifest.json");
+    physicsId = game.engine.physics->create(getAssetPath("world"), 0.0f);
 }
 
 World::~World() {
@@ -102,76 +100,67 @@ std::vector<std::byte> World::getData() {
     return data;
 }
 
-void World::readManifest(const fs::path& manifestPath) {
+void World::loadManifest(const fs::path& manifestPath) {
     if (!fs::exists(manifestPath)) {
-        spdlog::warn("World::readManifest: Manifest file not found: {}", manifestPath.string());
+        spdlog::warn("World::loadManifest: Manifest file not found: {}", manifestPath.string());
         return;
     }
 
     std::ifstream manifestFile(manifestPath);
     if (!manifestFile) {
-        spdlog::error("World::readManifest: Failed to open manifest file: {}", manifestPath.string());
+        spdlog::error("World::loadManifest: Failed to open manifest file: {}", manifestPath.string());
         return;
     }
 
-    nlohmann::json manifestJson;
     try {
-        manifestFile >> manifestJson;
+        manifestFile >> manifest;
     } catch (const std::exception &e) {
-        spdlog::error("World::readManifest: Failed to parse manifest JSON: {}", e.what());
+        spdlog::error("World::loadManifest: Failed to parse manifest JSON: {}", e.what());
         return;
     }
 
-    if (manifestJson.contains("settings") && manifestJson["settings"].is_object()) {
-        for (auto& [key, value] : manifestJson["settings"].items()) {
-            if (value.is_number_float()) {
-                settings[key] = value.get<float>();
-            }
-        }
+    // See if there is a "defaultPlayerParameters" key in the manifest
+    if (manifest.contains("defaultPlayerParameters")) {
+        nlohmann::json paramsJson = manifest["defaultPlayerParameters"];
+        if (paramsJson.contains("speed")) defaultPlayerParams.speed = paramsJson["speed"].get<float>();
+        if (paramsJson.contains("jumpSpeed")) defaultPlayerParams.jumpSpeed = paramsJson["jumpSpeed"].get<float>();
+        if (paramsJson.contains("turnSpeed")) defaultPlayerParams.turnSpeed = paramsJson["turnSpeed"].get<float>();
+        if (paramsJson.contains("shotSpeed")) defaultPlayerParams.shotSpeed = paramsJson["shotSpeed"].get<float>();
+        if (paramsJson.contains("gravity")) defaultPlayerParams.gravity = paramsJson["gravity"].get<float>();
+        if (paramsJson.contains("forwardSpeedMultiplier")) defaultPlayerParams.forwardSpeedMultiplier = paramsJson["forwardSpeedMultiplier"].get<float>();
+        if (paramsJson.contains("backwardSpeedMultiplier")) defaultPlayerParams.backwardSpeedMultiplier = paramsJson["backwardSpeedMultiplier"].get<float>();
+        if (paramsJson.contains("leftTurnSpeedMultiplier")) defaultPlayerParams.leftTurnSpeedMultiplier = paramsJson["leftTurnSpeedMultiplier"].get<float>();
+        if (paramsJson.contains("rightTurnSpeedMultiplier")) defaultPlayerParams.rightTurnSpeedMultiplier = paramsJson["rightTurnSpeedMultiplier"].get<float>();
     }
 }
 
 void World::update() {
     // Listen for player connection
-    if (auto *connMsg = game.engine.network->peekMessage<ClientMsg_Connection>()) {
+    if (auto *connMsg = game.engine.network->peekMessage<ClientMsg_PlayerJoin>()) {
         std::vector<std::byte> worldData = getData();
 
         // Create a memory chunk of size sizeof(ServerMsg_Init) + dataSize
         // by mallocating it
-        std::vector<char> initData(sizeof(ServerMsg_Init) + static_cast<size_t>(worldData.size())); // No additional data for now
-        ServerMsg_Init* initHeaderMsg = reinterpret_cast<ServerMsg_Init*>(initData.data());
-
-        initHeaderMsg->clientId = connMsg->clientId;
-        strcpy(initHeaderMsg->serverName, "server");
-        initHeaderMsg->settings = settings;
-        initHeaderMsg->dataSize = static_cast<uint32_t>(worldData.size());
-
-        // Now put the getData in the data section
-        
-        memmove(initHeaderMsg->data, worldData.data(), worldData.size());
-
-        game.engine.network->send<ServerMsg_Init>(connMsg->clientId, initHeaderMsg);
+        ServerMsg_Init initHeaderMsg;
+        initHeaderMsg.clientId = connMsg->clientId;
+        initHeaderMsg.serverName = "server";
+        initHeaderMsg.defaultPlayerParams = defaultPlayerParams;
+        initHeaderMsg.worldData = worldData.data();
+        game.engine.network->send<ServerMsg_Init>(connMsg->clientId, &initHeaderMsg);
 
         spdlog::trace("World::update: Sent init message to client id {}", connMsg->clientId);
     }
 }
 
-void World::setSetting(std::string key, float value) {
-    settings[key] = value;
-
-    // Broadcast the setting change to all clients
-    ServerMsg_WorldSettingChange msg;
-    strcpy(msg.key, key.c_str());
-    msg.value = value;
-    game.engine.network->sendAll<ServerMsg_WorldSettingChange>(&msg);
-}
-
-float World::getSetting(std::string key) const {
-    auto it = settings.find(key);
-    if (it != settings.end()) {
-        return it->second;
+std::string World::getAssetPath(const std::string &assetName) const {
+    // Check if manifest has "assets" and if assetName exists in it
+    if (manifest.contains("assets") && manifest["assets"].contains(assetName)) {
+        std::string assetPathStr = manifest["assets"][assetName].get<std::string>();
+        fs::path assetPath = fs::path(worldDir) / assetPathStr;
+        return assetPath.string();;
     } else {
-        throw std::runtime_error("Key not found in World settings: " + key);
+        spdlog::error("World::getAssetPath: Asset '{}' not found in manifest, using default path", assetName);
+        return "";
     }
 }
 

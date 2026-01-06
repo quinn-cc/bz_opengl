@@ -76,6 +76,7 @@ using audio_id = uint32_t;
 
 typedef struct PlayerParameters {
     float speed;
+    float turnSpeed;    
     float jumpSpeed;
     float shotSpeed;
     float gravity;
@@ -83,6 +84,19 @@ typedef struct PlayerParameters {
     float backwardSpeedMultiplier;
     float leftTurnSpeedMultiplier;
     float rightTurnSpeedMultiplier;
+
+    inline std::string toString() const {
+        return "PlayerParameters{speed: " + std::to_string(speed) +
+                ", turnSpeed: " + std::to_string(turnSpeed) +
+               ", jumpSpeed: " + std::to_string(jumpSpeed) +
+               ", shotSpeed: " + std::to_string(shotSpeed) +
+               ", gravity: " + std::to_string(gravity) +
+               ", forwardSpeedMultiplier: " + std::to_string(forwardSpeedMultiplier) +
+               ", backwardSpeedMultiplier: " + std::to_string(backwardSpeedMultiplier) +
+               ", leftTurnSpeedMultiplier: " + std::to_string(leftTurnSpeedMultiplier) +
+               ", rightTurnSpeedMultiplier: " + std::to_string(rightTurnSpeedMultiplier) +
+               "}";
+    }
 } PlayerParams;
 
 typedef struct PlayerState {
@@ -197,6 +211,7 @@ typedef struct ServerMsg_Init : ServerMsg {
     std::string serverName;
     PlayerParameters defaultPlayerParams;
     std::byte* worldData;
+    size_t worldDataSize;
 } ServerMsg_Init;
 
 /*

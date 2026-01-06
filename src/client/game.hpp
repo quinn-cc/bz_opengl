@@ -29,7 +29,7 @@ public:
 
     FOCUS_STATE getFocusState() const { return focusState; }
 
-    Game(ClientEngine &engine, std::string playerName);
+    Game(ClientEngine &engine, std::string playerName, std::string worldDir);
     ~Game();
 
     void earlyUpdate(TimeUtils::duration deltaTime);

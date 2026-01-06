@@ -32,7 +32,9 @@ public:
     ~Player();
 
     std::string getName() const { return state.name; }
+
     client_id getClientId() const { return clientId; }
+
     glm::vec3 getPosition() const { return state.position; }
     glm::vec3 getVelocity() const { return state.velocity; }
     glm::quat getRotation() const { return state.rotation; }

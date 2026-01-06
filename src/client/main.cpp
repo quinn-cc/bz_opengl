@@ -23,11 +23,14 @@ int main(int argc, char *argv[]) {
         ("a,addr", "Connection address", cxxopts::value<std::string>()->default_value("localhost"));
     options.add_options()
         ("p,port", "Connection port", cxxopts::value<uint16_t>()->default_value("1234"));
+    options.add_options()
+        ("w,world", "World directory", cxxopts::value<std::string>()->default_value("../client-test/"));
     
     auto result = options.parse(argc, argv);
     std::string playerName = result["name"].as<std::string>();
     std::string connectAddr = result["addr"].as<std::string>();
     uint16_t connectPort = result["port"].as<uint16_t>();
+    std::string worldDir = result["world"].as<std::string>();
 
     spdlog::trace("GLFW initialized successfully");
 
@@ -76,7 +79,7 @@ int main(int argc, char *argv[]) {
         spdlog::error("Failed to connect to server at {}:{}", connectAddr, connectPort);
     }
 
-    Game game(engine, playerName);
+    Game game(engine, playerName, worldDir);
     spdlog::trace("Game initialized successfully");
 
     lastFrameTime = TimeUtils::GetCurrentTime();
