@@ -1,8 +1,12 @@
 #include <GLFW/glfw3.h>
+#include <memory>
+#include <vector>
+#include <chrono>
 #include "spdlog/spdlog.h"
 #include "engine/client_engine.hpp"
 #include "game.hpp"
 #include "cxxopts.hpp"
+#include "client/server_discovery.hpp"
 
 TimeUtils::time lastFrameTime;
 
@@ -71,16 +75,18 @@ int main(int argc, char *argv[]) {
 
     ClientEngine engine(window);
     spdlog::trace("ClientEngine initialized successfully");
-    
 
-    if (engine.network->connect(connectAddr, connectPort, 50)) {
-        spdlog::info("Connected to server at {}:{}", connectAddr, connectPort);
-    } else {
-        spdlog::error("Failed to connect to server at {}:{}", connectAddr, connectPort);
-    }
+    std::unique_ptr<Game> game;
+    ServerDiscovery discovery;
+    std::size_t lastDiscoveryVersion = 0;
+    using SteadyClock = std::chrono::steady_clock;
+    const auto autoScanInterval = std::chrono::seconds(5);
+    auto nextAutoScanTime = SteadyClock::now() + autoScanInterval;
 
-    Game game(engine, playerName, worldDir);
-    spdlog::trace("Game initialized successfully");
+    engine.gui->showServerBrowser({}, connectAddr, connectPort);
+    engine.gui->setServerBrowserStatus("Searching local network for servers...", false);
+    discovery.startScan();
+    engine.gui->setServerBrowserScanning(true);
 
     lastFrameTime = TimeUtils::GetCurrentTime();
 
@@ -98,10 +104,87 @@ int main(int argc, char *argv[]) {
         lastFrameTime = currTime;
 
         engine.earlyUpdate(deltaTime);
-        game.earlyUpdate(deltaTime);
+
+        if (!game) {
+            auto nowSteady = SteadyClock::now();
+
+            if (engine.gui->consumeServerBrowserRefreshRequest()) {
+                discovery.startScan();
+                engine.gui->setServerBrowserScanning(true);
+                if (discovery.getServers().empty()) {
+                    engine.gui->setServerBrowserStatus("Searching local network for servers...", false);
+                }
+                nextAutoScanTime = nowSteady + autoScanInterval;
+            } else if (!discovery.isScanning() && nowSteady >= nextAutoScanTime) {
+                discovery.startScan();
+                engine.gui->setServerBrowserScanning(true);
+                if (discovery.getServers().empty()) {
+                    engine.gui->setServerBrowserStatus("Searching local network for servers...", false);
+                }
+                nextAutoScanTime = nowSteady + autoScanInterval;
+            }
+
+            discovery.update();
+            engine.gui->setServerBrowserScanning(discovery.isScanning());
+
+            const auto &servers = discovery.getServers();
+            auto discoveryVersion = discovery.getGeneration();
+            if (discoveryVersion != lastDiscoveryVersion) {
+                lastDiscoveryVersion = discoveryVersion;
+                std::vector<GUI::ServerBrowserEntry> entries;
+                entries.reserve(servers.size());
+                for (const auto &serverInfo : servers) {
+                    GUI::ServerBrowserEntry entry;
+                    entry.label = serverInfo.name.empty() ? "LAN server" : serverInfo.name;
+                    entry.host = serverInfo.host;
+                    entry.port = serverInfo.port;
+                    entry.description = serverInfo.world.empty() ? "Discovered via broadcast" : serverInfo.world;
+                    entry.displayHost = serverInfo.displayHost.empty() ? serverInfo.host : serverInfo.displayHost;
+                    entries.push_back(entry);
+                }
+                engine.gui->setServerBrowserEntries(entries);
+                if (!entries.empty()) {
+                    engine.gui->setServerBrowserStatus("Select a server to connect.", false);
+                }
+            }
+
+            if (!discovery.isScanning() && servers.empty()) {
+                engine.gui->setServerBrowserStatus("No LAN servers found. Start one or enter a custom host/port.", true);
+            }
+        }
+
+        if (game) {
+            game->earlyUpdate(deltaTime);
+        }
+
         engine.step(deltaTime);
-        game.lateUpdate(deltaTime);
+
+        if (game) {
+            game->lateUpdate(deltaTime);
+        }
+
         engine.lateUpdate(deltaTime);
+
+        if (!game) {
+            if (auto selection = engine.gui->consumeServerBrowserSelection()) {
+                const std::string targetHost = selection->host;
+                const uint16_t targetPort = selection->port;
+                std::string status = "Connecting to " + targetHost + ":" + std::to_string(targetPort) + "...";
+                engine.gui->setServerBrowserStatus(status, false);
+                spdlog::info("Attempting to connect to {}:{}", targetHost, targetPort);
+
+                if (engine.network->connect(targetHost, targetPort, 50)) {
+                    spdlog::info("Connected to server at {}:{}", targetHost, targetPort);
+                    game = std::make_unique<Game>(engine, playerName);
+                    spdlog::trace("Game initialized successfully");
+                    engine.gui->hideServerBrowser();
+                } else {
+                    spdlog::error("Failed to connect to server at {}:{}", targetHost, targetPort);
+                    std::string errorMsg = "Unable to reach " + targetHost + ":" + std::to_string(targetPort) + ".";
+                    engine.gui->setServerBrowserStatus(errorMsg, true);
+                }
+            }
+        }
 
         glfwSwapBuffers(window);
     }

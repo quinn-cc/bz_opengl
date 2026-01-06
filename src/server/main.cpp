@@ -3,6 +3,7 @@
 #include "game.hpp"
 #include "cxxopts.hpp"
 #include "plugin.hpp"
+#include "server/server_discovery.hpp"
 #include <pybind11/embed.h>
 #include <csignal>
 #include <atomic>
@@ -153,6 +154,8 @@ int main(int argc, char *argv[]) {
     Game game(engine, serverName, configJson["settings"], worldDir + "/world");
     g_game = &game;
     spdlog::trace("Game initialized successfully");
+
+    ServerDiscoveryBeacon discoveryBeacon(listenPort, "BZ Server", worldDir);
 
     spdlog::trace("Loading plugins...");
     py::scoped_interpreter guard{};

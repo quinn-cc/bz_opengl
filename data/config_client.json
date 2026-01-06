@@ -1,0 +1,8 @@
+{
+    "ServerLists": [
+        {
+            "name": "Super Secret Private Community Server",
+            "url": "https://192.168.1.6/servers.json"
+        }
+    ]
+}

@@ -17,9 +17,13 @@ ClientNetwork::ClientNetwork() {
 }
 
 ClientNetwork::~ClientNetwork() {
-    enet_peer_disconnect(server, 0);
-    enet_host_flush(client);
-    enet_host_destroy(client);
+    if (server) {
+        enet_peer_disconnect(server, 0);
+    }
+    if (client) {
+        enet_host_flush(client);
+        enet_host_destroy(client);
+    }
 }
 
 void ClientNetwork::flushPeekedMessages() {
@@ -235,31 +239,36 @@ void ClientNetwork::update() {
 }
 
 bool ClientNetwork::connect(const std::string &addr, uint16_t port, int timeoutMs) {
-    bool ret = false;
-    // Set up the server address
-    ENetAddress address;
-    enet_address_set_host(&address, addr.c_str());
-    address.port = port;
-
-    // Connect to the server
-    server = enet_host_connect(client, &address, 2, 0);
-    if (!server) {
-        spdlog::error("No available peers for initiating connection.");
-        enet_host_destroy(client);
+    if (!client) {
+        spdlog::error("ClientNetwork::connect: ENet client host is not initialized.");
+        return false;
     }
 
-    // Wait for the connection to succeed (with timeout)
+    ENetAddress address;
+    if (enet_address_set_host(&address, addr.c_str()) != 0) {
+        spdlog::error("ClientNetwork::connect: Failed to resolve host {}.", addr);
+        return false;
+    }
+    address.port = port;
+
+    server = enet_host_connect(client, &address, 2, 0);
+    if (!server) {
+        spdlog::error("ClientNetwork::connect: No available peers for initiating connection.");
+        return false;
+    }
+
     ENetEvent event;
+    bool connected = false;
     if (enet_host_service(client, &event, timeoutMs) > 0 && event.type == ENET_EVENT_TYPE_CONNECT) {
         spdlog::info("Connected to server.");
-        ret = true;
+        connected = true;
     } else {
         spdlog::info("Connection to server failed.");
         enet_peer_reset(server);
-        enet_host_destroy(client);
+        server = nullptr;
     }
 
     enet_host_flush(client);
-    return ret;
+    return connected;
 }
 
