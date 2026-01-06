@@ -51,7 +51,8 @@ bool Shot::hits(Client *client) {
 }
 
 bool Shot::isExpired() const {
-    if (TimeUtils::GetElapsedTime(creationTime, TimeUtils::GetCurrentTime()) > game.world->getSetting("shotLifetime")) {
+    // TODO: CHANGE THIS TO USE SHOT LIFETIME FROM CURRENT SHOT
+    if (TimeUtils::GetElapsedTime(creationTime, TimeUtils::GetCurrentTime()) > 5) {
         return true;
     } else {
         return false;

@@ -1,10 +1,10 @@
 #include "game.hpp"
 #include "spdlog/spdlog.h"
 
-Game::Game(ClientEngine &engine, std::string playerName) : engine(engine) {
+Game::Game(ClientEngine &engine, std::string playerName, std::string worldDir) : engine(engine) {
     player = new Player(*this, playerName); 
     spdlog::trace("Game: Player created successfully");
-    world = new World(*this);
+    world = new World(*this, worldDir);
     spdlog::trace("Game: World created successfully");
     console = new Console(*this);
     spdlog::trace("Game: Console created successfully");

@@ -1,0 +1,8 @@
+{
+    "serverName": "Test World Server",
+    "maxPlayers": 20,
+    "hostPort": 1234,
+    "settings": {
+        "highSpeedMultiplier": 2.0
+    }
+}

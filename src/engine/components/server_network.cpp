@@ -82,54 +82,54 @@ void ServerNetwork::update() {
 
             switch (msg.payload_case()) {
             
-            case bz::ClientMsg::kInitMsg: {
+            case bz::ClientMsg::kInit: {
                 ClientMsg_Init* initMsg = new ClientMsg_Init();
                 initMsg->clientId = getClient(event.peer);
-                initMsg->name = msg.init_msg().name();
+                initMsg->name = msg.init().name();
                 receivedMessages.push_back({ event.packet, initMsg });
                 break;
             }
 
-            case bz::ClientMsg::kChatMsg: {
+            case bz::ClientMsg::kChat: {
                 ClientMsg_Chat* chatMsg = new ClientMsg_Chat();
                 chatMsg->clientId = getClient(event.peer);
-                chatMsg->toId = msg.chat_msg().toid();
-                chatMsg->text = msg.chat_msg().text();
+                chatMsg->toId = msg.chat().to_id();
+                chatMsg->text = msg.chat().text();
                 receivedMessages.push_back({ event.packet, chatMsg });
                 break;
             }
 
-            case bz::ClientMsg::kLocationMsg: {
-                ClientMsg_Location* locMsg = new ClientMsg_Location();
+            case bz::ClientMsg::kPlayerLocation: {
+                ClientMsg_PlayerLocation* locMsg = new ClientMsg_PlayerLocation();
                 locMsg->clientId = getClient(event.peer);
-                locMsg->position.x = msg.location_msg().position().x();
-                locMsg->position.y = msg.location_msg().position().y();
-                locMsg->position.z = msg.location_msg().position().z();
-                locMsg->rotation.w = msg.location_msg().rotation().w();
-                locMsg->rotation.x = msg.location_msg().rotation().x();
-                locMsg->rotation.y = msg.location_msg().rotation().y();
-                locMsg->rotation.z = msg.location_msg().rotation().z();
+                locMsg->position.x = msg.player_location().position().x();
+                locMsg->position.y = msg.player_location().position().y();
+                locMsg->position.z = msg.player_location().position().z();
+                locMsg->rotation.w = msg.player_location().rotation().w();
+                locMsg->rotation.x = msg.player_location().rotation().x();
+                locMsg->rotation.y = msg.player_location().rotation().y();
+                locMsg->rotation.z = msg.player_location().rotation().z();
                 receivedMessages.push_back({ event.packet, locMsg });
                 break;
             }
 
-            case bz::ClientMsg::kRequestSpawnMsg: {
-                ClientMsg_RequestSpawn* spawnMsg = new ClientMsg_RequestSpawn();
+            case bz::ClientMsg::kRequestPlayerSpawn: {
+                ClientMsg_RequestPlayerSpawn* spawnMsg = new ClientMsg_RequestPlayerSpawn();
                 spawnMsg->clientId = getClient(event.peer);
                 receivedMessages.push_back({ event.packet, spawnMsg });
                 break;
             }
 
-            case bz::ClientMsg::kCreateShotMsg: {
+            case bz::ClientMsg::kCreateShot: {
                 ClientMsg_CreateShot* shotMsg = new ClientMsg_CreateShot();
                 shotMsg->clientId = getClient(event.peer);
-                shotMsg->localShotId = msg.create_shot_msg().localshotid();
-                shotMsg->position.x = msg.create_shot_msg().position().x();
-                shotMsg->position.y = msg.create_shot_msg().position().y();
-                shotMsg->position.z = msg.create_shot_msg().position().z();
-                shotMsg->velocity.x = msg.create_shot_msg().velocity().x();
-                shotMsg->velocity.y = msg.create_shot_msg().velocity().y();
-                shotMsg->velocity.z = msg.create_shot_msg().velocity().z();
+                shotMsg->localShotId = msg.create_shot().local_shot_id();
+                shotMsg->position.x = msg.create_shot().position().x();
+                shotMsg->position.y = msg.create_shot().position().y();
+                shotMsg->position.z = msg.create_shot().position().z();
+                shotMsg->velocity.x = msg.create_shot().velocity().x();
+                shotMsg->velocity.y = msg.create_shot().velocity().y();
+                shotMsg->velocity.z = msg.create_shot().velocity().z();
                 receivedMessages.push_back({ event.packet, shotMsg });
                 break;
             }
@@ -146,7 +146,7 @@ void ServerNetwork::update() {
         case ENET_EVENT_TYPE_CONNECT: {
             client_id newClientId = getNextClientId();
             clients[newClientId] = event.peer;
-            ClientMsg_Join* connMsg = new ClientMsg_Join();
+            ClientMsg_PlayerJoin* connMsg = new ClientMsg_PlayerJoin();
             connMsg->clientId = newClientId;
             char ip[64];
             enet_address_get_host_ip(&event.peer->address, ip, sizeof(ip));
@@ -157,7 +157,7 @@ void ServerNetwork::update() {
         case ENET_EVENT_TYPE_DISCONNECT: {
             client_id discClientId = getClient(event.peer);
             clients.erase(discClientId);
-            ClientMsg_Leave* discMsg = new ClientMsg_Leave();
+            ClientMsg_PlayerLeave* discMsg = new ClientMsg_PlayerLeave();
             discMsg->clientId = discClientId;
             receivedMessages.push_back({ nullptr, discMsg });
             break;

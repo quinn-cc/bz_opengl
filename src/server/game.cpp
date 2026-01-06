@@ -41,8 +41,8 @@ Client *Game::getClientByName(const std::string &name) {
     return nullptr;
 }
 
-Game::Game(ServerEngine &engine, std::string worldDir) : engine(engine) {
-    world = new World(*this, worldDir);
+Game::Game(ServerEngine &engine, std::string worldName, nlohmann::json settings, std::string worldDir) : engine(engine) {
+    world = new World(*this, worldName, settings, worldDir);
     chat = new Chat(*this);
 }
 
@@ -68,12 +68,12 @@ void Game::update(TimeUtils::duration deltaTime) {
         client->update();
     }
 
-    if (ClientMsg_Connection *connMsg = engine.network->peekMessage<ClientMsg_Connection>()) {
-        Client *newClient = new Client(*this, connMsg->clientId, std::string(connMsg->ip));
+    if (ClientMsg_PlayerJoin *connMsg = engine.network->peekMessage<ClientMsg_PlayerJoin>()) {
+        Client *newClient = new Client(*this, connMsg->clientId, connMsg->ip);
         addClient(newClient);
     }
 
-    if (ClientMsg_Disconnection *disconnMsg = engine.network->peekMessage<ClientMsg_Disconnection>()) {
+    if (ClientMsg_PlayerLeave *disconnMsg = engine.network->peekMessage<ClientMsg_PlayerLeave>()) {
         spdlog::info("Game::update: Client with id {} disconnected", disconnMsg->clientId);
         removeClient(disconnMsg->clientId);
     }
