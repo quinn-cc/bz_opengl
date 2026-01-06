@@ -16,9 +16,14 @@ private:
     std::string worldDir;
     nlohmann::json manifest;
 
+    std::map<std::string, std::filesystem::path> assetPaths;
+
     void loadManifest(const std::filesystem::path& manifestPath);
+    bool unzipFromMemory(const std::byte* data, size_t size, const std::string& destDir);
 
 public:
+    client_id playerId;
+
     World(Game &game, std::string worldDir);
     ~World();
 
@@ -26,4 +31,8 @@ public:
     bool isInitialized() const;
     void update();
     std::filesystem::path getAssetPath(const std::string &assetName) const;
+
+    PlayerParameters getDefaultPlayerParameters() const {
+        return defaultPlayerParams;
+    }
 };

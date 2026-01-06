@@ -40,7 +40,7 @@ void loadPythonPlugins() {
     sys.attr("path").attr("insert")(0, "./plugins");    // plugin files
     sys.attr("path").attr("insert")(0, "./python");     // optional shared python code
 
-    py::list files = glob.attr("glob")("./plugins/*.py");
+    py::list files = glob.attr("glob")("../plugins/*.py");
 
     for (auto file : files) {
         try {
@@ -94,7 +94,19 @@ std::string processTerminalInput(const std::string &input) {
             return std::string("Error: ") + e.what();
         }
     } else if (cmd == "defaultPlayerParameters") {
-        return g_game->world->getDefaultPlayerParameters().toString();
+        std::string response = "Default Player Parameters:";
+        for (const auto& [key, val] : g_game->world->getDefaultPlayerParameters()) {
+            response += "\n - " + key + ": " + std::to_string(val);
+        }
+        return response;
+    } else if (cmd == "listPlayers") {
+        std::string response = "Connected Players:";
+        for (const Client* client : g_game->getClients()) {
+            response += "\n - ID: " + std::to_string(client->getId()) +
+                        ", Name: " + client->getName() +
+                        ", IP: " + client->getIP();
+        }
+        return response;
     } else {
         return "Unknown command: " + input;
     }

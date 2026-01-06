@@ -6,6 +6,47 @@
 namespace fs = std::filesystem;
 
 World::World(Game &game, std::string worldName, nlohmann::json settings, std::string worldDir) : game(game), name(worldName), settings(settings), worldDir(worldDir) {
+    // Load config file from ../data/config.json
+    nlohmann::json configJson;
+    std::filesystem::path configPath = std::filesystem::path("../data/config.json");
+    if (std::filesystem::exists(configPath)) {
+        std::ifstream configFile(configPath);
+        if (configFile) {
+            try {
+                configFile >> configJson;
+            } catch (const std::exception &e) {
+                spdlog::error("World::World: Failed to parse config JSON: {}", e.what());
+            }
+        } else {
+            spdlog::error("World::World: Failed to open config file: {}", configPath.string());
+        }
+    } else {
+        spdlog::warn("World::World: Config file not found: {}", configPath.string());
+    }
+
+    // Load asset paths from config
+    if (configJson.contains("assets") && configJson["assets"].is_object()) {
+        for (auto& [key, value] : configJson["assets"].items()) {
+            if (value.is_string()) {
+                assetPaths[key] = value.get<std::string>();
+            }
+        }
+    } else {
+        spdlog::warn("World::World: No 'assets' object found in config");
+    }
+
+    // Load the default player parameters from config
+    if (configJson.contains("defaultPlayerParameters") && configJson["defaultPlayerParameters"].is_object()) {
+        nlohmann::json paramsJson = configJson["defaultPlayerParameters"];
+        for (auto& [key, value] : paramsJson.items()) {
+            if (value.is_number_float()) {
+                defaultPlayerParams[key] = value.get<float>();
+            }
+        }
+    } else {
+        spdlog::warn("World::World: No 'defaultPlayerParameters' object found in config");
+    }
+
     loadManifest(fs::path(worldDir) / "manifest.json");
     
     // World "name" will be the folder name (not including the path)
@@ -122,15 +163,12 @@ void World::loadManifest(const fs::path& manifestPath) {
     // See if there is a "defaultPlayerParameters" key in the manifest
     if (manifest.contains("defaultPlayerParameters")) {
         nlohmann::json paramsJson = manifest["defaultPlayerParameters"];
-        if (paramsJson.contains("speed")) defaultPlayerParams.speed = paramsJson["speed"].get<float>();
-        if (paramsJson.contains("jumpSpeed")) defaultPlayerParams.jumpSpeed = paramsJson["jumpSpeed"].get<float>();
-        if (paramsJson.contains("turnSpeed")) defaultPlayerParams.turnSpeed = paramsJson["turnSpeed"].get<float>();
-        if (paramsJson.contains("shotSpeed")) defaultPlayerParams.shotSpeed = paramsJson["shotSpeed"].get<float>();
-        if (paramsJson.contains("gravity")) defaultPlayerParams.gravity = paramsJson["gravity"].get<float>();
-        if (paramsJson.contains("forwardSpeedMultiplier")) defaultPlayerParams.forwardSpeedMultiplier = paramsJson["forwardSpeedMultiplier"].get<float>();
-        if (paramsJson.contains("backwardSpeedMultiplier")) defaultPlayerParams.backwardSpeedMultiplier = paramsJson["backwardSpeedMultiplier"].get<float>();
-        if (paramsJson.contains("leftTurnSpeedMultiplier")) defaultPlayerParams.leftTurnSpeedMultiplier = paramsJson["leftTurnSpeedMultiplier"].get<float>();
-        if (paramsJson.contains("rightTurnSpeedMultiplier")) defaultPlayerParams.rightTurnSpeedMultiplier = paramsJson["rightTurnSpeedMultiplier"].get<float>();
+        for (auto& [key, value] : paramsJson.items()) {
+            if (value.is_number()) {
+                defaultPlayerParams[key] = value.get<float>();
+                spdlog::info("World::loadManifest: Loaded player parameter '{}' = {}", key, value.get<float>());
+            }
+        }
     }
 }
 
@@ -145,7 +183,7 @@ void World::update() {
         initHeaderMsg.clientId = connMsg->clientId;
         initHeaderMsg.serverName = "server";
         initHeaderMsg.defaultPlayerParams = defaultPlayerParams;
-        initHeaderMsg.worldData = worldData.data();
+        initHeaderMsg.worldData = worldData;
         game.engine.network->send<ServerMsg_Init>(connMsg->clientId, &initHeaderMsg);
 
         spdlog::trace("World::update: Sent init message to client id {}", connMsg->clientId);

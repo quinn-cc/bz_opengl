@@ -30,13 +30,6 @@ void ClientNetwork::flushPeekedMessages() {
             [](const MsgData& msgData) {
                 if (msgData.peeked) {
                     if (msgData.packet == nullptr) {
-                        // For connection/disconnection messages
-                        // we allocated the message on the heap
-                        if (msgData.msg->type == ServerMsg_Type_INIT) {
-                            auto* initMsg = static_cast<ServerMsg_Init*>(msgData.msg);
-                            delete[] reinterpret_cast<std::byte*>(initMsg->worldData);
-                        }
-
                         delete msgData.msg;
                     } else {
                         enet_packet_destroy(msgData.packet);
@@ -113,14 +106,9 @@ void ClientNetwork::update() {
             case bz::ServerMsg::kPlayerParameters: {
                 ServerMsg_PlayerParameters* paramsMsg = new ServerMsg_PlayerParameters();
                 paramsMsg->clientId = msg.player_parameters().client_id();
-                paramsMsg->params.speed = msg.player_parameters().params().speed();
-                paramsMsg->params.jumpSpeed = msg.player_parameters().params().jump_speed();
-                paramsMsg->params.shotSpeed = msg.player_parameters().params().shot_speed();
-                paramsMsg->params.gravity = msg.player_parameters().params().gravity();
-                paramsMsg->params.forwardSpeedMultiplier = msg.player_parameters().params().forward_speed_multiplier();
-                paramsMsg->params.backwardSpeedMultiplier = msg.player_parameters().params().backward_speed_multiplier();
-                paramsMsg->params.leftTurnSpeedMultiplier = msg.player_parameters().params().left_turn_speed_multiplier();
-                paramsMsg->params.rightTurnSpeedMultiplier = msg.player_parameters().params().right_turn_speed_multiplier();
+                for (const auto& [key, val] : msg.player_parameters().params().params()) {
+                    paramsMsg->params[key] = val;
+                }
                 receivedMessages.push_back({ event.packet, paramsMsg });
                 break;
             }
@@ -191,25 +179,14 @@ void ClientNetwork::update() {
                 ServerMsg_Init* initMsg = new ServerMsg_Init();
                 initMsg->clientId = msg.init().client_id();
                 initMsg->serverName = msg.init().server_name();
-                initMsg->defaultPlayerParams.speed = msg.init().default_player_params().speed();
-                initMsg->defaultPlayerParams.turnSpeed = msg.init().default_player_params().turn_speed();
-                initMsg->defaultPlayerParams.jumpSpeed = msg.init().default_player_params().jump_speed();
-                initMsg->defaultPlayerParams.shotSpeed = msg.init().default_player_params().shot_speed();
-                initMsg->defaultPlayerParams.gravity = msg.init().default_player_params().gravity();
-                initMsg->defaultPlayerParams.forwardSpeedMultiplier = msg.init().default_player_params().forward_speed_multiplier();
-                initMsg->defaultPlayerParams.backwardSpeedMultiplier = msg.init().default_player_params().backward_speed_multiplier();
-                initMsg->defaultPlayerParams.leftTurnSpeedMultiplier = msg.init().default_player_params().left_turn_speed_multiplier();
-                initMsg->defaultPlayerParams.rightTurnSpeedMultiplier = msg.init().default_player_params().right_turn_speed_multiplier();
+                for (const auto& [key, val] : msg.init().default_player_params().params()) {
+                    initMsg->defaultPlayerParams[key] = val;
+                }
                 
                 // Copy the world data
                 const std::string& worldDataStr = msg.init().world_data();
-                initMsg->worldDataSize = worldDataStr.size();
-                if (initMsg->worldDataSize > 0) {
-                    initMsg->worldData = new std::byte[initMsg->worldDataSize];
-                    std::memcpy(initMsg->worldData, worldDataStr.data(), initMsg->worldDataSize);
-                } else {
-                    initMsg->worldData = nullptr;
-                }
+                const std::byte* dataPtr = reinterpret_cast<const std::byte*>(worldDataStr.data());
+                initMsg->worldData = std::vector<std::byte>(dataPtr, dataPtr + worldDataStr.size());
                 
                 receivedMessages.push_back({ event.packet, initMsg });
                 break;
