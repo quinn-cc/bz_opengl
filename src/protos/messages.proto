@@ -24,15 +24,7 @@ message Quat {
 // =====================
 
 message PlayerParameters {
-  float speed = 1;
-  float turn_speed = 2;
-  float jump_speed = 3;
-  float shot_speed = 4;
-  float gravity = 5;
-  float forward_speed_multiplier = 6;
-  float backward_speed_multiplier = 7;
-  float left_turn_speed_multiplier = 8;
-  float right_turn_speed_multiplier = 9;
+  map<string, float> params = 1;
 }
 
 message PlayerState {

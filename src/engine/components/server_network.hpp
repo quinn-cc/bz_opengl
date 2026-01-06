@@ -118,15 +118,9 @@ public:
                 auto* pp = msg.mutable_player_parameters();
                 pp->set_client_id(input->clientId);
                 auto* params = pp->mutable_params();
-                params->set_speed(input->params.speed);
-                params->set_turn_speed(input->params.turnSpeed);
-                params->set_jump_speed(input->params.jumpSpeed);
-                params->set_shot_speed(input->params.shotSpeed);
-                params->set_gravity(input->params.gravity);
-                params->set_forward_speed_multiplier(input->params.forwardSpeedMultiplier);
-                params->set_backward_speed_multiplier(input->params.backwardSpeedMultiplier);
-                params->set_left_turn_speed_multiplier(input->params.leftTurnSpeedMultiplier);
-                params->set_right_turn_speed_multiplier(input->params.rightTurnSpeedMultiplier);
+                for (const auto& [key, val] : input->params) {
+                    (*params->mutable_params())[key] = val;
+                }
             } else if constexpr (std::is_same_v<T, ServerMsg_PlayerLocation>) {
                 msg.set_type(bz::ServerMsg::PLAYER_LOCATION);
                 auto* loc = msg.mutable_player_location();
@@ -186,15 +180,9 @@ public:
                 init->set_client_id(input->clientId);
                 init->set_server_name(input->serverName);
                 auto* params = init->mutable_default_player_params();
-                params->set_speed(input->defaultPlayerParams.speed);
-                params->set_turn_speed(input->defaultPlayerParams.turnSpeed);
-                params->set_jump_speed(input->defaultPlayerParams.jumpSpeed);
-                params->set_shot_speed(input->defaultPlayerParams.shotSpeed);
-                params->set_gravity(input->defaultPlayerParams.gravity);
-                params->set_forward_speed_multiplier(input->defaultPlayerParams.forwardSpeedMultiplier);
-                params->set_backward_speed_multiplier(input->defaultPlayerParams.backwardSpeedMultiplier);
-                params->set_left_turn_speed_multiplier(input->defaultPlayerParams.leftTurnSpeedMultiplier);
-                params->set_right_turn_speed_multiplier(input->defaultPlayerParams.rightTurnSpeedMultiplier);
+                for (const auto& [key, val] : input->defaultPlayerParams) {
+                    (*params->mutable_params())[key] = val;
+                }
                 init->set_world_data(input->worldData.data(), input->worldData.size());
             }
             else {
@@ -212,6 +200,11 @@ public:
             );
 
             enet_peer_send(peer, 0, packet);
+
+            if constexpr (std::is_same_v<T, ServerMsg_Init>) {
+                // Flush
+                enet_host_flush(server);
+            }
         }
     };
 
