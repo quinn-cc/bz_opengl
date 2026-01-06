@@ -180,21 +180,9 @@ public:
                 init->set_client_id(input->clientId);
                 init->set_server_name(input->serverName);
                 auto* params = init->mutable_default_player_params();
-<<<<<<< HEAD
-                params->set_speed(input->defaultPlayerParams.speed);
-                params->set_turn_speed(input->defaultPlayerParams.turnSpeed);
-                params->set_jump_speed(input->defaultPlayerParams.jumpSpeed);
-                params->set_shot_speed(input->defaultPlayerParams.shotSpeed);
-                params->set_gravity(input->defaultPlayerParams.gravity);
-                params->set_forward_speed_multiplier(input->defaultPlayerParams.forwardSpeedMultiplier);
-                params->set_backward_speed_multiplier(input->defaultPlayerParams.backwardSpeedMultiplier);
-                params->set_left_turn_speed_multiplier(input->defaultPlayerParams.leftTurnSpeedMultiplier);
-                params->set_right_turn_speed_multiplier(input->defaultPlayerParams.rightTurnSpeedMultiplier);
-=======
                 for (const auto& [key, val] : input->defaultPlayerParams) {
                     (*params->mutable_params())[key] = val;
                 }
->>>>>>> game-state
                 init->set_world_data(input->worldData.data(), input->worldData.size());
             }
             else {

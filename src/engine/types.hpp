@@ -186,11 +186,7 @@ typedef struct ServerMsg_Init : ServerMsg {
     ServerMsg_Init() { type = Type; }
     client_id clientId;
     std::string serverName;
-<<<<<<< HEAD
     PlayerParameters defaultPlayerParams;
-=======
-    std::map<std::string, float> defaultPlayerParams;
->>>>>>> game-state
     std::vector<std::byte> worldData;
 } ServerMsg_Init;
 
