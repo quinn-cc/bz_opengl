@@ -1,4 +1,4 @@
-#include "client/server_list_fetcher.hpp"
+#include "client/server/server_list_fetcher.hpp"
 
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
@@ -181,6 +181,18 @@ std::vector<ServerListFetcher::ServerRecord> ServerListFetcher::parseResponse(
             record.gameMode = server.value("game_mode", std::string{});
             record.maxPlayers = parseIntegerField(server, "max_players");
             record.activePlayers = parseIntegerField(server, "active_players");
+            if (record.activePlayers < 0) {
+                record.activePlayers = parseIntegerField(server, "num_players");
+            }
+            record.description = server.value("description", server.value("descrpition", std::string{}));
+            record.flags.clear();
+            if (server.contains("flags") && server["flags"].is_array()) {
+                for (const auto &flagValue : server["flags"]) {
+                    if (flagValue.is_string()) {
+                        record.flags.push_back(flagValue.get<std::string>());
+                    }
+                }
+            }
 
             if (record.host.empty()) {
                 continue;

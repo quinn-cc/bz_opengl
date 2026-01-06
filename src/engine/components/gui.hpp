@@ -20,6 +20,11 @@ public:
         uint16_t port;
         std::string description;
         std::string displayHost;
+        std::string longDescription;
+        std::vector<std::string> flags;
+        int activePlayers = -1;
+        int maxPlayers = -1;
+        std::string gameMode;
     };
 
     struct ServerBrowserSelection {

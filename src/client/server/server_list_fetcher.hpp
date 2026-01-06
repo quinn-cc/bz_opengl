@@ -18,6 +18,8 @@ public:
         int maxPlayers = -1;
         int activePlayers = -1;
         std::string gameMode;
+        std::string description;
+        std::vector<std::string> flags;
     };
 
     explicit ServerListFetcher(std::vector<ClientServerListSource> sources);

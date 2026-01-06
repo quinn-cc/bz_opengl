@@ -1,4 +1,4 @@
-#include "client/server_discovery.hpp"
+#include "client/server/server_discovery.hpp"
 #include "network/discovery_protocol.hpp"
 #include "spdlog/spdlog.h"
 

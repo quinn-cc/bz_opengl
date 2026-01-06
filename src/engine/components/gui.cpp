@@ -3,6 +3,7 @@
 #include "spdlog/spdlog.h"
 #include <cstdio>
 #include <optional>
+#include <algorithm>
 
 GUI::GUI(GLFWwindow *window) {
     // Initialize ImGui context
@@ -136,7 +137,7 @@ void GUI::drawDeathScreen() {
 void GUI::drawServerBrowser() {
     ImGuiIO& io = ImGui::GetIO();
 
-    const ImVec2 windowSize(640.0f, 520.0f);
+    const ImVec2 windowSize(780.0f, 560.0f);
     const ImVec2 windowPos(
         (io.DisplaySize.x - windowSize.x) * 0.5f,
         (io.DisplaySize.y - windowSize.y) * 0.5f
@@ -156,6 +157,16 @@ void GUI::drawServerBrowser() {
 
     ImGui::TextWrapped("Select a server to join or enter a custom host and port.");
     ImGui::Spacing();
+
+    ImVec2 contentAvail = ImGui::GetContentRegionAvail();
+    const ImGuiStyle &style = ImGui::GetStyle();
+    const float minDetailWidth = 240.0f;
+    const float minListWidth = 280.0f;
+    float maxListWidth = std::max(minListWidth, contentAvail.x - minDetailWidth - style.ItemSpacing.x);
+    float listPanelWidth = std::max(340.0f, contentAvail.x * 0.62f);
+    listPanelWidth = std::clamp(listPanelWidth, minListWidth, maxListWidth);
+
+    ImGui::BeginChild("ServerBrowserListPane", ImVec2(listPanelWidth, 0), false);
 
     if (ImGui::Button("Refresh Servers")) {
         serverBrowserRefreshRequested = true;
@@ -281,6 +292,67 @@ void GUI::drawServerBrowser() {
             ImVec4(0.60f, 0.80f, 0.40f, 1.0f);
         ImGui::TextColored(color, "%s", serverBrowserStatusText.c_str());
     }
+
+    ImGui::EndChild();
+
+    ImGui::SameLine();
+
+    ImGui::BeginChild("ServerBrowserDetailsPane", ImVec2(0, 0), true);
+    ImGui::TextUnformatted("Server Details");
+    ImGui::Separator();
+
+    const GUI::ServerBrowserEntry *selectedEntry = nullptr;
+    if (serverBrowserSelectedIndex >= 0 &&
+        serverBrowserSelectedIndex < static_cast<int>(serverBrowserEntries.size())) {
+        selectedEntry = &serverBrowserEntries[serverBrowserSelectedIndex];
+    }
+
+    if (!selectedEntry) {
+        ImGui::TextDisabled("Select a server to see more information.");
+    } else {
+        ImGui::TextWrapped("%s", selectedEntry->label.c_str());
+        ImGui::Spacing();
+
+        const std::string &displayHost = selectedEntry->displayHost.empty() ? selectedEntry->host : selectedEntry->displayHost;
+        ImGui::Text("Host: %s", displayHost.c_str());
+        ImGui::Text("Port: %u", selectedEntry->port);
+
+        if (selectedEntry->activePlayers >= 0) {
+            if (selectedEntry->maxPlayers >= 0) {
+                ImGui::Text("Players: %d/%d", selectedEntry->activePlayers, selectedEntry->maxPlayers);
+            } else {
+                ImGui::Text("Players: %d", selectedEntry->activePlayers);
+            }
+        } else if (selectedEntry->maxPlayers >= 0) {
+            ImGui::Text("Capacity: %d", selectedEntry->maxPlayers);
+        }
+
+        if (!selectedEntry->gameMode.empty()) {
+            ImGui::Text("Mode: %s", selectedEntry->gameMode.c_str());
+        }
+
+        ImGui::Spacing();
+        ImGui::Separator();
+        ImGui::TextUnformatted("Description");
+        if (!selectedEntry->longDescription.empty()) {
+            ImGui::TextWrapped("%s", selectedEntry->longDescription.c_str());
+        } else {
+            ImGui::TextDisabled("No description provided.");
+        }
+
+        ImGui::Spacing();
+        ImGui::Separator();
+        ImGui::TextUnformatted("Flags");
+        if (!selectedEntry->flags.empty()) {
+            for (const auto &flag : selectedEntry->flags) {
+                ImGui::BulletText("%s", flag.c_str());
+            }
+        } else {
+            ImGui::TextDisabled("No special flags reported.");
+        }
+    }
+
+    ImGui::EndChild();
 
     ImGui::End();
 }

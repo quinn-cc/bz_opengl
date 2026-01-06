@@ -73,7 +73,7 @@ target_include_directories(proto_lib PUBLIC ${CMAKE_BINARY_DIR})
 # Gather sources
 file(GLOB_RECURSE CLIENT_SOURCES "${PROJECT_SOURCE_DIR}/src/client/*.cpp")
 list(APPEND CLIENT_SOURCES
-    ${PROJECT_SOURCE_DIR}/src/client/server_browser_controller.cpp
+    ${PROJECT_SOURCE_DIR}/src/client/server/server_browser_controller.cpp
 )
 file(GLOB_RECURSE SERVER_SOURCES "${PROJECT_SOURCE_DIR}/src/server/*.cpp")
 ## Separate engine sources for client and server to avoid over-linking

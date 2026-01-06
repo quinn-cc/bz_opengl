@@ -1,9 +1,9 @@
-#include "client/server_browser_controller.hpp"
+#include "client/server/server_browser_controller.hpp"
 
 #include <unordered_set>
 #include <utility>
 
-#include "client/server_connector.hpp"
+#include "client/server/server_connector.hpp"
 
 ServerBrowserController::ServerBrowserController(ClientEngine &engine,
                                                  const ClientConfig &clientConfig,
@@ -95,6 +95,13 @@ void ServerBrowserController::rebuildEntries() {
         entry.port = serverInfo.port;
         entry.description = serverInfo.world.empty() ? "Discovered via broadcast" : serverInfo.world;
         entry.displayHost = serverInfo.displayHost.empty() ? serverInfo.host : serverInfo.displayHost;
+        entry.longDescription = serverInfo.world.empty()
+            ? std::string("Discovered via LAN broadcast.")
+            : (std::string("World: ") + serverInfo.world);
+        entry.flags.clear();
+        entry.activePlayers = -1;
+        entry.maxPlayers = -1;
+        entry.gameMode.clear();
         entries.push_back(std::move(entry));
     }
 
@@ -113,6 +120,11 @@ void ServerBrowserController::rebuildEntries() {
         entry.port = recordPort;
         entry.description = buildRemoteDescription(record);
         entry.displayHost = record.host;
+        entry.longDescription = record.description.empty() ? entry.description : record.description;
+        entry.flags = record.flags;
+        entry.activePlayers = record.activePlayers;
+        entry.maxPlayers = record.maxPlayers;
+        entry.gameMode = record.gameMode;
         entries.push_back(std::move(entry));
     }
 

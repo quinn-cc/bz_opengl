@@ -5,8 +5,8 @@
 #include "game.hpp"
 #include "client/client_cli_options.hpp"
 #include "client/config_client.hpp"
-#include "client/server_browser_controller.hpp"
-#include "client/server_connector.hpp"
+#include "client/server/server_browser_controller.hpp"
+#include "client/server/server_connector.hpp"
 
 TimeUtils::time lastFrameTime;
 
