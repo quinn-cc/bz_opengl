@@ -17,6 +17,7 @@ private:
     nlohmann::json manifest;
 
     void loadManifest(const std::filesystem::path& manifestPath);
+    bool unzipFromMemory(const std::byte* data, size_t size, const std::string& destDir);
 
 public:
     World(Game &game, std::string worldDir);

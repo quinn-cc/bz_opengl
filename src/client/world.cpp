@@ -3,6 +3,8 @@
 #include "spdlog/spdlog.h"
 #include <fstream>
 #include <iostream>
+#include <cstring>
+#include <miniz.h>
 
 World::World(Game &game, std::string worldDir) : game(game), worldDir(worldDir) {
     
@@ -17,15 +19,44 @@ bool World::isInitialized() const {
     return initialized;
 }
 
-std::filesystem::path World::getAssetPath(const std::string &assetName) const {
-    std::filesystem::path assetPath = std::filesystem::path(worldDir) / "world";
+bool World::unzipFromMemory(const std::byte* data, size_t size, const std::string& destDir) {
+    mz_zip_archive zip;
+    memset(&zip, 0, sizeof(zip));
 
+    if (!mz_zip_reader_init_mem(&zip, data, size, 0)) {
+        spdlog::error("World::unzipFromMemory: Failed to open zip from memory");
+        return false;
+    }
 
+    int numFiles = mz_zip_reader_get_num_files(&zip);
 
-    return assetPath;
+    for (int i = 0; i < numFiles; i++) {
+        mz_zip_archive_file_stat fileStat;
+        if (!mz_zip_reader_file_stat(&zip, i, &fileStat)) {
+            spdlog::error("World::unzipFromMemory: Failed to get file stat for index {}", i);
+            mz_zip_reader_end(&zip);
+            return false;
+        }
+
+        std::string outPath = destDir + "/" + fileStat.m_filename;
+
+        if (mz_zip_reader_is_file_a_directory(&zip, i)) {
+            std::filesystem::create_directories(outPath);
+        } else {
+            std::filesystem::create_directories(std::filesystem::path(outPath).parent_path());
+
+            if (!mz_zip_reader_extract_to_file(&zip, i, outPath.c_str(), 0)) {
+                spdlog::error("World::unzipFromMemory: Failed to extract: {}", fileStat.m_filename);
+                mz_zip_reader_end(&zip);
+                return false;
+            }
+        }
+    }
+
+    mz_zip_reader_end(&zip);
+    spdlog::info("World::unzipFromMemory: Unzipped {} files to {}", numFiles, destDir);
+    return true;
 }
-
-
 
 void World::loadManifest(const std::filesystem::path& manifestPath) {
     if (!std::filesystem::exists(manifestPath)) {
@@ -76,15 +107,11 @@ void World::update() {
         }
         // Assuming initMsg->worldData is a pointer to a byte array and we know its size
         // Here we just write dummy data for illustration; replace with actual data handling
-        worldZipFile.write(reinterpret_cast<const char*>(initMsg->worldData), initMsg->worldDataSize);
+        worldZipFile.write(reinterpret_cast<const char*>(initMsg->worldData.data()), initMsg->worldData.size());
         worldZipFile.close();
         
-        
+        unzipFromMemory(initMsg->worldData.data(), initMsg->worldData.size(), worldDir);
 
-
-
-        /*
-        
         loadManifest(std::filesystem::path(worldDir) / "manifest.json");
 
         game.engine.physics->setGravity(defaultPlayerParams.gravity);
@@ -95,6 +122,16 @@ void World::update() {
         spdlog::info("World::update: World initialized from server");
         initialized = true;
         return;
-        */
+    }
+}
+
+std::filesystem::path World::getAssetPath(const std::string &assetName) const {
+    // Check if assetName exists in manifest "assets"
+    if (manifest.contains("assets") && manifest["assets"].contains(assetName)) {
+        std::string assetPathStr = manifest["assets"][assetName].get<std::string>();
+        std::filesystem::path assetPath = std::filesystem::path(worldDir) / assetPathStr;
+        return assetPath;
+    } else {
+        throw std::runtime_error("World::getAssetPath: Asset not found in manifest: " + assetName);
     }
 }

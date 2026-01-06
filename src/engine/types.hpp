@@ -210,8 +210,7 @@ typedef struct ServerMsg_Init : ServerMsg {
     client_id clientId;
     std::string serverName;
     PlayerParameters defaultPlayerParams;
-    std::byte* worldData;
-    size_t worldDataSize;
+    std::vector<std::byte> worldData;
 } ServerMsg_Init;
 
 /*

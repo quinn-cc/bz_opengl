@@ -1,0 +1,33 @@
+{
+    "defaultPlayerParameters": {
+        "speed": 5.0,
+        "turnSpeed": 3.0,
+        "jumpSpeed": 8.0,
+        "shotSpeed": 20.0,
+        "shotLifetime": 3.0,
+        "gravity": -9.81,
+        "forwardSpeedMultiplier": 1.0,
+        "backwardSpeedMultiplier": 0.8,
+        "leftTurnSpeedMultiplier": 1,
+        "rightTurnSpeedMultiplier": 1
+    },
+    "assets": {
+        "world": "models/world.glb",
+        "skybox": "models/skybox.png",
+        "playerModel": "models/player.glb"
+    },
+    "teams": [
+        {
+            "name": "Red",
+            "color": "#FF0000",
+            "model": "playerModel",
+            "maxPlayers": 8
+        },
+        {
+            "name": "Blue",
+            "color": "#0000FF",
+            "model": "playerModel",
+            "maxPlayers": 10
+        }
+    ]
+}

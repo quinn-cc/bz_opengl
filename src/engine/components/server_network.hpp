@@ -195,6 +195,7 @@ public:
                 params->set_backward_speed_multiplier(input->defaultPlayerParams.backwardSpeedMultiplier);
                 params->set_left_turn_speed_multiplier(input->defaultPlayerParams.leftTurnSpeedMultiplier);
                 params->set_right_turn_speed_multiplier(input->defaultPlayerParams.rightTurnSpeedMultiplier);
+                init->set_world_data(input->worldData.data(), input->worldData.size());
             }
             else {
                 spdlog::error("ServerNetwork::send: Unsupported message type");

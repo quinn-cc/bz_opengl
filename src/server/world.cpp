@@ -145,7 +145,7 @@ void World::update() {
         initHeaderMsg.clientId = connMsg->clientId;
         initHeaderMsg.serverName = "server";
         initHeaderMsg.defaultPlayerParams = defaultPlayerParams;
-        initHeaderMsg.worldData = worldData.data();
+        initHeaderMsg.worldData = worldData;
         game.engine.network->send<ServerMsg_Init>(connMsg->clientId, &initHeaderMsg);
 
         spdlog::trace("World::update: Sent init message to client id {}", connMsg->clientId);
