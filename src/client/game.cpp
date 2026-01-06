@@ -1,9 +1,8 @@
 #include "game.hpp"
 #include "spdlog/spdlog.h"
 
-Game::Game(ClientEngine &engine, std::string playerName, std::string worldDir) : engine(engine) {
-    player = new Player(*this, playerName); 
-    spdlog::trace("Game: Player created successfully");
+Game::Game(ClientEngine &engine, std::string playerName, std::string worldDir) : playerName(playerName), engine(engine) {
+    player = nullptr;
     world = new World(*this, worldDir);
     spdlog::trace("Game: World created successfully");
     console = new Console(*this);
@@ -26,6 +25,12 @@ void Game::earlyUpdate(TimeUtils::duration deltaTime) {
 
     if (!world->isInitialized()) {
         return;
+    }
+
+    if (!player) {
+        spdlog::trace("Game: Creating player with name '{}'", playerName);
+        player = new Player(*this, world->playerId, world->getDefaultPlayerParameters(), playerName); 
+        spdlog::trace("Game: Player created successfully");
     }
 
     if (focusState == FOCUS_STATE_GAME && engine.input->getInputState().chat) {

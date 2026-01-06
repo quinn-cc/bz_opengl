@@ -26,4 +26,5 @@ public:
     void update();
     glm::vec3 getPosition() const { return state.position; }
     void die();
+    bool setParameter(const std::string &param, float value);
 };

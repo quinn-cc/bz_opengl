@@ -7,7 +7,48 @@
 #include <miniz.h>
 
 World::World(Game &game, std::string worldDir) : game(game), worldDir(worldDir) {
-    
+    // Load config file from ../data/config.json
+    nlohmann::json configJson;
+    std::filesystem::path configPath = std::filesystem::path("../data/config.json");
+    if (std::filesystem::exists(configPath)) {
+        std::ifstream configFile(configPath);
+        if (configFile) {
+            try {
+                configFile >> configJson;
+            } catch (const std::exception &e) {
+                spdlog::error("World::World: Failed to parse config JSON: {}", e.what());
+            }
+        } else {
+            spdlog::error("World::World: Failed to open config file: {}", configPath.string());
+        }
+    } else {
+        spdlog::warn("World::World: Config file not found: {}", configPath.string());
+    }
+
+    // Load asset paths from config
+    if (configJson.contains("assets") && configJson["assets"].is_object()) {
+        for (auto& [key, value] : configJson["assets"].items()) {
+            if (value.is_string()) {
+                assetPaths[key] = value.get<std::string>();
+            }
+        }
+    } else {
+        spdlog::warn("World::World: No 'assets' object found in config");
+    }
+
+    // Load the default player parameters from config
+    if (configJson.contains("defaultPlayerParameters") && configJson["defaultPlayerParameters"].is_object()) {
+        nlohmann::json paramsJson = configJson["defaultPlayerParameters"];
+        for (auto& [key, value] : paramsJson.items()) {
+            if (value.is_number_float()) {
+                defaultPlayerParams[key] = value.get<float>();
+            }
+
+            spdlog::debug("World::World: Loaded default player parameter '{}' = {}", key, value.dump());
+        }
+    } else {
+        spdlog::warn("World::World: No 'defaultPlayerParameters' object found in config");
+    }
 }
 
 World::~World() {
@@ -80,23 +121,33 @@ void World::loadManifest(const std::filesystem::path& manifestPath) {
     // See if there is a "defaultPlayerParameters" key in the manifest
     if (manifest.contains("defaultPlayerParameters")) {
         nlohmann::json paramsJson = manifest["defaultPlayerParameters"];
-        if (paramsJson.contains("speed")) defaultPlayerParams.speed = paramsJson["speed"].get<float>();
-        if (paramsJson.contains("jumpSpeed")) defaultPlayerParams.jumpSpeed = paramsJson["jumpSpeed"].get<float>();
-        if (paramsJson.contains("turnSpeed")) defaultPlayerParams.turnSpeed = paramsJson["turnSpeed"].get<float>();
-        if (paramsJson.contains("shotSpeed")) defaultPlayerParams.shotSpeed = paramsJson["shotSpeed"].get<float>();
-        if (paramsJson.contains("gravity")) defaultPlayerParams.gravity = paramsJson["gravity"].get<float>();
-        if (paramsJson.contains("forwardSpeedMultiplier")) defaultPlayerParams.forwardSpeedMultiplier = paramsJson["forwardSpeedMultiplier"].get<float>();
-        if (paramsJson.contains("backwardSpeedMultiplier")) defaultPlayerParams.backwardSpeedMultiplier = paramsJson["backwardSpeedMultiplier"].get<float>();
-        if (paramsJson.contains("leftTurnSpeedMultiplier")) defaultPlayerParams.leftTurnSpeedMultiplier = paramsJson["leftTurnSpeedMultiplier"].get<float>();
-        if (paramsJson.contains("rightTurnSpeedMultiplier")) defaultPlayerParams.rightTurnSpeedMultiplier = paramsJson["rightTurnSpeedMultiplier"].get<float>();
+
+        for (auto& [key, value] : paramsJson.items()) {
+            if (value.is_number()) {
+                defaultPlayerParams[key] = value.get<float>();
+                spdlog::info("World::loadManifest: Loaded player parameter '{}' = {}", key, value.get<float>());
+            }
+        }
+    }
+
+    // Load asset paths from config
+    if (manifest.contains("assets") && manifest["assets"].is_object()) {
+        for (auto& [key, value] : manifest["assets"].items()) {
+            if (value.is_string()) {
+                assetPaths[key] = std::filesystem::path(worldDir) / value.get<std::string>();
+            }
+        }
     }
 }
 
 void World::update() {
     if (auto *initMsg = game.engine.network->peekMessage<ServerMsg_Init>()) {
         spdlog::trace("World::update: Received init message from server");
-        // Load settings from init message
-        defaultPlayerParams = initMsg->defaultPlayerParams;
+        // Merge server params into client defaults (server values override)
+        for (const auto& [key, val] : initMsg->defaultPlayerParams) {
+            defaultPlayerParams[key] = val;
+        }
+        playerId = initMsg->clientId;
 
         // Write initMsg->worldData to a file in worldDir called "world.zip"
         std::filesystem::path worldZipPath = std::filesystem::path(worldDir) / "world.zip";
@@ -114,8 +165,6 @@ void World::update() {
 
         loadManifest(std::filesystem::path(worldDir) / "manifest.json");
 
-        game.engine.physics->setGravity(defaultPlayerParams.gravity);
-
         renderId = game.engine.render->create(getAssetPath("world").string());
         physicsId = game.engine.physics->create(getAssetPath("world").string(), 0.0f);
 
@@ -126,12 +175,10 @@ void World::update() {
 }
 
 std::filesystem::path World::getAssetPath(const std::string &assetName) const {
-    // Check if assetName exists in manifest "assets"
-    if (manifest.contains("assets") && manifest["assets"].contains(assetName)) {
-        std::string assetPathStr = manifest["assets"][assetName].get<std::string>();
-        std::filesystem::path assetPath = std::filesystem::path(worldDir) / assetPathStr;
-        return assetPath;
+    if (assetPaths.find(assetName) != assetPaths.end()) {
+        return assetPaths.at(assetName);
     } else {
-        throw std::runtime_error("World::getAssetPath: Asset not found in manifest: " + assetName);
+        spdlog::error("World::getAssetPath: Asset '{}' not found", assetName);
+        return std::filesystem::path();
     }
 }

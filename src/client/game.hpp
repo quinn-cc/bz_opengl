@@ -16,6 +16,7 @@ enum FOCUS_STATE {
 class Game {
 private:
     FOCUS_STATE focusState;
+    std::string playerName;
 
 public:
     ClientEngine &engine;

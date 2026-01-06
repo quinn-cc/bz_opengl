@@ -17,8 +17,8 @@ def send_chat_message(from_id: int, to_id: int, text: str) -> None:
     """Send a chat message"""
     ...
 
-def set_world_setting(key: str, value: float) -> None:
-    """Set a world setting"""
+def set_player_parameter(client_id: int, parameter: str, value: float) -> None:
+    """Set a player parameter"""
     ...
 
 def kill_player(target_id: int) -> None:
