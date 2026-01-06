@@ -3,9 +3,10 @@
 #include "spdlog/spdlog.h"
 #include "engine/client_engine.hpp"
 #include "game.hpp"
-#include "cxxopts.hpp"
+#include "client/client_cli_options.hpp"
 #include "client/config_client.hpp"
 #include "client/server_browser_controller.hpp"
+#include "client/server_connector.hpp"
 
 TimeUtils::time lastFrameTime;
 
@@ -19,22 +20,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    cxxopts::Options options("BZ", "This is the client.");
-    options.add_options()
-        ("n,name", "Player name", cxxopts::value<std::string>()->default_value("Player"));
-    options.add_options()
-        ("a,addr", "Connection address", cxxopts::value<std::string>()->default_value("localhost"));
-    options.add_options()
-        ("p,port", "Connection port", cxxopts::value<uint16_t>()->default_value("1234"));
-    options.add_options()
-        ("w,world", "World directory", cxxopts::value<std::string>()->default_value("../client-test/"));
-    
-    auto result = options.parse(argc, argv);
-    std::string playerName = result["name"].as<std::string>();
-    std::string connectAddr = result["addr"].as<std::string>();
-    uint16_t connectPort = result["port"].as<uint16_t>();
-    std::string worldDir = result["world"].as<std::string>();
-    const bool autoConnectRequested = result.count("addr") > 0;
+    const ClientCLIOptions cliOptions = ParseClientCLIOptions(argc, argv);
 
     constexpr const char *kClientConfigPath = "../data/config_client.json";
     ClientConfig clientConfig = ClientConfig::Load(kClientConfigPath);
@@ -79,30 +65,12 @@ int main(int argc, char *argv[]) {
     ClientEngine engine(window);
     spdlog::trace("ClientEngine initialized successfully");
 
-    ServerBrowserController serverBrowser(engine, clientConfig, connectAddr, connectPort);
     std::unique_ptr<Game> game;
+    ServerConnector serverConnector(engine, cliOptions.playerName, cliOptions.worldDir, game);
+    ServerBrowserController serverBrowser(engine, clientConfig, cliOptions.connectAddr, cliOptions.connectPort, serverConnector);
 
-    auto connectToServer = [&](const std::string &targetHost, uint16_t targetPort) {
-        std::string status = "Connecting to " + targetHost + ":" + std::to_string(targetPort) + "...";
-        engine.gui->setServerBrowserStatus(status, false);
-        spdlog::info("Attempting to connect to {}:{}", targetHost, targetPort);
-
-        if (engine.network->connect(targetHost, targetPort, 50)) {
-            spdlog::info("Connected to server at {}:{}", targetHost, targetPort);
-            game = std::make_unique<Game>(engine, playerName, worldDir);
-            spdlog::trace("Game initialized successfully");
-            engine.gui->hideServerBrowser();
-            return true;
-        }
-
-        spdlog::error("Failed to connect to server at {}:{}", targetHost, targetPort);
-        std::string errorMsg = "Unable to reach " + targetHost + ":" + std::to_string(targetPort) + ".";
-        engine.gui->setServerBrowserStatus(errorMsg, true);
-        return false;
-    };
-
-    if (autoConnectRequested) {
-        connectToServer(connectAddr, connectPort);
+    if (cliOptions.addrExplicit) {
+        serverConnector.connect(cliOptions.connectAddr, cliOptions.connectPort);
     }
 
     lastFrameTime = TimeUtils::GetCurrentTime();
@@ -137,12 +105,6 @@ int main(int argc, char *argv[]) {
         }
 
         engine.lateUpdate(deltaTime);
-
-        if (!game) {
-            if (auto selection = engine.gui->consumeServerBrowserSelection()) {
-                connectToServer(selection->host, selection->port);
-            }
-        }
 
         glfwSwapBuffers(window);
     }

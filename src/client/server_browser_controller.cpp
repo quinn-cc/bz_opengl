@@ -3,11 +3,14 @@
 #include <unordered_set>
 #include <utility>
 
+#include "client/server_connector.hpp"
+
 ServerBrowserController::ServerBrowserController(ClientEngine &engine,
                                                  const ClientConfig &clientConfig,
                                                  const std::string &defaultHost,
-                                                 uint16_t defaultPort)
-    : engine(engine) {
+                                                 uint16_t defaultPort,
+                                                 ServerConnector &connector)
+    : engine(engine), connector(connector) {
     engine.gui->showServerBrowser({}, defaultHost, defaultPort);
 
     if (!clientConfig.serverLists.empty()) {
@@ -157,6 +160,10 @@ void ServerBrowserController::update() {
     const auto &servers = discovery.getServers();
     bool lanEmpty = servers.empty();
     bool remoteEmpty = cachedRemoteServers.empty();
+
+    if (auto selection = engine.gui->consumeServerBrowserSelection()) {
+        connector.connect(selection->host, selection->port);
+    }
 
     if (lanEmpty && remoteEmpty) {
         if (discovery.isScanning() || remoteFetchingActive) {

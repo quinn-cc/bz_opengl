@@ -11,12 +11,15 @@
 #include "client/server_list_fetcher.hpp"
 #include "engine/client_engine.hpp"
 
+class ServerConnector;
+
 class ServerBrowserController {
 public:
     ServerBrowserController(ClientEngine &engine,
                             const ClientConfig &clientConfig,
                             const std::string &defaultHost,
-                            uint16_t defaultPort);
+                            uint16_t defaultPort,
+                            ServerConnector &connector);
 
     void update();
 
@@ -27,6 +30,7 @@ private:
     void rebuildEntries();
 
     ClientEngine &engine;
+    ServerConnector &connector;
     ServerDiscovery discovery;
     std::unique_ptr<ServerListFetcher> serverListFetcher;
     std::vector<ServerListFetcher::ServerRecord> cachedRemoteServers;
