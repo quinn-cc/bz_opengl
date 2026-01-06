@@ -10,6 +10,8 @@ Client::Client(Game &game, client_id id, std::string ip) : game(game), id(id), i
     state.rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
     state.velocity = glm::vec3(0.0f, 0.0f, 0.0f);
     state.alive = false;
+
+    state.params = game.world->getDefaultPlayerParameters();
 }
 
 Client::~Client() {
@@ -103,4 +105,20 @@ void Client::die() {
         deathMsg.clientId = id;
         game.engine.network->sendAll<ServerMsg_PlayerDeath>(&deathMsg);
     }
+}
+
+bool Client::setParameter(const std::string &param, float value) {
+    if (state.params.find(param) == state.params.end()) {
+        spdlog::warn("Client::setParameter: Client id {} attempted to set unknown parameter '{}'", id, param);
+        return false;
+    }
+
+    state.params[param] = value;
+
+    // Broadcast updated parameters to all clients
+    ServerMsg_PlayerParameters paramMsg;
+    paramMsg.clientId = id;
+    paramMsg.params[param] = value;
+    game.engine.network->sendAll<ServerMsg_PlayerParameters>(&paramMsg);
+    return true;
 }

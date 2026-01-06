@@ -24,8 +24,12 @@ void PluginAPI::sendChatMessage(client_id fromId, client_id toId, const std::str
     g_engine->network->send<ServerMsg_Chat>(toId, &serverChatMsg);
 }
 
-void PluginAPI::setWorldSetting(const std::string &key, float value) {
-    //g_game->world->setSetting(key, value);
+bool PluginAPI::setPlayerParameter(client_id playerId, const std::string &param, const pybind11::object &value) {
+    Client* client = g_game->getClient(playerId);
+    if (client) {
+        return client->setParameter(param, value.cast<float>());
+    }
+    return false;
 }
 
 void PluginAPI::killPlayer(client_id targetId) {
@@ -36,12 +40,12 @@ void PluginAPI::killPlayer(client_id targetId) {
     }
 }
 
-client_id PluginAPI::getPlayerByName(const std::string &name) {
+std::optional<client_id> PluginAPI::getPlayerByName(const std::string &name) {
     Client* client = g_game->getClientByName(name);
     if (client) {
         return client->getId();
     }
-    return 0; // Return invalid ID if player not found
+    return std::nullopt;
 }
 
 std::vector<client_id> PluginAPI::getAllPlayerIds() {
@@ -52,23 +56,23 @@ std::vector<client_id> PluginAPI::getAllPlayerIds() {
     return ids;
 }
 
-std::string PluginAPI::getPlayerName(client_id id) {
+std::optional<std::string> PluginAPI::getPlayerName(client_id id) {
     Client* client = g_game->getClient(id);
     if (client) {
         return client->getName();
     }
-    return "";
+    return std::nullopt;
 }
 
-std::string PluginAPI::getPlayerIP(client_id id) {
+std::optional<std::string> PluginAPI::getPlayerIP(client_id id) {
     Client* client = g_game->getClient(id);
     if (client) {
         return client->getIP();
     }
-    return "";
+    return std::nullopt;
 }
 
-PYBIND11_EMBEDDED_MODULE(bz_plugins, m) {
+PYBIND11_EMBEDDED_MODULE(bzapi, m) {
     m.doc() = "Plugin API for BZ OpenGL server plugins";
 
     pybind11::enum_<ClientMsg_Type>(m, "event_type")
@@ -83,8 +87,8 @@ PYBIND11_EMBEDDED_MODULE(bz_plugins, m) {
 
     m.def("send_chat_message", &PluginAPI::sendChatMessage, "Send a chat message",
           pybind11::arg("from_id"), pybind11::arg("to_id"), pybind11::arg("text"));
-    m.def("set_world_setting", &PluginAPI::setWorldSetting, "Set a world setting",
-          pybind11::arg("key"), pybind11::arg("value"));
+    m.def("set_player_parameter", &PluginAPI::setPlayerParameter, "Set a player parameter",
+          pybind11::arg("player_id"), pybind11::arg("param"), pybind11::arg("value"));
     m.def("kill_player", &PluginAPI::killPlayer, "Kill a player",
           pybind11::arg("target_id"));
     m.def("get_player_by_name", &PluginAPI::getPlayerByName, "Get a player ID by name",

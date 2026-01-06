@@ -19,6 +19,7 @@ private:
     nlohmann::json settings;
     nlohmann::json manifest;
     std::string worldDir;
+    std::map<std::string, std::string> assetPaths;
 
     PlayerParameters defaultPlayerParams;
     physics_id physicsId;

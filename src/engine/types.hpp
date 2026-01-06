@@ -8,6 +8,7 @@
 #include <chrono>
 #include <unordered_map>
 #include <thread>
+#include <map>
 
 typedef struct InputState {
     bool fire;
@@ -72,32 +73,7 @@ using physics_id = uint32_t;
 using render_id = uint32_t;
 using audio_id = uint32_t;
 
-#pragma pack(push, 1)
-
-typedef struct PlayerParameters {
-    float speed;
-    float turnSpeed;    
-    float jumpSpeed;
-    float shotSpeed;
-    float gravity;
-    float forwardSpeedMultiplier;
-    float backwardSpeedMultiplier;
-    float leftTurnSpeedMultiplier;
-    float rightTurnSpeedMultiplier;
-
-    inline std::string toString() const {
-        return "PlayerParameters{speed: " + std::to_string(speed) +
-                ", turnSpeed: " + std::to_string(turnSpeed) +
-               ", jumpSpeed: " + std::to_string(jumpSpeed) +
-               ", shotSpeed: " + std::to_string(shotSpeed) +
-               ", gravity: " + std::to_string(gravity) +
-               ", forwardSpeedMultiplier: " + std::to_string(forwardSpeedMultiplier) +
-               ", backwardSpeedMultiplier: " + std::to_string(backwardSpeedMultiplier) +
-               ", leftTurnSpeedMultiplier: " + std::to_string(leftTurnSpeedMultiplier) +
-               ", rightTurnSpeedMultiplier: " + std::to_string(rightTurnSpeedMultiplier) +
-               "}";
-    }
-} PlayerParams;
+using PlayerParameters = std::map<std::string, float>;
 
 typedef struct PlayerState {
     std::string name;
@@ -107,6 +83,7 @@ typedef struct PlayerState {
     bool alive;
     PlayerParameters params;
 } PlayerState;
+
 
 /*
  * Server messages
@@ -209,7 +186,11 @@ typedef struct ServerMsg_Init : ServerMsg {
     ServerMsg_Init() { type = Type; }
     client_id clientId;
     std::string serverName;
+<<<<<<< HEAD
     PlayerParameters defaultPlayerParams;
+=======
+    std::map<std::string, float> defaultPlayerParams;
+>>>>>>> game-state
     std::vector<std::byte> worldData;
 } ServerMsg_Init;
 
@@ -275,5 +256,3 @@ typedef struct ClientMsg_Chat : ClientMsg {
     client_id toId;
     std::string text;
 } ClientMsg_Chat;
-
-#pragma pack(pop)

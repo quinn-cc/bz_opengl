@@ -2,6 +2,7 @@
 #include <glm/glm.hpp>
 #include <string>
 #include "engine/types.hpp"
+#include <spdlog/spdlog.h>
 
 #define POSITION_UPDATE_THRESHOLD 0.01f
 #define ROTATION_UPDATE_THRESHOLD 0.01f
@@ -27,8 +28,10 @@ private:
     glm::quat lastRotation;
     PlayerState state;
 
+    float getParameter(const std::string &paramName) const;
+
 public:
-    Player(Game &game, const std::string name);
+    Player(Game &game, client_id, PlayerParameters params, const std::string name);
     ~Player();
 
     std::string getName() const { return state.name; }

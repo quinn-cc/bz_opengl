@@ -6,18 +6,21 @@
 #include "spdlog/spdlog.h"
 #include "shot.hpp"
 
-Player::Player(Game &game, const std::string name) : game(game) {
+Player::Player(Game &game, client_id id, PlayerParameters params, const std::string name) : game(game) {
+    this->clientId = id;
+    this->state.params = params;
     state.name = name;
+    state.alive = false;
     grounded = false;
     lastJumpTime = TimeUtils::GetCurrentTime();
     jumpCooldown = TimeUtils::getDuration(0.1f);
 
     physicsId = game.engine.physics->createPlayer(glm::vec3(1.0f, 2.0f, 1.0f));
 
-    jumpAudioId = game.engine.audio->create("data/audio/jump.wav", 5);
-    dieAudioId = game.engine.audio->create("data/audio/die.wav", 1);
-    spawnAudioId = game.engine.audio->create("data/audio/spawn.wav", 1);
-    landAudioId = game.engine.audio->create("data/audio/land.wav", 1);
+    jumpAudioId = game.engine.audio->create(game.world->getAssetPath("playerJumpSound"), 5);
+    dieAudioId = game.engine.audio->create(game.world->getAssetPath("playerDieSound"), 1);
+    spawnAudioId = game.engine.audio->create(game.world->getAssetPath("playerSpawnSound"), 1);
+    landAudioId = game.engine.audio->create(game.world->getAssetPath("playerLandSound"), 1);
 
     ClientMsg_Init initMsg;
     initMsg.name = name;
@@ -28,23 +31,31 @@ Player::~Player() {
     game.engine.physics->destroy(physicsId);
 }
 
+float Player::getParameter(const std::string &paramName) const {
+    auto it = state.params.find(paramName);
+    if (it != state.params.end()) {
+        return it->second;
+    } else {
+        spdlog::warn("Player::getParameter: Parameter '{}' not found, returning 0.0", paramName);
+        return 0.0f;
+    }
+}
+
 glm::vec3 Player::getForwardVector() const {
     return game.engine.physics->getForwardVector(physicsId);
 }
 
 void Player::earlyUpdate() {
     // Listen for incoming world setting changes
-    if (auto *settingChangeMsg = game.engine.network->peekMessage<ServerMsg_PlayerState>(
-        [this](const ServerMsg_PlayerState &msg) {
+    if (auto *paramMsg = game.engine.network->peekMessage<ServerMsg_PlayerParameters>(
+        [this](const ServerMsg_PlayerParameters &msg) {
             return msg.clientId == this->clientId;
         }))
     {
-        state = settingChangeMsg->state;
-    }
-
-    if (auto *msg = game.engine.network->peekMessage<ServerMsg_Init>()) {
-        this->clientId = msg->clientId;
-        this->state.params = msg->defaultPlayerParams;
+        for (auto& [key, value] : paramMsg->params) {
+            this->state.params[key] = value;
+        }
+        game.engine.physics->setGravity(getParameter("gravity"));
     }
 
     if (state.alive) {
@@ -58,21 +69,21 @@ void Player::earlyUpdate() {
             if (game.getFocusState() == FOCUS_STATE_GAME)
                 movement = game.engine.input->getInputState().movement;
             glm::vec3 movementVector = game.engine.physics->getForwardVector(physicsId);
-            movementVector *= movement.y * state.params.speed;
+            movementVector *= movement.y * getParameter("speed");
             movementVector.y = game.engine.physics->getVelocity(physicsId).y;
 
             game.engine.physics->setVelocity(physicsId, movementVector);
 
             game.engine.physics->setAngularVelocity(physicsId, glm::vec3(
                 0.0f,
-                -movement.x * state.params.turnSpeed,
+                -movement.x * getParameter("turnSpeed"),
                 0.0f
             ));
 
             if (game.getFocusState() == FOCUS_STATE_GAME) {
                 if (grounded && game.engine.input->getInputState().jump && TimeUtils::GetElapsedTime(lastJumpTime, TimeUtils::GetCurrentTime()) >= jumpCooldown) {
                     glm::vec3 velocity = game.engine.physics->getVelocity(physicsId);
-                    velocity.y = state.params.jumpSpeed;
+                    velocity.y = getParameter("jumpSpeed");
                     game.engine.physics->setVelocity(physicsId, velocity);
                     lastJumpTime = TimeUtils::GetCurrentTime();
                     grounded = false;
@@ -88,7 +99,7 @@ void Player::earlyUpdate() {
         if (game.getFocusState() == FOCUS_STATE_GAME) {
             if (game.engine.input->getInputState().fire) {
                 glm::vec3 shotPosition = state.position + getForwardVector() * 2.0f;
-                glm::vec3 shotVelocity = getForwardVector() * state.params.shotSpeed + getVelocity();
+                glm::vec3 shotVelocity = getForwardVector() * getParameter("shotSpeed") + getVelocity();
 
                 Shot *shot = new Shot(game, shotPosition, shotVelocity);
                 game.addShot(shot);
