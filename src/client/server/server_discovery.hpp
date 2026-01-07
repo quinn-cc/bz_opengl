@@ -26,6 +26,7 @@ public:
     bool isScanning() const;
     const std::vector<DiscoveredServer>& getServers() const;
     std::size_t getGeneration() const;
+    void clearServers();
 
 private:
     void closeSocket();

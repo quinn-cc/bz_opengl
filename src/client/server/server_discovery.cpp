@@ -82,6 +82,7 @@ ServerDiscovery::~ServerDiscovery() {
 }
 
 void ServerDiscovery::startScan() {
+    clearServers();
     closeSocket();
 
     socketFd = static_cast<int>(socket(AF_INET, SOCK_DGRAM, 0));
@@ -271,6 +272,17 @@ const std::vector<ServerDiscovery::DiscoveredServer>& ServerDiscovery::getServer
 
 std::size_t ServerDiscovery::getGeneration() const {
     return generation;
+}
+
+void ServerDiscovery::clearServers() {
+    if (servers.empty() && serverIndexById.empty() && serverIndexByAddress.empty()) {
+        return;
+    }
+
+    servers.clear();
+    serverIndexById.clear();
+    serverIndexByAddress.clear();
+    ++generation;
 }
 
 void ServerDiscovery::closeSocket() {

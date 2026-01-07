@@ -7,6 +7,7 @@
 #include <utility>
 
 #include "client/server/server_connector.hpp"
+#include "spdlog/spdlog.h"
 
 namespace {
 std::string trimCopy(const std::string &value) {
@@ -144,35 +145,34 @@ void ServerBrowserController::rebuildEntries() {
     std::unordered_set<std::string> seen;
     seen.reserve(entries.capacity() > 0 ? entries.capacity() : 1);
 
-    for (const auto &serverInfo : servers) {
-        if (serverInfo.host.empty()) {
-            continue;
-        }
-        auto key = makeKey(serverInfo.host, serverInfo.port);
-        if (!seen.insert(key).second) {
-            continue;
-        }
-        GUI::ServerBrowserEntry entry;
-        const std::string addressLabel = serverInfo.host + ":" + std::to_string(serverInfo.port);
-        entry.label = lanViewActive ? addressLabel : (serverInfo.name.empty() ? "LAN server" : serverInfo.name);
-        entry.host = serverInfo.host;
-        entry.port = serverInfo.port;
-        entry.description = serverInfo.world.empty() ? "Discovered via broadcast" : serverInfo.world;
-        if (lanViewActive && !serverInfo.name.empty()) {
-            entry.description = serverInfo.name;
+    if (lanViewActive) {
+        for (const auto &serverInfo : servers) {
+            if (serverInfo.host.empty()) {
+                continue;
+            }
+            auto key = makeKey(serverInfo.host, serverInfo.port);
+            if (!seen.insert(key).second) {
+                continue;
+            }
+            GUI::ServerBrowserEntry entry;
+            const std::string addressLabel = serverInfo.host + ":" + std::to_string(serverInfo.port);
+            entry.label = addressLabel;
+            entry.host = serverInfo.host;
+            entry.port = serverInfo.port;
+            entry.description = serverInfo.name.empty() ? "Discovered via broadcast" : serverInfo.name;
             if (!serverInfo.world.empty()) {
                 entry.description += " — " + serverInfo.world;
             }
+            entry.displayHost = serverInfo.displayHost.empty() ? serverInfo.host : serverInfo.displayHost;
+            entry.longDescription = serverInfo.world.empty()
+                ? std::string("Discovered via LAN broadcast.")
+                : (std::string("World: ") + serverInfo.world);
+            entry.flags.clear();
+            entry.activePlayers = -1;
+            entry.maxPlayers = -1;
+            entry.gameMode.clear();
+            entries.push_back(std::move(entry));
         }
-        entry.displayHost = serverInfo.displayHost.empty() ? serverInfo.host : serverInfo.displayHost;
-        entry.longDescription = serverInfo.world.empty()
-            ? std::string("Discovered via LAN broadcast.")
-            : (std::string("World: ") + serverInfo.world);
-        entry.flags.clear();
-        entry.activePlayers = -1;
-        entry.maxPlayers = -1;
-        entry.gameMode.clear();
-        entries.push_back(std::move(entry));
     }
 
     for (const auto &record : cachedRemoteServers) {
@@ -405,19 +405,48 @@ void ServerBrowserController::handleServerListAddition(const GUI::ServerListOpti
 }
 
 void ServerBrowserController::updateServerListDisplayNamesFromCache() {
-    bool changed = false;
+    bool displayNamesChanged = false;
+    bool configUpdated = false;
+    std::vector<std::pair<std::size_t, std::string>> previousNames;
+
     for (const auto &record : cachedRemoteServers) {
         if (record.sourceUrl.empty() || record.sourceName.empty()) {
             continue;
         }
-        auto it = serverListDisplayNames.find(record.sourceUrl);
-        if (it == serverListDisplayNames.end() || it->second != record.sourceName) {
+
+        auto mapIt = serverListDisplayNames.find(record.sourceUrl);
+        if (mapIt == serverListDisplayNames.end() || mapIt->second != record.sourceName) {
             serverListDisplayNames[record.sourceUrl] = record.sourceName;
-            changed = true;
+            displayNamesChanged = true;
+        }
+
+        for (std::size_t i = 0; i < clientConfig.serverLists.size(); ++i) {
+            auto &source = clientConfig.serverLists[i];
+            if (source.url != record.sourceUrl) {
+                continue;
+            }
+
+            if (source.name != record.sourceName) {
+                previousNames.emplace_back(i, source.name);
+                source.name = record.sourceName;
+                configUpdated = true;
+            }
+            break;
         }
     }
 
-    if (changed) {
+    if (configUpdated) {
+        if (!clientConfig.Save(clientConfigPath)) {
+            for (const auto &entry : previousNames) {
+                clientConfig.serverLists[entry.first].name = entry.second;
+            }
+            spdlog::warn("ServerBrowserController: Failed to persist server list names to {}.", clientConfigPath);
+        } else {
+            displayNamesChanged = true;
+        }
+    }
+
+    if (displayNamesChanged) {
         refreshGuiServerListOptions();
     }
 }

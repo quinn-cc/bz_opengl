@@ -41,6 +41,9 @@ public:
 private:
     GLFWwindow *window;
     ImFont* bigFont;
+    ImFont* serverBrowserFont = nullptr;
+    ImFont* serverBrowserHeadingFont = nullptr;
+    ImFont* serverBrowserButtonFont = nullptr;
 
     void update();
     std::vector<std::string> scoreboardPlayerNames;

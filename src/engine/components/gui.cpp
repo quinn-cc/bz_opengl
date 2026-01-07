@@ -58,6 +58,33 @@ GUI::GUI(GLFWwindow *window) {
         100.0f   // font size in pixels
     );
 
+    serverBrowserFont = io.Fonts->AddFontFromFileTTF(
+        "../data/fonts/GoogleSans.ttf",
+        20.0f
+    );
+
+    if (!serverBrowserFont) {
+        spdlog::warn("Failed to load GoogleSans font for server browser.");
+    }
+
+    serverBrowserHeadingFont = io.Fonts->AddFontFromFileTTF(
+        "../data/fonts/Audiowide.ttf",
+        28.0f
+    );
+
+    if (!serverBrowserHeadingFont) {
+        spdlog::warn("Failed to load Audiowide font for server browser headings.");
+    }
+
+    serverBrowserButtonFont = io.Fonts->AddFontFromFileTTF(
+        "../data/fonts/Roboto.ttf",
+        18.0f
+    );
+
+    if (!serverBrowserButtonFont) {
+        spdlog::warn("Failed to load Roboto font for server browser buttons.");
+    }
+
     io.Fonts->Build();
 }
 
@@ -169,8 +196,14 @@ void GUI::drawDeathScreen() {
 
 void GUI::drawServerBrowser() {
     ImGuiIO& io = ImGui::GetIO();
+    const bool pushedServerBrowserFont = (serverBrowserFont != nullptr);
+    if (pushedServerBrowserFont) {
+        ImGui::PushFont(serverBrowserFont);
+    }
+    const bool hasHeadingFont = (serverBrowserHeadingFont != nullptr);
+    const bool hasButtonFont = (serverBrowserButtonFont != nullptr);
 
-    const ImVec2 windowSize(1000.0f, 700.0f);
+    const ImVec2 windowSize(1200.0f, 680.0f);
     const ImVec2 windowPos(
         (io.DisplaySize.x - windowSize.x) * 0.5f,
         (io.DisplaySize.y - windowSize.y) * 0.5f
@@ -186,10 +219,13 @@ void GUI::drawServerBrowser() {
         ImGuiWindowFlags_NoSavedSettings |
         ImGuiWindowFlags_NoMove;
 
+    if (hasHeadingFont) {
+        ImGui::PushFont(serverBrowserHeadingFont);
+    }
     ImGui::Begin("Server Browser", nullptr, flags);
-
-    ImGui::TextWrapped("Select a server to join or enter a custom host and port.");
-    ImGui::Spacing();
+    if (hasHeadingFont) {
+        ImGui::PopFont();
+    }
 
     ImVec2 contentAvail = ImGui::GetContentRegionAvail();
     const ImGuiStyle &style = ImGui::GetStyle();
@@ -211,7 +247,6 @@ void GUI::drawServerBrowser() {
         return std::string("Unnamed list");
     };
 
-    ImGui::TextUnformatted("Server lists");
     if (serverBrowserListOptions.empty() || serverBrowserListSelectedIndex < 0) {
         ImGui::TextDisabled("Add a server list below to fetch public servers.");
     } else {
@@ -243,16 +278,12 @@ void GUI::drawServerBrowser() {
 
     ImGui::Spacing();
 
-    if (ImGui::Button("Refresh Servers")) {
-        serverBrowserRefreshRequested = true;
-    }
-    ImGui::SameLine();
     ImVec4 scanColor = serverBrowserScanning ?
         ImVec4(0.60f, 0.80f, 0.40f, 1.0f) :
         ImVec4(0.70f, 0.70f, 0.70f, 1.0f);
     const char* scanLabel = serverBrowserScanning ? "Scanning..." : "Idle";
-    ImGui::TextColored(scanColor, "%s", scanLabel);
-    ImGui::Spacing();
+    const float refreshButtonWidth = ImGui::CalcTextSize("Refresh").x + style.FramePadding.x * 2.0f;
+    const float statusTextWidth = ImGui::CalcTextSize(scanLabel).x;
 
     const ImGuiTableFlags tableFlags =
         ImGuiTableFlags_Resizable |
@@ -262,29 +293,89 @@ void GUI::drawServerBrowser() {
 
     const float tableHeight = 260.0f;
 
-    if (serverBrowserEntries.empty()) {
-        ImGui::TextDisabled("No saved servers yet.");
-    } else if (ImGui::BeginTable("##ServerBrowserPresets", 1, tableFlags, ImVec2(-1.0f, tableHeight))) {
-        ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_None, 1.0f);
-        ImGui::TableHeadersRow();
+    if (ImGui::BeginTable("##ServerBrowserPresets", 1, tableFlags, ImVec2(-1.0f, tableHeight))) {
+        ImGui::TableSetupColumn("##ServerListColumn", ImGuiTableColumnFlags_None, 1.0f);
 
-        for (int i = 0; i < static_cast<int>(serverBrowserEntries.size()); ++i) {
-            const auto &entry = serverBrowserEntries[i];
+        ImGui::TableNextRow(ImGuiTableRowFlags_Headers);
+        ImGui::TableSetColumnIndex(0);
+
+        const char* serversHeadingLabel = "Servers";
+        ImVec2 headingTextSize;
+        if (hasHeadingFont) {
+            ImGui::PushFont(serverBrowserHeadingFont);
+            headingTextSize = ImGui::CalcTextSize(serversHeadingLabel);
+            ImGui::PopFont();
+        } else {
+            headingTextSize = ImGui::CalcTextSize(serversHeadingLabel);
+        }
+
+        const float headerStartX = ImGui::GetCursorPosX();
+        const float headerStartY = ImGui::GetCursorPosY();
+        const float headerWidth = ImGui::GetContentRegionAvail().x;
+        float buttonX = headerStartX + headerWidth - refreshButtonWidth;
+        float statusX = buttonX - style.ItemSpacing.x - statusTextWidth;
+        const float minStatusX = headerStartX + headingTextSize.x + style.ItemSpacing.x;
+        if (statusX < minStatusX) {
+            statusX = minStatusX;
+            buttonX = statusX + style.ItemSpacing.x + refreshButtonWidth;
+        }
+
+        const float maxButtonX = headerStartX + headerWidth - refreshButtonWidth;
+        if (buttonX > maxButtonX) {
+            buttonX = maxButtonX;
+            statusX = std::max(headerStartX + headingTextSize.x + style.ItemSpacing.x,
+                buttonX - style.ItemSpacing.x - statusTextWidth);
+        }
+
+        ImGui::SetCursorPos(ImVec2(headerStartX, headerStartY));
+        if (hasHeadingFont) {
+            ImGui::PushFont(serverBrowserHeadingFont);
+        }
+        ImGui::TextUnformatted(serversHeadingLabel);
+        if (hasHeadingFont) {
+            ImGui::PopFont();
+        }
+        float lineBottom = ImGui::GetCursorPosY();
+
+        ImGui::SetCursorPos(ImVec2(statusX, headerStartY));
+        ImGui::TextColored(scanColor, "%s", scanLabel);
+        lineBottom = std::max(lineBottom, ImGui::GetCursorPosY());
+
+        ImGui::SetCursorPos(ImVec2(buttonX, headerStartY));
+        if (hasButtonFont) {
+            ImGui::PushFont(serverBrowserButtonFont);
+        }
+        if (ImGui::Button("Refresh")) {
+            serverBrowserRefreshRequested = true;
+        }
+        if (hasButtonFont) {
+            ImGui::PopFont();
+        }
+        lineBottom = std::max(lineBottom, ImGui::GetCursorPosY());
+        ImGui::SetCursorPosY(lineBottom);
+
+        if (serverBrowserEntries.empty()) {
             ImGui::TableNextRow();
-
             ImGui::TableSetColumnIndex(0);
-            bool selected = (serverBrowserSelectedIndex == i);
-            std::string selectableLabel = entry.label + "##server_row_" + std::to_string(i);
-            if (ImGui::Selectable(selectableLabel.c_str(), selected,
-                    ImGuiSelectableFlags_SpanAllColumns | ImGuiSelectableFlags_AllowDoubleClick)) {
-                serverBrowserSelectedIndex = i;
-                if (ImGui::IsMouseDoubleClicked(0)) {
-                    pendingServerBrowserSelection = ServerBrowserSelection{ entry.host, entry.port, true };
-                    serverBrowserStatusText.clear();
-                    serverBrowserStatusIsError = false;
+            ImGui::TextDisabled("No saved servers yet.");
+        } else {
+            for (int i = 0; i < static_cast<int>(serverBrowserEntries.size()); ++i) {
+                const auto &entry = serverBrowserEntries[i];
+                ImGui::TableNextRow();
+
+                ImGui::TableSetColumnIndex(0);
+                bool selected = (serverBrowserSelectedIndex == i);
+                std::string selectableLabel = entry.label + "##server_row_" + std::to_string(i);
+                if (ImGui::Selectable(selectableLabel.c_str(), selected,
+                        ImGuiSelectableFlags_SpanAllColumns | ImGuiSelectableFlags_AllowDoubleClick)) {
+                    serverBrowserSelectedIndex = i;
+                    if (ImGui::IsMouseDoubleClicked(0)) {
+                        pendingServerBrowserSelection = ServerBrowserSelection{ entry.host, entry.port, true };
+                        serverBrowserStatusText.clear();
+                        serverBrowserStatusIsError = false;
+                    }
                 }
             }
-
         }
 
         ImGui::EndTable();
@@ -297,7 +388,17 @@ void GUI::drawServerBrowser() {
     ImGui::Text("Custom server");
     ImGui::InputText("Address (host:port)", serverBrowserAddressBuffer.data(), serverBrowserAddressBuffer.size());
 
+    bool joinCustomClicked = false;
+    if (hasButtonFont) {
+        ImGui::PushFont(serverBrowserButtonFont);
+    }
     if (ImGui::Button("Join Custom")) {
+        joinCustomClicked = true;
+    }
+    if (hasButtonFont) {
+        ImGui::PopFont();
+    }
+    if (joinCustomClicked) {
         std::string addressValue = trimCopy(serverBrowserAddressBuffer.data());
         if (addressValue.empty()) {
             serverBrowserStatusText = "Enter a server address before joining.";
@@ -356,7 +457,17 @@ void GUI::drawServerBrowser() {
     ImGui::Text("Add server list");
     ImGui::InputText("List URL", serverBrowserListUrlBuffer.data(), serverBrowserListUrlBuffer.size());
 
+    bool saveListClicked = false;
+    if (hasButtonFont) {
+        ImGui::PushFont(serverBrowserButtonFont);
+    }
     if (ImGui::Button("Save Server List")) {
+        saveListClicked = true;
+    }
+    if (hasButtonFont) {
+        ImGui::PopFont();
+    }
+    if (saveListClicked) {
         std::string urlValue(serverBrowserListUrlBuffer.data());
         if (urlValue.empty()) {
             serverBrowserListStatusText = "Enter a URL before saving.";
@@ -381,12 +492,28 @@ void GUI::drawServerBrowser() {
     ImGui::SameLine();
 
     ImGui::BeginChild("ServerBrowserDetailsPane", ImVec2(0, 0), true);
+    if (hasHeadingFont) {
+        ImGui::PushFont(serverBrowserHeadingFont);
+    }
     ImGui::TextUnformatted("Server Details");
+    if (hasHeadingFont) {
+        ImGui::PopFont();
+    }
     ImGui::SameLine();
     const float joinButtonWidth = ImGui::CalcTextSize("Join").x + style.FramePadding.x * 2.0f;
     const float joinButtonOffset = std::max(0.0f, ImGui::GetContentRegionAvail().x - joinButtonWidth);
     ImGui::SetCursorPosX(ImGui::GetCursorPosX() + joinButtonOffset);
+    bool joinSelectedClicked = false;
+    if (hasButtonFont) {
+        ImGui::PushFont(serverBrowserButtonFont);
+    }
     if (ImGui::Button("Join")) {
+        joinSelectedClicked = true;
+    }
+    if (hasButtonFont) {
+        ImGui::PopFont();
+    }
+    if (joinSelectedClicked) {
         if (serverBrowserSelectedIndex >= 0 &&
             serverBrowserSelectedIndex < static_cast<int>(serverBrowserEntries.size())) {
             const auto &entry = serverBrowserEntries[serverBrowserSelectedIndex];
@@ -441,19 +568,23 @@ void GUI::drawServerBrowser() {
 
         ImGui::Spacing();
         ImGui::Separator();
-        ImGui::TextUnformatted("Flags");
+        ImGui::TextUnformatted("Plugins");
         if (!selectedEntry->flags.empty()) {
             for (const auto &flag : selectedEntry->flags) {
                 ImGui::BulletText("%s", flag.c_str());
             }
         } else {
-            ImGui::TextDisabled("No special flags reported.");
+            ImGui::TextDisabled("No plugins reported.");
         }
     }
 
     ImGui::EndChild();
 
     ImGui::End();
+
+    if (pushedServerBrowserFont) {
+        ImGui::PopFont();
+    }
 }
 
 void GUI::resetServerBrowserBuffers(const std::string &defaultHost, uint16_t defaultPort) {
