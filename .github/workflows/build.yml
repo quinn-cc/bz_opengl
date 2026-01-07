@@ -2,11 +2,8 @@ name: Build
 
 on:
   push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
-  release:
-    types: [ created ]
+    tags:
+      - '*'
 
 jobs:
   build:

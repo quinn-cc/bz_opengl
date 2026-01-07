@@ -100,6 +100,13 @@ set(ENGINE_SERVER_SOURCES
 
 # Create executables
 add_executable(client ${CLIENT_SOURCES} ${ENGINE_CLIENT_SOURCES})
+
+# Handle OpenGL target for portability
+if(TARGET OpenGL::OpenGL)
+    set(OPENGL_TARGET OpenGL::OpenGL)
+else()
+    set(OPENGL_TARGET ${OPENGL_LIBRARIES})
+endif()
 add_executable(server ${SERVER_SOURCES} ${ENGINE_SERVER_SOURCES})
 
 # Include directories
@@ -124,7 +131,7 @@ target_link_libraries(client PRIVATE
     ${BULLET_LIBRARIES}
     enet_static
     assimp::assimp
-    OpenGL::OpenGL
+    ${OPENGL_TARGET}
     threepp::threepp
     cxxopts::cxxopts
     imgui::imgui
