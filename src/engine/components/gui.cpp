@@ -54,7 +54,7 @@ GUI::GUI(GLFWwindow *window) {
     io.Fonts->AddFontDefault();
 
     bigFont = io.Fonts->AddFontFromFileTTF(
-        "data/fonts/share_tech_mono_regular.ttf",
+        "../data/fonts/share_tech_mono_regular.ttf",
         100.0f   // font size in pixels
     );
 
@@ -170,7 +170,7 @@ void GUI::drawDeathScreen() {
 void GUI::drawServerBrowser() {
     ImGuiIO& io = ImGui::GetIO();
 
-    const ImVec2 windowSize(780.0f, 560.0f);
+    const ImVec2 windowSize(1000.0f, 700.0f);
     const ImVec2 windowPos(
         (io.DisplaySize.x - windowSize.x) * 0.5f,
         (io.DisplaySize.y - windowSize.y) * 0.5f
@@ -193,10 +193,10 @@ void GUI::drawServerBrowser() {
 
     ImVec2 contentAvail = ImGui::GetContentRegionAvail();
     const ImGuiStyle &style = ImGui::GetStyle();
-    const float minDetailWidth = 240.0f;
+    const float minDetailWidth = 300.0f;
     const float minListWidth = 280.0f;
     float maxListWidth = std::max(minListWidth, contentAvail.x - minDetailWidth - style.ItemSpacing.x);
-    float listPanelWidth = std::max(340.0f, contentAvail.x * 0.62f);
+    float listPanelWidth = std::max(320.0f, contentAvail.x * 0.5f);
     listPanelWidth = std::clamp(listPanelWidth, minListWidth, maxListWidth);
 
     ImGui::BeginChild("ServerBrowserListPane", ImVec2(listPanelWidth, 0), false);
@@ -239,10 +239,6 @@ void GUI::drawServerBrowser() {
             }
             ImGui::EndCombo();
         }
-
-        if (!currentOption.url.empty()) {
-            ImGui::TextDisabled("%s", currentOption.url.c_str());
-        }
     }
 
     ImGui::Spacing();
@@ -268,10 +264,8 @@ void GUI::drawServerBrowser() {
 
     if (serverBrowserEntries.empty()) {
         ImGui::TextDisabled("No saved servers yet.");
-    } else if (ImGui::BeginTable("##ServerBrowserPresets", 3, tableFlags, ImVec2(-1.0f, tableHeight))) {
-        ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_None, 0.45f);
-        ImGui::TableSetupColumn("Host", ImGuiTableColumnFlags_None, 0.35f);
-        ImGui::TableSetupColumn("Port", ImGuiTableColumnFlags_WidthFixed, 70.0f);
+    } else if (ImGui::BeginTable("##ServerBrowserPresets", 1, tableFlags, ImVec2(-1.0f, tableHeight))) {
+        ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_None, 1.0f);
         ImGui::TableHeadersRow();
 
         for (int i = 0; i < static_cast<int>(serverBrowserEntries.size()); ++i) {
@@ -291,33 +285,10 @@ void GUI::drawServerBrowser() {
                 }
             }
 
-            ImGui::TableSetColumnIndex(1);
-            const std::string &displayHost = entry.displayHost.empty() ? entry.host : entry.displayHost;
-            ImGui::TextUnformatted(displayHost.c_str());
-
-            ImGui::TableSetColumnIndex(2);
-            ImGui::Text("%u", entry.port);
-
         }
 
         ImGui::EndTable();
     }
-
-    if (ImGui::Button("Join Selected")) {
-        if (serverBrowserSelectedIndex >= 0 &&
-            serverBrowserSelectedIndex < static_cast<int>(serverBrowserEntries.size())) {
-            const auto &entry = serverBrowserEntries[serverBrowserSelectedIndex];
-            pendingServerBrowserSelection = ServerBrowserSelection{ entry.host, entry.port, true };
-            serverBrowserStatusText.clear();
-            serverBrowserStatusIsError = false;
-        } else {
-            serverBrowserStatusText = "Choose a server from the list first.";
-            serverBrowserStatusIsError = true;
-        }
-    }
-
-    ImGui::SameLine();
-    ImGui::TextDisabled("Tip: double-click a row to quick-join");
 
     ImGui::Spacing();
     ImGui::Separator();
@@ -411,6 +382,22 @@ void GUI::drawServerBrowser() {
 
     ImGui::BeginChild("ServerBrowserDetailsPane", ImVec2(0, 0), true);
     ImGui::TextUnformatted("Server Details");
+    ImGui::SameLine();
+    const float joinButtonWidth = ImGui::CalcTextSize("Join").x + style.FramePadding.x * 2.0f;
+    const float joinButtonOffset = std::max(0.0f, ImGui::GetContentRegionAvail().x - joinButtonWidth);
+    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + joinButtonOffset);
+    if (ImGui::Button("Join")) {
+        if (serverBrowserSelectedIndex >= 0 &&
+            serverBrowserSelectedIndex < static_cast<int>(serverBrowserEntries.size())) {
+            const auto &entry = serverBrowserEntries[serverBrowserSelectedIndex];
+            pendingServerBrowserSelection = ServerBrowserSelection{ entry.host, entry.port, true };
+            serverBrowserStatusText.clear();
+            serverBrowserStatusIsError = false;
+        } else {
+            serverBrowserStatusText = "Choose a server from the list first.";
+            serverBrowserStatusIsError = true;
+        }
+    }
     ImGui::Separator();
 
     const GUI::ServerBrowserEntry *selectedEntry = nullptr;

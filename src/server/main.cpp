@@ -1,23 +1,22 @@
 #include "spdlog/spdlog.h"
 #include "engine/server_engine.hpp"
 #include "game.hpp"
-#include "cxxopts.hpp"
 #include "plugin.hpp"
 #include "server/server_discovery.hpp"
+#include "server/terminal_commands.hpp"
+#include "server/server_cli_options.hpp"
 #include <pybind11/embed.h>
 #include <csignal>
 #include <atomic>
 #include <poll.h>
 #include <unistd.h>
-#include <sstream>
+#include <filesystem>
 
 #define MIN_FRAME_HZ (1.0f / 120.0f)
 
 Game *g_game = nullptr;
 ServerEngine *g_engine = nullptr;
 std::atomic<bool> g_running{true};
-std::vector<std::string> g_loadedPlugins;
-
 namespace py = pybind11;
 
 /**
@@ -31,88 +30,6 @@ void signalHandler(int signum) {
     g_running = false;
 }
 
-void loadPythonPlugins() {
-    namespace py = pybind11;
-
-    py::module_ sys  = py::module_::import("sys");
-    py::module_ glob = py::module_::import("glob");
-
-    sys.attr("path").attr("insert")(0, "./");           // project root
-    sys.attr("path").attr("insert")(0, "./plugins");    // plugin files
-    sys.attr("path").attr("insert")(0, "./python");     // optional shared python code
-
-    py::list files = glob.attr("glob")("../plugins/*.py");
-
-    for (auto file : files) {
-        try {
-            py::print("[PY] Loading plugin:", file);
-            py::eval_file(py::cast<std::string>(file), py::globals());
-            g_loadedPlugins.push_back(py::cast<std::string>(file));
-        } catch (py::error_already_set& e) {
-            py::print("[PY ERROR]", e.what());
-        }
-    }
-}
-
-std::vector<std::string> splitString(const std::string &s) {
-    std::istringstream iss(s);
-    std::vector<std::string> tokens;
-    std::string token;
-    while (iss >> token) {
-        tokens.push_back(token);
-    }
-    return tokens;
-}
-
-std::string processTerminalInput(const std::string &input) {
-    std::vector<std::string> args = splitString(input);
-    if (args.empty()) return "";
-
-    std::string cmd = args[0];
-
-    if (cmd == "quit" || cmd == "exit") {
-        g_running = false;
-        return "Shutting down server...";
-    } else if (cmd == "listPlugins") {
-        std::string response = "Loaded Plugins:";
-        for (const auto &plugin : g_loadedPlugins) {
-            response += "\n - " + plugin;
-        }
-        return response;
-    } else if (cmd == "manifest") {
-        try {
-            return g_game->world->getManifest().dump(4);
-        } catch (const std::exception &e) {
-            return std::string("Error retrieving manifest: ") + e.what();
-        }
-    } else if (cmd == "getAssetPath") {
-        if (args.size() < 2) {
-            return "Usage: getAssetPath <assetName>";
-        }
-        try {
-            return g_game->world->getAssetPath(args[1]);
-        } catch (const std::exception &e) {
-            return std::string("Error: ") + e.what();
-        }
-    } else if (cmd == "defaultPlayerParameters") {
-        std::string response = "Default Player Parameters:";
-        for (const auto& [key, val] : g_game->world->getDefaultPlayerParameters()) {
-            response += "\n - " + key + ": " + std::to_string(val);
-        }
-        return response;
-    } else if (cmd == "listPlayers") {
-        std::string response = "Connected Players:";
-        for (const Client* client : g_game->getClients()) {
-            response += "\n - ID: " + std::to_string(client->getId()) +
-                        ", Name: " + client->getName() +
-                        ", IP: " + client->getIP();
-        }
-        return response;
-    } else {
-        return "Unknown command: " + input;
-    }
-}
-
 int main(int argc, char *argv[]) {
     spdlog::set_level(spdlog::level::trace);
 
@@ -120,11 +37,8 @@ int main(int argc, char *argv[]) {
     signal(SIGINT, signalHandler);
     signal(SIGTERM, signalHandler);
 
-    cxxopts::Options options("BZ", "This is the server.");
-    options.add_options()
-        ("w,world", "World directory", cxxopts::value<std::string>()->default_value("test-world/"));
-    auto result = options.parse(argc, argv);
-    std::string worldDir = result["world"].as<std::string>();
+    ServerCLIOptions cliOptions = ParseServerCLIOptions(argc, argv);
+    std::string worldDir = cliOptions.worldDir;
 
     // Get directory path for worldDir/config.json (using the json library)
     std::string configPath = worldDir + "/config.json";
@@ -149,9 +63,12 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    uint16_t port = 1234;
+    uint16_t port = cliOptions.hostPort;
     if (configJson.contains("hostPort") && configJson["hostPort"].is_number_unsigned()) {
         port = configJson["hostPort"].get<uint16_t>();
+    }
+    if (cliOptions.hostPortExplicit) {
+        port = cliOptions.hostPort;
     }
 
     std::string serverName = "BZ OpenGL Server";
@@ -171,7 +88,7 @@ int main(int argc, char *argv[]) {
 
     spdlog::trace("Loading plugins...");
     py::scoped_interpreter guard{};
-    loadPythonPlugins();
+    PluginAPI::loadPythonPlugins(configJson);
     spdlog::trace("Plugins loaded successfully");
 
     TimeUtils::time lastFrameTime = TimeUtils::GetCurrentTime();

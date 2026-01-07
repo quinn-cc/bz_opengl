@@ -215,10 +215,14 @@ void ClientNetwork::update() {
         }
         case ENET_EVENT_TYPE_DISCONNECT: {
             spdlog::info("Disconnected from server.");
+            pendingDisconnect = DisconnectEvent{ "Disconnected from server." };
+            server = nullptr;
             break;
         }
         case ENET_EVENT_TYPE_DISCONNECT_TIMEOUT: {
             spdlog::info("Disconnected from server due to timeout.");
+            pendingDisconnect = DisconnectEvent{ "Connection lost (timeout)." };
+            server = nullptr;
             break;
         }
         default:
@@ -232,6 +236,8 @@ bool ClientNetwork::connect(const std::string &addr, uint16_t port, int timeoutM
         spdlog::error("ClientNetwork::connect: ENet client host is not initialized.");
         return false;
     }
+
+    pendingDisconnect.reset();
 
     ENetAddress address;
     if (enet_address_set_host(&address, addr.c_str()) != 0) {
@@ -259,5 +265,14 @@ bool ClientNetwork::connect(const std::string &addr, uint16_t port, int timeoutM
 
     enet_host_flush(client);
     return connected;
+}
+
+std::optional<ClientNetwork::DisconnectEvent> ClientNetwork::consumeDisconnectEvent() {
+    if (!pendingDisconnect.has_value()) {
+        return std::nullopt;
+    }
+    auto evt = pendingDisconnect;
+    pendingDisconnect.reset();
+    return evt;
 }
 

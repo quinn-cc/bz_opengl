@@ -96,6 +96,13 @@ int main(int argc, char *argv[]) {
 
         engine.earlyUpdate(deltaTime);
 
+        if (auto disconnectEvent = engine.network->consumeDisconnectEvent()) {
+            if (game) {
+                game.reset();
+            }
+            serverBrowser.handleDisconnected(disconnectEvent->reason);
+        }
+
         if (!game) {
             serverBrowser.update();
         }

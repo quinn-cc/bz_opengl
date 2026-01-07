@@ -1,9 +1,11 @@
 #pragma once
 #include "engine/types.hpp"
 #include "spdlog/spdlog.h"
+#include <nlohmann/json.hpp>
 #include <vector>
 #include <memory>
 #include <map>
+#include <string>
 #include <pybind11/pybind11.h>
 
 namespace py = pybind11;
@@ -39,10 +41,13 @@ template<typename T> inline bool g_runPluginCallbacks(T &msg) {
 
 namespace PluginAPI {
     void registerCallback(ClientMsg_Type type, pybind11::function func);
+    void loadPythonPlugins(const nlohmann::json &configJson);
+    const std::vector<std::string>& getLoadedPluginScripts();
     
     void sendChatMessage(client_id fromId, client_id toId, const std::string &text);
     bool setPlayerParameter(client_id playerId, const std::string &param, const pybind11::object &value);
     void killPlayer(client_id targetId);
+    void disconnectPlayer(client_id targetId, const std::string &reason);
     std::optional<client_id> getPlayerByName(const std::string &name);
     std::vector<client_id> getAllPlayerIds();
 

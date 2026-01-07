@@ -57,11 +57,13 @@ ServerBrowserController::ServerBrowserController(ClientEngine &engine,
     : engine(engine),
       clientConfig(clientConfig),
       clientConfigPath(configPath),
-      connector(connector) {
+            connector(connector),
+            defaultHost(defaultHost.empty() ? "localhost" : defaultHost),
+            defaultPort(defaultPort == 0 ? 1234 : defaultPort) {
     refreshGuiServerListOptions();
     rebuildServerListFetcher();
 
-    engine.gui->showServerBrowser({}, defaultHost, defaultPort);
+        engine.gui->showServerBrowser({}, this->defaultHost, this->defaultPort);
     triggerFullRefresh();
     nextAutoScanTime = SteadyClock::now() + autoScanInterval;
 }
@@ -106,6 +108,7 @@ void ServerBrowserController::triggerFullRefresh() {
 
 void ServerBrowserController::rebuildEntries() {
     const auto &servers = discovery.getServers();
+    const bool lanViewActive = isLanSelected();
 
     auto makeKey = [](const std::string &host, uint16_t port) {
         return host + ":" + std::to_string(port);
@@ -150,10 +153,17 @@ void ServerBrowserController::rebuildEntries() {
             continue;
         }
         GUI::ServerBrowserEntry entry;
-        entry.label = serverInfo.name.empty() ? "LAN server" : serverInfo.name;
+        const std::string addressLabel = serverInfo.host + ":" + std::to_string(serverInfo.port);
+        entry.label = lanViewActive ? addressLabel : (serverInfo.name.empty() ? "LAN server" : serverInfo.name);
         entry.host = serverInfo.host;
         entry.port = serverInfo.port;
         entry.description = serverInfo.world.empty() ? "Discovered via broadcast" : serverInfo.world;
+        if (lanViewActive && !serverInfo.name.empty()) {
+            entry.description = serverInfo.name;
+            if (!serverInfo.world.empty()) {
+                entry.description += " — " + serverInfo.world;
+            }
+        }
         entry.displayHost = serverInfo.displayHost.empty() ? serverInfo.host : serverInfo.displayHost;
         entry.longDescription = serverInfo.world.empty()
             ? std::string("Discovered via LAN broadcast.")
@@ -188,7 +198,8 @@ void ServerBrowserController::rebuildEntries() {
         entries.push_back(std::move(entry));
     }
 
-    engine.gui->setServerBrowserEntries(entries);
+    lastGuiEntries = entries;
+    engine.gui->setServerBrowserEntries(lastGuiEntries);
     if (!entries.empty()) {
         engine.gui->setServerBrowserStatus("Select a server to connect.", false);
     }
@@ -262,6 +273,17 @@ void ServerBrowserController::update() {
             engine.gui->setServerBrowserStatus("No server sources configured. Add a server list or enable Local Area Network.", true);
         }
     }
+}
+
+void ServerBrowserController::handleDisconnected(const std::string &reason) {
+    std::string status = reason.empty()
+        ? std::string("Disconnected from server. Select a server to reconnect.")
+        : reason;
+
+    engine.gui->showServerBrowser(lastGuiEntries, defaultHost, defaultPort);
+    engine.gui->setServerBrowserStatus(status, true);
+    triggerFullRefresh();
+    nextAutoScanTime = SteadyClock::now() + autoScanInterval;
 }
 
 void ServerBrowserController::refreshGuiServerListOptions() {

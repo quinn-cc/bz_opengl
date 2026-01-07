@@ -4,10 +4,105 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/embed.h>
+#include <filesystem>
 
 extern Game* g_game;
 extern ServerEngine* g_engine;
 std::map<ClientMsg_Type, std::vector<pybind11::function>> g_pluginCallbacks;
+namespace {
+std::vector<std::string> g_loadedPlugins;
+}
+
+void PluginAPI::loadPythonPlugins(const nlohmann::json &configJson) {
+    namespace py = pybind11;
+    namespace fs = std::filesystem;
+
+    std::vector<std::string> configuredPlugins;
+    if (configJson.contains("plugins") && configJson["plugins"].is_array()) {
+        for (const auto &entry : configJson["plugins"]) {
+            if (!entry.is_object()) {
+                spdlog::warn("Skipping plugin entry because it is not an object.");
+                continue;
+            }
+
+            auto nameIt = entry.find("name");
+            if (nameIt != entry.end() && nameIt->is_string()) {
+                configuredPlugins.emplace_back(nameIt->get<std::string>());
+            } else {
+                spdlog::warn("Skipping plugin entry missing a string 'name' field.");
+            }
+        }
+    }
+
+    if (configuredPlugins.empty()) {
+        spdlog::info("No plugins configured in world config; skipping Python plugin load.");
+        g_loadedPlugins.clear();
+        return;
+    }
+
+    fs::path cwd = fs::current_path();
+    fs::path repoRoot = cwd;
+    if (!fs::exists(repoRoot / "plugins") && repoRoot.has_parent_path()) {
+        repoRoot = repoRoot.parent_path();
+    }
+
+    const fs::path pluginDir = fs::exists(repoRoot / "plugins") ? (repoRoot / "plugins") : (cwd / "plugins");
+    const fs::path commandsDir = pluginDir / "commands";
+    const fs::path sharedPythonDir = fs::exists(repoRoot / "python") ? (repoRoot / "python") : (cwd / "python");
+
+    py::module_ sys  = py::module_::import("sys");
+
+    auto addSysPath = [&](const fs::path &path) {
+        if (!path.empty() && fs::exists(path)) {
+            sys.attr("path").attr("insert")(0, path.lexically_normal().string());
+        }
+    };
+
+    addSysPath(cwd);
+    addSysPath(repoRoot);
+    addSysPath(pluginDir);
+    addSysPath(sharedPythonDir);
+    if (fs::exists(commandsDir)) {
+        addSysPath(commandsDir);
+    }
+
+    g_loadedPlugins.clear();
+
+    auto isPluginNameSafe = [](const std::string &pluginName) {
+        return !pluginName.empty() &&
+               pluginName.find("..") == std::string::npos &&
+               pluginName.find('/') == std::string::npos &&
+               pluginName.find('\\') == std::string::npos;
+    };
+
+    for (const auto &pluginName : configuredPlugins) {
+        if (!isPluginNameSafe(pluginName)) {
+            spdlog::warn("Skipping plugin '{}' because it contains invalid path characters.", pluginName);
+            continue;
+        }
+
+        const fs::path scriptPath = pluginDir / pluginName / "plugin.py";
+        if (!fs::exists(scriptPath)) {
+            spdlog::warn("Configured plugin '{}' missing at {}", pluginName, scriptPath.string());
+            continue;
+        }
+
+        addSysPath(scriptPath.parent_path());
+
+        try {
+            const std::string normalizedPath = scriptPath.lexically_normal().string();
+            py::print("[PY] Loading plugin:", pluginName, "->", normalizedPath);
+            py::eval_file(normalizedPath, py::globals());
+            g_loadedPlugins.push_back(normalizedPath);
+        } catch (py::error_already_set &e) {
+            py::print("[PY ERROR]", e.what());
+        }
+    }
+}
+
+const std::vector<std::string> &PluginAPI::getLoadedPluginScripts() {
+    return g_loadedPlugins;
+}
 
 void PluginAPI::registerCallback(ClientMsg_Type type, pybind11::function func) {
     if (g_pluginCallbacks.find(type) == g_pluginCallbacks.end()) {
@@ -38,6 +133,21 @@ void PluginAPI::killPlayer(client_id targetId) {
     if (client) {
         client->die();
     }
+}
+
+void PluginAPI::disconnectPlayer(client_id targetId, const std::string &reason) {
+    if (!g_engine || !g_engine->network) {
+        spdlog::warn("PluginAPI::disconnectPlayer: Server engine not initialized");
+        return;
+    }
+
+    Client *client = g_game ? g_game->getClient(targetId) : nullptr;
+    if (!client) {
+        spdlog::warn("PluginAPI::disconnectPlayer: Client id {} not found", targetId);
+        return;
+    }
+
+    g_engine->network->disconnectClient(targetId, reason);
 }
 
 std::optional<client_id> PluginAPI::getPlayerByName(const std::string &name) {
@@ -91,6 +201,10 @@ PYBIND11_EMBEDDED_MODULE(bzapi, m) {
           pybind11::arg("player_id"), pybind11::arg("param"), pybind11::arg("value"));
     m.def("kill_player", &PluginAPI::killPlayer, "Kill a player",
           pybind11::arg("target_id"));
+        m.def("disconnect_player", &PluginAPI::disconnectPlayer, "Disconnect a player",
+            pybind11::arg("target_id"), pybind11::arg("reason") = "");
+        m.def("kick_player", &PluginAPI::disconnectPlayer, "Disconnect a player",
+            pybind11::arg("target_id"), pybind11::arg("reason") = "");
     m.def("get_player_by_name", &PluginAPI::getPlayerByName, "Get a player ID by name",
           pybind11::arg("name"));
     m.def("get_all_player_ids", &PluginAPI::getAllPlayerIds, "Get all player IDs");

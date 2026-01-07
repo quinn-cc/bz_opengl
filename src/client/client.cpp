@@ -6,7 +6,7 @@
 Client::Client(Game &game, client_id id) : game(game), id(id) {
     initialized = false;
 
-    renderId = game.engine.render->create("data/models/tank/tank.glb");
+    renderId = game.engine.render->create("../data/models/tank/tank.glb");
 
     if (auto msg = game.engine.network->peekMessage<ServerMsg_PlayerJoin>(
         [this](const ServerMsg_PlayerJoin &msg) {

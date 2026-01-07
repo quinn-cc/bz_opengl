@@ -76,6 +76,10 @@ list(APPEND CLIENT_SOURCES
     ${PROJECT_SOURCE_DIR}/src/client/server/server_browser_controller.cpp
 )
 file(GLOB_RECURSE SERVER_SOURCES "${PROJECT_SOURCE_DIR}/src/server/*.cpp")
+list(APPEND SERVER_SOURCES
+    ${PROJECT_SOURCE_DIR}/src/server/terminal_commands.cpp
+    ${PROJECT_SOURCE_DIR}/src/server/server_cli_options.cpp
+)
 ## Separate engine sources for client and server to avoid over-linking
 set(ENGINE_CLIENT_SOURCES
     ${PROJECT_SOURCE_DIR}/src/engine/client_engine.cpp

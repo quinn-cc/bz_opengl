@@ -4,8 +4,8 @@
 
 Shot::Shot(Game &game, shot_id id, bool isGlobalId, glm::vec3 position, glm::vec3 velocity) : game(game) {
     if (fireAudioId == 0) {
-        fireAudioId = game.engine.audio->create("data/audio/fire.wav", 20);
-        ricochetAudioId = game.engine.audio->create("data/audio/ricochet.wav", 20);
+        fireAudioId = game.engine.audio->create("../data/audio/fire.wav", 20);
+        ricochetAudioId = game.engine.audio->create("../data/audio/ricochet.wav", 20);
     }
     
     this->id = id;
@@ -13,7 +13,7 @@ Shot::Shot(Game &game, shot_id id, bool isGlobalId, glm::vec3 position, glm::vec
     this->position = position;
     this->velocity = velocity;
 
-    renderId = game.engine.render->create("data/models/shot.glb");
+    renderId = game.engine.render->create("../data/models/shot.glb");
     game.engine.render->setPosition(renderId, position);
     game.engine.render->setScale(renderId, glm::vec3(0.6f));
     game.engine.render->setTransparency(renderId, true);   

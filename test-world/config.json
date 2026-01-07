@@ -2,7 +2,33 @@
     "serverName": "Test World Server",
     "maxPlayers": 20,
     "hostPort": 1234,
-    "settings": {
-        "highSpeedMultiplier": 2.0
-    }
+    "admin": {
+        "local": [
+            {
+                "username": "Grue",
+                "password": "darkness"
+            },
+            {
+                "username": "r55man",
+                "password": "r55cat"
+            }
+        ],
+        "remote" : {
+            "enabled": true,
+            "groups" : {}
+        }
+    },
+    "plugins": [
+        {
+            "name": "core_commands",
+            "options": {
+            }
+        },
+        {
+            "name": "high_speed",
+            "options": {
+                "speed_multiplier": 3.0
+            }
+        }
+    ]
 }

@@ -175,3 +175,23 @@ std::vector<client_id> ServerNetwork::getClients() const {
     }
     return clientIds;
 }
+
+void ServerNetwork::disconnectClient(client_id clientId, const std::string &reason) {
+    auto it = clients.find(clientId);
+    if (it == clients.end()) {
+        spdlog::warn("ServerNetwork::disconnectClient: Attempted to disconnect unknown client {}", clientId);
+        return;
+    }
+
+    if (!reason.empty()) {
+        ServerMsg_Chat notice;
+        notice.fromId = SERVER_CLIENT_ID;
+        notice.toId = clientId;
+        notice.text = reason;
+        send<ServerMsg_Chat>(clientId, &notice);
+        enet_host_flush(server);
+    }
+
+    spdlog::info("ServerNetwork::disconnectClient: Disconnecting client {}", clientId);
+    enet_peer_disconnect(it->second, 0);
+}

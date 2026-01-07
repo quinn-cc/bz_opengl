@@ -25,6 +25,10 @@ def kill_player(target_id: int) -> None:
     """Kill a player"""
     ...
 
+def disconnect_player(target_id: int, reason: str) -> None:
+    """Disconnect a player from the server"""
+    ...
+
 def get_player_by_name(name: str) -> int:
     """Get a player ID by name"""
     ...

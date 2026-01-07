@@ -226,5 +226,6 @@ public:
         }
     };
 
+    void disconnectClient(client_id clientId, const std::string &reason = "");
     std::vector<client_id> getClients() const;
 };

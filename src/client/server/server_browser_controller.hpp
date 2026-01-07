@@ -24,6 +24,7 @@ public:
                             ServerConnector &connector);
 
     void update();
+    void handleDisconnected(const std::string &reason);
 
 private:
     using SteadyClock = std::chrono::steady_clock;
@@ -51,6 +52,9 @@ private:
     ServerDiscovery discovery;
     std::unique_ptr<ServerListFetcher> serverListFetcher;
     std::vector<ServerListFetcher::ServerRecord> cachedRemoteServers;
+    std::vector<GUI::ServerBrowserEntry> lastGuiEntries;
+    std::string defaultHost;
+    uint16_t defaultPort = 0;
     int activeServerListIndex = -1;
     std::unordered_map<std::string, std::string> serverListDisplayNames;
     bool lanAutoRefreshEnabled = false;

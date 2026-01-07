@@ -2,6 +2,7 @@
 #include "engine/types.hpp"
 #include <string>
 #include <cstdint>
+#include <optional>
 #include <enet.h>
 #include "messages.pb.h"
 #include "spdlog/spdlog.h"
@@ -9,9 +10,15 @@
 class ClientNetwork {
     friend class ClientEngine;
 
+public:
+    struct DisconnectEvent {
+        std::string reason;
+    };
+
 private:
     ENetHost* client = nullptr;
     ENetPeer* server = nullptr;
+    std::optional<DisconnectEvent> pendingDisconnect;
 
     struct MsgData {
         ENetPacket* packet;
@@ -29,6 +36,8 @@ private:
 
 public:
     bool connect(const std::string &address, uint16_t port, int timeoutMs = 5000);
+    std::optional<DisconnectEvent> consumeDisconnectEvent();
+    bool isConnected() const { return server != nullptr; }
 
     template<typename T> T* peekMessage(std::function<bool(const T&)> predicate = [](const T&) { return true; }) {
         static_assert(std::is_base_of_v<ServerMsg, T>, "T must be a subclass of ServerMsg");
