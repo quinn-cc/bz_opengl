@@ -162,3 +162,41 @@ elseif(WIN32)
     target_link_libraries(client PRIVATE ws2_32)
     target_link_libraries(server PRIVATE ws2_32)
 endif()
+
+# Define install prefix for runtime data lookup
+target_compile_definitions(client PRIVATE
+    INSTALL_DATA_DIR="${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/data"
+)
+target_compile_definitions(server PRIVATE
+    INSTALL_DATA_DIR="${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/data"
+)
+
+install(TARGETS client server
+    RUNTIME DESTINATION bin
+)
+
+# Install data folder
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/data/
+    DESTINATION share/${PROJECT_NAME}/data
+)
+
+# CPack configuration
+set(CPACK_PACKAGE_NAME "BZ")
+set(CPACK_PACKAGE_VERSION "1.0.0")
+set(CPACK_PACKAGE_VENDOR "Quinn Carmack")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "BZFlag remade")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "BZ")
+
+# Linux-specific generators
+if(UNIX AND NOT APPLE)
+    set(CPACK_GENERATOR "DEB;RPM;TGZ")
+    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Quinn Carmack <quinncarmack@gmail.com>")
+    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libgl1, libglfw3")
+    set(CPACK_RPM_PACKAGE_LICENSE "MIT")
+elseif(APPLE)
+    set(CPACK_GENERATOR "DragNDrop")
+elseif(WIN32)
+    set(CPACK_GENERATOR "NSIS;ZIP")
+endif()
+
+include(CPack)
