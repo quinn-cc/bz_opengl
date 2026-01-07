@@ -70,6 +70,7 @@ inline float angleBetween(const glm::quat& a, const glm::quat& b, bool degrees =
 
 using client_id = uint32_t;
 using shot_id = uint32_t;
+
 using physics_id = uint32_t;
 using render_id = uint32_t;
 using audio_id = uint32_t;
