@@ -10,6 +10,62 @@
 
 TimeUtils::time lastFrameTime;
 
+namespace {
+struct FullscreenState {
+    bool active = false;
+    int windowedX = 0;
+    int windowedY = 0;
+    int windowedWidth = 1280;
+    int windowedHeight = 720;
+};
+
+void ToggleFullscreen(GLFWwindow *window, FullscreenState &state) {
+    if (!window) {
+        return;
+    }
+
+    if (!state.active) {
+        glfwGetWindowPos(window, &state.windowedX, &state.windowedY);
+        glfwGetWindowSize(window, &state.windowedWidth, &state.windowedHeight);
+
+        GLFWmonitor *monitor = glfwGetWindowMonitor(window);
+        if (!monitor) {
+            monitor = glfwGetPrimaryMonitor();
+        }
+
+        if (!monitor) {
+            return;
+        }
+
+        int monitorX = 0;
+        int monitorY = 0;
+        glfwGetMonitorPos(monitor, &monitorX, &monitorY);
+
+        const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+        if (!mode) {
+            return;
+        }
+
+        glfwSetWindowAttrib(window, GLFW_DECORATED, GLFW_FALSE);
+        glfwSetWindowPos(window, monitorX, monitorY);
+        glfwSetWindowSize(window, mode->width, mode->height);
+
+        glfwSwapInterval(1); // ensure vsync remains active after mode switch
+        state.active = true;
+    } else {
+        const int restoreWidth = state.windowedWidth > 0 ? state.windowedWidth : 1280;
+        const int restoreHeight = state.windowedHeight > 0 ? state.windowedHeight : 720;
+        const int restoreX = state.windowedX;
+        const int restoreY = state.windowedY;
+        glfwSetWindowAttrib(window, GLFW_DECORATED, GLFW_TRUE);
+        glfwSetWindowPos(window, restoreX, restoreY);
+        glfwSetWindowSize(window, restoreWidth, restoreHeight);
+        glfwSwapInterval(1); // reapply vsync after returning to windowed mode
+        state.active = false;
+    }
+}
+}
+
 #define MIN_DELTA_TIME (1.0f / 120.0f)
 
 int main(int argc, char *argv[]) {
@@ -64,6 +120,7 @@ int main(int argc, char *argv[]) {
 
     ClientEngine engine(window);
     spdlog::trace("ClientEngine initialized successfully");
+    FullscreenState fullscreenState;
 
     std::unique_ptr<Game> game;
     ServerConnector serverConnector(engine, cliOptions.playerName, cliOptions.worldDir, game);
@@ -95,6 +152,10 @@ int main(int argc, char *argv[]) {
         lastFrameTime = currTime;
 
         engine.earlyUpdate(deltaTime);
+
+        if (engine.input->getInputState().toggleFullscreen) {
+            ToggleFullscreen(window, fullscreenState);
+        }
 
         if (auto disconnectEvent = engine.network->consumeDisconnectEvent()) {
             if (game) {

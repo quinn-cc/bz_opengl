@@ -88,6 +88,7 @@ set(ENGINE_CLIENT_SOURCES
     ${PROJECT_SOURCE_DIR}/src/engine/components/render.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/input.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/gui.cpp
+    ${PROJECT_SOURCE_DIR}/src/engine/components/gui/server_browser.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/physics.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/audio.cpp
 )

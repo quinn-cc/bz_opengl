@@ -17,6 +17,7 @@ typedef struct InputState {
     bool quickQuit;
     bool chat;
     bool escape;
+    bool toggleFullscreen;
     glm::vec2 movement;
 } InputState;
 
