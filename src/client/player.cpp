@@ -62,7 +62,7 @@ void Player::earlyUpdate() {
         game.engine.gui->displayDeathScreen(false);
 
         bool wasGrounded = grounded;
-        grounded = game.engine.physics->isGrounded(physicsId, glm::vec3(1.0f, 2.0f, 1.0f));       
+        grounded = game.engine.physics->isGrounded(physicsId, glm::vec3(1.0f, 2.0f, 1.0f));
         
         if (grounded) {
             glm::vec2 movement(0.0f);

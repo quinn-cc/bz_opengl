@@ -56,6 +56,7 @@ ServerBrowserController::ServerBrowserController(ClientEngine &engine,
                                                  uint16_t defaultPort,
                                                  ServerConnector &connector)
     : engine(engine),
+            browser(engine.gui->serverBrowser()),
       clientConfig(clientConfig),
       clientConfigPath(configPath),
             connector(connector),
@@ -64,7 +65,7 @@ ServerBrowserController::ServerBrowserController(ClientEngine &engine,
     refreshGuiServerListOptions();
     rebuildServerListFetcher();
 
-        engine.gui->showServerBrowser({}, this->defaultHost, this->defaultPort);
+                browser.show({}, this->defaultHost, this->defaultPort);
     triggerFullRefresh();
     nextAutoScanTime = SteadyClock::now() + autoScanInterval;
 }
@@ -84,8 +85,8 @@ void ServerBrowserController::triggerFullRefresh() {
     }
 
     if (!issuedRequest) {
-        engine.gui->setServerBrowserStatus("No server sources configured. Add a server list or enable Local Area Network.", true);
-        engine.gui->setServerBrowserScanning(false);
+        browser.setStatus("No server sources configured. Add a server list or enable Local Area Network.", true);
+        browser.setScanning(false);
         return;
     }
 
@@ -97,14 +98,14 @@ void ServerBrowserController::triggerFullRefresh() {
     }
 
     if (lanActive && serverListFetcher) {
-        engine.gui->setServerBrowserStatus("Searching local network and fetching the selected server list...", false);
+        browser.setStatus("Searching local network and fetching the selected server list...", false);
     } else if (lanActive) {
-        engine.gui->setServerBrowserStatus("Searching local network for servers...", false);
+        browser.setStatus("Searching local network for servers...", false);
     } else {
-        engine.gui->setServerBrowserStatus("Fetching " + selectionLabel + "...", false);
+        browser.setStatus("Fetching " + selectionLabel + "...", false);
     }
 
-    engine.gui->setServerBrowserScanning(issuedRequest);
+    browser.setScanning(issuedRequest);
 }
 
 void ServerBrowserController::rebuildEntries() {
@@ -140,7 +141,7 @@ void ServerBrowserController::rebuildEntries() {
         return description;
     };
 
-    std::vector<GUI::ServerBrowserEntry> entries;
+    std::vector<gui::ServerBrowserEntry> entries;
     entries.reserve(servers.size() + cachedRemoteServers.size());
     std::unordered_set<std::string> seen;
     seen.reserve(entries.capacity() > 0 ? entries.capacity() : 1);
@@ -154,7 +155,7 @@ void ServerBrowserController::rebuildEntries() {
             if (!seen.insert(key).second) {
                 continue;
             }
-            GUI::ServerBrowserEntry entry;
+            gui::ServerBrowserEntry entry;
             const std::string addressLabel = serverInfo.host + ":" + std::to_string(serverInfo.port);
             entry.label = addressLabel;
             entry.host = serverInfo.host;
@@ -184,7 +185,7 @@ void ServerBrowserController::rebuildEntries() {
         if (!seen.insert(key).second) {
             continue;
         }
-        GUI::ServerBrowserEntry entry;
+        gui::ServerBrowserEntry entry;
         entry.label = record.name.empty() ? record.host : record.name;
         entry.host = record.host;
         entry.port = recordPort;
@@ -199,24 +200,24 @@ void ServerBrowserController::rebuildEntries() {
     }
 
     lastGuiEntries = entries;
-    engine.gui->setServerBrowserEntries(lastGuiEntries);
+    browser.setEntries(lastGuiEntries);
     if (!entries.empty()) {
-        engine.gui->setServerBrowserStatus("Select a server to connect.", false);
+        browser.setStatus("Select a server to connect.", false);
     }
 }
 
 void ServerBrowserController::update() {
-    if (auto listSelection = engine.gui->consumeServerBrowserListSelection()) {
+    if (auto listSelection = browser.consumeListSelection()) {
         handleServerListSelection(*listSelection);
     }
 
-    if (auto newList = engine.gui->consumeServerBrowserNewListRequest()) {
+    if (auto newList = browser.consumeNewListRequest()) {
         handleServerListAddition(*newList);
     }
 
     auto nowSteady = SteadyClock::now();
 
-    if (engine.gui->consumeServerBrowserRefreshRequest()) {
+    if (browser.consumeRefreshRequest()) {
         triggerFullRefresh();
         nextAutoScanTime = nowSteady + autoScanInterval;
     } else if (lanAutoRefreshEnabled && !discovery.isScanning() && nowSteady >= nextAutoScanTime) {
@@ -226,7 +227,7 @@ void ServerBrowserController::update() {
 
     discovery.update();
     bool remoteFetchingActive = serverListFetcher && serverListFetcher->isFetching();
-    engine.gui->setServerBrowserScanning(discovery.isScanning() || remoteFetchingActive);
+    browser.setScanning(discovery.isScanning() || remoteFetchingActive);
 
     bool entriesDirty = false;
     auto discoveryVersion = discovery.getGeneration();
@@ -253,7 +254,7 @@ void ServerBrowserController::update() {
     bool lanEmpty = servers.empty();
     bool remoteEmpty = cachedRemoteServers.empty();
 
-    if (auto selection = engine.gui->consumeServerBrowserSelection()) {
+    if (auto selection = browser.consumeSelection()) {
         connector.connect(selection->host, selection->port);
     }
 
@@ -262,15 +263,15 @@ void ServerBrowserController::update() {
 
     if (lanEmpty && remoteEmpty) {
         if (discovery.isScanning() && isLanSelected()) {
-            engine.gui->setServerBrowserStatus("Searching local network for servers...", false);
+            browser.setStatus("Searching local network for servers...", false);
         } else if (remoteFetchingActive && serverListFetcher) {
-            engine.gui->setServerBrowserStatus("Fetching " + remoteLabel + "...", false);
+            browser.setStatus("Fetching " + remoteLabel + "...", false);
         } else if (isLanSelected()) {
-            engine.gui->setServerBrowserStatus("No LAN servers found. Start one locally or refresh.", true);
+            browser.setStatus("No LAN servers found. Start one locally or refresh.", true);
         } else if (serverListFetcher) {
-            engine.gui->setServerBrowserStatus(remoteLabel + " returned no servers. Verify the list provider.", true);
+            browser.setStatus(remoteLabel + " returned no servers. Verify the list provider.", true);
         } else {
-            engine.gui->setServerBrowserStatus("No server sources configured. Add a server list or enable Local Area Network.", true);
+            browser.setStatus("No server sources configured. Add a server list or enable Local Area Network.", true);
         }
     }
 }
@@ -280,23 +281,23 @@ void ServerBrowserController::handleDisconnected(const std::string &reason) {
         ? std::string("Disconnected from server. Select a server to reconnect.")
         : reason;
 
-    engine.gui->showServerBrowser(lastGuiEntries, defaultHost, defaultPort);
-    engine.gui->setServerBrowserStatus(status, true);
+    browser.show(lastGuiEntries, defaultHost, defaultPort);
+    browser.setStatus(status, true);
     triggerFullRefresh();
     nextAutoScanTime = SteadyClock::now() + autoScanInterval;
 }
 
 void ServerBrowserController::refreshGuiServerListOptions() {
-    std::vector<GUI::ServerListOption> options;
+    std::vector<gui::ServerListOption> options;
 
     if (clientConfig.showLanServers) {
-        GUI::ServerListOption lanOption;
+        gui::ServerListOption lanOption;
         lanOption.name = "Local Area Network";
         options.push_back(std::move(lanOption));
     }
 
     for (const auto &source : clientConfig.serverLists) {
-        GUI::ServerListOption option;
+        gui::ServerListOption option;
         option.name = resolveDisplayNameForSource(source);
         option.url = source.url;
         options.push_back(std::move(option));
@@ -313,7 +314,7 @@ void ServerBrowserController::refreshGuiServerListOptions() {
         activeServerListIndex = desiredIndex;
     }
 
-    engine.gui->setServerBrowserListOptions(options, activeServerListIndex);
+    browser.setListOptions(options, activeServerListIndex);
 }
 
 std::vector<ClientServerListSource> ServerBrowserController::resolveActiveServerLists() const {
@@ -360,19 +361,19 @@ void ServerBrowserController::handleServerListSelection(int selectedIndex) {
     rebuildEntries();
 
     if (isLanSelected()) {
-        engine.gui->setServerBrowserListStatus("Local Area Network selected.", false);
+        browser.setListStatus("Local Area Network selected.", false);
     } else {
-        engine.gui->setServerBrowserListStatus("Server list updated.", false);
+        browser.setListStatus("Server list updated.", false);
     }
 
     triggerFullRefresh();
 }
 
-void ServerBrowserController::handleServerListAddition(const GUI::ServerListOption &option) {
+void ServerBrowserController::handleServerListAddition(const gui::ServerListOption &option) {
     std::string trimmedUrl = trimCopy(option.url);
 
     if (trimmedUrl.empty()) {
-        engine.gui->setServerBrowserListStatus("Enter a URL before saving.", true);
+        browser.setListStatus("Enter a URL before saving.", true);
         return;
     }
 
@@ -381,7 +382,7 @@ void ServerBrowserController::handleServerListAddition(const GUI::ServerListOpti
             return source.url == trimmedUrl;
         });
     if (existing != clientConfig.serverLists.end()) {
-        engine.gui->setServerBrowserListStatus("A server list with that URL already exists.", true);
+        browser.setListStatus("A server list with that URL already exists.", true);
         return;
     }
 
@@ -391,12 +392,12 @@ void ServerBrowserController::handleServerListAddition(const GUI::ServerListOpti
 
     if (!clientConfig.Save(clientConfigPath)) {
         clientConfig.serverLists.pop_back();
-        engine.gui->setServerBrowserListStatus("Failed to write config_client.json. Check permissions.", true);
+        browser.setListStatus("Failed to write config_client.json. Check permissions.", true);
         return;
     }
 
-    engine.gui->setServerBrowserListStatus("Server list saved.", false);
-    engine.gui->clearServerBrowserNewListInputs();
+    browser.setListStatus("Server list saved.", false);
+    browser.clearNewListInputs();
 
     activeServerListIndex = getLanOffset() + static_cast<int>(clientConfig.serverLists.size()) - 1;
     refreshGuiServerListOptions();

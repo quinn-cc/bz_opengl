@@ -17,19 +17,20 @@ ServerConnector::ServerConnector(ClientEngine &engine,
 
 bool ServerConnector::connect(const std::string &targetHost, uint16_t targetPort) {
     std::string status = "Connecting to " + targetHost + ":" + std::to_string(targetPort) + "...";
-    engine.gui->setServerBrowserStatus(status, false);
+    auto &browser = engine.gui->serverBrowser();
+    browser.setStatus(status, false);
     spdlog::info("Attempting to connect to {}:{}", targetHost, targetPort);
 
     if (engine.network->connect(targetHost, targetPort, 50)) {
         spdlog::info("Connected to server at {}:{}", targetHost, targetPort);
         game = std::make_unique<Game>(engine, playerName, worldDir);
         spdlog::trace("Game initialized successfully");
-        engine.gui->hideServerBrowser();
+        browser.hide();
         return true;
     }
 
     spdlog::error("Failed to connect to server at {}:{}", targetHost, targetPort);
     std::string errorMsg = "Unable to reach " + targetHost + ":" + std::to_string(targetPort) + ".";
-    engine.gui->setServerBrowserStatus(errorMsg, true);
+    browser.setStatus(errorMsg, true);
     return false;
 }
