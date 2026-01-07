@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
 
-project(BZ)
+project(Panzer)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -99,7 +99,7 @@ set(ENGINE_SERVER_SOURCES
 )
 
 # Create executables
-add_executable(client ${CLIENT_SOURCES} ${ENGINE_CLIENT_SOURCES})
+add_executable(panzer ${CLIENT_SOURCES} ${ENGINE_CLIENT_SOURCES})
 
 # Handle GLFW target for portability
 if(TARGET glfw3::glfw)
@@ -114,17 +114,17 @@ if(TARGET OpenGL::OpenGL)
 else()
     set(OPENGL_TARGET ${OPENGL_LIBRARIES})
 endif()
-add_executable(server ${SERVER_SOURCES} ${ENGINE_SERVER_SOURCES})
+add_executable(panzer-server ${SERVER_SOURCES} ${ENGINE_SERVER_SOURCES})
 
 # Include directories
-target_include_directories(client PRIVATE
+target_include_directories(panzer PRIVATE
     ${PROJECT_SOURCE_DIR}/src/
     ${PROJECT_SOURCE_DIR}/src/client
     ${BULLET_INCLUDE_DIRS}
     ${enet_SOURCE_DIR}/include
     ${PROJECT_SOURCE_DIR}/include/client
 )
-target_include_directories(server PRIVATE
+target_include_directories(panzer-server PRIVATE
     ${PROJECT_SOURCE_DIR}/src/
     ${PROJECT_SOURCE_DIR}/src/server
     ${BULLET_INCLUDE_DIRS}
@@ -132,7 +132,7 @@ target_include_directories(server PRIVATE
 )
 
 # Link libraries
-target_link_libraries(client PRIVATE
+target_link_libraries(panzer PRIVATE
     ${GLFW_TARGET}
     glm::glm
     ${BULLET_LIBRARIES}
@@ -149,7 +149,7 @@ target_link_libraries(client PRIVATE
     CURL::libcurl
 )
 
-target_link_libraries(server PRIVATE
+target_link_libraries(panzer-server PRIVATE
     glm::glm
     ${BULLET_LIBRARIES}
     enet_static
@@ -164,28 +164,28 @@ target_link_libraries(server PRIVATE
 
 # System libraries (platform-specific)
 if (UNIX AND NOT APPLE)
-    target_link_libraries(client PRIVATE pthread dl m)
-    target_link_libraries(server PRIVATE pthread dl m)
+    target_link_libraries(panzer PRIVATE pthread dl m)
+    target_link_libraries(panzer-server PRIVATE pthread dl m)
 elseif(APPLE)
     find_library(COCOA Cocoa)
     find_library(IOKIT IOKit)
     find_library(COREVIDEO CoreVideo)
-    target_link_libraries(client PRIVATE ${COCOA} ${IOKIT} ${COREVIDEO})
-    target_link_libraries(server PRIVATE ${COCOA})
+    target_link_libraries(panzer PRIVATE ${COCOA} ${IOKIT} ${COREVIDEO})
+    target_link_libraries(panzer-server PRIVATE ${COCOA})
 elseif(WIN32)
-    target_link_libraries(client PRIVATE ws2_32)
-    target_link_libraries(server PRIVATE ws2_32)
+    target_link_libraries(panzer PRIVATE ws2_32)
+    target_link_libraries(panzer-server PRIVATE ws2_32)
 endif()
 
 # Define install prefix for runtime data lookup
-target_compile_definitions(client PRIVATE
+target_compile_definitions(panzer PRIVATE
     INSTALL_DATA_DIR="${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/data"
 )
-target_compile_definitions(server PRIVATE
+target_compile_definitions(panzer-server PRIVATE
     INSTALL_DATA_DIR="${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/data"
 )
 
-install(TARGETS client server
+install(TARGETS panzer panzer-server
     RUNTIME DESTINATION bin
 )
 

@@ -16,7 +16,7 @@ jobs:
           - os: windows-latest
             vcpkg_triplet: x64-windows-static
           - os: macos-latest
-            vcpkg_triplet: x64-osx
+            vcpkg_triplet: arm64-osx
 
     runs-on: ${{ matrix.os }}
 
