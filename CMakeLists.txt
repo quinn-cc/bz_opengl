@@ -99,7 +99,8 @@ set(ENGINE_SERVER_SOURCES
 )
 
 # Create executables
-add_executable(panzer ${CLIENT_SOURCES} ${ENGINE_CLIENT_SOURCES})
+set(MACOSX_BUNDLE_ICON_FILE "") # Set to your .icns file if you have one
+add_executable(panzer MACOSX_BUNDLE ${CLIENT_SOURCES} ${ENGINE_CLIENT_SOURCES})
 
 # Handle GLFW target for portability
 if(TARGET glfw3::glfw)
@@ -185,7 +186,8 @@ target_compile_definitions(panzer-server PRIVATE
     INSTALL_DATA_DIR="${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/data"
 )
 
-install(TARGETS panzer panzer-server
+install(TARGETS panzer BUNDLE DESTINATION .)
+install(TARGETS panzer-server
     RUNTIME DESTINATION bin
 )
 
