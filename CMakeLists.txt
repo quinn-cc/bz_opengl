@@ -100,6 +100,20 @@ set(ENGINE_SERVER_SOURCES
 
 # Create executables
 add_executable(client ${CLIENT_SOURCES} ${ENGINE_CLIENT_SOURCES})
+
+# Handle GLFW target for portability
+if(TARGET glfw3::glfw)
+    set(GLFW_TARGET glfw3::glfw)
+else()
+    set(GLFW_TARGET glfw)
+endif()
+
+# Handle OpenGL target for portability
+if(TARGET OpenGL::OpenGL)
+    set(OPENGL_TARGET OpenGL::OpenGL)
+else()
+    set(OPENGL_TARGET ${OPENGL_LIBRARIES})
+endif()
 add_executable(server ${SERVER_SOURCES} ${ENGINE_SERVER_SOURCES})
 
 # Include directories
@@ -119,12 +133,12 @@ target_include_directories(server PRIVATE
 
 # Link libraries
 target_link_libraries(client PRIVATE
-    glfw
+    ${GLFW_TARGET}
     glm::glm
     ${BULLET_LIBRARIES}
     enet_static
     assimp::assimp
-    OpenGL::OpenGL
+    ${OPENGL_TARGET}
     threepp::threepp
     cxxopts::cxxopts
     imgui::imgui
