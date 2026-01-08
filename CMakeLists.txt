@@ -89,14 +89,18 @@ set(ENGINE_CLIENT_SOURCES
     ${PROJECT_SOURCE_DIR}/src/engine/components/input.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/gui.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/gui/server_browser.cpp
-    ${PROJECT_SOURCE_DIR}/src/engine/components/physics.cpp
+    ${PROJECT_SOURCE_DIR}/src/engine/physics/physics_world.cpp
+    ${PROJECT_SOURCE_DIR}/src/engine/physics/rigid_body.cpp
+    ${PROJECT_SOURCE_DIR}/src/engine/physics/compound_body.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/audio.cpp
 )
 set(ENGINE_SERVER_SOURCES
     ${PROJECT_SOURCE_DIR}/src/engine/server_engine.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/mesh_loader.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/server_network.cpp
-    ${PROJECT_SOURCE_DIR}/src/engine/components/physics.cpp
+    ${PROJECT_SOURCE_DIR}/src/engine/physics/physics_world.cpp
+    ${PROJECT_SOURCE_DIR}/src/engine/physics/rigid_body.cpp
+    ${PROJECT_SOURCE_DIR}/src/engine/physics/compound_body.cpp
 )
 
 # Create executables

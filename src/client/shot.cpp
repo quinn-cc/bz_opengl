@@ -2,23 +2,25 @@
 #include "game.hpp"
 #include "spdlog/spdlog.h"
 
-Shot::Shot(Game &game, shot_id id, bool isGlobalId, glm::vec3 position, glm::vec3 velocity) : game(game) {
-    if (fireAudioId == 0) {
-        fireAudioId = game.engine.audio->create("../data/audio/fire.wav", 20);
-        ricochetAudioId = game.engine.audio->create("../data/audio/ricochet.wav", 20);
-    }
-    
-    this->id = id;
-    this->isGlobalId = isGlobalId;
-    this->position = position;
-    this->velocity = velocity;
-
-    renderId = game.engine.render->create("../data/models/shot.glb");
+Shot::Shot(Game &game,
+           shot_id id,
+           bool isGlobalId,
+           glm::vec3 position,
+           glm::vec3 velocity)
+    : game(game),
+      id(id),
+      isGlobalId(isGlobalId),
+      position(position),
+      velocity(velocity),
+      renderId(game.engine.render->create(game.world->getAssetPath("shotModel").string())),
+      audioEngine(*game.engine.audio),
+      fireAudio(audioEngine.loadClip(game.world->getAssetPath("playerFireSound").string(), 20)),
+      ricochetAudio(audioEngine.loadClip(game.world->getAssetPath("shotRicochetSound").string(), 20)) {
     game.engine.render->setPosition(renderId, position);
     game.engine.render->setScale(renderId, glm::vec3(0.6f));
-    game.engine.render->setTransparency(renderId, true);   
+    game.engine.render->setTransparency(renderId, true);
 
-    game.engine.audio->play(fireAudioId, position);
+    fireAudio.play(position);
 }
 
 // Local id constructor
@@ -41,7 +43,7 @@ void Shot::update(TimeUtils::duration deltaTime) {
     glm::vec3 hitPoint, hitNormal;
     if (game.engine.physics->raycast(position, position + velocity * deltaTime, hitPoint, hitNormal)) {
         velocity = glm::reflect(velocity, hitNormal);
-        game.engine.audio->play(ricochetAudioId, hitPoint);
+        ricochetAudio.play(hitPoint);
     }
 
     position += velocity * deltaTime;

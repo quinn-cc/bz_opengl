@@ -2,6 +2,8 @@
 #include <glm/glm.hpp>
 #include <string>
 #include "engine/types.hpp"
+#include "engine/physics/rigid_body.hpp"
+#include "engine/components/audio.hpp"
 #include <spdlog/spdlog.h>
 
 #define POSITION_UPDATE_THRESHOLD 0.01f
@@ -15,11 +17,12 @@ private:
     client_id clientId;
     bool grounded;
 
-    physics_id physicsId;
-    audio_id jumpAudioId;
-    audio_id dieAudioId;
-    audio_id spawnAudioId;
-    audio_id landAudioId;
+    PhysicsRigidBody physics;
+    Audio& audioEngine;
+    AudioClip jumpAudio;
+    AudioClip dieAudio;
+    AudioClip spawnAudio;
+    AudioClip landAudio;
 
     TimeUtils::time lastJumpTime;
     TimeUtils::duration jumpCooldown;

@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "engine/types.hpp"
+#include "engine/physics/compound_body.hpp"
 #include <nlohmann/json.hpp>
 
 class Game;
@@ -9,7 +10,7 @@ class World {
 private:
     Game &game;
     render_id renderId;
-    physics_id physicsId;
+    PhysicsCompoundBody physics;
     PlayerParameters defaultPlayerParams;
     bool initialized = false;
 

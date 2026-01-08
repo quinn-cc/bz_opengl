@@ -3,24 +3,30 @@
 #include "engine/types.hpp"
 #include "game.hpp"
 #include <string>
+#include <utility>
 #include "spdlog/spdlog.h"
 #include "shot.hpp"
 
-Player::Player(Game &game, client_id id, PlayerParameters params, const std::string name) : game(game) {
-    this->clientId = id;
-    this->state.params = params;
+Player::Player(Game &game,
+               client_id id,
+               PlayerParameters params,
+               const std::string name)
+    : game(game),
+      clientId(id),
+      grounded(false),
+      physics(game.engine.physics->createPlayer(glm::vec3(1.0f, 2.0f, 1.0f))),
+      audioEngine(*game.engine.audio),
+      jumpAudio(audioEngine.loadClip(game.world->getAssetPath("playerJumpSound"), 5)),
+      dieAudio(audioEngine.loadClip(game.world->getAssetPath("playerDieSound"), 1)),
+      spawnAudio(audioEngine.loadClip(game.world->getAssetPath("playerSpawnSound"), 1)),
+      landAudio(audioEngine.loadClip(game.world->getAssetPath("playerLandSound"), 1)),
+      lastJumpTime(TimeUtils::GetCurrentTime()),
+      jumpCooldown(TimeUtils::getDuration(0.1f)) {
+    state.params = std::move(params);
     state.name = name;
     state.alive = false;
-    grounded = false;
-    lastJumpTime = TimeUtils::GetCurrentTime();
-    jumpCooldown = TimeUtils::getDuration(0.1f);
-
-    physicsId = game.engine.physics->createPlayer(glm::vec3(1.0f, 2.0f, 1.0f));
-
-    jumpAudioId = game.engine.audio->create(game.world->getAssetPath("playerJumpSound"), 5);
-    dieAudioId = game.engine.audio->create(game.world->getAssetPath("playerDieSound"), 1);
-    spawnAudioId = game.engine.audio->create(game.world->getAssetPath("playerSpawnSound"), 1);
-    landAudioId = game.engine.audio->create(game.world->getAssetPath("playerLandSound"), 1);
+    lastPosition = glm::vec3(0.0f);
+    lastRotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
 
     ClientMsg_Init initMsg;
     initMsg.name = name;
@@ -28,7 +34,7 @@ Player::Player(Game &game, client_id id, PlayerParameters params, const std::str
 }
 
 Player::~Player() {
-    game.engine.physics->destroy(physicsId);
+    physics.destroy();
 }
 
 float Player::getParameter(const std::string &paramName) const {
@@ -42,7 +48,7 @@ float Player::getParameter(const std::string &paramName) const {
 }
 
 glm::vec3 Player::getForwardVector() const {
-    return game.engine.physics->getForwardVector(physicsId);
+    return physics.getForwardVector();
 }
 
 void Player::earlyUpdate() {
@@ -62,19 +68,19 @@ void Player::earlyUpdate() {
         game.engine.gui->displayDeathScreen(false);
 
         bool wasGrounded = grounded;
-        grounded = game.engine.physics->isGrounded(physicsId, glm::vec3(1.0f, 2.0f, 1.0f));
+        grounded = physics.isGrounded(glm::vec3(1.0f, 2.0f, 1.0f));
         
         if (grounded) {
             glm::vec2 movement(0.0f);
             if (game.getFocusState() == FOCUS_STATE_GAME)
                 movement = game.engine.input->getInputState().movement;
-            glm::vec3 movementVector = game.engine.physics->getForwardVector(physicsId);
+            glm::vec3 movementVector = physics.getForwardVector();
             movementVector *= movement.y * getParameter("speed");
-            movementVector.y = game.engine.physics->getVelocity(physicsId).y;
+            movementVector.y = physics.getVelocity().y;
 
-            game.engine.physics->setVelocity(physicsId, movementVector);
+            physics.setVelocity(movementVector);
 
-            game.engine.physics->setAngularVelocity(physicsId, glm::vec3(
+            physics.setAngularVelocity(glm::vec3(
                 0.0f,
                 -movement.x * getParameter("turnSpeed"),
                 0.0f
@@ -82,17 +88,17 @@ void Player::earlyUpdate() {
 
             if (game.getFocusState() == FOCUS_STATE_GAME) {
                 if (grounded && game.engine.input->getInputState().jump && TimeUtils::GetElapsedTime(lastJumpTime, TimeUtils::GetCurrentTime()) >= jumpCooldown) {
-                    glm::vec3 velocity = game.engine.physics->getVelocity(physicsId);
+                    glm::vec3 velocity = physics.getVelocity();
                     velocity.y = getParameter("jumpSpeed");
-                    game.engine.physics->setVelocity(physicsId, velocity);
+                    physics.setVelocity(velocity);
                     lastJumpTime = TimeUtils::GetCurrentTime();
                     grounded = false;
-                    game.engine.audio->play(jumpAudioId, state.position);
+                    jumpAudio.play(state.position);
                 }
             }
 
             if (wasGrounded == false) {
-                game.engine.audio->play(landAudioId, state.position);
+                landAudio.play(state.position);
             }
         }
 
@@ -110,7 +116,7 @@ void Player::earlyUpdate() {
         if (auto *msg = game.engine.network->peekMessage<ServerMsg_PlayerDeath>(
             [this](const ServerMsg_PlayerDeath &msg) { return msg.clientId == this->clientId; }
         )) {
-            game.engine.audio->play(dieAudioId, state.position);
+            dieAudio.play(state.position);
             state.alive = false;
         }
     } else {
@@ -130,18 +136,18 @@ void Player::lateUpdate() {
         if (auto *msg = game.engine.network->peekMessage<ServerMsg_PlayerSpawn>(
             [this](const ServerMsg_PlayerSpawn &msg) { return msg.clientId == this->clientId; }
         )) {
-            game.engine.audio->play(spawnAudioId, msg->position);
+            spawnAudio.play(msg->position);
             state.alive = true;
-            game.engine.physics->setPosition(physicsId, msg->position);
-            game.engine.physics->setRotation(physicsId, msg->rotation);
-            game.engine.physics->setVelocity(physicsId, glm::vec3(0.0f));  // Add this
-            game.engine.physics->setAngularVelocity(physicsId, glm::vec3(0.0f));  // Add this too
+            physics.setPosition(msg->position);
+            physics.setRotation(msg->rotation);
+            physics.setVelocity(glm::vec3(0.0f));
+            physics.setAngularVelocity(glm::vec3(0.0f));
         }
     }
 
-    state.position = game.engine.physics->getPosition(physicsId);
-    state.rotation = game.engine.physics->getRotation(physicsId);
-    state.velocity = game.engine.physics->getVelocity(physicsId);
+    state.position = physics.getPosition();
+    state.rotation = physics.getRotation();
+    state.velocity = physics.getVelocity();
     game.engine.render->setCameraPosition(state.position);
     game.engine.render->setCameraRotation(state.rotation);
 
@@ -155,6 +161,6 @@ void Player::lateUpdate() {
         lastRotation = state.rotation;
     }
 
-    game.engine.audio->setListenerPosition(state.position);
-    game.engine.audio->setListenerRotation(state.rotation);
+    audioEngine.setListenerPosition(state.position);
+    audioEngine.setListenerRotation(state.rotation);
 }

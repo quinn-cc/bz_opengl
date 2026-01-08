@@ -53,7 +53,7 @@ World::World(Game &game, std::string worldDir) : game(game), worldDir(worldDir) 
 
 World::~World() {
     game.engine.render->destroy(renderId);
-    game.engine.physics->destroy(physicsId);
+    physics.destroy();
 }
 
 bool World::isInitialized() const {
@@ -166,7 +166,7 @@ void World::update() {
         loadManifest(std::filesystem::path(worldDir) / "manifest.json");
 
         renderId = game.engine.render->create(getAssetPath("world").string());
-        physicsId = game.engine.physics->create(getAssetPath("world").string(), 0.0f);
+        physics = game.engine.physics->createStaticMesh(getAssetPath("world").string(), 0.0f);
 
         spdlog::info("World::update: World initialized from server");
         initialized = true;

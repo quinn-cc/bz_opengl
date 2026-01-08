@@ -2,7 +2,7 @@
 #include "engine/types.hpp"
 #include "engine/components/client_network.hpp"
 #include "engine/components/render.hpp"
-#include "engine/components/physics.hpp"
+#include "engine/physics/physics_world.hpp"
 #include "engine/components/input.hpp"
 #include "engine/components/gui.hpp"
 #include "engine/components/audio.hpp"
@@ -17,7 +17,7 @@ private:
 public:
     ClientNetwork *network;
     Render *render;
-    Physics *physics;
+    PhysicsWorld *physics;
     Input *input;
     GUI *gui;
     Audio *audio;
