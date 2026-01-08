@@ -15,16 +15,19 @@
         "rightTurnSpeedMultiplier": 1
     },
     "assets": {
-        "world": "../data/world.glb",
-        "playerModel": "../data/models/tank/tank.glb",
-        "shotModel": "../data/models/shot.glb",
-        "playerDieSound": "../data/audio/die.wav",
-        "playerFireSound": "../data/audio/fire.wav",
-        "playerJumpSound": "../data/audio/jump.wav",
-        "playerLandSound": "../data/audio/land.wav",
-        "playerSpawnSound": "../data/audio/spawn.wav",
-        "shotRicochetSound": "../data/audio/ricochet.wav",
-        "font": "../data/fonts/share_tech_mono_regular.ttf"
+        "world": "world.glb",
+        "playerModel": "models/tank/tank.glb",
+        "shotModel": "models/shot.glb",
+        "playerDieSound": "audio/die.wav",
+        "playerFireSound": "audio/fire.wav",
+        "playerJumpSound": "audio/jump.wav",
+        "playerLandSound": "audio/land.wav",
+        "playerSpawnSound": "audio/spawn.wav",
+        "shotRicochetSound": "audio/ricochet.wav",
+        "guiBigFont": "fonts/ShareTech.ttf",
+        "guiServerBrowserRegularFont": "fonts/GoogleSans.ttf",
+        "guiServerBrowserHeadingFont": "fonts/Audiowide.ttf",
+        "guiServerBrowserButtonFont": "fonts/Roboto.ttf"
     },
     "teams": [
         {

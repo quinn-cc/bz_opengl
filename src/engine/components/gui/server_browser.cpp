@@ -8,6 +8,8 @@
 #include <spdlog/spdlog.h>
 #include <string>
 
+#include "common/data_path_resolver.hpp"
+
 namespace {
 std::string trimCopy(const std::string &value) {
     auto begin = std::find_if_not(value.begin(), value.end(), [](unsigned char ch) {
@@ -28,31 +30,37 @@ std::string trimCopy(const std::string &value) {
 namespace gui {
 
 void ServerBrowserView::initializeFonts(ImGuiIO &io) {
+    const auto regularFontPath = bz::data::ResolveConfiguredAsset("guiServerBrowserRegularFont");
+    const std::string regularFontPathStr = regularFontPath.string();
     regularFont = io.Fonts->AddFontFromFileTTF(
-        "../data/fonts/GoogleSans.ttf",
+        regularFontPathStr.c_str(),
         20.0f
     );
 
     if (!regularFont) {
-        spdlog::warn("Failed to load GoogleSans font for server browser.");
+        spdlog::warn("Failed to load GoogleSans font for server browser ({}).", regularFontPathStr);
     }
 
+    const auto headingFontPath = bz::data::ResolveConfiguredAsset("guiServerBrowserHeadingFont");
+    const std::string headingFontPathStr = headingFontPath.string();
     headingFont = io.Fonts->AddFontFromFileTTF(
-        "../data/fonts/Audiowide.ttf",
+        headingFontPathStr.c_str(),
         28.0f
     );
 
     if (!headingFont) {
-        spdlog::warn("Failed to load Audiowide font for server browser headings.");
+        spdlog::warn("Failed to load Audiowide font for server browser headings ({}).", headingFontPathStr);
     }
 
+    const auto buttonFontPath = bz::data::ResolveConfiguredAsset("guiServerBrowserButtonFont");
+    const std::string buttonFontPathStr = buttonFontPath.string();
     buttonFont = io.Fonts->AddFontFromFileTTF(
-        "../data/fonts/Roboto.ttf",
+        buttonFontPathStr.c_str(),
         18.0f
     );
 
     if (!buttonFont) {
-        spdlog::warn("Failed to load Roboto font for server browser buttons.");
+        spdlog::warn("Failed to load Roboto font for server browser buttons ({}).", buttonFontPathStr);
     }
 }
 

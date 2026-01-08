@@ -2,11 +2,12 @@
 #include "engine/types.hpp"
 #include "engine/physics/compound_body.hpp"
 #include <filesystem>
-#include <stdexcept>
-#include <string>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <nlohmann/json.hpp>
+#include <stdexcept>
+#include <string>
 
 namespace fs = std::filesystem;
 
@@ -20,7 +21,7 @@ private:
     nlohmann::json settings;
     nlohmann::json manifest;
     std::string worldDir;
-    std::map<std::string, std::string> assetPaths;
+    std::map<std::string, std::filesystem::path> assetPaths;
 
     PlayerParameters defaultPlayerParams;
     PhysicsCompoundBody physics;
