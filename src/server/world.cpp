@@ -1,14 +1,16 @@
 #include "world.hpp"
 #include "game.hpp"
+#include "common/data_path_resolver.hpp"
+#include "spdlog/spdlog.h"
 #include <string>
 #include <miniz.h>
 
 namespace fs = std::filesystem;
 
 World::World(Game &game, std::string worldName, nlohmann::json settings, std::string worldDir) : game(game), name(worldName), settings(settings), worldDir(worldDir) {
-    // Load config file from ../data/config.json
+    // Load config file from the detected data directory
     nlohmann::json configJson;
-    std::filesystem::path configPath = std::filesystem::path("../data/config.json");
+    std::filesystem::path configPath = bz::data::Resolve("config.json");
     if (std::filesystem::exists(configPath)) {
         std::ifstream configFile(configPath);
         if (configFile) {
@@ -28,7 +30,7 @@ World::World(Game &game, std::string worldName, nlohmann::json settings, std::st
     if (configJson.contains("assets") && configJson["assets"].is_object()) {
         for (auto& [key, value] : configJson["assets"].items()) {
             if (value.is_string()) {
-                assetPaths[key] = value.get<std::string>();
+                assetPaths[key] = bz::data::Resolve(value.get<std::string>());
             }
         }
     } else {
@@ -195,9 +197,15 @@ std::string World::getAssetPath(const std::string &assetName) const {
     if (manifest.contains("assets") && manifest["assets"].contains(assetName)) {
         std::string assetPathStr = manifest["assets"][assetName].get<std::string>();
         fs::path assetPath = fs::path(worldDir) / assetPathStr;
-        return assetPath.string();;
+        return assetPath.string();
     } else {
-        spdlog::error("World::getAssetPath: Asset '{}' not found in manifest, using default path", assetName);
+        auto it = assetPaths.find(assetName);
+        if (it != assetPaths.end()) {
+            spdlog::warn("World::getAssetPath: Asset '{}' not found in manifest, using config fallback", assetName);
+            return it->second.string();
+        }
+
+        spdlog::error("World::getAssetPath: Asset '{}' not found", assetName);
         return "";
     }
 }

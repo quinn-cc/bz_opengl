@@ -1,15 +1,16 @@
 #include "world.hpp"
 #include "game.hpp"
 #include "spdlog/spdlog.h"
+#include "common/data_path_resolver.hpp"
 #include <fstream>
 #include <iostream>
 #include <cstring>
 #include <miniz.h>
 
 World::World(Game &game, std::string worldDir) : game(game), worldDir(worldDir) {
-    // Load config file from ../data/config.json
+    // Load config file from the detected data directory
     nlohmann::json configJson;
-    std::filesystem::path configPath = std::filesystem::path("../data/config.json");
+    std::filesystem::path configPath = bz::data::Resolve("config.json");
     if (std::filesystem::exists(configPath)) {
         std::ifstream configFile(configPath);
         if (configFile) {
@@ -29,7 +30,7 @@ World::World(Game &game, std::string worldDir) : game(game), worldDir(worldDir) 
     if (configJson.contains("assets") && configJson["assets"].is_object()) {
         for (auto& [key, value] : configJson["assets"].items()) {
             if (value.is_string()) {
-                assetPaths[key] = value.get<std::string>();
+                assetPaths[key] = bz::data::Resolve(value.get<std::string>());
             }
         }
     } else {

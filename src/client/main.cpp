@@ -7,6 +7,7 @@
 #include "client/config_client.hpp"
 #include "client/server/server_browser_controller.hpp"
 #include "client/server/server_connector.hpp"
+#include "common/data_path_resolver.hpp"
 
 TimeUtils::time lastFrameTime;
 
@@ -78,8 +79,8 @@ int main(int argc, char *argv[]) {
 
     const ClientCLIOptions cliOptions = ParseClientCLIOptions(argc, argv);
 
-    constexpr const char *kClientConfigPath = "../data/config_client.json";
-    ClientConfig clientConfig = ClientConfig::Load(kClientConfigPath);
+    const std::string clientConfigPath = bz::data::Resolve("config_client.json").string();
+    ClientConfig clientConfig = ClientConfig::Load(clientConfigPath);
 
     spdlog::trace("GLFW initialized successfully");
 
@@ -127,7 +128,7 @@ int main(int argc, char *argv[]) {
     ServerBrowserController serverBrowser(
         engine,
         clientConfig,
-        kClientConfigPath,
+        clientConfigPath,
         cliOptions.connectAddr,
         cliOptions.connectPort,
         serverConnector);

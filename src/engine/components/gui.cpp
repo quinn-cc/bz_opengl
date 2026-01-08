@@ -1,5 +1,6 @@
 #include "engine/components/gui.hpp"
 #include <GLFW/glfw3.h>
+#include "common/data_path_resolver.hpp"
 #include "spdlog/spdlog.h"
 #include <algorithm>
 
@@ -35,10 +36,16 @@ GUI::GUI(GLFWwindow *window) {
     ImGuiIO& io = ImGui::GetIO();
     io.Fonts->AddFontDefault();
 
+    const auto bigFontPath = bz::data::ResolveConfiguredAsset("guiBigFont");
+    const std::string bigFontPathStr = bigFontPath.string();
     bigFont = io.Fonts->AddFontFromFileTTF(
-        "../data/fonts/share_tech_mono_regular.ttf",
+        bigFontPathStr.c_str(),
         100.0f   // font size in pixels
     );
+
+    if (!bigFont) {
+        spdlog::warn("GUI: Failed to load font at {}", bigFontPathStr);
+    }
 
     serverBrowserView.initializeFonts(io);
 
