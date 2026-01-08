@@ -1,5 +1,6 @@
 #pragma once
 #include "engine/types.hpp"
+#include "engine/physics/compound_body.hpp"
 #include <filesystem>
 #include <stdexcept>
 #include <string>
@@ -22,7 +23,7 @@ private:
     std::map<std::string, std::string> assetPaths;
 
     PlayerParameters defaultPlayerParams;
-    physics_id physicsId;
+    PhysicsCompoundBody physics;
 
     void zipDirectory(const fs::path& inputDir, const fs::path& outputZip);
     std::vector<std::byte> getData();

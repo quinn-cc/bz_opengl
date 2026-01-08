@@ -12,7 +12,7 @@ ClientEngine::ClientEngine(GLFWwindow *window) {
     spdlog::trace("ClientEngine: ClientNetwork initialized successfully");
     render = new Render(window);
     spdlog::trace("ClientEngine: Render initialized successfully");
-    physics = new Physics();
+    physics = new PhysicsWorld();
     spdlog::trace("ClientEngine: Physics initialized successfully");
     input = new Input(window);
     spdlog::trace("ClientEngine: Input initialized successfully");

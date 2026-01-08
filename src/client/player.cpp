@@ -15,7 +15,7 @@ Player::Player(Game &game, client_id id, PlayerParameters params, const std::str
     lastJumpTime = TimeUtils::GetCurrentTime();
     jumpCooldown = TimeUtils::getDuration(0.1f);
 
-    physicsId = game.engine.physics->createPlayer(glm::vec3(1.0f, 2.0f, 1.0f));
+    physics = game.engine.physics->createPlayer(glm::vec3(1.0f, 2.0f, 1.0f));
 
     jumpAudioId = game.engine.audio->create(game.world->getAssetPath("playerJumpSound"), 5);
     dieAudioId = game.engine.audio->create(game.world->getAssetPath("playerDieSound"), 1);
@@ -28,7 +28,7 @@ Player::Player(Game &game, client_id id, PlayerParameters params, const std::str
 }
 
 Player::~Player() {
-    game.engine.physics->destroy(physicsId);
+    physics.destroy();
 }
 
 float Player::getParameter(const std::string &paramName) const {
@@ -42,7 +42,7 @@ float Player::getParameter(const std::string &paramName) const {
 }
 
 glm::vec3 Player::getForwardVector() const {
-    return game.engine.physics->getForwardVector(physicsId);
+    return physics.getForwardVector();
 }
 
 void Player::earlyUpdate() {
@@ -62,19 +62,19 @@ void Player::earlyUpdate() {
         game.engine.gui->displayDeathScreen(false);
 
         bool wasGrounded = grounded;
-        grounded = game.engine.physics->isGrounded(physicsId, glm::vec3(1.0f, 2.0f, 1.0f));
+        grounded = physics.isGrounded(glm::vec3(1.0f, 2.0f, 1.0f));
         
         if (grounded) {
             glm::vec2 movement(0.0f);
             if (game.getFocusState() == FOCUS_STATE_GAME)
                 movement = game.engine.input->getInputState().movement;
-            glm::vec3 movementVector = game.engine.physics->getForwardVector(physicsId);
+            glm::vec3 movementVector = physics.getForwardVector();
             movementVector *= movement.y * getParameter("speed");
-            movementVector.y = game.engine.physics->getVelocity(physicsId).y;
+            movementVector.y = physics.getVelocity().y;
 
-            game.engine.physics->setVelocity(physicsId, movementVector);
+            physics.setVelocity(movementVector);
 
-            game.engine.physics->setAngularVelocity(physicsId, glm::vec3(
+            physics.setAngularVelocity(glm::vec3(
                 0.0f,
                 -movement.x * getParameter("turnSpeed"),
                 0.0f
@@ -82,9 +82,9 @@ void Player::earlyUpdate() {
 
             if (game.getFocusState() == FOCUS_STATE_GAME) {
                 if (grounded && game.engine.input->getInputState().jump && TimeUtils::GetElapsedTime(lastJumpTime, TimeUtils::GetCurrentTime()) >= jumpCooldown) {
-                    glm::vec3 velocity = game.engine.physics->getVelocity(physicsId);
+                    glm::vec3 velocity = physics.getVelocity();
                     velocity.y = getParameter("jumpSpeed");
-                    game.engine.physics->setVelocity(physicsId, velocity);
+                    physics.setVelocity(velocity);
                     lastJumpTime = TimeUtils::GetCurrentTime();
                     grounded = false;
                     game.engine.audio->play(jumpAudioId, state.position);
@@ -132,16 +132,16 @@ void Player::lateUpdate() {
         )) {
             game.engine.audio->play(spawnAudioId, msg->position);
             state.alive = true;
-            game.engine.physics->setPosition(physicsId, msg->position);
-            game.engine.physics->setRotation(physicsId, msg->rotation);
-            game.engine.physics->setVelocity(physicsId, glm::vec3(0.0f));  // Add this
-            game.engine.physics->setAngularVelocity(physicsId, glm::vec3(0.0f));  // Add this too
+            physics.setPosition(msg->position);
+            physics.setRotation(msg->rotation);
+            physics.setVelocity(glm::vec3(0.0f));
+            physics.setAngularVelocity(glm::vec3(0.0f));
         }
     }
 
-    state.position = game.engine.physics->getPosition(physicsId);
-    state.rotation = game.engine.physics->getRotation(physicsId);
-    state.velocity = game.engine.physics->getVelocity(physicsId);
+    state.position = physics.getPosition();
+    state.rotation = physics.getRotation();
+    state.velocity = physics.getVelocity();
     game.engine.render->setCameraPosition(state.position);
     game.engine.render->setCameraRotation(state.rotation);
 

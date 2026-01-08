@@ -65,11 +65,11 @@ World::World(Game &game, std::string worldName, nlohmann::json settings, std::st
     outputZip += ".zip";
     zipDirectory(inputDir, outputZip);
 
-    physicsId = game.engine.physics->create(getAssetPath("world"), 0.0f);
+    physics = game.engine.physics->createStaticMesh(getAssetPath("world"), 0.0f);
 }
 
 World::~World() {
-    game.engine.physics->destroy(physicsId);
+    physics.destroy();
 }
 
 void World::zipDirectory(const fs::path& inputDir, const fs::path& outputZip) {

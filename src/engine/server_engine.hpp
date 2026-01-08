@@ -1,12 +1,12 @@
 #pragma once
 #include "engine/types.hpp"
 #include "engine/components/server_network.hpp"
-#include "engine/components/physics.hpp"
+#include "engine/physics/physics_world.hpp"
 
 class ServerEngine {
 public:
     ServerNetwork *network;
-    Physics *physics;
+    PhysicsWorld *physics;
 
     ServerEngine(uint16_t serverPort);
     ~ServerEngine();
