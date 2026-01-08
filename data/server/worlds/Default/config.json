@@ -1,0 +1,12 @@
+{
+    "serverName": "Default World",
+    "assets" : {
+        "audio" : {
+            "shot" : {
+                "Fire": "audio/laser.wav"
+            }
+        }
+    }
+}
+
+

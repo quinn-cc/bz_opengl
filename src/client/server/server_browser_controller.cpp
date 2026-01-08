@@ -392,7 +392,7 @@ void ServerBrowserController::handleServerListAddition(const gui::ServerListOpti
 
     if (!clientConfig.Save(clientConfigPath)) {
         clientConfig.serverLists.pop_back();
-        browser.setListStatus("Failed to write config_client.json. Check permissions.", true);
+        browser.setListStatus("Failed to write " + clientConfigPath + ". Check permissions.", true);
         return;
     }
 

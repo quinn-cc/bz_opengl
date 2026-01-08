@@ -1,0 +1,24 @@
+{
+    "defaultPlayerParameters": {
+        
+    },
+    "assets": {
+        "world": "models/world.glb",
+        "skybox": "models/skybox.png",
+        "playerModel": "models/player.glb"
+    },
+    "teams": [
+        {
+            "name": "Red",
+            "color": "#FF0000",
+            "model": "playerModel",
+            "maxPlayers": 8
+        },
+        {
+            "name": "Blue",
+            "color": "#0000FF",
+            "model": "playerModel",
+            "maxPlayers": 10
+        }
+    ]
+}

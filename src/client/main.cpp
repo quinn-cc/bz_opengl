@@ -79,8 +79,13 @@ int main(int argc, char *argv[]) {
 
     const ClientCLIOptions cliOptions = ParseClientCLIOptions(argc, argv);
 
-    const std::string clientConfigPath = bz::data::Resolve("config_client.json").string();
-    ClientConfig clientConfig = ClientConfig::Load(clientConfigPath);
+    const std::string clientDefaultsConfigPath = bz::data::Resolve("client/config.json").string();
+    const std::string clientUserConfigPath = bz::data::EnsureUserConfigFile("config.json").string();
+    ClientConfig clientConfig = ClientConfig::Load(clientDefaultsConfigPath);
+
+    const std::string initialWorldDir = (cliOptions.worldExplicit && !cliOptions.worldDir.empty())
+        ? cliOptions.worldDir
+        : bz::data::Resolve("client-test").string();
 
     spdlog::trace("GLFW initialized successfully");
 
@@ -124,11 +129,11 @@ int main(int argc, char *argv[]) {
     FullscreenState fullscreenState;
 
     std::unique_ptr<Game> game;
-    ServerConnector serverConnector(engine, cliOptions.playerName, cliOptions.worldDir, game);
+    ServerConnector serverConnector(engine, cliOptions.playerName, initialWorldDir, game);
     ServerBrowserController serverBrowser(
         engine,
         clientConfig,
-        clientConfigPath,
+        clientUserConfigPath,
         cliOptions.connectAddr,
         cliOptions.connectPort,
         serverConnector);

@@ -1,0 +1,73 @@
+{
+    "userDefaults" : {
+        "username": "MPCarbon",
+        "password": "securepassword123",
+        "serverList" : "http://192.168.1.6/servers.json"
+    },
+    "serverLists": {
+        "default": "http://192.168.1.6/servers.json",
+        "showLAN": true,
+        "sources": [
+            {
+                "name": "Official BZ32 Server List",
+                "url": "http://192.168.1.6/servers.json",
+                "username" : "r55man",
+                "password" : "bzopen2024"
+            }
+        ]
+    },
+    "assets" : {
+        "fonts" : {
+            "console" : {
+                "Regular": "fonts/GoogleSans.ttf",
+                "Heading": "fonts/Audiowide.ttf",
+                "Button": "fonts/Roboto.ttf"
+            }
+        },
+        "audio" : {
+            "player" : {
+                "Die": "audio/die.wav",
+                "Jump": "audio/jump.wav",
+                "Land": "audio/land.wav",
+                "Spawn": "audio/spawn.wav"
+            },
+            "shot" : {
+                "Fire": "audio/laser.wav",
+                "Ricochet": "audio/ricochet.wav"
+            }
+        }
+    },
+    "network": {
+        "defaultPort": 1234,
+        "connectionTimeout": 5,
+        "maxRetries": 3
+    },
+    "graphics": {
+        "defaultResolution": {
+            "width": 1280,
+            "height": 720
+        },
+        "fullscreen": false,
+        "vsync": true
+    },
+    "controls": {
+        "mouseSensitivity": 1.0,
+        "invertYAxis": false
+    },
+    "logging": {
+        "logLevel": "info",
+        "logToFile": true,
+        "logFilePath": "logs/client.log"
+    },
+    "performance": {
+        "maxFPS": 60,
+        "enableShadows": true,
+        "textureQuality": "high"
+    },
+    "mods": {
+        "enabledMods": []
+    },
+    "debug": {
+        "showFPS": false
+    }
+}

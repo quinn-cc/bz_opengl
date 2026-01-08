@@ -11,7 +11,7 @@ ClientCLIOptions ParseClientCLIOptions(int argc, char *argv[]) {
     options.add_options()
         ("p,port", "Connection port", cxxopts::value<uint16_t>()->default_value("1234"));
     options.add_options()
-        ("w,world", "World directory", cxxopts::value<std::string>()->default_value("../client-test/"));
+        ("w,world", "World directory", cxxopts::value<std::string>()->default_value(""));
 
     auto result = options.parse(argc, argv);
 
@@ -21,5 +21,6 @@ ClientCLIOptions ParseClientCLIOptions(int argc, char *argv[]) {
     parsed.connectPort = result["port"].as<uint16_t>();
     parsed.worldDir = result["world"].as<std::string>();
     parsed.addrExplicit = result.count("addr") > 0;
+    parsed.worldExplicit = result.count("world") > 0;
     return parsed;
 }

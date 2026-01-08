@@ -30,7 +30,7 @@ std::string trimCopy(const std::string &value) {
 namespace gui {
 
 void ServerBrowserView::initializeFonts(ImGuiIO &io) {
-    const auto regularFontPath = bz::data::ResolveConfiguredAsset("guiServerBrowserRegularFont");
+    const auto regularFontPath = bz::data::ResolveConfiguredAsset("fonts.console.Regular");
     const std::string regularFontPathStr = regularFontPath.string();
     regularFont = io.Fonts->AddFontFromFileTTF(
         regularFontPathStr.c_str(),
@@ -38,10 +38,10 @@ void ServerBrowserView::initializeFonts(ImGuiIO &io) {
     );
 
     if (!regularFont) {
-        spdlog::warn("Failed to load GoogleSans font for server browser ({}).", regularFontPathStr);
+        spdlog::warn("Failed to load console regular font for server browser ({}).", regularFontPathStr);
     }
 
-    const auto headingFontPath = bz::data::ResolveConfiguredAsset("guiServerBrowserHeadingFont");
+    const auto headingFontPath = bz::data::ResolveConfiguredAsset("fonts.console.Heading");
     const std::string headingFontPathStr = headingFontPath.string();
     headingFont = io.Fonts->AddFontFromFileTTF(
         headingFontPathStr.c_str(),
@@ -49,10 +49,10 @@ void ServerBrowserView::initializeFonts(ImGuiIO &io) {
     );
 
     if (!headingFont) {
-        spdlog::warn("Failed to load Audiowide font for server browser headings ({}).", headingFontPathStr);
+        spdlog::warn("Failed to load console heading font for server browser ({}).", headingFontPathStr);
     }
 
-    const auto buttonFontPath = bz::data::ResolveConfiguredAsset("guiServerBrowserButtonFont");
+    const auto buttonFontPath = bz::data::ResolveConfiguredAsset("fonts.console.Button");
     const std::string buttonFontPathStr = buttonFontPath.string();
     buttonFont = io.Fonts->AddFontFromFileTTF(
         buttonFontPathStr.c_str(),
@@ -60,7 +60,7 @@ void ServerBrowserView::initializeFonts(ImGuiIO &io) {
     );
 
     if (!buttonFont) {
-        spdlog::warn("Failed to load Roboto font for server browser buttons ({}).", buttonFontPathStr);
+        spdlog::warn("Failed to load console button font for server browser ({}).", buttonFontPathStr);
     }
 }
 

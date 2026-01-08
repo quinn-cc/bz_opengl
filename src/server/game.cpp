@@ -1,5 +1,6 @@
 #include "game.hpp"
 #include "spdlog/spdlog.h"
+#include <utility>
 
 void Game::addClient(Client *client) {
     clients.push_back(client);
@@ -41,8 +42,17 @@ Client *Game::getClientByName(const std::string &name) {
     return nullptr;
 }
 
-Game::Game(ServerEngine &engine, std::string worldName, nlohmann::json settings, std::string worldDir) : engine(engine) {
-    world = new World(*this, worldName, settings, worldDir);
+Game::Game(ServerEngine &engine,
+           std::string worldName,
+           nlohmann::json worldConfig,
+           std::string worldDir,
+           bool enableWorldZipping)
+    : engine(engine) {
+    world = new World(*this,
+                      std::move(worldName),
+                      std::move(worldConfig),
+                      std::move(worldDir),
+                      enableWorldZipping);
     chat = new Chat(*this);
 }
 

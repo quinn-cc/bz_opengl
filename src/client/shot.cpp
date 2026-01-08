@@ -13,9 +13,9 @@ Shot::Shot(Game &game,
       position(position),
       velocity(velocity),
       renderId(game.engine.render->create(game.world->getAssetPath("shotModel").string())),
-      audioEngine(*game.engine.audio),
-      fireAudio(audioEngine.loadClip(game.world->getAssetPath("playerFireSound").string(), 20)),
-      ricochetAudio(audioEngine.loadClip(game.world->getAssetPath("shotRicochetSound").string(), 20)) {
+            audioEngine(*game.engine.audio),
+            fireAudio(audioEngine.loadClip(game.world->getAssetPath("audio.shot.Fire").string(), 20)),
+            ricochetAudio(audioEngine.loadClip(game.world->getAssetPath("audio.shot.Ricochet").string(), 20)) {
     game.engine.render->setPosition(renderId, position);
     game.engine.render->setScale(renderId, glm::vec3(0.6f));
     game.engine.render->setTransparency(renderId, true);

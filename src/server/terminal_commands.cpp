@@ -43,11 +43,11 @@ std::string processTerminalInput(const std::string &input) {
         return response;
     }
 
-    if (cmd == "manifest") {
+    if (cmd == "config" || cmd == "manifest") {
         try {
-            return g_game->world->getManifest().dump(4);
+            return g_game->world->getConfig().dump(4);
         } catch (const std::exception &e) {
-            return std::string("Error retrieving manifest: ") + e.what();
+            return std::string("Error retrieving config: ") + e.what();
         }
     }
 
