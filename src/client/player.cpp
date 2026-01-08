@@ -3,24 +3,30 @@
 #include "engine/types.hpp"
 #include "game.hpp"
 #include <string>
+#include <utility>
 #include "spdlog/spdlog.h"
 #include "shot.hpp"
 
-Player::Player(Game &game, client_id id, PlayerParameters params, const std::string name) : game(game) {
-    this->clientId = id;
-    this->state.params = params;
+Player::Player(Game &game,
+               client_id id,
+               PlayerParameters params,
+               const std::string name)
+    : game(game),
+      clientId(id),
+      grounded(false),
+      physics(game.engine.physics->createPlayer(glm::vec3(1.0f, 2.0f, 1.0f))),
+      audioEngine(*game.engine.audio),
+      jumpAudio(audioEngine.loadClip(game.world->getAssetPath("playerJumpSound"), 5)),
+      dieAudio(audioEngine.loadClip(game.world->getAssetPath("playerDieSound"), 1)),
+      spawnAudio(audioEngine.loadClip(game.world->getAssetPath("playerSpawnSound"), 1)),
+      landAudio(audioEngine.loadClip(game.world->getAssetPath("playerLandSound"), 1)),
+      lastJumpTime(TimeUtils::GetCurrentTime()),
+      jumpCooldown(TimeUtils::getDuration(0.1f)) {
+    state.params = std::move(params);
     state.name = name;
     state.alive = false;
-    grounded = false;
-    lastJumpTime = TimeUtils::GetCurrentTime();
-    jumpCooldown = TimeUtils::getDuration(0.1f);
-
-    physics = game.engine.physics->createPlayer(glm::vec3(1.0f, 2.0f, 1.0f));
-
-    jumpAudioId = game.engine.audio->create(game.world->getAssetPath("playerJumpSound"), 5);
-    dieAudioId = game.engine.audio->create(game.world->getAssetPath("playerDieSound"), 1);
-    spawnAudioId = game.engine.audio->create(game.world->getAssetPath("playerSpawnSound"), 1);
-    landAudioId = game.engine.audio->create(game.world->getAssetPath("playerLandSound"), 1);
+    lastPosition = glm::vec3(0.0f);
+    lastRotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
 
     ClientMsg_Init initMsg;
     initMsg.name = name;
@@ -87,12 +93,12 @@ void Player::earlyUpdate() {
                     physics.setVelocity(velocity);
                     lastJumpTime = TimeUtils::GetCurrentTime();
                     grounded = false;
-                    game.engine.audio->play(jumpAudioId, state.position);
+                    jumpAudio.play(state.position);
                 }
             }
 
             if (wasGrounded == false) {
-                game.engine.audio->play(landAudioId, state.position);
+                landAudio.play(state.position);
             }
         }
 
@@ -110,7 +116,7 @@ void Player::earlyUpdate() {
         if (auto *msg = game.engine.network->peekMessage<ServerMsg_PlayerDeath>(
             [this](const ServerMsg_PlayerDeath &msg) { return msg.clientId == this->clientId; }
         )) {
-            game.engine.audio->play(dieAudioId, state.position);
+            dieAudio.play(state.position);
             state.alive = false;
         }
     } else {
@@ -130,7 +136,7 @@ void Player::lateUpdate() {
         if (auto *msg = game.engine.network->peekMessage<ServerMsg_PlayerSpawn>(
             [this](const ServerMsg_PlayerSpawn &msg) { return msg.clientId == this->clientId; }
         )) {
-            game.engine.audio->play(spawnAudioId, msg->position);
+            spawnAudio.play(msg->position);
             state.alive = true;
             physics.setPosition(msg->position);
             physics.setRotation(msg->rotation);
@@ -155,6 +161,6 @@ void Player::lateUpdate() {
         lastRotation = state.rotation;
     }
 
-    game.engine.audio->setListenerPosition(state.position);
-    game.engine.audio->setListenerRotation(state.rotation);
+    audioEngine.setListenerPosition(state.position);
+    audioEngine.setListenerRotation(state.rotation);
 }

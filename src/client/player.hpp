@@ -3,6 +3,7 @@
 #include <string>
 #include "engine/types.hpp"
 #include "engine/physics/rigid_body.hpp"
+#include "engine/components/audio.hpp"
 #include <spdlog/spdlog.h>
 
 #define POSITION_UPDATE_THRESHOLD 0.01f
@@ -17,10 +18,11 @@ private:
     bool grounded;
 
     PhysicsRigidBody physics;
-    audio_id jumpAudioId;
-    audio_id dieAudioId;
-    audio_id spawnAudioId;
-    audio_id landAudioId;
+    Audio& audioEngine;
+    AudioClip jumpAudio;
+    AudioClip dieAudio;
+    AudioClip spawnAudio;
+    AudioClip landAudio;
 
     TimeUtils::time lastJumpTime;
     TimeUtils::duration jumpCooldown;
