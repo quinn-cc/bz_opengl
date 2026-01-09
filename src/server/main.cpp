@@ -10,6 +10,7 @@
 #include <pybind11/embed.h>
 #include <csignal>
 #include <atomic>
+#include <limits>
 #include <poll.h>
 #include <unistd.h>
 #include <filesystem>
@@ -40,6 +41,12 @@ int main(int argc, char *argv[]) {
     signal(SIGINT, signalHandler);
     signal(SIGTERM, signalHandler);
 
+    const std::vector<bz::data::ConfigLayerSpec> baseConfigSpecs = {
+        {"common/config.json", "data/common/config.json", spdlog::level::err, true},
+        {"server/config.json", "data/server/config.json", spdlog::level::err, true}
+    };
+    bz::data::InitializeConfigCache(baseConfigSpecs);
+
     ServerCLIOptions cliOptions;
     try {
         cliOptions = ParseServerCLIOptions(argc, argv);
@@ -59,46 +66,51 @@ int main(int argc, char *argv[]) {
         spdlog::error("World directory not found: {}", worldDirPath.string());
         return 1;
     }
-    std::filesystem::path configPath = worldDirPath / "config.json";
-    auto worldConfigOpt = bz::data::LoadJsonFile(configPath, "world config", spdlog::level::err);
-    if (!worldConfigOpt) {
-        spdlog::error("main: Failed to load world config: {}", configPath.string());
-        return 1;
-    }
-    if (!worldConfigOpt->is_object()) {
-        spdlog::error("main: World config '{}' is not a JSON object", configPath.string());
-        return 1;
-    }
-    nlohmann::json worldConfig = std::move(*worldConfigOpt);
+    const std::filesystem::path configPath = worldDirPath / "config.json";
 
-    nlohmann::json mergedConfig = nlohmann::json::object();
     const std::vector<bz::data::ConfigLayerSpec> serverConfigSpecs = {
         {"common/config.json", "data/common/config.json", spdlog::level::err, true},
-        {"server/config.json", "data/server/config.json", spdlog::level::err, true}
+        {"server/config.json", "data/server/config.json", spdlog::level::err, true},
+        {configPath, "world config", spdlog::level::err, true}
     };
 
-    const auto serverLayers = bz::data::LoadConfigLayers(serverConfigSpecs);
-    if (serverLayers.size() != serverConfigSpecs.size()) {
-        spdlog::error("main: Failed to load required server configuration layers");
+    bz::data::InitializeConfigCache(serverConfigSpecs);
+
+    const auto *worldConfigPtr = bz::data::ConfigLayerByLabel("world config");
+    if (!worldConfigPtr || !worldConfigPtr->is_object()) {
+        spdlog::error("main: Failed to load world config object from {}", configPath.string());
         return 1;
     }
-    for (const auto &layer : serverLayers) {
-        bz::data::MergeJsonObjects(mergedConfig, layer.json);
-    }
 
-    bz::data::MergeJsonObjects(mergedConfig, worldConfig);
+    const auto &mergedConfig = bz::data::ConfigCacheRoot();
+    if (!mergedConfig.is_object()) {
+        spdlog::error("main: Merged configuration is not a JSON object");
+        return 1;
+    }
 
     uint16_t port = cliOptions.hostPort;
-    if (mergedConfig.contains("hostPort") && mergedConfig["hostPort"].is_number_unsigned()) {
-        port = mergedConfig["hostPort"].get<uint16_t>();
-    }
-    if (cliOptions.hostPortExplicit) {
+    if (!cliOptions.hostPortExplicit) {
+        if (const auto *portNode = bz::data::ConfigValue("network.ServerPort")) {
+            if (portNode->is_number_unsigned()) {
+                port = static_cast<uint16_t>(portNode->get<unsigned int>());
+            } else if (portNode->is_string()) {
+                try {
+                    const auto parsed = static_cast<int>(std::stoi(portNode->get<std::string>()));
+                    if (parsed > 0 && parsed <= std::numeric_limits<uint16_t>::max()) {
+                        port = static_cast<uint16_t>(parsed);
+                    }
+                } catch (...) {
+                    spdlog::warn("main: Failed to parse network.ServerPort string value");
+                }
+            }
+        }
+    } else {
         port = cliOptions.hostPort;
     }
 
     std::string serverName = "BZ OpenGL Server";
-    if (mergedConfig.contains("serverName") && mergedConfig["serverName"].is_string()) {
-        serverName = mergedConfig["serverName"].get<std::string>();
+    if (const auto *serverNameNode = bz::data::ConfigValue("serverName"); serverNameNode && serverNameNode->is_string()) {
+        serverName = serverNameNode->get<std::string>();
     }
 
     ServerEngine engine(port);
@@ -107,7 +119,7 @@ int main(int argc, char *argv[]) {
 
     const bool shouldZipWorld = cliOptions.customWorldProvided;
 
-    Game game(engine, serverName, worldConfig, worldDirPath.string(), shouldZipWorld);
+    Game game(engine, serverName, *worldConfigPtr, worldDirPath.string(), shouldZipWorld);
     g_game = &game;
     spdlog::trace("Game initialized successfully");
 

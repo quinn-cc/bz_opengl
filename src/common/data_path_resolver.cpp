@@ -1,13 +1,18 @@
 #include "common/data_path_resolver.hpp"
 
 #include <array>
+#include <cctype>
 #include <cstdlib>
 #include <fstream>
+#include <limits>
 #include <map>
+#include <utility>
 #include <mutex>
 #include <optional>
 #include <stdexcept>
 #include <string>
+#include <sstream>
+#include <string_view>
 #include <system_error>
 #include <unordered_map>
 #include <vector>
@@ -42,6 +47,25 @@ std::filesystem::path TryCanonical(const std::filesystem::path &path) {
     return path;
 }
 
+std::string SanitizePathComponent(std::string_view value) {
+    std::string sanitized;
+    sanitized.reserve(value.size());
+
+    for (char ch : value) {
+        if (std::isalnum(static_cast<unsigned char>(ch)) || ch == '.' || ch == '-' || ch == '_') {
+            sanitized.push_back(ch);
+        } else {
+            sanitized.push_back('_');
+        }
+    }
+
+    if (sanitized.empty()) {
+        sanitized = "server";
+    }
+
+    return sanitized;
+}
+
 std::filesystem::path ExecutableDirectory() {
 #if defined(_WIN32)
     std::array<char, MAX_PATH> buffer{};
@@ -74,66 +98,98 @@ std::filesystem::path ExecutableDirectory() {
 }
 
 std::filesystem::path DetectDataRoot() {
-    std::vector<std::filesystem::path> candidates;
-
     const char *envDataDir = std::getenv("BZ_DATA_DIR");
-    if (envDataDir && *envDataDir != '\0') {
-        candidates.emplace_back(TryCanonical(envDataDir));
+    if (!envDataDir || *envDataDir == '\0') {
+        throw std::runtime_error("BZ_DATA_DIR environment variable must be set to the game data directory");
     }
 
-#ifdef INSTALL_DATA_DIR
-    candidates.emplace_back(TryCanonical(INSTALL_DATA_DIR));
-#endif
+    const auto canonical = TryCanonical(envDataDir);
+    std::error_code ec;
+    if (!std::filesystem::exists(canonical, ec) || !std::filesystem::is_directory(canonical, ec)) {
+        throw std::runtime_error("BZ_DATA_DIR does not point to a valid directory: " + canonical.string());
+    }
 
-    const auto exeDir = ExecutableDirectory();
-    const auto cwd = std::filesystem::current_path();
+    return canonical;
+}
 
-    const std::array<std::filesystem::path, 4> relativeRoots = {
-        std::filesystem::path("data"),
-        std::filesystem::path("../data"),
-        std::filesystem::path("../../data"),
-        std::filesystem::path("../../../data")
-    };
+struct ConfigCacheState {
+    std::mutex mutex;
+    bool initialized = false;
+    std::vector<bz::data::ConfigLayer> layers;
+    nlohmann::json merged = nlohmann::json::object();
+    std::unordered_map<std::string, std::size_t> labelIndex;
+    std::unordered_map<std::string, std::filesystem::path> assetLookup;
+};
 
-    auto appendRelativeCandidates = [&](const std::filesystem::path &base) {
-        for (const auto &relative : relativeRoots) {
-            candidates.push_back(TryCanonical(base / relative));
-        }
-    };
+ConfigCacheState g_configCache;
 
-    appendRelativeCandidates(exeDir);
-    appendRelativeCandidates(cwd);
+const nlohmann::json *ResolveConfigPath(const nlohmann::json &root, const std::string &path) {
+    if (path.empty()) {
+        return &root;
+    }
 
-    const std::array<std::filesystem::path, 2> rootIndicators = {
-        std::filesystem::path("client/config.json"),
-        std::filesystem::path("server/world/Default/config.json")
-    };
+    const nlohmann::json *current = &root;
+    std::size_t position = 0;
 
-    std::filesystem::path fallback;
-
-    for (const auto &candidate : candidates) {
-        std::error_code ec;
-        if (!std::filesystem::exists(candidate, ec) || !std::filesystem::is_directory(candidate, ec)) {
-            continue;
-        }
-
-        if (fallback.empty()) {
-            fallback = candidate;
+    while (position < path.size()) {
+        const std::size_t dot = path.find('.', position);
+        const bool lastSegment = (dot == std::string::npos);
+        const std::string segment = path.substr(position, lastSegment ? std::string::npos : dot - position);
+        if (segment.empty()) {
+            return nullptr;
         }
 
-        for (const auto &indicator : rootIndicators) {
-            const auto marker = candidate / indicator;
-            if (std::filesystem::exists(marker, ec)) {
-                return candidate;
+        std::string key = segment;
+        std::optional<std::size_t> arrayIndex;
+        const auto bracketPos = segment.find('[');
+        if (bracketPos != std::string::npos) {
+            key = segment.substr(0, bracketPos);
+            const auto closingPos = segment.find(']', bracketPos);
+            if (closingPos == std::string::npos || closingPos != segment.size() - 1) {
+                return nullptr;
+            }
+
+            const std::string indexText = segment.substr(bracketPos + 1, closingPos - bracketPos - 1);
+            if (indexText.empty()) {
+                return nullptr;
+            }
+
+            try {
+                arrayIndex = static_cast<std::size_t>(std::stoul(indexText));
+            } catch (...) {
+                return nullptr;
             }
         }
+
+        if (!key.empty()) {
+            if (!current->is_object()) {
+                return nullptr;
+            }
+
+            const auto it = current->find(key);
+            if (it == current->end()) {
+                return nullptr;
+            }
+
+            current = &(*it);
+        }
+
+        if (arrayIndex.has_value()) {
+            if (!current->is_array() || *arrayIndex >= current->size()) {
+                return nullptr;
+            }
+
+            current = &((*current)[*arrayIndex]);
+        }
+
+        if (lastSegment) {
+            break;
+        }
+
+        position = dot + 1;
     }
 
-    if (!fallback.empty()) {
-        return fallback;
-    }
-
-    return cwd;
+    return current;
 }
 
 } // namespace
@@ -245,6 +301,80 @@ std::filesystem::path EnsureUserWorldsDirectory() {
     return TryCanonical(worldsDir);
 }
 
+std::filesystem::path EnsureUserWorldDirectoryForServer(const std::string &host, uint16_t port) {
+    const auto baseDir = EnsureUserWorldsDirectory();
+    const auto sanitizedHost = SanitizePathComponent(host);
+
+    std::ostringstream name;
+    name << sanitizedHost << '.' << port;
+
+    const auto serverDir = baseDir / name.str();
+
+    std::error_code ec;
+    std::filesystem::create_directories(serverDir, ec);
+    if (ec) {
+        throw std::runtime_error("Failed to create server world directory " + serverDir.string() + ": " + ec.message());
+    }
+
+    return TryCanonical(serverDir);
+}
+
+namespace {
+std::unordered_map<std::string, std::filesystem::path> BuildAssetLookupFromLayers(const std::vector<ConfigLayer> &layers);
+}
+
+bool MergeConfigLayer(const std::string &label,
+                      const nlohmann::json &layerJson,
+                      const std::filesystem::path &baseDir) {
+    std::filesystem::path canonicalBase = TryCanonical(baseDir);
+    const std::string resolvedLabel = label.empty() ? canonicalBase.string() : label;
+
+    if (!layerJson.is_object()) {
+        spdlog::warn("data_path_resolver: Config layer '{}' ignored because it is not a JSON object", resolvedLabel);
+        return false;
+    }
+
+    std::lock_guard<std::mutex> lock(g_configCache.mutex);
+    if (!g_configCache.initialized) {
+        spdlog::warn("data_path_resolver: Config cache not initialized; cannot merge layer '{}'", resolvedLabel);
+        return false;
+    }
+
+    ConfigLayer newLayer{layerJson, canonicalBase, resolvedLabel};
+
+    auto labelIt = g_configCache.labelIndex.find(resolvedLabel);
+    if (labelIt != g_configCache.labelIndex.end()) {
+        g_configCache.layers[labelIt->second] = newLayer;
+    } else {
+        g_configCache.labelIndex[resolvedLabel] = g_configCache.layers.size();
+        g_configCache.layers.push_back(newLayer);
+    }
+
+    g_configCache.merged = nlohmann::json::object();
+    for (const auto &layer : g_configCache.layers) {
+        MergeJsonObjects(g_configCache.merged, layer.json);
+    }
+
+    g_configCache.assetLookup = BuildAssetLookupFromLayers(g_configCache.layers);
+
+    spdlog::debug("data_path_resolver: Merged config layer '{}' from {}", resolvedLabel, canonicalBase.string());
+    return true;
+}
+
+bool MergeExternalConfigLayer(const std::filesystem::path &configPath,
+                              const std::string &label,
+                              spdlog::level::level_enum missingLevel) {
+    const auto canonicalPath = TryCanonical(configPath);
+    const auto jsonOpt = LoadJsonFile(canonicalPath,
+                                      label.empty() ? canonicalPath.string() : label,
+                                      missingLevel);
+    if (!jsonOpt) {
+        return false;
+    }
+
+    return MergeConfigLayer(label, *jsonOpt, canonicalPath.parent_path());
+}
+
 std::optional<nlohmann::json> LoadJsonFile(const std::filesystem::path &path,
                                            const std::string &label,
                                            spdlog::level::level_enum missingLevel) {
@@ -289,7 +419,7 @@ std::vector<ConfigLayer> LoadConfigLayers(const std::vector<ConfigLayerSpec> &sp
             continue;
         }
 
-        layers.push_back({std::move(*jsonOpt), absolutePath.parent_path()});
+        layers.push_back({std::move(*jsonOpt), absolutePath.parent_path(), label});
     }
 
     return layers;
@@ -331,13 +461,69 @@ void CollectAssetEntries(const nlohmann::json &node,
     }
 }
 
+namespace {
+
+std::unordered_map<std::string, std::filesystem::path> BuildAssetLookupFromLayers(const std::vector<ConfigLayer> &layers) {
+    std::map<std::string, std::filesystem::path> flattened;
+
+    for (const auto &layer : layers) {
+        if (!layer.json.is_object()) {
+            continue;
+        }
+
+        const auto assetsIt = layer.json.find("assets");
+        if (assetsIt != layer.json.end()) {
+            if (!assetsIt->is_object()) {
+                spdlog::warn("data_path_resolver: 'assets' in {} is not an object; skipping", layer.baseDir.string());
+            } else {
+                CollectAssetEntries(*assetsIt, layer.baseDir, flattened);
+            }
+        }
+
+        const auto fontsIt = layer.json.find("fonts");
+        if (fontsIt != layer.json.end()) {
+            if (!fontsIt->is_object()) {
+                spdlog::warn("data_path_resolver: 'fonts' in {} is not an object; skipping", layer.baseDir.string());
+            } else {
+                CollectAssetEntries(*fontsIt, layer.baseDir, flattened, "fonts");
+            }
+        }
+    }
+
+    std::unordered_map<std::string, std::filesystem::path> lookup;
+    lookup.reserve(flattened.size() * 2);
+
+    for (const auto &[key, resolvedPath] : flattened) {
+        lookup[key] = resolvedPath;
+
+        const auto separator = key.find_last_of('.');
+        if (separator != std::string::npos) {
+            lookup[key.substr(separator + 1)] = resolvedPath;
+        }
+    }
+
+    return lookup;
+}
+
+} // namespace
+
 std::filesystem::path ResolveConfiguredAsset(const std::string &assetKey,
                                              const std::filesystem::path &defaultRelativePath) {
     const auto defaultPath = defaultRelativePath.empty() ? std::filesystem::path{} : Resolve(defaultRelativePath);
 
-    static std::once_flag configLoadFlag;
-    static std::unordered_map<std::string, std::filesystem::path> assetLookup;
-    std::call_once(configLoadFlag, [] {
+    {
+        std::lock_guard<std::mutex> lock(g_configCache.mutex);
+        if (g_configCache.initialized) {
+            const auto it = g_configCache.assetLookup.find(assetKey);
+            if (it != g_configCache.assetLookup.end()) {
+                return it->second;
+            }
+        }
+    }
+
+    static std::once_flag fallbackLoadFlag;
+    static std::unordered_map<std::string, std::filesystem::path> fallbackLookup;
+    std::call_once(fallbackLoadFlag, [] {
         const auto userConfigPath = EnsureUserConfigFile("config.json");
 
         const std::vector<ConfigLayerSpec> specs = {
@@ -347,46 +533,126 @@ std::filesystem::path ResolveConfiguredAsset(const std::string &assetKey,
         };
 
         const auto layers = LoadConfigLayers(specs);
-
-        std::map<std::string, std::filesystem::path> flattened;
-        for (const auto &layer : layers) {
-            if (layer.json.is_object()) {
-                const auto assetsIt = layer.json.find("assets");
-                if (assetsIt != layer.json.end()) {
-                    if (!assetsIt->is_object()) {
-                        spdlog::warn("data_path_resolver: 'assets' in {} is not an object; skipping", layer.baseDir.string());
-                    } else {
-                        CollectAssetEntries(*assetsIt, layer.baseDir, flattened);
-                    }
-                }
-
-                const auto fontsIt = layer.json.find("fonts");
-                if (fontsIt != layer.json.end()) {
-                    if (!fontsIt->is_object()) {
-                        spdlog::warn("data_path_resolver: 'fonts' in {} is not an object; skipping", layer.baseDir.string());
-                    } else {
-                        CollectAssetEntries(*fontsIt, layer.baseDir, flattened, "fonts");
-                    }
-                }
-            }
-        }
-
-        for (const auto &[key, resolvedPath] : flattened) {
-            assetLookup[key] = resolvedPath;
-
-            const auto separator = key.find_last_of('.');
-            if (separator != std::string::npos) {
-                assetLookup[key.substr(separator + 1)] = resolvedPath;
-            }
-        }
+        fallbackLookup = BuildAssetLookupFromLayers(layers);
     });
 
-    if (const auto it = assetLookup.find(assetKey); it != assetLookup.end()) {
+    if (const auto it = fallbackLookup.find(assetKey); it != fallbackLookup.end()) {
         return it->second;
     }
 
     spdlog::warn("data_path_resolver: Asset '{}' not found in configuration layers, using default.", assetKey);
     return defaultPath;
+}
+
+void InitializeConfigCache(const std::vector<ConfigLayerSpec> &specs) {
+    std::vector<ConfigLayer> layers = LoadConfigLayers(specs);
+
+    nlohmann::json merged = nlohmann::json::object();
+    for (const auto &layer : layers) {
+        MergeJsonObjects(merged, layer.json);
+    }
+
+    std::unordered_map<std::string, std::size_t> labelIndex;
+    labelIndex.reserve(layers.size());
+    for (std::size_t i = 0; i < layers.size(); ++i) {
+        if (!layers[i].label.empty()) {
+            labelIndex[layers[i].label] = i;
+        }
+    }
+
+    auto assetLookup = BuildAssetLookupFromLayers(layers);
+
+    std::lock_guard<std::mutex> lock(g_configCache.mutex);
+    g_configCache.layers = std::move(layers);
+    g_configCache.merged = std::move(merged);
+    g_configCache.labelIndex = std::move(labelIndex);
+    g_configCache.assetLookup = std::move(assetLookup);
+    g_configCache.initialized = true;
+}
+
+bool ConfigCacheInitialized() {
+    std::lock_guard<std::mutex> lock(g_configCache.mutex);
+    return g_configCache.initialized;
+}
+
+const nlohmann::json &ConfigCacheRoot() {
+    std::lock_guard<std::mutex> lock(g_configCache.mutex);
+    if (!g_configCache.initialized) {
+        static const nlohmann::json empty = nlohmann::json::object();
+        return empty;
+    }
+
+    return g_configCache.merged;
+}
+
+const nlohmann::json *ConfigLayerByLabel(const std::string &label) {
+    std::lock_guard<std::mutex> lock(g_configCache.mutex);
+    if (!g_configCache.initialized) {
+        return nullptr;
+    }
+
+    const auto it = g_configCache.labelIndex.find(label);
+    if (it == g_configCache.labelIndex.end()) {
+        return nullptr;
+    }
+
+    return &g_configCache.layers[it->second].json;
+}
+
+const nlohmann::json *ConfigValue(const std::string &path) {
+    std::lock_guard<std::mutex> lock(g_configCache.mutex);
+    if (!g_configCache.initialized) {
+        return nullptr;
+    }
+
+    return ResolveConfigPath(g_configCache.merged, path);
+}
+
+std::optional<nlohmann::json> ConfigValueCopy(const std::string &path) {
+    if (const auto *value = ConfigValue(path)) {
+        return std::optional<nlohmann::json>(std::in_place, *value);
+    }
+    return std::nullopt;
+}
+
+std::optional<uint16_t> ConfigValueUInt16(const std::string &path) {
+    const auto *value = ConfigValue(path);
+    if (!value) {
+        return std::nullopt;
+    }
+
+    auto clampToUint16 = [](long long number) -> std::optional<uint16_t> {
+        if (number < 0 || number > std::numeric_limits<uint16_t>::max()) {
+            return std::nullopt;
+        }
+        return static_cast<uint16_t>(number);
+    };
+
+    if (value->is_number_unsigned()) {
+        return clampToUint16(static_cast<long long>(value->get<unsigned long long>()));
+    }
+
+    if (value->is_number_integer()) {
+        return clampToUint16(static_cast<long long>(value->get<long long>()));
+    }
+
+    if (value->is_string()) {
+        try {
+            return clampToUint16(std::stoll(value->get<std::string>()));
+        } catch (...) {
+            return std::nullopt;
+        }
+    }
+
+    return std::nullopt;
+}
+
+std::optional<std::string> ConfigValueString(const std::string &path) {
+    const auto *value = ConfigValue(path);
+    if (!value || !value->is_string()) {
+        return std::nullopt;
+    }
+    return value->get<std::string>();
 }
 
 } // namespace bz::data

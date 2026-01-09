@@ -2,6 +2,7 @@
 
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
+#include "common/data_path_resolver.hpp"
 #include "spdlog/spdlog.h"
 
 #include <sstream>
@@ -32,6 +33,30 @@ int parseIntegerField(const nlohmann::json &object, const char *key) {
     }
 
     return -1;
+}
+
+std::string configuredServerPortString() {
+    if (const auto label = bz::data::ConfigValueString("network.ServerPort")) {
+        return *label;
+    }
+    if (const auto numeric = bz::data::ConfigValueUInt16("network.ServerPort")) {
+        return std::to_string(*numeric);
+    }
+    return std::string("0");
+}
+
+uint16_t configuredServerPortValue() {
+    if (const auto numeric = bz::data::ConfigValueUInt16("network.ServerPort")) {
+        return *numeric;
+    }
+    if (const auto label = bz::data::ConfigValueString("network.ServerPort")) {
+        try {
+            return static_cast<uint16_t>(std::stoul(*label));
+        } catch (...) {
+            return 0;
+        }
+    }
+    return 0;
 }
 }
 
@@ -180,12 +205,12 @@ std::vector<ServerListFetcher::ServerRecord> ServerListFetcher::parseResponse(
             record.sourceName = sourceDisplayName;
             record.sourceUrl = source.url;
             record.host = server.value("host", "");
-            std::string portString = server.value("port", "1234");
+            std::string portString = server.value("port", configuredServerPortString());
 
             try {
                 record.port = static_cast<uint16_t>(std::stoi(portString));
             } catch (...) {
-                record.port = 1234;
+                record.port = configuredServerPortValue();
             }
 
             record.name = server.value("name", record.host);

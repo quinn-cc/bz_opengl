@@ -25,6 +25,27 @@ std::string trimCopy(const std::string &value) {
 
     return std::string(begin, end);
 }
+
+    uint16_t configuredServerPort() {
+        if (const auto configured = bz::data::ConfigValueUInt16("network.ServerPort")) {
+            return *configured;
+        }
+        return 0;
+    }
+
+    std::string configuredServerPortLabel() {
+        if (const auto label = bz::data::ConfigValueString("network.ServerPort")) {
+            return *label;
+        }
+        return std::to_string(configuredServerPort());
+    }
+
+    uint16_t applyPortFallback(uint16_t candidate) {
+        if (candidate != 0) {
+            return candidate;
+        }
+        return configuredServerPort();
+    }
 }
 
 namespace gui {
@@ -280,7 +301,8 @@ void ServerBrowserView::draw(ImGuiIO &io) {
         } else {
             auto colonPos = addressValue.find_last_of(':');
             if (colonPos == std::string::npos) {
-                statusText = "Use the format host:port (example: localhost:1234).";
+                const std::string exampleAddress = "localhost:" + configuredServerPortLabel();
+                statusText = "Use the format host:port (example: " + exampleAddress + ").";
                 statusIsError = true;
             } else {
                 std::string hostPart = trimCopy(addressValue.substr(0, colonPos));
@@ -577,7 +599,7 @@ void ServerBrowserView::setScanning(bool isScanning) {
 
 void ServerBrowserView::resetBuffers(const std::string &defaultHost, uint16_t defaultPort) {
     std::string hostValue = defaultHost.empty() ? std::string("localhost") : defaultHost;
-    uint16_t portValue = defaultPort == 0 ? 1234 : defaultPort;
+    uint16_t portValue = applyPortFallback(defaultPort);
 
     addressBuffer.fill(0);
     std::snprintf(

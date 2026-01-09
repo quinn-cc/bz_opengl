@@ -1,6 +1,23 @@
 #include "client/client_cli_options.hpp"
 
+#include "common/data_path_resolver.hpp"
 #include "cxxopts.hpp"
+
+namespace {
+
+std::string ConfiguredPortDefault() {
+    if (const auto *portNode = bz::data::ConfigValue("network.ServerPort")) {
+        if (portNode->is_string()) {
+            return portNode->get<std::string>();
+        }
+        if (portNode->is_number_unsigned()) {
+            return std::to_string(portNode->get<unsigned int>());
+        }
+    }
+    return std::string("0");
+}
+
+} // namespace
 
 ClientCLIOptions ParseClientCLIOptions(int argc, char *argv[]) {
     cxxopts::Options options("BZ", "This is the client.");
@@ -9,7 +26,7 @@ ClientCLIOptions ParseClientCLIOptions(int argc, char *argv[]) {
     options.add_options()
         ("a,addr", "Connection address", cxxopts::value<std::string>()->default_value("localhost"));
     options.add_options()
-        ("p,port", "Connection port", cxxopts::value<uint16_t>()->default_value("1234"));
+        ("p,port", "Connection port", cxxopts::value<uint16_t>()->default_value(ConfiguredPortDefault()));
     options.add_options()
         ("w,world", "World directory", cxxopts::value<std::string>()->default_value(""));
 

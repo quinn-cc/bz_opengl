@@ -159,7 +159,14 @@ void World::update() {
         playerId = initMsg->clientId;
 
         if (!initMsg->worldData.empty()) {
-            const auto downloadsDir = bz::data::EnsureUserWorldsDirectory();
+            std::filesystem::path downloadsDir;
+            if (const auto endpoint = game.engine.network->getServerEndpoint()) {
+                downloadsDir = bz::data::EnsureUserWorldDirectoryForServer(endpoint->host, endpoint->port);
+            } else {
+                spdlog::warn("World::update: Server endpoint unknown; falling back to shared world directory");
+                downloadsDir = bz::data::EnsureUserWorldsDirectory();
+            }
+
             worldDir = downloadsDir.string();
 
             // Write initMsg->worldData to a file in worldDir called "world.zip"
@@ -174,6 +181,34 @@ void World::update() {
             worldZipFile.close();
 
             unzipFromMemory(initMsg->worldData.data(), initMsg->worldData.size(), worldDir);
+
+            const auto worldConfigPath = downloadsDir / "config.json";
+            if (std::filesystem::exists(worldConfigPath)) {
+                std::ifstream worldConfigFile(worldConfigPath);
+                if (!worldConfigFile) {
+                    spdlog::error("World::update: Failed to open world config for reading: {}", worldConfigPath.string());
+                } else {
+                    try {
+                        nlohmann::json worldConfigJson;
+                        worldConfigFile >> worldConfigJson;
+
+                        if (!worldConfigJson.is_object()) {
+                            spdlog::warn("World::update: World config is not a JSON object: {}", worldConfigPath.string());
+                        } else {
+                            constexpr const char* worldConfigLabel = "world config";
+                            if (!bz::data::MergeConfigLayer(worldConfigLabel, worldConfigJson, downloadsDir)) {
+                                spdlog::warn("World::update: Failed to merge world config layer from {}", worldConfigPath.string());
+                            } else {
+                                registerAssets(worldConfigJson, downloadsDir);
+                            }
+                        }
+                    } catch (const std::exception &e) {
+                        spdlog::error("World::update: Failed to parse world config JSON {}: {}", worldConfigPath.string(), e.what());
+                    }
+                }
+            } else {
+                spdlog::warn("World::update: World config not found at {}", worldConfigPath.string());
+            }
 
             loadManifest(downloadsDir / "manifest.json");
         } else {

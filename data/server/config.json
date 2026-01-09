@@ -12,5 +12,15 @@
         "backwardSpeedMultiplier": 0.8,
         "leftTurnSpeedMultiplier": 1,
         "rightTurnSpeedMultiplier": 1
-    }
+    },
+    "plugins" : [
+        {
+            "name" : "core_commands",
+            "options" : {
+                "enableAdminCommands" : true
+            },
+            "enabled" : true
+        }
+    ]
+
 }

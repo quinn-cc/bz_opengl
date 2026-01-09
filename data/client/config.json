@@ -32,42 +32,41 @@
                 "Spawn": "audio/spawn.wav"
             },
             "shot" : {
-                "Fire": "audio/laser.wav",
+                "Fire": "audio/fire.wav",
                 "Ricochet": "audio/ricochet.wav"
             }
         }
     },
     "network": {
-        "defaultPort": 1234,
-        "connectionTimeout": 5,
-        "maxRetries": 3
+        "ConnectionTimeout": 5,
+        "MaxRetries": 3
     },
     "graphics": {
-        "defaultResolution": {
-            "width": 1280,
-            "height": 720
+        "resolution": {
+            "Width": 1280,
+            "Height": 720
         },
-        "fullscreen": false,
-        "vsync": true
+        "Fullscreen": false,
+        "VSync": true
     },
     "controls": {
-        "mouseSensitivity": 1.0,
-        "invertYAxis": false
+        "MouseSensitivity": 1.0,
+        "InvertYAxis": false
     },
     "logging": {
-        "logLevel": "info",
-        "logToFile": true,
-        "logFilePath": "logs/client.log"
+        "LogLevel": "info",
+        "LogToFile": true,
+        "LogFilePath": "logs/client.log"
     },
     "performance": {
-        "maxFPS": 60,
-        "enableShadows": true,
-        "textureQuality": "high"
+        "MaxFPS": 60,
+        "EnableShadows": true,
+        "TextureQuality": "high"
     },
     "mods": {
-        "enabledMods": []
+        "EnabledMods": []
     },
     "debug": {
-        "showFPS": false
+        "ShowFPS": false
     }
 }

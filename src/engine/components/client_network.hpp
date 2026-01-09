@@ -15,10 +15,16 @@ public:
         std::string reason;
     };
 
+    struct ServerEndpointInfo {
+        std::string host;
+        uint16_t port;
+    };
+
 private:
     ENetHost* client = nullptr;
     ENetPeer* server = nullptr;
     std::optional<DisconnectEvent> pendingDisconnect;
+    std::optional<ServerEndpointInfo> serverEndpoint;
 
     struct MsgData {
         ENetPacket* packet;
@@ -38,6 +44,7 @@ public:
     bool connect(const std::string &address, uint16_t port, int timeoutMs = 5000);
     std::optional<DisconnectEvent> consumeDisconnectEvent();
     bool isConnected() const { return server != nullptr; }
+    std::optional<ServerEndpointInfo> getServerEndpoint() const { return serverEndpoint; }
 
     template<typename T> T* peekMessage(std::function<bool(const T&)> predicate = [](const T&) { return true; }) {
         static_assert(std::is_base_of_v<ServerMsg, T>, "T must be a subclass of ServerMsg");

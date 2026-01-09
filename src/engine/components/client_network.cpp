@@ -1,5 +1,6 @@
 #include "engine/components/client_network.hpp"
 #include "spdlog/spdlog.h"
+#include <array>
 
 ClientNetwork::ClientNetwork() {
     if (enet_initialize() != 0) {
@@ -217,12 +218,14 @@ void ClientNetwork::update() {
             spdlog::info("Disconnected from server.");
             pendingDisconnect = DisconnectEvent{ "Disconnected from server." };
             server = nullptr;
+            serverEndpoint.reset();
             break;
         }
         case ENET_EVENT_TYPE_DISCONNECT_TIMEOUT: {
             spdlog::info("Disconnected from server due to timeout.");
             pendingDisconnect = DisconnectEvent{ "Connection lost (timeout)." };
             server = nullptr;
+            serverEndpoint.reset();
             break;
         }
         default:
@@ -257,10 +260,17 @@ bool ClientNetwork::connect(const std::string &addr, uint16_t port, int timeoutM
     if (enet_host_service(client, &event, timeoutMs) > 0 && event.type == ENET_EVENT_TYPE_CONNECT) {
         spdlog::info("Connected to server.");
         connected = true;
+        std::array<char, 128> ipBuffer{};
+        if (enet_address_get_host_ip(&event.peer->address, ipBuffer.data(), ipBuffer.size()) == 0) {
+            serverEndpoint = ServerEndpointInfo{ ipBuffer.data(), event.peer->address.port };
+        } else {
+            serverEndpoint = ServerEndpointInfo{ addr, port };
+        }
     } else {
         spdlog::info("Connection to server failed.");
         enet_peer_reset(server);
         server = nullptr;
+        serverEndpoint.reset();
     }
 
     enet_host_flush(client);

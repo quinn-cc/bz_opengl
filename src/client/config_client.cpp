@@ -5,37 +5,16 @@
 #include "spdlog/spdlog.h"
 #include "common/data_path_resolver.hpp"
 
-ClientConfig ClientConfig::Load(const std::string &path) {
+namespace {
+
+ClientConfig ParseClientConfig(const nlohmann::json &root) {
     ClientConfig config;
 
-    const std::filesystem::path defaultConfigPath = path.empty()
-        ? bz::data::Resolve("client/config.json")
-        : std::filesystem::path(path);
-    const std::filesystem::path userConfigPath = bz::data::EnsureUserConfigFile("config.json");
-
-    nlohmann::json merged = nlohmann::json::object();
-
-    if (auto defaults = bz::data::LoadJsonFile(defaultConfigPath, "client defaults", spdlog::level::warn)) {
-        if (!defaults->is_object()) {
-            spdlog::warn("ClientConfig::Load: {} is not a JSON object", defaultConfigPath.string());
-        } else {
-            bz::data::MergeJsonObjects(merged, *defaults);
-        }
-    }
-
-    if (auto user = bz::data::LoadJsonFile(userConfigPath, "user config", spdlog::level::debug)) {
-        if (!user->is_object()) {
-            spdlog::warn("ClientConfig::Load: User config at {} is not a JSON object", userConfigPath.string());
-        } else {
-            bz::data::MergeJsonObjects(merged, *user);
-        }
-    }
-
-    if (auto it = merged.find("tankPath"); it != merged.end() && it->is_string()) {
+    if (auto it = root.find("tankPath"); it != root.end() && it->is_string()) {
         config.tankPath = it->get<std::string>();
     }
 
-    if (auto serverListsIt = merged.find("serverLists"); serverListsIt != merged.end()) {
+    if (auto serverListsIt = root.find("serverLists"); serverListsIt != root.end()) {
         if (!serverListsIt->is_object()) {
             spdlog::warn("ClientConfig::Load: 'serverLists' must be an object");
         } else {
@@ -79,6 +58,54 @@ ClientConfig ClientConfig::Load(const std::string &path) {
     }
 
     return config;
+}
+
+ClientConfig LoadClientConfigFromFiles(const std::filesystem::path &defaultConfigPath,
+                                       const std::filesystem::path &userConfigPath) {
+    nlohmann::json merged = nlohmann::json::object();
+
+    if (auto defaults = bz::data::LoadJsonFile(defaultConfigPath, "client defaults", spdlog::level::warn)) {
+        if (!defaults->is_object()) {
+            spdlog::warn("ClientConfig::Load: {} is not a JSON object", defaultConfigPath.string());
+        } else {
+            bz::data::MergeJsonObjects(merged, *defaults);
+        }
+    }
+
+    if (auto user = bz::data::LoadJsonFile(userConfigPath, "user config", spdlog::level::debug)) {
+        if (!user->is_object()) {
+            spdlog::warn("ClientConfig::Load: User config at {} is not a JSON object", userConfigPath.string());
+        } else {
+            bz::data::MergeJsonObjects(merged, *user);
+        }
+    }
+
+    return ParseClientConfig(merged);
+}
+
+} // namespace
+
+ClientConfig ClientConfig::Load(const std::string &path) {
+    if (!path.empty()) {
+        const std::filesystem::path defaultConfigPath(path);
+        const std::filesystem::path userConfigPath = bz::data::EnsureUserConfigFile("config.json");
+        return LoadClientConfigFromFiles(defaultConfigPath, userConfigPath);
+    }
+
+    if (!bz::data::ConfigCacheInitialized()) {
+        spdlog::debug("ClientConfig::Load: Config cache uninitialized; falling back to direct file load");
+        const auto defaultConfigPath = bz::data::Resolve("client/config.json");
+        const auto userConfigPath = bz::data::EnsureUserConfigFile("config.json");
+        return LoadClientConfigFromFiles(defaultConfigPath, userConfigPath);
+    }
+
+    const auto &root = bz::data::ConfigCacheRoot();
+    if (!root.is_object()) {
+        spdlog::warn("ClientConfig::Load: Configuration cache root is not a JSON object");
+        return ClientConfig{};
+    }
+
+    return ParseClientConfig(root);
 }
 
 bool ClientConfig::Save(const std::string &path) const {

@@ -1,5 +1,7 @@
 {
-    "serverPort": 1234,
+    "network" : {
+        "ServerPort" : 1234
+    },
     "assets": {
         "models" : {
             "world": "models/world.glb",
