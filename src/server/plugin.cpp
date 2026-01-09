@@ -1,6 +1,7 @@
 #include "plugin.hpp"
 #include "game.hpp"
 #include "engine/server_engine.hpp"
+#include "common/data_path_resolver.hpp"
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/embed.h>
@@ -40,15 +41,16 @@ void PluginAPI::loadPythonPlugins(const nlohmann::json &configJson) {
         return;
     }
 
-    fs::path cwd = fs::current_path();
-    fs::path repoRoot = cwd;
-    if (!fs::exists(repoRoot / "plugins") && repoRoot.has_parent_path()) {
-        repoRoot = repoRoot.parent_path();
-    }
-
-    const fs::path pluginDir = fs::exists(repoRoot / "plugins") ? (repoRoot / "plugins") : (cwd / "plugins");
+    const fs::path dataRoot = bz::data::DataRoot();
+    const fs::path pluginDir = dataRoot / "plugins";
     const fs::path commandsDir = pluginDir / "commands";
-    const fs::path sharedPythonDir = fs::exists(repoRoot / "python") ? (repoRoot / "python") : (cwd / "python");
+    const fs::path sharedPythonDir = dataRoot / "python";
+
+    if (!fs::exists(pluginDir)) {
+        spdlog::error("Plugin directory not found at {}", pluginDir.string());
+        g_loadedPlugins.clear();
+        return;
+    }
 
     py::module_ sys  = py::module_::import("sys");
 
@@ -58,8 +60,7 @@ void PluginAPI::loadPythonPlugins(const nlohmann::json &configJson) {
         }
     };
 
-    addSysPath(cwd);
-    addSysPath(repoRoot);
+    addSysPath(dataRoot);
     addSysPath(pluginDir);
     addSysPath(sharedPythonDir);
     if (fs::exists(commandsDir)) {

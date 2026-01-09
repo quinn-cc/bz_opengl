@@ -4,7 +4,7 @@
 
 ServerEngine::ServerEngine(uint16_t serverPort) {
     network = new ServerNetwork(serverPort);
-    physics = new Physics();
+    physics = new PhysicsWorld();
 }
 
 ServerEngine::~ServerEngine() {

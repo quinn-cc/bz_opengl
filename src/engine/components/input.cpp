@@ -33,6 +33,10 @@ void Input::keyCallback(GLFWwindow* window, int key, int scancode, int action, i
             inputState.quickQuit = true;
         }
 
+        if (key == GLFW_KEY_RIGHT_BRACKET) {
+            inputState.toggleFullscreen = true;
+        }
+
         if (key == GLFW_KEY_T) {
             // Start chat
             inputState.chat = true;

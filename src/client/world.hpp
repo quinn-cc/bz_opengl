@@ -1,6 +1,9 @@
 #pragma once
+#include <filesystem>
+#include <map>
 #include <string>
 #include "engine/types.hpp"
+#include "engine/physics/compound_body.hpp"
 #include <nlohmann/json.hpp>
 
 class Game;
@@ -9,7 +12,7 @@ class World {
 private:
     Game &game;
     render_id renderId;
-    physics_id physicsId;
+    PhysicsCompoundBody physics;
     PlayerParameters defaultPlayerParams;
     bool initialized = false;
 
@@ -18,6 +21,7 @@ private:
 
     std::map<std::string, std::filesystem::path> assetPaths;
 
+    void registerAssets(const nlohmann::json &source, const std::filesystem::path &baseDir);
     void loadManifest(const std::filesystem::path& manifestPath);
     bool unzipFromMemory(const std::byte* data, size_t size, const std::string& destDir);
 

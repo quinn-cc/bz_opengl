@@ -74,11 +74,13 @@ target_include_directories(proto_lib PUBLIC ${CMAKE_BINARY_DIR})
 file(GLOB_RECURSE CLIENT_SOURCES "${PROJECT_SOURCE_DIR}/src/client/*.cpp")
 list(APPEND CLIENT_SOURCES
     ${PROJECT_SOURCE_DIR}/src/client/server/server_browser_controller.cpp
+    ${PROJECT_SOURCE_DIR}/src/common/data_path_resolver.cpp
 )
 file(GLOB_RECURSE SERVER_SOURCES "${PROJECT_SOURCE_DIR}/src/server/*.cpp")
 list(APPEND SERVER_SOURCES
     ${PROJECT_SOURCE_DIR}/src/server/terminal_commands.cpp
     ${PROJECT_SOURCE_DIR}/src/server/server_cli_options.cpp
+    ${PROJECT_SOURCE_DIR}/src/common/data_path_resolver.cpp
 )
 ## Separate engine sources for client and server to avoid over-linking
 set(ENGINE_CLIENT_SOURCES
@@ -88,14 +90,19 @@ set(ENGINE_CLIENT_SOURCES
     ${PROJECT_SOURCE_DIR}/src/engine/components/render.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/input.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/gui.cpp
-    ${PROJECT_SOURCE_DIR}/src/engine/components/physics.cpp
+    ${PROJECT_SOURCE_DIR}/src/engine/components/gui/server_browser.cpp
+    ${PROJECT_SOURCE_DIR}/src/engine/physics/physics_world.cpp
+    ${PROJECT_SOURCE_DIR}/src/engine/physics/rigid_body.cpp
+    ${PROJECT_SOURCE_DIR}/src/engine/physics/compound_body.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/audio.cpp
 )
 set(ENGINE_SERVER_SOURCES
     ${PROJECT_SOURCE_DIR}/src/engine/server_engine.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/mesh_loader.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/server_network.cpp
-    ${PROJECT_SOURCE_DIR}/src/engine/components/physics.cpp
+    ${PROJECT_SOURCE_DIR}/src/engine/physics/physics_world.cpp
+    ${PROJECT_SOURCE_DIR}/src/engine/physics/rigid_body.cpp
+    ${PROJECT_SOURCE_DIR}/src/engine/physics/compound_body.cpp
 )
 
 # Create executables

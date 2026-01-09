@@ -11,6 +11,7 @@
 #include "client/server/server_discovery.hpp"
 #include "client/server/server_list_fetcher.hpp"
 #include "engine/client_engine.hpp"
+#include "engine/components/gui/server_browser.hpp"
 
 class ServerConnector;
 
@@ -35,7 +36,7 @@ private:
     void rebuildServerListFetcher();
     std::vector<ClientServerListSource> resolveActiveServerLists() const;
     void handleServerListSelection(int selectedIndex);
-    void handleServerListAddition(const GUI::ServerListOption &option);
+    void handleServerListAddition(const gui::ServerListOption &option);
     void updateServerListDisplayNamesFromCache();
     std::string resolveDisplayNameForSource(const ClientServerListSource &source) const;
     int getLanOffset() const;
@@ -46,13 +47,14 @@ private:
     int computeDefaultSelectionIndex(int optionCount) const;
 
     ClientEngine &engine;
+    gui::ServerBrowserView &browser;
     ClientConfig &clientConfig;
     std::string clientConfigPath;
     ServerConnector &connector;
     ServerDiscovery discovery;
     std::unique_ptr<ServerListFetcher> serverListFetcher;
     std::vector<ServerListFetcher::ServerRecord> cachedRemoteServers;
-    std::vector<GUI::ServerBrowserEntry> lastGuiEntries;
+    std::vector<gui::ServerBrowserEntry> lastGuiEntries;
     std::string defaultHost;
     uint16_t defaultPort = 0;
     int activeServerListIndex = -1;

@@ -30,7 +30,11 @@ public:
     Client *getClientByName(const std::string &name);
     
 
-    Game(class ServerEngine &engine, std::string worldName, nlohmann::json settings, std::string worldDir);
+        Game(class ServerEngine &engine,
+            std::string worldName,
+            nlohmann::json worldConfig,
+            std::string worldDir,
+            bool enableWorldZipping);
     ~Game();
 
     void update(TimeUtils::duration deltaTime);

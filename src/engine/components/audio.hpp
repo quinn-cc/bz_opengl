@@ -1,32 +1,48 @@
 #pragma once
-#include "engine/types.hpp"
-#include <string>
-#include <glm/glm.hpp>
-#include <unordered_map>
-#include <vector>
-#include "miniaudio.h"
 
-class Audio {
-friend class ClientEngine;
+#include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <memory>
+#include <string>
+#include <unordered_map>
+
+struct ma_engine;
+
+class AudioClipData;
+class ClientEngine;
+
+class AudioClip {
+public:
+    AudioClip() = delete;
+    AudioClip(const AudioClip&) = default;
+    AudioClip(AudioClip&&) noexcept = default;
+    AudioClip& operator=(const AudioClip&) = default;
+    AudioClip& operator=(AudioClip&&) noexcept = default;
+    ~AudioClip() = default;
+
+    void play(const glm::vec3& position, float volume = 1.0f) const;
 
 private:
-    struct AudioInstance {
-        ma_sound* sound;
-        int maxInstances;
-        std::vector<ma_sound*> instances;
-    };
+    friend class Audio;
+    explicit AudioClip(std::shared_ptr<AudioClipData> data);
 
-    ma_engine* engine;
-    std::unordered_map<audio_id, AudioInstance> audioMap;
-    audio_id nextAudioId;
+    std::shared_ptr<AudioClipData> data_;
+};
 
+class Audio {
+    friend class ClientEngine;
+
+public:
     Audio();
     ~Audio();
 
-public:
-    audio_id create(std::string filepath, int maxInstances = 5);
-    void play(audio_id id, glm::vec3 position, float volume = 1.0f);
-    void destroy(audio_id id);
-    void setListenerPosition(const glm::vec3 &position);
-    void setListenerRotation(const glm::quat &rotation);
+    AudioClip loadClip(const std::string& filepath, int maxInstances = 5);
+    void setListenerPosition(const glm::vec3& position);
+    void setListenerRotation(const glm::quat& rotation);
+
+private:
+    std::shared_ptr<AudioClipData> createClip(const std::string& filepath, int maxInstances);
+
+    ma_engine* engine = nullptr;
+    std::unordered_map<std::string, std::weak_ptr<AudioClipData>> clipCache_;
 };

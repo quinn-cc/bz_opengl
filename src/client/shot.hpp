@@ -1,5 +1,6 @@
 #pragma once
 #include "engine/types.hpp"
+#include "engine/components/audio.hpp"
 
 class Game;
 
@@ -12,8 +13,9 @@ private:
     glm::vec3 velocity;
 
     render_id renderId;
-    inline static audio_id fireAudioId = 0;
-    inline static audio_id ricochetAudioId = 0;
+    Audio& audioEngine;
+    AudioClip fireAudio;
+    AudioClip ricochetAudio;
 
     shot_id getNextLocalShotId() {
         static shot_id nextId = 1;
