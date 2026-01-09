@@ -1,4 +1,6 @@
 #pragma once
+#include <filesystem>
+#include <map>
 #include <string>
 #include "engine/types.hpp"
 #include "engine/physics/compound_body.hpp"
@@ -19,6 +21,7 @@ private:
 
     std::map<std::string, std::filesystem::path> assetPaths;
 
+    void registerAssets(const nlohmann::json &source, const std::filesystem::path &baseDir);
     void loadManifest(const std::filesystem::path& manifestPath);
     bool unzipFromMemory(const std::byte* data, size_t size, const std::string& destDir);
 

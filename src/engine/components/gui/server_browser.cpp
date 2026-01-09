@@ -25,12 +25,33 @@ std::string trimCopy(const std::string &value) {
 
     return std::string(begin, end);
 }
+
+    uint16_t configuredServerPort() {
+        if (const auto configured = bz::data::ConfigValueUInt16("network.ServerPort")) {
+            return *configured;
+        }
+        return 0;
+    }
+
+    std::string configuredServerPortLabel() {
+        if (const auto label = bz::data::ConfigValueString("network.ServerPort")) {
+            return *label;
+        }
+        return std::to_string(configuredServerPort());
+    }
+
+    uint16_t applyPortFallback(uint16_t candidate) {
+        if (candidate != 0) {
+            return candidate;
+        }
+        return configuredServerPort();
+    }
 }
 
 namespace gui {
 
 void ServerBrowserView::initializeFonts(ImGuiIO &io) {
-    const auto regularFontPath = bz::data::ResolveConfiguredAsset("guiServerBrowserRegularFont");
+    const auto regularFontPath = bz::data::ResolveConfiguredAsset("fonts.console.Regular");
     const std::string regularFontPathStr = regularFontPath.string();
     regularFont = io.Fonts->AddFontFromFileTTF(
         regularFontPathStr.c_str(),
@@ -38,10 +59,10 @@ void ServerBrowserView::initializeFonts(ImGuiIO &io) {
     );
 
     if (!regularFont) {
-        spdlog::warn("Failed to load GoogleSans font for server browser ({}).", regularFontPathStr);
+        spdlog::warn("Failed to load console regular font for server browser ({}).", regularFontPathStr);
     }
 
-    const auto headingFontPath = bz::data::ResolveConfiguredAsset("guiServerBrowserHeadingFont");
+    const auto headingFontPath = bz::data::ResolveConfiguredAsset("fonts.console.Heading");
     const std::string headingFontPathStr = headingFontPath.string();
     headingFont = io.Fonts->AddFontFromFileTTF(
         headingFontPathStr.c_str(),
@@ -49,10 +70,10 @@ void ServerBrowserView::initializeFonts(ImGuiIO &io) {
     );
 
     if (!headingFont) {
-        spdlog::warn("Failed to load Audiowide font for server browser headings ({}).", headingFontPathStr);
+        spdlog::warn("Failed to load console heading font for server browser ({}).", headingFontPathStr);
     }
 
-    const auto buttonFontPath = bz::data::ResolveConfiguredAsset("guiServerBrowserButtonFont");
+    const auto buttonFontPath = bz::data::ResolveConfiguredAsset("fonts.console.Button");
     const std::string buttonFontPathStr = buttonFontPath.string();
     buttonFont = io.Fonts->AddFontFromFileTTF(
         buttonFontPathStr.c_str(),
@@ -60,7 +81,7 @@ void ServerBrowserView::initializeFonts(ImGuiIO &io) {
     );
 
     if (!buttonFont) {
-        spdlog::warn("Failed to load Roboto font for server browser buttons ({}).", buttonFontPathStr);
+        spdlog::warn("Failed to load console button font for server browser ({}).", buttonFontPathStr);
     }
 }
 
@@ -280,7 +301,8 @@ void ServerBrowserView::draw(ImGuiIO &io) {
         } else {
             auto colonPos = addressValue.find_last_of(':');
             if (colonPos == std::string::npos) {
-                statusText = "Use the format host:port (example: localhost:1234).";
+                const std::string exampleAddress = "localhost:" + configuredServerPortLabel();
+                statusText = "Use the format host:port (example: " + exampleAddress + ").";
                 statusIsError = true;
             } else {
                 std::string hostPart = trimCopy(addressValue.substr(0, colonPos));
@@ -577,7 +599,7 @@ void ServerBrowserView::setScanning(bool isScanning) {
 
 void ServerBrowserView::resetBuffers(const std::string &defaultHost, uint16_t defaultPort) {
     std::string hostValue = defaultHost.empty() ? std::string("localhost") : defaultHost;
-    uint16_t portValue = defaultPort == 0 ? 1234 : defaultPort;
+    uint16_t portValue = applyPortFallback(defaultPort);
 
     addressBuffer.fill(0);
     std::snprintf(

@@ -1,71 +1,88 @@
 #include "world.hpp"
 #include "game.hpp"
-#include "common/data_path_resolver.hpp"
 #include "spdlog/spdlog.h"
+#include "common/data_path_resolver.hpp"
+#include <fstream>
+#include <map>
+#include <stdexcept>
 #include <string>
+#include <utility>
 #include <miniz.h>
+#include <vector>
 
 namespace fs = std::filesystem;
 
-World::World(Game &game, std::string worldName, nlohmann::json settings, std::string worldDir) : game(game), name(worldName), settings(settings), worldDir(worldDir) {
-    // Load config file from the detected data directory
-    nlohmann::json configJson;
-    std::filesystem::path configPath = bz::data::Resolve("config.json");
-    if (std::filesystem::exists(configPath)) {
-        std::ifstream configFile(configPath);
-        if (configFile) {
-            try {
-                configFile >> configJson;
-            } catch (const std::exception &e) {
-                spdlog::error("World::World: Failed to parse config JSON: {}", e.what());
-            }
-        } else {
-            spdlog::error("World::World: Failed to open config file: {}", configPath.string());
-        }
+World::World(Game &game,
+                         std::string worldName,
+                         nlohmann::json worldConfig,
+                         std::string worldDir,
+                         bool enableWorldZipping)
+        : game(game),
+            name(std::move(worldName)),
+            worldDir(std::move(worldDir)),
+            zipWorldOnStartup(enableWorldZipping) {
+    const std::vector<bz::data::ConfigLayerSpec> baseSpecs = {
+        {"common/config.json", "data/common/config.json", spdlog::level::err, true},
+        {"server/config.json", "data/server/config.json", spdlog::level::err, true}
+    };
+
+    std::vector<bz::data::ConfigLayer> layers = bz::data::LoadConfigLayers(baseSpecs);
+
+    if (worldConfig.is_object()) {
+        layers.push_back({std::move(worldConfig), fs::path(this->worldDir)});
     } else {
-        spdlog::warn("World::World: Config file not found: {}", configPath.string());
+        spdlog::warn("World::World: World config for {} is not an object", this->worldDir);
     }
 
-    // Load asset paths from config
-    if (configJson.contains("assets") && configJson["assets"].is_object()) {
-        for (auto& [key, value] : configJson["assets"].items()) {
-            if (value.is_string()) {
-                assetPaths[key] = bz::data::Resolve(value.get<std::string>());
+    nlohmann::json mergedConfig = nlohmann::json::object();
+    for (const auto &layer : layers) {
+        bz::data::MergeJsonObjects(mergedConfig, layer.json);
+
+        if (layer.json.is_object()) {
+            const auto assetsIt = layer.json.find("assets");
+            if (assetsIt != layer.json.end()) {
+                if (!assetsIt->is_object()) {
+                    spdlog::warn("World::World: 'assets' in layer is not an object; skipping");
+                } else {
+                    std::map<std::string, std::filesystem::path> layerAssets;
+                    bz::data::CollectAssetEntries(*assetsIt, layer.baseDir, layerAssets);
+
+                    for (const auto &[assetKey, assetPath] : layerAssets) {
+                        assetPaths[assetKey] = assetPath;
+
+                        const auto separator = assetKey.find_last_of('.');
+                        if (separator != std::string::npos) {
+                            assetPaths[assetKey.substr(separator + 1)] = assetPath;
+                        }
+                    }
+                }
             }
         }
-    } else {
-        spdlog::warn("World::World: No 'assets' object found in config");
-    }
 
-    // Load the default player parameters from config
-    if (configJson.contains("defaultPlayerParameters") && configJson["defaultPlayerParameters"].is_object()) {
-        nlohmann::json paramsJson = configJson["defaultPlayerParameters"];
-        for (auto& [key, value] : paramsJson.items()) {
-            if (value.is_number_float()) {
-                defaultPlayerParams[key] = value.get<float>();
+        if (layer.json.contains("defaultPlayerParameters") && layer.json["defaultPlayerParameters"].is_object()) {
+            for (const auto &[key, value] : layer.json["defaultPlayerParameters"].items()) {
+                if (value.is_number()) {
+                    defaultPlayerParams[key] = value.get<float>();
+                }
             }
         }
-    } else {
-        spdlog::warn("World::World: No 'defaultPlayerParameters' object found in config");
     }
 
-    loadManifest(fs::path(worldDir) / "manifest.json");
+    config = std::move(mergedConfig);
     
-    // World "name" will be the folder name (not including the path)
-    size_t lastSlash = worldDir.find_last_of("/\\");
-    if (lastSlash == std::string::npos) {
-        name = worldDir;
-    } else {
-        name = worldDir.substr(lastSlash + 1);
-    }
-    spdlog::info("World::World: Loaded world '{}'", worldName);
+    name = fs::path(this->worldDir).filename().string();
+    spdlog::info("World::World: Loaded world '{}'", name);
 
-    // Create a zip file of the directory "worldDir", and save it at the same location
-    // with the same name but with .zip extension
-    fs::path inputDir(worldDir);
-    fs::path outputZip = inputDir;
-    outputZip += ".zip";
-    zipDirectory(inputDir, outputZip);
+    if (zipWorldOnStartup) {
+        // Create a zip file of the directory "worldDir", and save it at the same location
+        // with the same name but with .zip extension
+        fs::path inputDir(this->worldDir);
+        fs::path outputZip = inputDir;
+        outputZip += ".zip";
+        zipDirectory(inputDir, outputZip);
+    } else {
+        spdlog::debug("World::World: Skipping zip generation for bundled world at {}", this->worldDir);
+    }
 
     physics = game.engine.physics->createStaticMesh(getAssetPath("world"), 0.0f);
 }
@@ -117,8 +134,12 @@ void World::zipDirectory(const fs::path& inputDir, const fs::path& outputZip) {
 }
 
 std::vector<std::byte> World::getData() {
+    if (!zipWorldOnStartup) {
+        return {};
+    }
+
     // Construct the zip path from the world name
-    fs::path zipPath = fs::path(worldDir);
+    fs::path zipPath = fs::path(this->worldDir);
     zipPath += ".zip";
 
     if (!fs::exists(zipPath)) {
@@ -143,37 +164,6 @@ std::vector<std::byte> World::getData() {
     return data;
 }
 
-void World::loadManifest(const fs::path& manifestPath) {
-    if (!fs::exists(manifestPath)) {
-        spdlog::warn("World::loadManifest: Manifest file not found: {}", manifestPath.string());
-        return;
-    }
-
-    std::ifstream manifestFile(manifestPath);
-    if (!manifestFile) {
-        spdlog::error("World::loadManifest: Failed to open manifest file: {}", manifestPath.string());
-        return;
-    }
-
-    try {
-        manifestFile >> manifest;
-    } catch (const std::exception &e) {
-        spdlog::error("World::loadManifest: Failed to parse manifest JSON: {}", e.what());
-        return;
-    }
-
-    // See if there is a "defaultPlayerParameters" key in the manifest
-    if (manifest.contains("defaultPlayerParameters")) {
-        nlohmann::json paramsJson = manifest["defaultPlayerParameters"];
-        for (auto& [key, value] : paramsJson.items()) {
-            if (value.is_number()) {
-                defaultPlayerParams[key] = value.get<float>();
-                spdlog::info("World::loadManifest: Loaded player parameter '{}' = {}", key, value.get<float>());
-            }
-        }
-    }
-}
-
 void World::update() {
     // Listen for player connection
     if (auto *connMsg = game.engine.network->peekMessage<ClientMsg_PlayerJoin>()) {
@@ -193,21 +183,13 @@ void World::update() {
 }
 
 std::string World::getAssetPath(const std::string &assetName) const {
-    // Check if manifest has "assets" and if assetName exists in it
-    if (manifest.contains("assets") && manifest["assets"].contains(assetName)) {
-        std::string assetPathStr = manifest["assets"][assetName].get<std::string>();
-        fs::path assetPath = fs::path(worldDir) / assetPathStr;
-        return assetPath.string();
-    } else {
-        auto it = assetPaths.find(assetName);
-        if (it != assetPaths.end()) {
-            spdlog::warn("World::getAssetPath: Asset '{}' not found in manifest, using config fallback", assetName);
-            return it->second.string();
-        }
-
-        spdlog::error("World::getAssetPath: Asset '{}' not found", assetName);
-        return "";
+    auto it = assetPaths.find(assetName);
+    if (it != assetPaths.end()) {
+        return it->second.string();
     }
+
+    spdlog::error("World::getAssetPath: Asset '{}' not found", assetName);
+    return "";
 }
 
 Location World::getSpawnLocation() const {

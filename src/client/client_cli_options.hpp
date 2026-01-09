@@ -9,6 +9,7 @@ struct ClientCLIOptions {
     uint16_t connectPort;
     std::string worldDir;
     bool addrExplicit = false;
+    bool worldExplicit = false;
 };
 
 ClientCLIOptions ParseClientCLIOptions(int argc, char *argv[]);

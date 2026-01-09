@@ -7,6 +7,7 @@
 #include <utility>
 
 #include "client/server/server_connector.hpp"
+#include "common/data_path_resolver.hpp"
 #include "spdlog/spdlog.h"
 
 namespace {
@@ -47,6 +48,20 @@ bool isLanToken(const std::string &value) {
     std::string trimmed = trimCopy(value);
     return equalsIgnoreCase(trimmed, "LAN") || equalsIgnoreCase(trimmed, "Local Area Network");
 }
+
+uint16_t configuredServerPort() {
+    if (const auto configured = bz::data::ConfigValueUInt16("network.ServerPort")) {
+        return *configured;
+    }
+    return 0;
+}
+
+uint16_t applyPortFallback(uint16_t candidate) {
+    if (candidate != 0) {
+        return candidate;
+    }
+    return configuredServerPort();
+}
 }
 
 ServerBrowserController::ServerBrowserController(ClientEngine &engine,
@@ -61,7 +76,7 @@ ServerBrowserController::ServerBrowserController(ClientEngine &engine,
       clientConfigPath(configPath),
             connector(connector),
             defaultHost(defaultHost.empty() ? "localhost" : defaultHost),
-            defaultPort(defaultPort == 0 ? 1234 : defaultPort) {
+            defaultPort(applyPortFallback(defaultPort)) {
     refreshGuiServerListOptions();
     rebuildServerListFetcher();
 
@@ -180,7 +195,7 @@ void ServerBrowserController::rebuildEntries() {
         if (record.host.empty()) {
             continue;
         }
-        uint16_t recordPort = record.port == 0 ? 1234 : record.port;
+        uint16_t recordPort = applyPortFallback(record.port);
         auto key = makeKey(record.host, recordPort);
         if (!seen.insert(key).second) {
             continue;
@@ -392,7 +407,7 @@ void ServerBrowserController::handleServerListAddition(const gui::ServerListOpti
 
     if (!clientConfig.Save(clientConfigPath)) {
         clientConfig.serverLists.pop_back();
-        browser.setListStatus("Failed to write config_client.json. Check permissions.", true);
+        browser.setListStatus("Failed to write " + clientConfigPath + ". Check permissions.", true);
         return;
     }
 

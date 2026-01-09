@@ -1,5 +1,10 @@
 #include <GLFW/glfw3.h>
+#include <algorithm>
+#include <cctype>
+#include <filesystem>
+#include <initializer_list>
 #include <memory>
+#include <string>
 #include "spdlog/spdlog.h"
 #include "engine/client_engine.hpp"
 #include "game.hpp"
@@ -20,7 +25,7 @@ struct FullscreenState {
     int windowedHeight = 720;
 };
 
-void ToggleFullscreen(GLFWwindow *window, FullscreenState &state) {
+void ToggleFullscreen(GLFWwindow *window, FullscreenState &state, bool vsyncEnabled) {
     if (!window) {
         return;
     }
@@ -51,7 +56,7 @@ void ToggleFullscreen(GLFWwindow *window, FullscreenState &state) {
         glfwSetWindowPos(window, monitorX, monitorY);
         glfwSetWindowSize(window, mode->width, mode->height);
 
-        glfwSwapInterval(1); // ensure vsync remains active after mode switch
+        glfwSwapInterval(vsyncEnabled ? 1 : 0); // reapply configured vsync after mode switch
         state.active = true;
     } else {
         const int restoreWidth = state.windowedWidth > 0 ? state.windowedWidth : 1280;
@@ -61,7 +66,7 @@ void ToggleFullscreen(GLFWwindow *window, FullscreenState &state) {
         glfwSetWindowAttrib(window, GLFW_DECORATED, GLFW_TRUE);
         glfwSetWindowPos(window, restoreX, restoreY);
         glfwSetWindowSize(window, restoreWidth, restoreHeight);
-        glfwSwapInterval(1); // reapply vsync after returning to windowed mode
+        glfwSwapInterval(vsyncEnabled ? 1 : 0); // reapply configured vsync after returning
         state.active = false;
     }
 }
@@ -77,10 +82,68 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
+    const std::filesystem::path clientUserConfigPathFs = bz::data::EnsureUserConfigFile("config.json");
+    const std::vector<bz::data::ConfigLayerSpec> clientConfigSpecs = {
+        {"common/config.json", "data/common/config.json", spdlog::level::err, true},
+        {"client/config.json", "data/client/config.json", spdlog::level::err, true},
+        {clientUserConfigPathFs, "user config", spdlog::level::debug, false}
+    };
+    bz::data::InitializeConfigCache(clientConfigSpecs);
+
+    auto readBoolConfig = [](std::initializer_list<const char*> paths, bool defaultValue) {
+        for (const char* path : paths) {
+            if (const auto* value = bz::data::ConfigValue(path)) {
+                if (value->is_boolean()) {
+                    return value->get<bool>();
+                }
+                if (value->is_number_integer()) {
+                    return value->get<long long>() != 0;
+                }
+                if (value->is_number_float()) {
+                    return value->get<double>() != 0.0;
+                }
+                if (value->is_string()) {
+                    std::string text = value->get<std::string>();
+                    std::transform(text.begin(), text.end(), text.begin(), [](unsigned char ch) { return static_cast<char>(std::tolower(ch)); });
+                    if (text == "true" || text == "1" || text == "yes" || text == "on") {
+                        return true;
+                    }
+                    if (text == "false" || text == "0" || text == "no" || text == "off") {
+                        return false;
+                    }
+                }
+                spdlog::warn("Client startup config '{}' cannot be interpreted as boolean", path);
+            }
+        }
+        return defaultValue;
+    };
+
+    auto readUInt16Config = [](std::initializer_list<const char*> paths, uint16_t defaultValue) {
+        for (const char* path : paths) {
+            if (auto value = bz::data::ConfigValueUInt16(path)) {
+                if (*value > 0) {
+                    return *value;
+                }
+                spdlog::warn("Client startup config '{}' must be positive; falling back", path);
+                return defaultValue;
+            }
+        }
+        return defaultValue;
+    };
+
+    const uint16_t configWidth = readUInt16Config({"graphics.resolution.Width"}, 1280);
+    const uint16_t configHeight = readUInt16Config({"graphics.resolution.Height"}, 720);
+    const bool fullscreenEnabled = readBoolConfig({"graphics.Fullscreen"}, false);
+    const bool vsyncEnabled = readBoolConfig({"graphics.VSync"}, true);
+
     const ClientCLIOptions cliOptions = ParseClientCLIOptions(argc, argv);
 
-    const std::string clientConfigPath = bz::data::Resolve("config_client.json").string();
-    ClientConfig clientConfig = ClientConfig::Load(clientConfigPath);
+    const std::string clientUserConfigPath = clientUserConfigPathFs.string();
+    ClientConfig clientConfig = ClientConfig::Load("");
+
+    const std::string initialWorldDir = (cliOptions.worldExplicit && !cliOptions.worldDir.empty())
+        ? cliOptions.worldDir
+        : bz::data::Resolve("client-test").string();
 
     spdlog::trace("GLFW initialized successfully");
 
@@ -91,7 +154,11 @@ int main(int argc, char *argv[]) {
 
     
 
-    GLFWwindow *window = glfwCreateWindow(1280, 720, "BZFlag v3", nullptr, nullptr);
+    FullscreenState fullscreenState;
+    fullscreenState.windowedWidth = configWidth;
+    fullscreenState.windowedHeight = configHeight;
+
+    GLFWwindow *window = glfwCreateWindow(configWidth, configHeight, "BZFlag v3", nullptr, nullptr);
     //glfwSetWindowUserPointer(window, userPointer);
     if (!window) {
         spdlog::error("GLFW window failed to create");
@@ -105,7 +172,7 @@ int main(int argc, char *argv[]) {
     spdlog::trace("GLFW context made current");
 
     glEnable(GL_MULTISAMPLE);
-    glfwSwapInterval(1); // Enable vsync
+    glfwSwapInterval(vsyncEnabled ? 1 : 0);
 
 
     spdlog::info("GLFW_SAMPLES attrib = {}", glfwGetWindowAttrib(window, GLFW_SAMPLES));
@@ -121,14 +188,17 @@ int main(int argc, char *argv[]) {
 
     ClientEngine engine(window);
     spdlog::trace("ClientEngine initialized successfully");
-    FullscreenState fullscreenState;
+
+    if (fullscreenEnabled) {
+        ToggleFullscreen(window, fullscreenState, vsyncEnabled);
+    }
 
     std::unique_ptr<Game> game;
-    ServerConnector serverConnector(engine, cliOptions.playerName, cliOptions.worldDir, game);
+    ServerConnector serverConnector(engine, cliOptions.playerName, initialWorldDir, game);
     ServerBrowserController serverBrowser(
         engine,
         clientConfig,
-        clientConfigPath,
+        clientUserConfigPath,
         cliOptions.connectAddr,
         cliOptions.connectPort,
         serverConnector);
@@ -155,7 +225,7 @@ int main(int argc, char *argv[]) {
         engine.earlyUpdate(deltaTime);
 
         if (engine.input->getInputState().toggleFullscreen) {
-            ToggleFullscreen(window, fullscreenState);
+            ToggleFullscreen(window, fullscreenState, vsyncEnabled);
         }
 
         if (auto disconnectEvent = engine.network->consumeDisconnectEvent()) {
