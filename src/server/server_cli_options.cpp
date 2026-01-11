@@ -5,6 +5,8 @@
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
 #include <stdexcept>
+#include <cstdlib>
+#include <iostream>
 
 namespace {
 
@@ -23,13 +25,29 @@ std::string ConfiguredPortDefault() {
 } // namespace
 
 ServerCLIOptions ParseServerCLIOptions(int argc, char *argv[]) {
-    cxxopts::Options options("BZ", "This is the server.");
+    cxxopts::Options options("bz3-server", "BZ3 server");
     options.add_options()
         ("w,world", "World directory", cxxopts::value<std::string>())
         ("D,default-world", "Use bundled default world")
-        ("p,port", "Server listen port", cxxopts::value<uint16_t>()->default_value(ConfiguredPortDefault()));
+        ("p,port", "Server listen port", cxxopts::value<uint16_t>()->default_value(ConfiguredPortDefault()))
+        ("d,data-dir", "Data directory (overrides BZ3_DATA_DIR)", cxxopts::value<std::string>())
+        ("c,config", "User config file path", cxxopts::value<std::string>())
+        ("v,verbose", "Enable verbose logging")
+        ("h,help", "Show help");
 
-    auto result = options.parse(argc, argv);
+    cxxopts::ParseResult result;
+    try {
+        result = options.parse(argc, argv);
+    } catch (const cxxopts::exceptions::exception &ex) {
+        std::cerr << "Error: " << ex.what() << "\n";
+        std::cerr << options.help() << std::endl;
+        std::exit(1);
+    }
+
+    if (result.count("help")) {
+        std::cout << options.help() << std::endl;
+        std::exit(0);
+    }
 
     ServerCLIOptions parsed;
     if (result.count("world") && result.count("default-world")) {
@@ -60,7 +78,12 @@ ServerCLIOptions ParseServerCLIOptions(int argc, char *argv[]) {
         parsed.customWorldProvided = true;
     }
 
+    parsed.dataDir = result.count("data-dir") ? result["data-dir"].as<std::string>() : std::string();
+    parsed.userConfigPath = result.count("config") ? result["config"].as<std::string>() : std::string();
     parsed.hostPort = result["port"].as<uint16_t>();
     parsed.hostPortExplicit = result.count("port") > 0;
+    parsed.dataDirExplicit = result.count("data-dir") > 0;
+    parsed.userConfigExplicit = result.count("config") > 0;
+    parsed.verbose = result.count("verbose") > 0;
     return parsed;
 }

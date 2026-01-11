@@ -16,14 +16,14 @@ This project uses vcpkg to provide most native dependencies and the setup script
 
 ## Runtime Data
 
-The programs load assets/config from a data root resolved via the `BZ_DATA_DIR` environment variable.
+The programs load assets/config from a data root resolved via the `BZ3_DATA_DIR` environment variable.
 
 - Linux/macOS:
 
-  - `export BZ_DATA_DIR="$PWD/data"`
+  - `export BZ3_DATA_DIR="$PWD/data"`
 - Windows (PowerShell):
 
-  - `$env:BZ_DATA_DIR = "$pwd\data"`
+  - `$env:BZ3_DATA_DIR = "$pwd\data"`
 
 ## Install (Prerequisites)
 

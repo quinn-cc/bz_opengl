@@ -61,7 +61,7 @@ src/
         mesh_loader.*                  # Loads GLB meshes for physics/render helpers
 
     common/
-        data_path_resolver.*           # BZ_DATA_DIR resolution + config layering + asset lookup
+        data_path_resolver.*           # BZ3_DATA_DIR resolution + config layering + asset lookup
 
     protos/
         messages.proto                 # Protobuf wire schema (ClientMsg/ServerMsg)
@@ -82,7 +82,7 @@ data/
 
 ### Data root and configuration layering
 
-The runtime **data root** is discovered via the `BZ_DATA_DIR` environment variable (required). All config and assets are loaded relative to this directory.
+The runtime **data root** is discovered via the `BZ3_DATA_DIR` environment variable (required). All config and assets are loaded relative to this directory.
 
 Configuration is **layered JSON** merged into a single “config cache”:
 
@@ -360,6 +360,6 @@ Plugin callbacks are keyed by `ClientMsg_Type` and currently invoked from gamepl
 
 ## Common gotchas
 
-- `BZ_DATA_DIR` must point at the repo’s `data/` directory (or an installed equivalent).
+- `BZ3_DATA_DIR` must point at the repo’s `data/` directory (or an installed equivalent).
 - Config and assets are *layered*; if something “mysteriously” changes between worlds, check the world’s `config.json` and `manifest.json` merging.
 - Network messages are freed on `flushPeekedMessages()`; don’t hold pointers returned by `peekMessage<T>()` beyond the current frame.

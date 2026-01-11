@@ -15,6 +15,9 @@ namespace bz::data {
 // Resolve paths located under the runtime data directory.
 std::filesystem::path Resolve(const std::filesystem::path &relativePath);
 
+// Overrides the detected data directory. Must be called before the first Resolve/DataRoot invocation.
+void SetDataRootOverride(const std::filesystem::path &path);
+
 std::optional<nlohmann::json> LoadJsonFile(const std::filesystem::path &path,
 										   const std::string &label,
 										   spdlog::level::level_enum missingLevel);
