@@ -243,7 +243,7 @@ std::filesystem::path UserConfigDirectory() {
             throw std::runtime_error("Unable to determine user configuration directory: no home path detected");
         }
 
-        return TryCanonical(base / "bz_opengl");
+        return TryCanonical(base / "bz3");
     }();
 
     return dir;

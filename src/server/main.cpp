@@ -10,6 +10,7 @@
 #include <pybind11/embed.h>
 #include <csignal>
 #include <atomic>
+#include <iostream>
 #include <limits>
 #include <poll.h>
 #include <unistd.h>
