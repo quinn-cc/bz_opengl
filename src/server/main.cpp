@@ -5,11 +5,13 @@
 #include "server/server_discovery.hpp"
 #include "server/terminal_commands.hpp"
 #include "server/server_cli_options.hpp"
+#include "common/data_dir_override.hpp"
 #include "common/data_path_resolver.hpp"
 #include <nlohmann/json.hpp>
 #include <pybind11/embed.h>
 #include <csignal>
 #include <atomic>
+#include <iostream>
 #include <limits>
 #include <poll.h>
 #include <unistd.h>
@@ -17,6 +19,16 @@
 #include <vector>
 
 #define MIN_FRAME_HZ (1.0f / 120.0f)
+
+void ConfigureLogging(bool verbose) {
+    if (verbose) {
+        spdlog::set_level(spdlog::level::trace);
+        spdlog::set_pattern("%Y-%m-%d %H:%M:%S.%e [%^%l%$] %v");
+    } else {
+        spdlog::set_level(spdlog::level::info);
+        spdlog::set_pattern("%v");
+    }
+}
 
 Game *g_game = nullptr;
 ServerEngine *g_engine = nullptr;
@@ -35,11 +47,13 @@ void signalHandler(int signum) {
 }
 
 int main(int argc, char *argv[]) {
-    spdlog::set_level(spdlog::level::trace);
+    ConfigureLogging(false);
 
     // Register signal handler
     signal(SIGINT, signalHandler);
     signal(SIGTERM, signalHandler);
+
+    const auto dataDirResult = bz::data::ApplyDataDirOverrideFromArgs(argc, argv, std::filesystem::path("server/config.json"));
 
     const std::vector<bz::data::ConfigLayerSpec> baseConfigSpecs = {
         {"common/config.json", "data/common/config.json", spdlog::level::err, true},
@@ -53,6 +67,10 @@ int main(int argc, char *argv[]) {
     } catch (const std::exception &ex) {
         spdlog::error("Failed to parse server command line options: {}", ex.what());
         return 1;
+    }
+
+    if (cliOptions.verbose) {
+        ConfigureLogging(true);
     }
 
     if (!cliOptions.worldSpecified) {
@@ -71,6 +89,7 @@ int main(int argc, char *argv[]) {
     const std::vector<bz::data::ConfigLayerSpec> serverConfigSpecs = {
         {"common/config.json", "data/common/config.json", spdlog::level::err, true},
         {"server/config.json", "data/server/config.json", spdlog::level::err, true},
+        {dataDirResult.userConfigPath, "user config", spdlog::level::debug, false},
         {configPath, "world config", spdlog::level::err, true}
     };
 

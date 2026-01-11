@@ -1,23 +1,24 @@
 #pragma once
 #include "engine/types.hpp"
-#include <string>
+#include "network/transport.hpp"
+
 #include <cstdint>
-#include <enet.h>
-#include <optional>
-#include <map>
 #include <functional>
-#include "spdlog/spdlog.h"
-#include "messages.pb.h"
+#include <memory>
+#include <map>
+#include <string>
+#include <type_traits>
+#include <vector>
 
 class ServerNetwork {
     friend class ServerEngine;
 
 private:
-    ENetHost *server;
-    std::map<client_id, ENetPeer *> clients;
+    std::unique_ptr<net::IServerTransport> transport;
+    std::map<client_id, net::ConnectionHandle> clients;
+    std::map<net::ConnectionHandle, client_id> clientByConnection;
 
     struct MsgData {
-        ENetPacket* packet;
         ClientMsg* msg;
         bool peeked = false;
     };
@@ -32,9 +33,11 @@ private:
     ~ServerNetwork();
 
     void flushPeekedMessages();
-    client_id getClient(ENetPeer *peer);
+    client_id getClient(net::ConnectionHandle connection);
     client_id getNextClientId();
     void update();
+    void sendImpl(client_id clientId, const ServerMsg &input, bool flush);
+    void logUnsupportedMessageType();
 
 public:
     template<typename T> T* peekMessage(std::function<bool(const T&)> predicate = [](const T&) { return true; }) {
@@ -64,148 +67,10 @@ public:
         }
 
         if (clients.find(clientId) == clients.end()) {
-            spdlog::debug("ServerNetwork::send: Attempted to send message to non-existent client id {}", clientId);
-        } else {
-            ENetPeer *peer = clients[clientId];
-            ENetPacketFlag flag = ENET_PACKET_FLAG_RELIABLE;
-
-            if constexpr (std::is_same_v<T, ServerMsg_PlayerLocation>) {
-                flag = ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT;
-            }
-            
-            bz::ServerMsg msg;
-
-            if constexpr (std::is_same_v<T, ServerMsg_PlayerJoin>) {
-                msg.set_type(bz::ServerMsg::PLAYER_JOIN);
-                auto* join = msg.mutable_player_join();
-                join->set_client_id(input->clientId);
-                auto* state = join->mutable_state();
-                state->set_name(input->state.name);
-                state->mutable_position()->set_x(input->state.position.x);
-                state->mutable_position()->set_y(input->state.position.y);
-                state->mutable_position()->set_z(input->state.position.z);
-                state->mutable_rotation()->set_x(input->state.rotation.x);
-                state->mutable_rotation()->set_y(input->state.rotation.y);
-                state->mutable_rotation()->set_z(input->state.rotation.z);
-                state->mutable_rotation()->set_w(input->state.rotation.w);
-                state->mutable_velocity()->set_x(input->state.velocity.x);
-                state->mutable_velocity()->set_y(input->state.velocity.y);
-                state->mutable_velocity()->set_z(input->state.velocity.z);
-                state->set_alive(input->state.alive);
-            } else if constexpr (std::is_same_v<T, ServerMsg_PlayerLeave>) {
-                msg.set_type(bz::ServerMsg::PLAYER_LEAVE);
-                auto* leave = msg.mutable_player_leave();
-                leave->set_client_id(input->clientId);
-            } else if constexpr (std::is_same_v<T, ServerMsg_PlayerState>) {
-                msg.set_type(bz::ServerMsg::PLAYER_STATE);
-                auto* ps = msg.mutable_player_state();
-                ps->set_client_id(input->clientId);
-                auto* state = ps->mutable_state();
-                state->set_name(input->state.name);
-                state->mutable_position()->set_x(input->state.position.x);
-                state->mutable_position()->set_y(input->state.position.y);
-                state->mutable_position()->set_z(input->state.position.z);
-                state->mutable_rotation()->set_x(input->state.rotation.x);
-                state->mutable_rotation()->set_y(input->state.rotation.y);
-                state->mutable_rotation()->set_z(input->state.rotation.z);
-                state->mutable_rotation()->set_w(input->state.rotation.w);
-                state->mutable_velocity()->set_x(input->state.velocity.x);
-                state->mutable_velocity()->set_y(input->state.velocity.y);
-                state->mutable_velocity()->set_z(input->state.velocity.z);
-                state->set_alive(input->state.alive);
-            } else if constexpr (std::is_same_v<T, ServerMsg_PlayerParameters>) {
-                msg.set_type(bz::ServerMsg::PLAYER_PARAMETERS);
-                auto* pp = msg.mutable_player_parameters();
-                pp->set_client_id(input->clientId);
-                auto* params = pp->mutable_params();
-                for (const auto& [key, val] : input->params) {
-                    (*params->mutable_params())[key] = val;
-                }
-            } else if constexpr (std::is_same_v<T, ServerMsg_PlayerLocation>) {
-                msg.set_type(bz::ServerMsg::PLAYER_LOCATION);
-                auto* loc = msg.mutable_player_location();
-                loc->set_client_id(input->clientId);
-                loc->mutable_position()->set_x(input->position.x);
-                loc->mutable_position()->set_y(input->position.y);
-                loc->mutable_position()->set_z(input->position.z);
-                loc->mutable_rotation()->set_x(input->rotation.x);
-                loc->mutable_rotation()->set_y(input->rotation.y);
-                loc->mutable_rotation()->set_z(input->rotation.z);
-                loc->mutable_rotation()->set_w(input->rotation.w);
-                loc->mutable_velocity()->set_x(input->velocity.x);
-                loc->mutable_velocity()->set_y(input->velocity.y);
-                loc->mutable_velocity()->set_z(input->velocity.z);
-            } else if constexpr (std::is_same_v<T, ServerMsg_PlayerSpawn>) {
-                msg.set_type(bz::ServerMsg::PLAYER_SPAWN);
-                auto* spawn = msg.mutable_player_spawn();
-                spawn->set_client_id(input->clientId);
-                spawn->mutable_position()->set_x(input->position.x);
-                spawn->mutable_position()->set_y(input->position.y);
-                spawn->mutable_position()->set_z(input->position.z);
-                spawn->mutable_rotation()->set_x(input->rotation.x);
-                spawn->mutable_rotation()->set_y(input->rotation.y);
-                spawn->mutable_rotation()->set_z(input->rotation.z);
-                spawn->mutable_rotation()->set_w(input->rotation.w);
-                spawn->mutable_velocity()->set_x(input->velocity.x);
-                spawn->mutable_velocity()->set_y(input->velocity.y);
-                spawn->mutable_velocity()->set_z(input->velocity.z);
-            } else if constexpr (std::is_same_v<T, ServerMsg_PlayerDeath>) {
-                msg.set_type(bz::ServerMsg::PLAYER_DEATH);
-                auto* death = msg.mutable_player_death();
-                death->set_client_id(input->clientId);
-            } else if constexpr (std::is_same_v<T, ServerMsg_CreateShot>) {
-                msg.set_type(bz::ServerMsg::CREATE_SHOT);
-                auto* shot = msg.mutable_create_shot();
-                shot->set_global_shot_id(input->globalShotId);
-                shot->mutable_position()->set_x(input->position.x);
-                shot->mutable_position()->set_y(input->position.y);
-                shot->mutable_position()->set_z(input->position.z);
-                shot->mutable_velocity()->set_x(input->velocity.x);
-                shot->mutable_velocity()->set_y(input->velocity.y);
-                shot->mutable_velocity()->set_z(input->velocity.z);
-            } else if constexpr (std::is_same_v<T, ServerMsg_RemoveShot>) {
-                msg.set_type(bz::ServerMsg::REMOVE_SHOT);
-                auto* remove = msg.mutable_remove_shot();
-                remove->set_shot_id(input->shotId);
-                remove->set_is_global_id(input->isGlobalId);
-            } else if constexpr (std::is_same_v<T, ServerMsg_Chat>) {
-                msg.set_type(bz::ServerMsg::CHAT);
-                auto* chat = msg.mutable_chat();
-                chat->set_from_id(input->fromId);
-                chat->set_to_id(input->toId);
-                chat->set_text(input->text);
-            } else if constexpr (std::is_same_v<T, ServerMsg_Init>) {
-                msg.set_type(bz::ServerMsg::INIT);
-                auto* init = msg.mutable_init();
-                init->set_client_id(input->clientId);
-                init->set_server_name(input->serverName);
-                auto* params = init->mutable_default_player_params();
-                for (const auto& [key, val] : input->defaultPlayerParams) {
-                    (*params->mutable_params())[key] = val;
-                }
-                init->set_world_data(input->worldData.data(), input->worldData.size());
-            }
-            else {
-                spdlog::error("ServerNetwork::send: Unsupported message type");
-                return;
-            }
-            
-            std::string buffer;
-            msg.SerializeToString(&buffer);
-
-            ENetPacket* packet = enet_packet_create(
-                buffer.data(),
-                buffer.size(),
-                flag
-            );
-
-            enet_peer_send(peer, 0, packet);
-
-            if constexpr (std::is_same_v<T, ServerMsg_Init>) {
-                // Flush
-                enet_host_flush(server);
-            }
+            return;
         }
+
+        sendImpl(clientId, *input, false);
     };
 
     template<typename T> void sendExcept(client_id client, const T *input) {

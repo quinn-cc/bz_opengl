@@ -2,6 +2,8 @@
 
 #include "common/data_path_resolver.hpp"
 #include "cxxopts.hpp"
+#include <cstdlib>
+#include <iostream>
 
 namespace {
 
@@ -20,7 +22,7 @@ std::string ConfiguredPortDefault() {
 } // namespace
 
 ClientCLIOptions ParseClientCLIOptions(int argc, char *argv[]) {
-    cxxopts::Options options("BZ", "This is the client.");
+    cxxopts::Options options("bz3", "BZ3 client");
     options.add_options()
         ("n,name", "Player name", cxxopts::value<std::string>()->default_value("Player"));
     options.add_options()
@@ -28,16 +30,41 @@ ClientCLIOptions ParseClientCLIOptions(int argc, char *argv[]) {
     options.add_options()
         ("p,port", "Connection port", cxxopts::value<uint16_t>()->default_value(ConfiguredPortDefault()));
     options.add_options()
-        ("w,world", "World directory", cxxopts::value<std::string>()->default_value(""));
+        ("w,world", "World directory", cxxopts::value<std::string>());
+    options.add_options()
+        ("d,data-dir", "Data directory (overrides BZ3_DATA_DIR)", cxxopts::value<std::string>());
+    options.add_options()
+        ("c,config", "User config file path", cxxopts::value<std::string>());
+    options.add_options()
+        ("v,verbose", "Enable verbose logging");
+    options.add_options()
+        ("h,help", "Show help");
 
-    auto result = options.parse(argc, argv);
+    cxxopts::ParseResult result;
+    try {
+        result = options.parse(argc, argv);
+    } catch (const cxxopts::exceptions::exception &ex) {
+        std::cerr << "Error: " << ex.what() << "\n";
+        std::cerr << options.help() << std::endl;
+        std::exit(1);
+    }
+
+    if (result.count("help")) {
+        std::cout << options.help() << std::endl;
+        std::exit(0);
+    }
 
     ClientCLIOptions parsed;
     parsed.playerName = result["name"].as<std::string>();
     parsed.connectAddr = result["addr"].as<std::string>();
     parsed.connectPort = result["port"].as<uint16_t>();
-    parsed.worldDir = result["world"].as<std::string>();
+    parsed.worldDir = result.count("world") ? result["world"].as<std::string>() : std::string();
+    parsed.dataDir = result.count("data-dir") ? result["data-dir"].as<std::string>() : std::string();
+    parsed.userConfigPath = result.count("config") ? result["config"].as<std::string>() : std::string();
     parsed.addrExplicit = result.count("addr") > 0;
     parsed.worldExplicit = result.count("world") > 0;
+    parsed.dataDirExplicit = result.count("data-dir") > 0;
+    parsed.userConfigExplicit = result.count("config") > 0;
+    parsed.verbose = result.count("verbose") > 0;
     return parsed;
 }

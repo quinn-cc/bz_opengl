@@ -3,7 +3,6 @@
 #include <cctype>
 #include <filesystem>
 #include <initializer_list>
-#include <memory>
 #include <string>
 #include "spdlog/spdlog.h"
 #include "engine/client_engine.hpp"
@@ -12,6 +11,7 @@
 #include "client/config_client.hpp"
 #include "client/server/server_browser_controller.hpp"
 #include "client/server/server_connector.hpp"
+#include "common/data_dir_override.hpp"
 #include "common/data_path_resolver.hpp"
 
 TimeUtils::time lastFrameTime;
@@ -70,19 +70,32 @@ void ToggleFullscreen(GLFWwindow *window, FullscreenState &state, bool vsyncEnab
         state.active = false;
     }
 }
-}
+
+} // namespace
 
 #define MIN_DELTA_TIME (1.0f / 120.0f)
 
+void ConfigureLogging(bool verbose) {
+    if (verbose) {
+        spdlog::set_level(spdlog::level::trace);
+        spdlog::set_pattern("%Y-%m-%d %H:%M:%S.%e [%^%l%$] %v");
+    } else {
+        spdlog::set_level(spdlog::level::info);
+        spdlog::set_pattern("%v");
+    }
+}
+
 int main(int argc, char *argv[]) {
-    spdlog::set_level(spdlog::level::trace);
+    ConfigureLogging(false);
+
+    const bz::data::DataDirOverrideResult dataDirResult = bz::data::ApplyDataDirOverrideFromArgs(argc, argv);
 
     if (!glfwInit()) {
         spdlog::error("GLFW failed to initialize");
         exit(1);
     }
 
-    const std::filesystem::path clientUserConfigPathFs = bz::data::EnsureUserConfigFile("config.json");
+    const auto clientUserConfigPathFs = dataDirResult.userConfigPath;
     const std::vector<bz::data::ConfigLayerSpec> clientConfigSpecs = {
         {"common/config.json", "data/common/config.json", spdlog::level::err, true},
         {"client/config.json", "data/client/config.json", spdlog::level::err, true},
@@ -137,6 +150,9 @@ int main(int argc, char *argv[]) {
     const bool vsyncEnabled = readBoolConfig({"graphics.VSync"}, true);
 
     const ClientCLIOptions cliOptions = ParseClientCLIOptions(argc, argv);
+    if (cliOptions.verbose) {
+        ConfigureLogging(true);
+    }
 
     const std::string clientUserConfigPath = clientUserConfigPathFs.string();
     ClientConfig clientConfig = ClientConfig::Load("");
