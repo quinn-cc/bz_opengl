@@ -97,19 +97,35 @@ std::filesystem::path ExecutableDirectory() {
 #endif
 }
 
-std::filesystem::path DetectDataRoot() {
-    const char *envDataDir = std::getenv("BZ_DATA_DIR");
-    if (!envDataDir || *envDataDir == '\0') {
-        throw std::runtime_error("BZ_DATA_DIR environment variable must be set to the game data directory");
-    }
+std::mutex g_dataRootMutex;
+std::optional<std::filesystem::path> g_dataRootOverride;
+bool g_dataRootInitialized = false;
 
-    const auto canonical = TryCanonical(envDataDir);
+std::filesystem::path ValidateDataRootCandidate(const std::filesystem::path &path) {
+    const auto canonical = TryCanonical(path);
     std::error_code ec;
     if (!std::filesystem::exists(canonical, ec) || !std::filesystem::is_directory(canonical, ec)) {
-        throw std::runtime_error("BZ_DATA_DIR does not point to a valid directory: " + canonical.string());
+        throw std::runtime_error("data_path_resolver: Data directory is invalid: " + canonical.string());
     }
 
+    const auto commonConfig = canonical / "common" / "config.json";
+    if (!std::filesystem::exists(commonConfig, ec) || !std::filesystem::is_regular_file(commonConfig, ec)) {
+        throw std::runtime_error("Invalid data directory: " + canonical.string() + "\n" + commonConfig.string() + " does not exist.");
+    }
     return canonical;
+}
+
+std::filesystem::path DetectDataRoot(const std::optional<std::filesystem::path> &overridePath) {
+    if (overridePath) {
+        return ValidateDataRootCandidate(*overridePath);
+    }
+
+    const char *envDataDir = std::getenv("BZ3_DATA_DIR");
+    if (!envDataDir || *envDataDir == '\0') {
+        throw std::runtime_error("BZ3_DATA_DIR environment variable must be set to the game data directory");
+    }
+
+    return ValidateDataRootCandidate(envDataDir);
 }
 
 struct ConfigCacheState {
@@ -197,8 +213,32 @@ const nlohmann::json *ResolveConfigPath(const nlohmann::json &root, const std::s
 namespace bz::data {
 
 const std::filesystem::path &DataRoot() {
-    static const std::filesystem::path root = DetectDataRoot();
+    static std::once_flag initFlag;
+    static std::filesystem::path root;
+
+    std::call_once(initFlag, [] {
+        std::optional<std::filesystem::path> overrideCopy;
+        {
+            std::lock_guard<std::mutex> lock(g_dataRootMutex);
+            overrideCopy = g_dataRootOverride;
+        }
+
+        root = DetectDataRoot(overrideCopy);
+
+        std::lock_guard<std::mutex> lock(g_dataRootMutex);
+        g_dataRootInitialized = true;
+    });
+
     return root;
+}
+
+void SetDataRootOverride(const std::filesystem::path &path) {
+    std::lock_guard<std::mutex> lock(g_dataRootMutex);
+    if (g_dataRootInitialized) {
+        throw std::runtime_error("data_path_resolver: Data root already initialized; override must be set earlier");
+    }
+
+    g_dataRootOverride = ValidateDataRootCandidate(path);
 }
 
 std::filesystem::path Resolve(const std::filesystem::path &relativePath) {
@@ -243,7 +283,7 @@ std::filesystem::path UserConfigDirectory() {
             throw std::runtime_error("Unable to determine user configuration directory: no home path detected");
         }
 
-        return TryCanonical(base / "bz_opengl");
+        return TryCanonical(base / "bz3");
     }();
 
     return dir;

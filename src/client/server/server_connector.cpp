@@ -4,6 +4,7 @@
 
 #include "engine/client_engine.hpp"
 #include "game.hpp"
+#include "common/config_helpers.hpp"
 #include "spdlog/spdlog.h"
 
 ServerConnector::ServerConnector(ClientEngine &engine,
@@ -21,7 +22,8 @@ bool ServerConnector::connect(const std::string &targetHost, uint16_t targetPort
     browser.setStatus(status, false);
     spdlog::info("Attempting to connect to {}:{}", targetHost, targetPort);
 
-    if (engine.network->connect(targetHost, targetPort, 50)) {
+    const uint16_t connectTimeoutMs = bz::data::ReadUInt16Config({"network.ConnectTimeoutMs"}, 2000);
+    if (engine.network->connect(targetHost, targetPort, static_cast<int>(connectTimeoutMs))) {
         spdlog::info("Connected to server at {}:{}", targetHost, targetPort);
         game = std::make_unique<Game>(engine, playerName, worldDir);
         spdlog::trace("Game initialized successfully");

@@ -1,9 +1,6 @@
 #include <GLFW/glfw3.h>
-#include <algorithm>
-#include <cctype>
 #include <filesystem>
 #include <initializer_list>
-#include <memory>
 #include <string>
 #include "spdlog/spdlog.h"
 #include "engine/client_engine.hpp"
@@ -12,7 +9,9 @@
 #include "client/config_client.hpp"
 #include "client/server/server_browser_controller.hpp"
 #include "client/server/server_connector.hpp"
+#include "common/data_dir_override.hpp"
 #include "common/data_path_resolver.hpp"
+#include "common/config_helpers.hpp"
 
 TimeUtils::time lastFrameTime;
 
@@ -70,19 +69,32 @@ void ToggleFullscreen(GLFWwindow *window, FullscreenState &state, bool vsyncEnab
         state.active = false;
     }
 }
-}
+
+} // namespace
 
 #define MIN_DELTA_TIME (1.0f / 120.0f)
 
+void ConfigureLogging(bool verbose) {
+    if (verbose) {
+        spdlog::set_level(spdlog::level::trace);
+        spdlog::set_pattern("%Y-%m-%d %H:%M:%S.%e [%^%l%$] %v");
+    } else {
+        spdlog::set_level(spdlog::level::info);
+        spdlog::set_pattern("%v");
+    }
+}
+
 int main(int argc, char *argv[]) {
-    spdlog::set_level(spdlog::level::trace);
+    ConfigureLogging(false);
+
+    const bz::data::DataDirOverrideResult dataDirResult = bz::data::ApplyDataDirOverrideFromArgs(argc, argv);
 
     if (!glfwInit()) {
         spdlog::error("GLFW failed to initialize");
         exit(1);
     }
 
-    const std::filesystem::path clientUserConfigPathFs = bz::data::EnsureUserConfigFile("config.json");
+    const auto clientUserConfigPathFs = dataDirResult.userConfigPath;
     const std::vector<bz::data::ConfigLayerSpec> clientConfigSpecs = {
         {"common/config.json", "data/common/config.json", spdlog::level::err, true},
         {"client/config.json", "data/client/config.json", spdlog::level::err, true},
@@ -90,53 +102,15 @@ int main(int argc, char *argv[]) {
     };
     bz::data::InitializeConfigCache(clientConfigSpecs);
 
-    auto readBoolConfig = [](std::initializer_list<const char*> paths, bool defaultValue) {
-        for (const char* path : paths) {
-            if (const auto* value = bz::data::ConfigValue(path)) {
-                if (value->is_boolean()) {
-                    return value->get<bool>();
-                }
-                if (value->is_number_integer()) {
-                    return value->get<long long>() != 0;
-                }
-                if (value->is_number_float()) {
-                    return value->get<double>() != 0.0;
-                }
-                if (value->is_string()) {
-                    std::string text = value->get<std::string>();
-                    std::transform(text.begin(), text.end(), text.begin(), [](unsigned char ch) { return static_cast<char>(std::tolower(ch)); });
-                    if (text == "true" || text == "1" || text == "yes" || text == "on") {
-                        return true;
-                    }
-                    if (text == "false" || text == "0" || text == "no" || text == "off") {
-                        return false;
-                    }
-                }
-                spdlog::warn("Client startup config '{}' cannot be interpreted as boolean", path);
-            }
-        }
-        return defaultValue;
-    };
-
-    auto readUInt16Config = [](std::initializer_list<const char*> paths, uint16_t defaultValue) {
-        for (const char* path : paths) {
-            if (auto value = bz::data::ConfigValueUInt16(path)) {
-                if (*value > 0) {
-                    return *value;
-                }
-                spdlog::warn("Client startup config '{}' must be positive; falling back", path);
-                return defaultValue;
-            }
-        }
-        return defaultValue;
-    };
-
-    const uint16_t configWidth = readUInt16Config({"graphics.resolution.Width"}, 1280);
-    const uint16_t configHeight = readUInt16Config({"graphics.resolution.Height"}, 720);
-    const bool fullscreenEnabled = readBoolConfig({"graphics.Fullscreen"}, false);
-    const bool vsyncEnabled = readBoolConfig({"graphics.VSync"}, true);
+    const uint16_t configWidth = bz::data::ReadUInt16Config({"graphics.resolution.Width"}, 1280);
+    const uint16_t configHeight = bz::data::ReadUInt16Config({"graphics.resolution.Height"}, 720);
+    const bool fullscreenEnabled = bz::data::ReadBoolConfig({"graphics.Fullscreen"}, false);
+    const bool vsyncEnabled = bz::data::ReadBoolConfig({"graphics.VSync"}, true);
 
     const ClientCLIOptions cliOptions = ParseClientCLIOptions(argc, argv);
+    if (cliOptions.verbose) {
+        ConfigureLogging(true);
+    }
 
     const std::string clientUserConfigPath = clientUserConfigPathFs.string();
     ClientConfig clientConfig = ClientConfig::Load("");

@@ -1,5 +1,5 @@
 {
-  "name": "bz-opengl",
+  "name": "bz3",
   "version": "0.1.0",
   "dependencies": [
     "glfw3",

@@ -1,21 +1,15 @@
 #include "engine/components/server_network.hpp"
 #include "spdlog/spdlog.h"
 
+#include "network/proto_codec.hpp"
+#include "network/transport_factory.hpp"
+
+#include <algorithm>
+
 ServerNetwork::ServerNetwork(uint16_t port, int maxClients, int numChannels) {
-    if (enet_initialize() != 0) {
-        spdlog::error("Failed to initialize ENet");
-        exit(1);
-    }
-
-    atexit(enet_deinitialize);
-
-    ENetAddress address;
-    address.host = ENET_HOST_ANY;
-    address.port = port;
-
-    server = enet_host_create(&address, maxClients, numChannels, 0, 0);
-    if (server == nullptr) {
-        spdlog::error("ServerNetwork::ServerNetwork: Failed to create ENet server host.");
+    transport = net::createDefaultServerTransport(port, maxClients, numChannels);
+    if (!transport) {
+        spdlog::error("ServerNetwork::ServerNetwork: Failed to initialize server transport.");
         return;
     }
 
@@ -23,7 +17,13 @@ ServerNetwork::ServerNetwork(uint16_t port, int maxClients, int numChannels) {
 }
 
 ServerNetwork::~ServerNetwork() {
-    enet_host_destroy(server);
+    for (auto &msgData : receivedMessages) {
+        delete msgData.msg;
+    }
+    receivedMessages.clear();
+    clients.clear();
+    clientByConnection.clear();
+    transport.reset();
 }
 
 void ServerNetwork::flushPeekedMessages() {
@@ -33,13 +33,7 @@ void ServerNetwork::flushPeekedMessages() {
             receivedMessages.end(),
             [](const MsgData& msgData) {
                 if (msgData.peeked) {
-                    if (msgData.packet == nullptr) {
-                        // For connection/disconnection messages
-                        // we allocated the message on the heap
-                        delete msgData.msg;
-                    } else {
-                        enet_packet_destroy(msgData.packet);
-                    }
+                    delete msgData.msg;
                 }
                 return msgData.peeked;
             }
@@ -48,14 +42,13 @@ void ServerNetwork::flushPeekedMessages() {
     );
 }
 
-client_id ServerNetwork::getClient(ENetPeer *peer) {
-    for (const auto& [id, p] : clients) {
-        if (p == peer) {
-            return id;
-        }
+client_id ServerNetwork::getClient(net::ConnectionHandle connection) {
+    auto it = clientByConnection.find(connection);
+    if (it != clientByConnection.end()) {
+        return it->second;
     }
 
-    spdlog::warn("ServerNetwork::getClient: Peer not found in clients map.");
+    spdlog::warn("ServerNetwork::getClient: Connection not found in client map.");
     return static_cast<client_id>(0); // Invalid client_id
 }
 
@@ -68,98 +61,63 @@ client_id ServerNetwork::getNextClientId() {
 }
 
 void ServerNetwork::update() {
-    ENetEvent event;
+    if (!transport) {
+        return;
+    }
 
-    while (enet_host_service(server, &event, 0) > 0) {
-        switch (event.type) {
-        case ENET_EVENT_TYPE_RECEIVE: {
-            bz::ClientMsg msg;
+    std::vector<net::Event> events;
+    transport->poll(events);
 
-            if (!msg.ParseFromArray(event.packet->data, event.packet->dataLength)) {
-                spdlog::error("Failed to parse ServerMsg");
-                return;
-            }
-
-            switch (msg.payload_case()) {
-            
-            case bz::ClientMsg::kInit: {
-                ClientMsg_Init* initMsg = new ClientMsg_Init();
-                initMsg->clientId = getClient(event.peer);
-                initMsg->name = msg.init().name();
-                receivedMessages.push_back({ event.packet, initMsg });
+    for (const auto &evt : events) {
+        switch (evt.type) {
+        case net::Event::Type::Receive: {
+            if (evt.payload.empty()) {
                 break;
             }
 
-            case bz::ClientMsg::kChat: {
-                ClientMsg_Chat* chatMsg = new ClientMsg_Chat();
-                chatMsg->clientId = getClient(event.peer);
-                chatMsg->toId = msg.chat().to_id();
-                chatMsg->text = msg.chat().text();
-                receivedMessages.push_back({ event.packet, chatMsg });
+            auto decoded = net::decodeClientMsg(evt.payload.data(), evt.payload.size());
+            if (!decoded) {
+                spdlog::warn("Received unknown/invalid ClientMsg payload");
                 break;
             }
 
-            case bz::ClientMsg::kPlayerLocation: {
-                ClientMsg_PlayerLocation* locMsg = new ClientMsg_PlayerLocation();
-                locMsg->clientId = getClient(event.peer);
-                locMsg->position.x = msg.player_location().position().x();
-                locMsg->position.y = msg.player_location().position().y();
-                locMsg->position.z = msg.player_location().position().z();
-                locMsg->rotation.w = msg.player_location().rotation().w();
-                locMsg->rotation.x = msg.player_location().rotation().x();
-                locMsg->rotation.y = msg.player_location().rotation().y();
-                locMsg->rotation.z = msg.player_location().rotation().z();
-                receivedMessages.push_back({ event.packet, locMsg });
+            if (decoded->type == ClientMsg_Type_PLAYER_JOIN || decoded->type == ClientMsg_Type_PLAYER_LEAVE) {
+                spdlog::warn("ServerNetwork::update: Ignoring client-sent join/leave message");
                 break;
             }
 
-            case bz::ClientMsg::kRequestPlayerSpawn: {
-                ClientMsg_RequestPlayerSpawn* spawnMsg = new ClientMsg_RequestPlayerSpawn();
-                spawnMsg->clientId = getClient(event.peer);
-                receivedMessages.push_back({ event.packet, spawnMsg });
+            const client_id cid = getClient(evt.connection);
+            if (cid == 0) {
                 break;
             }
 
-            case bz::ClientMsg::kCreateShot: {
-                ClientMsg_CreateShot* shotMsg = new ClientMsg_CreateShot();
-                shotMsg->clientId = getClient(event.peer);
-                shotMsg->localShotId = msg.create_shot().local_shot_id();
-                shotMsg->position.x = msg.create_shot().position().x();
-                shotMsg->position.y = msg.create_shot().position().y();
-                shotMsg->position.z = msg.create_shot().position().z();
-                shotMsg->velocity.x = msg.create_shot().velocity().x();
-                shotMsg->velocity.y = msg.create_shot().velocity().y();
-                shotMsg->velocity.z = msg.create_shot().velocity().z();
-                receivedMessages.push_back({ event.packet, shotMsg });
-                break;
-            }
-
-            default:
-                spdlog::warn("Received unknown ClientMsg type");
-                enet_packet_destroy(event.packet);
-                break;
-
-            }
+            decoded->clientId = cid;
+            receivedMessages.push_back({ decoded.release() });
             
             break;
         }
-        case ENET_EVENT_TYPE_CONNECT: {
+        case net::Event::Type::Connect: {
             client_id newClientId = getNextClientId();
-            clients[newClientId] = event.peer;
+            clients[newClientId] = evt.connection;
+            clientByConnection[evt.connection] = newClientId;
             ClientMsg_PlayerJoin* connMsg = new ClientMsg_PlayerJoin();
             connMsg->clientId = newClientId;
-            char ip[64];
-            enet_address_get_host_ip(&event.peer->address, ip, sizeof(ip));
-            connMsg->ip = std::string(ip);
-            receivedMessages.push_back({ nullptr, connMsg });
+            connMsg->ip = evt.peerIp;
+            receivedMessages.push_back({ connMsg });
             break;
         }
-        case ENET_EVENT_TYPE_DISCONNECT: {
-            client_id discClientId = getClient(event.peer);
+        case net::Event::Type::Disconnect:
+        case net::Event::Type::DisconnectTimeout: {
+            auto it = clientByConnection.find(evt.connection);
+            if (it == clientByConnection.end()) {
+                break;
+            }
+            client_id discClientId = it->second;
+            clientByConnection.erase(it);
             clients.erase(discClientId);
             ClientMsg_PlayerLeave* discMsg = new ClientMsg_PlayerLeave();
             discMsg->clientId = discClientId;
-            receivedMessages.push_back({ nullptr, discMsg });
+            receivedMessages.push_back({ discMsg });
             break;
         }
         default:
@@ -188,10 +146,40 @@ void ServerNetwork::disconnectClient(client_id clientId, const std::string &reas
         notice.fromId = SERVER_CLIENT_ID;
         notice.toId = clientId;
         notice.text = reason;
-        send<ServerMsg_Chat>(clientId, &notice);
-        enet_host_flush(server);
+        sendImpl(clientId, notice, true);
     }
 
     spdlog::info("ServerNetwork::disconnectClient: Disconnecting client {}", clientId);
-    enet_peer_disconnect(it->second, 0);
+    if (transport) {
+        transport->disconnect(it->second);
+    }
+}
+
+void ServerNetwork::logUnsupportedMessageType() {
+    spdlog::error("ServerNetwork::send: Unsupported message type");
+}
+
+void ServerNetwork::sendImpl(client_id clientId, const ServerMsg &input, bool flush) {
+    if (!transport) {
+        return;
+    }
+
+    auto it = clients.find(clientId);
+    if (it == clients.end()) {
+        return;
+    }
+
+    net::Delivery delivery = net::Delivery::Reliable;
+    if (input.type == ServerMsg_Type_PLAYER_LOCATION) {
+        delivery = net::Delivery::Unreliable;
+    }
+
+    auto encoded = net::encodeServerMsg(input);
+    if (!encoded.has_value()) {
+        logUnsupportedMessageType();
+        return;
+    }
+
+    const bool shouldFlush = flush || (input.type == ServerMsg_Type_INIT);
+    transport->send(it->second, encoded->data(), encoded->size(), delivery, shouldFlush);
 }

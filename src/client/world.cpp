@@ -114,51 +114,27 @@ bool World::unzipFromMemory(const std::byte* data, size_t size, const std::strin
     return true;
 }
 
-void World::loadManifest(const std::filesystem::path& manifestPath) {
-    if (!std::filesystem::exists(manifestPath)) {
-        spdlog::warn("World::loadManifest: Manifest file not found: {}", manifestPath.string());
-        return;
-    }
-
-    std::ifstream manifestFile(manifestPath);
-    if (!manifestFile) {
-        spdlog::error("World::loadManifest: Failed to open manifest file: {}", manifestPath.string());
-        return;
-    }
-
-    try {
-        manifestFile >> manifest;
-    } catch (const std::exception &e) {
-        spdlog::error("World::loadManifest: Failed to parse manifest JSON: {}", e.what());
-        return;
-    }
-
-    // See if there is a "defaultPlayerParameters" key in the manifest
-    if (manifest.contains("defaultPlayerParameters")) {
-        nlohmann::json paramsJson = manifest["defaultPlayerParameters"];
-
-        for (auto& [key, value] : paramsJson.items()) {
-            if (value.is_number()) {
-                defaultPlayerParams[key] = value.get<float>();
-                spdlog::info("World::loadManifest: Loaded player parameter '{}' = {}", key, value.get<float>());
-            }
-        }
-    }
-
-    // Load asset paths from config
-    registerAssets(manifest, std::filesystem::path(worldDir));
-}
-
 void World::update() {
-    if (auto *initMsg = game.engine.network->peekMessage<ServerMsg_Init>()) {
+    for (const auto &initMsg : game.engine.network->consumeMessages<ServerMsg_Init>()) {
         spdlog::trace("World::update: Received init message from server");
+        serverName = initMsg.serverName;
+        worldName = initMsg.worldName;
+        protocolVersion = initMsg.protocolVersion;
+        features = initMsg.features;
+        if (protocolVersion != 0 && protocolVersion != NET_PROTOCOL_VERSION) {
+            spdlog::error("World::update: Protocol version mismatch (client {}, server {})",
+                          NET_PROTOCOL_VERSION,
+                          protocolVersion);
+            game.engine.network->disconnect("Protocol version mismatch.");
+            return;
+        }
         // Merge server params into client defaults (server values override)
-        for (const auto& [key, val] : initMsg->defaultPlayerParams) {
+        for (const auto& [key, val] : initMsg.defaultPlayerParams) {
             defaultPlayerParams[key] = val;
         }
-        playerId = initMsg->clientId;
+        playerId = initMsg.clientId;
 
-        if (!initMsg->worldData.empty()) {
+        if (!initMsg.worldData.empty()) {
             std::filesystem::path downloadsDir;
             if (const auto endpoint = game.engine.network->getServerEndpoint()) {
                 downloadsDir = bz::data::EnsureUserWorldDirectoryForServer(endpoint->host, endpoint->port);
@@ -169,18 +145,7 @@ void World::update() {
 
             worldDir = downloadsDir.string();
 
-            // Write initMsg->worldData to a file in worldDir called "world.zip"
-            std::filesystem::path worldZipPath = downloadsDir / "world.zip";
-            std::ofstream worldZipFile(worldZipPath, std::ios::binary);
-            if (!worldZipFile) {
-                spdlog::error("World::update: Failed to open world.zip for writing: {}", worldZipPath.string());
-                return;
-            }
-
-            worldZipFile.write(reinterpret_cast<const char*>(initMsg->worldData.data()), initMsg->worldData.size());
-            worldZipFile.close();
-
-            unzipFromMemory(initMsg->worldData.data(), initMsg->worldData.size(), worldDir);
+            unzipFromMemory(initMsg.worldData.data(), initMsg.worldData.size(), worldDir);
 
             const auto worldConfigPath = downloadsDir / "config.json";
             if (std::filesystem::exists(worldConfigPath)) {
@@ -210,7 +175,6 @@ void World::update() {
                 spdlog::warn("World::update: World config not found at {}", worldConfigPath.string());
             }
 
-            loadManifest(downloadsDir / "manifest.json");
         } else {
             spdlog::debug("World::update: Received bundled world indication; skipping download");
         }

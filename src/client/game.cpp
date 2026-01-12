@@ -1,23 +1,25 @@
 #include "game.hpp"
 #include "spdlog/spdlog.h"
+#include <algorithm>
 
 Game::Game(ClientEngine &engine, std::string playerName, std::string worldDir) : playerName(playerName), engine(engine) {
-    player = nullptr;
-    world = new World(*this, worldDir);
+    world = std::make_unique<World>(*this, worldDir);
     spdlog::trace("Game: World created successfully");
-    console = new Console(*this);
+    console = std::make_unique<Console>(*this);
     spdlog::trace("Game: Console created successfully");
 
     focusState = FOCUS_STATE_GAME;
 };
 
 Game::~Game() {
-    delete player;
+    player.reset();
     spdlog::trace("Game: Player destroyed successfully");
-    delete world;
+    world.reset();
     spdlog::trace("Game: World destroyed successfully");
-    delete console;
+    console.reset();
     spdlog::trace("Game: Console destroyed successfully");
+    clients.clear();
+    shots.clear();
 }
 
 void Game::earlyUpdate(TimeUtils::duration deltaTime) {
@@ -29,7 +31,7 @@ void Game::earlyUpdate(TimeUtils::duration deltaTime) {
 
     if (!player) {
         spdlog::trace("Game: Creating player with name '{}'", playerName);
-        player = new Player(*this, world->playerId, world->getDefaultPlayerParameters(), playerName); 
+        player = std::make_unique<Player>(*this, world->playerId, world->getDefaultPlayerParameters(), playerName);
         spdlog::trace("Game: Player created successfully");
     }
 
@@ -46,52 +48,82 @@ void Game::earlyUpdate(TimeUtils::duration deltaTime) {
         spdlog::trace("Game: Returning focus to game");
     }
 
-    player->earlyUpdate();
-
-    if (auto msg = engine.network->peekMessage<ServerMsg_PlayerJoin>()) {
-        Client *client = new Client(*this, msg->clientId);
-        clients.push_back(client);
-        spdlog::trace("Game: New client connected with ID {}", msg->clientId);
+    for (const auto &msg : engine.network->consumeMessages<ServerMsg_PlayerJoin>()) {
+        clients.push_back(std::make_unique<Client>(*this, msg.clientId, msg.state));
+        spdlog::trace("Game: New client connected with ID {}", msg.clientId);
     }
 
-    if (auto msg = engine.network->peekMessage<ServerMsg_PlayerLeave>()) {
+    for (const auto &msg : engine.network->consumeMessages<ServerMsg_PlayerLeave>()) {
         auto it = std::find_if(clients.begin(), clients.end(),
-            [msg](Client *client) {
-                return client->isEqual(msg->clientId);
+            [&msg](const std::unique_ptr<Client> &client) {
+                return client->isEqual(msg.clientId);
             }
         );
 
         if (it != clients.end()) {
-            delete *it;
             clients.erase(it);
-            spdlog::trace("Game: Client disconnected with ID {}", msg->clientId);
+            spdlog::trace("Game: Client disconnected with ID {}", msg.clientId);
         }
     }
 
-    // Listen for incoming shots (they will always be global ids)
-    if (auto msg = engine.network->peekMessage<ServerMsg_CreateShot>()) {
-        Shot *newShot = new Shot(
+    for (const auto &msg : engine.network->consumeMessages<ServerMsg_PlayerParameters>()) {
+        if (player && msg.clientId == world->playerId) {
+            player->handleParameters(msg);
+        }
+    }
+
+    for (const auto &msg : engine.network->consumeMessages<ServerMsg_PlayerState>()) {
+        if (auto *client = getClientById(msg.clientId)) {
+            client->applyState(msg.state);
+        }
+    }
+
+    for (const auto &msg : engine.network->consumeMessages<ServerMsg_PlayerLocation>()) {
+        if (auto *client = getClientById(msg.clientId)) {
+            client->applyLocation(msg);
+        }
+    }
+
+    for (const auto &msg : engine.network->consumeMessages<ServerMsg_PlayerDeath>()) {
+        if (player && msg.clientId == world->playerId) {
+            player->handleDeath();
+            continue;
+        }
+        if (auto *client = getClientById(msg.clientId)) {
+            client->handleDeath();
+        }
+    }
+
+    for (const auto &msg : engine.network->consumeMessages<ServerMsg_PlayerSpawn>()) {
+        if (player && msg.clientId == world->playerId) {
+            player->handleSpawn(msg);
+            continue;
+        }
+        if (auto *client = getClientById(msg.clientId)) {
+            client->handleSpawn(msg);
+        }
+    }
+
+    for (const auto &msg : engine.network->consumeMessages<ServerMsg_CreateShot>()) {
+        shots.push_back(std::make_unique<Shot>(
             *this,
-            msg->globalShotId,
-            msg->position,
-            msg->velocity
-        );
-        shots.push_back(newShot);
+            msg.globalShotId,
+            msg.position,
+            msg.velocity
+        ));
     }
 
-    // Listen for remove shot messages
-    if (auto msg = engine.network->peekMessage<ServerMsg_RemoveShot>()) {
-        for (Shot *shot : shots) {
-            if (shot->isEqual(msg->shotId, msg->isGlobalId)) {
-                shots.erase(
-                    std::remove(shots.begin(), shots.end(), shot),
-                    shots.end()
-                );
-                delete shot;
-                break;
-            }
+    for (const auto &msg : engine.network->consumeMessages<ServerMsg_RemoveShot>()) {
+        auto it = std::remove_if(shots.begin(), shots.end(),
+            [&msg](const std::unique_ptr<Shot> &shot) {
+                return shot->isEqual(msg.shotId, msg.isGlobalId);
+            });
+        if (it != shots.end()) {
+            shots.erase(it, shots.end());
         }
     }
+
+    player->earlyUpdate();
 }
 
 void Game::lateUpdate(TimeUtils::duration deltaTime) {
@@ -101,16 +133,16 @@ void Game::lateUpdate(TimeUtils::duration deltaTime) {
 
     player->lateUpdate();
 
-    for (Client *client : clients) {
+    for (const auto &client : clients) {
         client->update();
     }
 
-    for (Shot *shot : shots) {
+    for (const auto &shot : shots) {
         shot->update(deltaTime);
     }
 
     std::vector<std::string> scoreboardNames;
-    for (Client *client : clients) {
+    for (const auto &client : clients) {
         scoreboardNames.push_back(client->getName());
     }
     scoreboardNames.push_back(player->getName());
@@ -118,9 +150,9 @@ void Game::lateUpdate(TimeUtils::duration deltaTime) {
 }
 
 Client *Game::getClientById(client_id id) {
-    for (Client *client : clients) {
+    for (const auto &client : clients) {
         if (client->isEqual(id)) {
-            return client;
+            return client.get();
         }
     }
     return nullptr;

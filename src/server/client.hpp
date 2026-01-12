@@ -23,6 +23,8 @@ public:
     std::string getName() const;
     std::string getIP() const { return ip; }
     client_id getId() const { return id; }
+    bool isInitialized() const { return initialized; }
+    const PlayerState &getState() const { return state; }
     void update();
     glm::vec3 getPosition() const { return state.position; }
     void die();

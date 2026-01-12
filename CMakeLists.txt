@@ -1,8 +1,13 @@
 cmake_minimum_required(VERSION 3.20)
 
-set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
+set(_VCPKG_TOOLCHAIN "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
+if (EXISTS "${_VCPKG_TOOLCHAIN}")
+    set(CMAKE_TOOLCHAIN_FILE "${_VCPKG_TOOLCHAIN}" CACHE FILEPATH "vcpkg toolchain" FORCE)
+else()
+    message(STATUS "vcpkg toolchain not found at ${_VCPKG_TOOLCHAIN}; configuring without vcpkg")
+endif()
 
-project(Panzer)
+project(bz3)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -74,19 +79,26 @@ target_include_directories(proto_lib PUBLIC ${CMAKE_BINARY_DIR})
 file(GLOB_RECURSE CLIENT_SOURCES "${PROJECT_SOURCE_DIR}/src/client/*.cpp")
 list(APPEND CLIENT_SOURCES
     ${PROJECT_SOURCE_DIR}/src/client/server/server_browser_controller.cpp
+    ${PROJECT_SOURCE_DIR}/src/common/config_helpers.cpp
     ${PROJECT_SOURCE_DIR}/src/common/data_path_resolver.cpp
+    ${PROJECT_SOURCE_DIR}/src/common/data_dir_override.cpp
 )
 file(GLOB_RECURSE SERVER_SOURCES "${PROJECT_SOURCE_DIR}/src/server/*.cpp")
 list(APPEND SERVER_SOURCES
     ${PROJECT_SOURCE_DIR}/src/server/terminal_commands.cpp
     ${PROJECT_SOURCE_DIR}/src/server/server_cli_options.cpp
+    ${PROJECT_SOURCE_DIR}/src/common/config_helpers.cpp
     ${PROJECT_SOURCE_DIR}/src/common/data_path_resolver.cpp
+    ${PROJECT_SOURCE_DIR}/src/common/data_dir_override.cpp
 )
 ## Separate engine sources for client and server to avoid over-linking
 set(ENGINE_CLIENT_SOURCES
     ${PROJECT_SOURCE_DIR}/src/engine/client_engine.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/mesh_loader.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/client_network.cpp
+    ${PROJECT_SOURCE_DIR}/src/network/enet_transport.cpp
+    ${PROJECT_SOURCE_DIR}/src/network/transport_factory.cpp
+    ${PROJECT_SOURCE_DIR}/src/network/proto_codec.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/render.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/input.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/gui.cpp
@@ -100,6 +112,9 @@ set(ENGINE_SERVER_SOURCES
     ${PROJECT_SOURCE_DIR}/src/engine/server_engine.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/mesh_loader.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/components/server_network.cpp
+    ${PROJECT_SOURCE_DIR}/src/network/enet_transport.cpp
+    ${PROJECT_SOURCE_DIR}/src/network/transport_factory.cpp
+    ${PROJECT_SOURCE_DIR}/src/network/proto_codec.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/physics/physics_world.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/physics/rigid_body.cpp
     ${PROJECT_SOURCE_DIR}/src/engine/physics/compound_body.cpp
@@ -107,7 +122,7 @@ set(ENGINE_SERVER_SOURCES
 
 # Create executables
 set(MACOSX_BUNDLE_ICON_FILE "") # Set to your .icns file if you have one
-add_executable(panzer MACOSX_BUNDLE ${CLIENT_SOURCES} ${ENGINE_CLIENT_SOURCES})
+add_executable(bz3 MACOSX_BUNDLE ${CLIENT_SOURCES} ${ENGINE_CLIENT_SOURCES})
 
 # Handle GLFW target for portability
 if(TARGET glfw3::glfw)
@@ -122,17 +137,18 @@ if(TARGET OpenGL::OpenGL)
 else()
     set(OPENGL_TARGET ${OPENGL_LIBRARIES})
 endif()
-add_executable(panzer-server ${SERVER_SOURCES} ${ENGINE_SERVER_SOURCES})
+
+add_executable(bz3-server ${SERVER_SOURCES} ${ENGINE_SERVER_SOURCES})
 
 # Include directories
-target_include_directories(panzer PRIVATE
+target_include_directories(bz3 PRIVATE
     ${PROJECT_SOURCE_DIR}/src/
     ${PROJECT_SOURCE_DIR}/src/client
     ${BULLET_INCLUDE_DIRS}
     ${enet_SOURCE_DIR}/include
     ${PROJECT_SOURCE_DIR}/include/client
 )
-target_include_directories(panzer-server PRIVATE
+target_include_directories(bz3-server PRIVATE
     ${PROJECT_SOURCE_DIR}/src/
     ${PROJECT_SOURCE_DIR}/src/server
     ${BULLET_INCLUDE_DIRS}
@@ -140,7 +156,7 @@ target_include_directories(panzer-server PRIVATE
 )
 
 # Link libraries
-target_link_libraries(panzer PRIVATE
+target_link_libraries(bz3 PRIVATE
     ${GLFW_TARGET}
     glm::glm
     ${BULLET_LIBRARIES}
@@ -157,7 +173,7 @@ target_link_libraries(panzer PRIVATE
     CURL::libcurl
 )
 
-target_link_libraries(panzer-server PRIVATE
+target_link_libraries(bz3-server PRIVATE
     glm::glm
     ${BULLET_LIBRARIES}
     enet_static
@@ -172,29 +188,29 @@ target_link_libraries(panzer-server PRIVATE
 
 # System libraries (platform-specific)
 if (UNIX AND NOT APPLE)
-    target_link_libraries(panzer PRIVATE pthread dl m)
-    target_link_libraries(panzer-server PRIVATE pthread dl m)
+    target_link_libraries(bz3 PRIVATE pthread dl m)
+    target_link_libraries(bz3-server PRIVATE pthread dl m)
 elseif(APPLE)
     find_library(COCOA Cocoa)
     find_library(IOKIT IOKit)
     find_library(COREVIDEO CoreVideo)
-    target_link_libraries(panzer PRIVATE ${COCOA} ${IOKIT} ${COREVIDEO})
-    target_link_libraries(panzer-server PRIVATE ${COCOA})
+    target_link_libraries(bz3 PRIVATE ${COCOA} ${IOKIT} ${COREVIDEO})
+    target_link_libraries(bz3-server PRIVATE ${COCOA})
 elseif(WIN32)
-    target_link_libraries(panzer PRIVATE ws2_32)
-    target_link_libraries(panzer-server PRIVATE ws2_32)
+    target_link_libraries(bz3 PRIVATE ws2_32)
+    target_link_libraries(bz3-server PRIVATE ws2_32)
 endif()
 
 # Define install prefix for runtime data lookup
-target_compile_definitions(panzer PRIVATE
+target_compile_definitions(bz3 PRIVATE
     INSTALL_DATA_DIR="${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/data"
 )
-target_compile_definitions(panzer-server PRIVATE
+target_compile_definitions(bz3-server PRIVATE
     INSTALL_DATA_DIR="${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/data"
 )
 
-install(TARGETS panzer BUNDLE DESTINATION .)
-install(TARGETS panzer-server
+install(TARGETS bz3 BUNDLE DESTINATION .)
+install(TARGETS bz3-server
     RUNTIME DESTINATION bin
 )
 
@@ -204,11 +220,11 @@ install(DIRECTORY ${PROJECT_SOURCE_DIR}/data/
 )
 
 # CPack configuration
-set(CPACK_PACKAGE_NAME "BZ")
+set(CPACK_PACKAGE_NAME "bz3")
 set(CPACK_PACKAGE_VERSION "1.0.0")
 set(CPACK_PACKAGE_VENDOR "Quinn Carmack")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "BZFlag remade")
-set(CPACK_PACKAGE_INSTALL_DIRECTORY "BZ")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "bz3")
 
 # Linux-specific generators
 if(UNIX AND NOT APPLE)

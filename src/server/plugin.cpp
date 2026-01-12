@@ -161,7 +161,7 @@ std::optional<client_id> PluginAPI::getPlayerByName(const std::string &name) {
 
 std::vector<client_id> PluginAPI::getAllPlayerIds() {
     std::vector<client_id> ids;
-    for (const Client* client : g_game->getClients()) {
+    for (const auto &client : g_game->getClients()) {
         ids.push_back(client->getId());
     }
     return ids;

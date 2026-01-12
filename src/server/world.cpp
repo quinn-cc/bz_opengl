@@ -13,14 +13,16 @@
 namespace fs = std::filesystem;
 
 World::World(Game &game,
-                         std::string worldName,
-                         nlohmann::json worldConfig,
-                         std::string worldDir,
-                         bool enableWorldZipping)
+             std::string serverName,
+             std::string worldName,
+             nlohmann::json worldConfig,
+             std::string worldDir,
+             bool enableWorldZipping)
         : game(game),
-            name(std::move(worldName)),
-            worldDir(std::move(worldDir)),
-            zipWorldOnStartup(enableWorldZipping) {
+          serverName(std::move(serverName)),
+          name(std::move(worldName)),
+          worldDir(std::move(worldDir)),
+          zipWorldOnStartup(enableWorldZipping) {
     const std::vector<bz::data::ConfigLayerSpec> baseSpecs = {
         {"common/config.json", "data/common/config.json", spdlog::level::err, true},
         {"server/config.json", "data/server/config.json", spdlog::level::err, true}
@@ -70,7 +72,9 @@ World::World(Game &game,
 
     config = std::move(mergedConfig);
     
-    name = fs::path(this->worldDir).filename().string();
+    if (name.empty()) {
+        name = fs::path(this->worldDir).filename().string();
+    }
     spdlog::info("World::World: Loaded world '{}'", name);
 
     if (zipWorldOnStartup) {
@@ -80,6 +84,8 @@ World::World(Game &game,
         fs::path outputZip = inputDir;
         outputZip += ".zip";
         zipDirectory(inputDir, outputZip);
+        worldDataCache = getData();
+        worldDataCached = true;
     } else {
         spdlog::debug("World::World: Skipping zip generation for bundled world at {}", this->worldDir);
     }
@@ -138,6 +144,10 @@ std::vector<std::byte> World::getData() {
         return {};
     }
 
+    if (worldDataCached) {
+        return worldDataCache;
+    }
+
     // Construct the zip path from the world name
     fs::path zipPath = fs::path(this->worldDir);
     zipPath += ".zip";
@@ -161,25 +171,27 @@ std::vector<std::byte> World::getData() {
         throw std::runtime_error("Failed to read zip file: " + zipPath.string());
     }
 
-    return data;
+    worldDataCache = data;
+    worldDataCached = true;
+    return worldDataCache;
 }
 
 void World::update() {
-    // Listen for player connection
-    if (auto *connMsg = game.engine.network->peekMessage<ClientMsg_PlayerJoin>()) {
-        std::vector<std::byte> worldData = getData();
+}
 
-        // Create a memory chunk of size sizeof(ServerMsg_Init) + dataSize
-        // by mallocating it
-        ServerMsg_Init initHeaderMsg;
-        initHeaderMsg.clientId = connMsg->clientId;
-        initHeaderMsg.serverName = "server";
-        initHeaderMsg.defaultPlayerParams = defaultPlayerParams;
-        initHeaderMsg.worldData = worldData;
-        game.engine.network->send<ServerMsg_Init>(connMsg->clientId, &initHeaderMsg);
+void World::sendInitToClient(client_id clientId) {
+    std::vector<std::byte> worldData = getData();
 
-        spdlog::trace("World::update: Sent init message to client id {}", connMsg->clientId);
-    }
+    ServerMsg_Init initHeaderMsg;
+    initHeaderMsg.clientId = clientId;
+    initHeaderMsg.serverName = serverName;
+    initHeaderMsg.worldName = name;
+    initHeaderMsg.protocolVersion = NET_PROTOCOL_VERSION;
+    initHeaderMsg.defaultPlayerParams = defaultPlayerParams;
+    initHeaderMsg.worldData = worldData;
+    game.engine.network->send<ServerMsg_Init>(clientId, &initHeaderMsg);
+
+    spdlog::trace("World::sendInitToClient: Sent init message to client id {}", clientId);
 }
 
 std::string World::getAssetPath(const std::string &assetName) const {

@@ -46,6 +46,9 @@ public:
     glm::quat getRotation() const { return state.rotation; }
     glm::vec3 getForwardVector() const;
 
+    void handleParameters(const ServerMsg_PlayerParameters &msg);
+    void handleDeath();
+    void handleSpawn(const ServerMsg_PlayerSpawn &msg);
     void earlyUpdate();
     void lateUpdate();
 };

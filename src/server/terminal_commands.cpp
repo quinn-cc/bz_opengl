@@ -72,7 +72,7 @@ std::string processTerminalInput(const std::string &input) {
 
     if (cmd == "listPlayers") {
         std::string response = "Connected Players:";
-        for (const Client *client : g_game->getClients()) {
+        for (const auto &client : g_game->getClients()) {
             response += "\n - ID: " + std::to_string(client->getId()) +
                         ", Name: " + client->getName() +
                         ", IP: " + client->getIP();

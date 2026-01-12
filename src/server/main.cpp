@@ -5,11 +5,14 @@
 #include "server/server_discovery.hpp"
 #include "server/terminal_commands.hpp"
 #include "server/server_cli_options.hpp"
+#include "common/data_dir_override.hpp"
 #include "common/data_path_resolver.hpp"
+#include "common/config_helpers.hpp"
 #include <nlohmann/json.hpp>
 #include <pybind11/embed.h>
 #include <csignal>
 #include <atomic>
+#include <iostream>
 #include <limits>
 #include <poll.h>
 #include <unistd.h>
@@ -17,6 +20,16 @@
 #include <vector>
 
 #define MIN_FRAME_HZ (1.0f / 120.0f)
+
+void ConfigureLogging(bool verbose) {
+    if (verbose) {
+        spdlog::set_level(spdlog::level::trace);
+        spdlog::set_pattern("%Y-%m-%d %H:%M:%S.%e [%^%l%$] %v");
+    } else {
+        spdlog::set_level(spdlog::level::info);
+        spdlog::set_pattern("%v");
+    }
+}
 
 Game *g_game = nullptr;
 ServerEngine *g_engine = nullptr;
@@ -35,11 +48,13 @@ void signalHandler(int signum) {
 }
 
 int main(int argc, char *argv[]) {
-    spdlog::set_level(spdlog::level::trace);
+    ConfigureLogging(false);
 
     // Register signal handler
     signal(SIGINT, signalHandler);
     signal(SIGTERM, signalHandler);
+
+    const auto dataDirResult = bz::data::ApplyDataDirOverrideFromArgs(argc, argv, std::filesystem::path("server/config.json"));
 
     const std::vector<bz::data::ConfigLayerSpec> baseConfigSpecs = {
         {"common/config.json", "data/common/config.json", spdlog::level::err, true},
@@ -53,6 +68,10 @@ int main(int argc, char *argv[]) {
     } catch (const std::exception &ex) {
         spdlog::error("Failed to parse server command line options: {}", ex.what());
         return 1;
+    }
+
+    if (cliOptions.verbose) {
+        ConfigureLogging(true);
     }
 
     if (!cliOptions.worldSpecified) {
@@ -71,6 +90,7 @@ int main(int argc, char *argv[]) {
     const std::vector<bz::data::ConfigLayerSpec> serverConfigSpecs = {
         {"common/config.json", "data/common/config.json", spdlog::level::err, true},
         {"server/config.json", "data/server/config.json", spdlog::level::err, true},
+        {dataDirResult.userConfigPath, "user config", spdlog::level::debug, false},
         {configPath, "world config", spdlog::level::err, true}
     };
 
@@ -90,28 +110,13 @@ int main(int argc, char *argv[]) {
 
     uint16_t port = cliOptions.hostPort;
     if (!cliOptions.hostPortExplicit) {
-        if (const auto *portNode = bz::data::ConfigValue("network.ServerPort")) {
-            if (portNode->is_number_unsigned()) {
-                port = static_cast<uint16_t>(portNode->get<unsigned int>());
-            } else if (portNode->is_string()) {
-                try {
-                    const auto parsed = static_cast<int>(std::stoi(portNode->get<std::string>()));
-                    if (parsed > 0 && parsed <= std::numeric_limits<uint16_t>::max()) {
-                        port = static_cast<uint16_t>(parsed);
-                    }
-                } catch (...) {
-                    spdlog::warn("main: Failed to parse network.ServerPort string value");
-                }
-            }
-        }
+        port = bz::data::ReadUInt16Config({"network.ServerPort"}, port);
     } else {
         port = cliOptions.hostPort;
     }
 
-    std::string serverName = "BZ OpenGL Server";
-    if (const auto *serverNameNode = bz::data::ConfigValue("serverName"); serverNameNode && serverNameNode->is_string()) {
-        serverName = serverNameNode->get<std::string>();
-    }
+    std::string serverName = bz::data::ReadStringConfig("serverName", "BZ OpenGL Server");
+    std::string worldName = bz::data::ReadStringConfig("worldName", worldDirPath.filename().string());
 
     ServerEngine engine(port);
     g_engine = &engine;
@@ -119,11 +124,11 @@ int main(int argc, char *argv[]) {
 
     const bool shouldZipWorld = cliOptions.customWorldProvided;
 
-    Game game(engine, serverName, *worldConfigPtr, worldDirPath.string(), shouldZipWorld);
+    Game game(engine, serverName, worldName, *worldConfigPtr, worldDirPath.string(), shouldZipWorld);
     g_game = &game;
     spdlog::trace("Game initialized successfully");
 
-    ServerDiscoveryBeacon discoveryBeacon(port, "BZ Server", worldDirPath.filename().string());
+    ServerDiscoveryBeacon discoveryBeacon(port, serverName, worldName);
 
     spdlog::trace("Loading plugins...");
     py::scoped_interpreter guard{};
