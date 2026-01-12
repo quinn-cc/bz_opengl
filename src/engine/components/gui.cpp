@@ -273,7 +273,11 @@ void GUI::drawConsolePanel() {
 }
 
 void GUI::addConsoleLine(const std::string &playerName, const std::string &line) {
-    std::string fullLine = playerName + ": " + line;
+    std::string displayName = playerName;
+    if (!displayName.empty() && displayName.front() != '[') {
+        displayName = "[" + displayName + "]";
+    }
+    std::string fullLine = displayName.empty() ? line : (displayName + " " + line);
     consoleLines.push_back(fullLine);
 }
 

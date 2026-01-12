@@ -31,6 +31,7 @@ Player::Player(Game &game,
 
     ClientMsg_Init initMsg;
     initMsg.name = name;
+    initMsg.protocolVersion = NET_PROTOCOL_VERSION;
     game.engine.network->send<ClientMsg_Init>(initMsg);
 }
 

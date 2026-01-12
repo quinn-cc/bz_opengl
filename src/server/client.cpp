@@ -37,6 +37,15 @@ void Client::update() {
             continue;
         }
 
+        if (initMsg.protocolVersion != NET_PROTOCOL_VERSION) {
+            spdlog::warn("Client::update: Client id {} protocol mismatch (client {}, server {})",
+                         id,
+                         initMsg.protocolVersion,
+                         NET_PROTOCOL_VERSION);
+            game.engine.network->disconnectClient(id, "Protocol version mismatch.");
+            return;
+        }
+
         spdlog::info("Client::update: Client id {} initialized with name {}", id, initMsg.name);
         state.name = initMsg.name;
         initialized = true;

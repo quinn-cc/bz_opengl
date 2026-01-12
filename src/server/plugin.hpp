@@ -48,7 +48,7 @@ namespace PluginAPI {
     bool setPlayerParameter(client_id playerId, const std::string &param, const pybind11::object &value);
     void killPlayer(client_id targetId);
     void disconnectPlayer(client_id targetId, const std::string &reason);
-    std::optional<client_id> getPlayerByName(const std::string &name);
+    client_id getPlayerByName(const std::string &name);
     std::vector<client_id> getAllPlayerIds();
 
     std::optional<std::string> getPlayerName(client_id id);

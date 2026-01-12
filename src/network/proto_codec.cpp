@@ -190,6 +190,7 @@ std::unique_ptr<ClientMsg> decodeClientMsg(const std::byte *data, std::size_t si
         auto out = std::make_unique<ClientMsg_Init>();
         out->clientId = msg.client_id();
         out->name = msg.init().name();
+        out->protocolVersion = msg.init().protocol_version();
         return out;
     }
 
@@ -251,6 +252,7 @@ std::optional<std::vector<std::byte>> encodeClientMsg(const ClientMsg &input) {
         msg.set_type(bz::ClientMsg::INIT);
         const auto &typed = static_cast<const ClientMsg_Init&>(input);
         msg.mutable_init()->set_name(typed.name);
+        msg.mutable_init()->set_protocol_version(typed.protocolVersion);
         break;
     }
     case ClientMsg_Type_CHAT: {

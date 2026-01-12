@@ -230,6 +230,7 @@ typedef struct ClientMsg_Init: ClientMsg {
     static constexpr ClientMsg_Type Type = ClientMsg_Type_INIT;
     ClientMsg_Init() { type = Type; }
     std::string name;
+    uint32_t protocolVersion = NET_PROTOCOL_VERSION;
 } ClientMsg_Init;
 
 typedef struct ClientMsg_RequestPlayerSpawn : ClientMsg {
