@@ -1,9 +1,10 @@
 #include "game.hpp"
 #include "spdlog/spdlog.h"
+#include <algorithm>
 #include <utility>
 
-void Game::addClient(Client *client) {
-    clients.push_back(client);
+void Game::addClient(std::unique_ptr<Client> client) {
+    clients.push_back(std::move(client));
 }
 
 void Game::removeClient(client_id id) {
@@ -11,9 +12,8 @@ void Game::removeClient(client_id id) {
         std::remove_if(
             clients.begin(),
             clients.end(),
-            [id](const Client *c) {
+            [id](const std::unique_ptr<Client> &c) {
                 if (c->isEqual(id)) {
-                    delete c;
                     return true;
                 } else {
                     return false;
@@ -25,30 +25,32 @@ void Game::removeClient(client_id id) {
 }
 
 Client *Game::getClient(client_id id) {
-    for (Client *client : clients) {
+    for (const auto &client : clients) {
         if (client->isEqual(id)) {
-            return client;
+            return client.get();
         }
     }
     return nullptr;
 }
 
 Client *Game::getClientByName(const std::string &name) {
-    for (Client *client : clients) {
+    for (const auto &client : clients) {
         if (client->isEqual(name)) {
-            return client;
+            return client.get();
         }
     }
     return nullptr;
 }
 
 Game::Game(ServerEngine &engine,
+           std::string serverName,
            std::string worldName,
            nlohmann::json worldConfig,
            std::string worldDir,
            bool enableWorldZipping)
     : engine(engine) {
     world = new World(*this,
+                      std::move(serverName),
                       std::move(worldName),
                       std::move(worldConfig),
                       std::move(worldDir),
@@ -57,14 +59,8 @@ Game::Game(ServerEngine &engine,
 }
 
 Game::~Game() {
-    for (Client *client : clients) {
-        delete client;
-    }
     clients.clear();
 
-    for (Shot *shot : shots) {
-        delete shot;
-    }
     shots.clear();
 
     delete world;
@@ -74,55 +70,62 @@ Game::~Game() {
 void Game::update(TimeUtils::duration deltaTime) {
     chat->update();
 
-    for (Client *client : clients) {
+    for (const auto &client : clients) {
         client->update();
     }
 
-    if (ClientMsg_PlayerJoin *connMsg = engine.network->peekMessage<ClientMsg_PlayerJoin>()) {
-        Client *newClient = new Client(*this, connMsg->clientId, connMsg->ip);
-        addClient(newClient);
-    }
+    for (const auto &connMsg : engine.network->consumeMessages<ClientMsg_PlayerJoin>()) {
+        world->sendInitToClient(connMsg.clientId);
+        auto newClient = std::make_unique<Client>(*this, connMsg.clientId, connMsg.ip);
 
-    if (ClientMsg_PlayerLeave *disconnMsg = engine.network->peekMessage<ClientMsg_PlayerLeave>()) {
-        spdlog::info("Game::update: Client with id {} disconnected", disconnMsg->clientId);
-        removeClient(disconnMsg->clientId);
-    }
-
-    // Listen for incoming shots
-    if (auto *shotMsg = engine.network->peekMessage<ClientMsg_CreateShot>()) {
-        Shot *newShot = new Shot(
-            *this,
-            shotMsg->clientId,
-            shotMsg->localShotId,
-            shotMsg->position,
-            shotMsg->velocity
-        );
-        shots.push_back(newShot);
-    }
-
-    for (Shot *shot : shots) {
-        shot->update(deltaTime);
-
-        if (shot->isExpired()) {
-            shots.erase(
-                std::remove(shots.begin(), shots.end(), shot),
-                shots.end()
-            );
-            delete shot;
-            continue;
+        for (const auto &client : clients) {
+            if (!client->isInitialized()) {
+                continue;
+            }
+            ServerMsg_PlayerJoin existingMsg;
+            existingMsg.clientId = client->getId();
+            existingMsg.state = client->getState();
+            engine.network->send<ServerMsg_PlayerJoin>(connMsg.clientId, &existingMsg);
         }
 
-        for (Client *client : clients) {
-            if (shot->hits(client)) {
-                client->die();
+        addClient(std::move(newClient));
+    }
 
-                shots.erase(
-                    std::remove(shots.begin(), shots.end(), shot),
-                    shots.end()
-                );
-                delete shot;
-                break;
+    for (const auto &disconnMsg : engine.network->consumeMessages<ClientMsg_PlayerLeave>()) {
+        spdlog::info("Game::update: Client with id {} disconnected", disconnMsg.clientId);
+        removeClient(disconnMsg.clientId);
+    }
+
+    for (const auto &shotMsg : engine.network->consumeMessages<ClientMsg_CreateShot>()) {
+        shots.push_back(std::make_unique<Shot>(
+            *this,
+            shotMsg.clientId,
+            shotMsg.localShotId,
+            shotMsg.position,
+            shotMsg.velocity
+        ));
+    }
+
+    for (auto it = shots.begin(); it != shots.end(); ) {
+        Shot *shot = it->get();
+        shot->update(deltaTime);
+
+        bool expired = shot->isExpired();
+        bool hit = false;
+        if (!expired) {
+            for (const auto &client : clients) {
+                if (shot->hits(client.get())) {
+                    client->die();
+                    hit = true;
+                    break;
+                }
             }
+        }
+
+        if (expired || hit) {
+            it = shots.erase(it);
+        } else {
+            ++it;
         }
     }
 

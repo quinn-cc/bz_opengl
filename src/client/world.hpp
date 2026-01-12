@@ -2,6 +2,7 @@
 #include <filesystem>
 #include <map>
 #include <string>
+#include <vector>
 #include "engine/types.hpp"
 #include "engine/physics/compound_body.hpp"
 #include <nlohmann/json.hpp>
@@ -17,12 +18,13 @@ private:
     bool initialized = false;
 
     std::string worldDir;
-    nlohmann::json manifest;
-
+    std::string serverName;
+    std::string worldName;
+    uint32_t protocolVersion = 0;
+    std::vector<std::string> features;
     std::map<std::string, std::filesystem::path> assetPaths;
 
     void registerAssets(const nlohmann::json &source, const std::filesystem::path &baseDir);
-    void loadManifest(const std::filesystem::path& manifestPath);
     bool unzipFromMemory(const std::byte* data, size_t size, const std::string& destDir);
 
 public:

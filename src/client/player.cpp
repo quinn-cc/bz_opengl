@@ -4,6 +4,7 @@
 #include "game.hpp"
 #include <string>
 #include <utility>
+#include <memory>
 #include "spdlog/spdlog.h"
 #include "shot.hpp"
 
@@ -52,18 +53,6 @@ glm::vec3 Player::getForwardVector() const {
 }
 
 void Player::earlyUpdate() {
-    // Listen for incoming world setting changes
-    if (auto *paramMsg = game.engine.network->peekMessage<ServerMsg_PlayerParameters>(
-        [this](const ServerMsg_PlayerParameters &msg) {
-            return msg.clientId == this->clientId;
-        }))
-    {
-        for (auto& [key, value] : paramMsg->params) {
-            this->state.params[key] = value;
-        }
-        game.engine.physics->setGravity(getParameter("gravity"));
-    }
-
     if (state.alive) {
         game.engine.gui->displayDeathScreen(false);
 
@@ -107,22 +96,14 @@ void Player::earlyUpdate() {
                 glm::vec3 shotPosition = state.position + getForwardVector() * 2.0f;
                 glm::vec3 shotVelocity = getForwardVector() * getParameter("shotSpeed") + getVelocity();
 
-                Shot *shot = new Shot(game, shotPosition, shotVelocity);
-                game.addShot(shot);
+                auto shot = std::make_unique<Shot>(game, shotPosition, shotVelocity);
+                game.addShot(std::move(shot));
             }
         }
 
-        // Check if received death message
-        if (auto *msg = game.engine.network->peekMessage<ServerMsg_PlayerDeath>(
-            [this](const ServerMsg_PlayerDeath &msg) { return msg.clientId == this->clientId; }
-        )) {
-            dieAudio.play(state.position);
-            state.alive = false;
-        }
     } else {
         game.engine.gui->displayDeathScreen(true);
 
-        // Spawn key
         if (game.engine.input->getInputState().spawn) {
             ClientMsg_RequestPlayerSpawn spawnMsg;
             game.engine.network->send<ClientMsg_RequestPlayerSpawn>(spawnMsg);
@@ -131,20 +112,6 @@ void Player::earlyUpdate() {
 }
 
 void Player::lateUpdate() {
-    if (!state.alive) {
-        // If spawn command has been recieved
-        if (auto *msg = game.engine.network->peekMessage<ServerMsg_PlayerSpawn>(
-            [this](const ServerMsg_PlayerSpawn &msg) { return msg.clientId == this->clientId; }
-        )) {
-            spawnAudio.play(msg->position);
-            state.alive = true;
-            physics.setPosition(msg->position);
-            physics.setRotation(msg->rotation);
-            physics.setVelocity(glm::vec3(0.0f));
-            physics.setAngularVelocity(glm::vec3(0.0f));
-        }
-    }
-
     state.position = physics.getPosition();
     state.rotation = physics.getRotation();
     state.velocity = physics.getVelocity();
@@ -163,4 +130,28 @@ void Player::lateUpdate() {
 
     audioEngine.setListenerPosition(state.position);
     audioEngine.setListenerRotation(state.rotation);
+}
+
+void Player::handleParameters(const ServerMsg_PlayerParameters &msg) {
+    for (const auto &pair : msg.params) {
+        state.params[pair.first] = pair.second;
+    }
+    game.engine.physics->setGravity(getParameter("gravity"));
+}
+
+void Player::handleDeath() {
+    if (!state.alive) {
+        return;
+    }
+    dieAudio.play(state.position);
+    state.alive = false;
+}
+
+void Player::handleSpawn(const ServerMsg_PlayerSpawn &msg) {
+    spawnAudio.play(msg.position);
+    state.alive = true;
+    physics.setPosition(msg.position);
+    physics.setRotation(msg.rotation);
+    physics.setVelocity(glm::vec3(0.0f));
+    physics.setAngularVelocity(glm::vec3(0.0f));
 }

@@ -67,12 +67,20 @@ void ClientNetwork::update() {
             spdlog::info("{}", DISCONNECT_REASON);
             pendingDisconnect = DisconnectEvent{ DISCONNECT_REASON };
             serverEndpoint.reset();
+            for (auto &msgData : receivedMessages) {
+                delete msgData.msg;
+            }
+            receivedMessages.clear();
             break;
         }
         case net::Event::Type::DisconnectTimeout: {
             spdlog::info("{}", TIMEOUT_REASON);
             pendingDisconnect = DisconnectEvent{ TIMEOUT_REASON };
             serverEndpoint.reset();
+            for (auto &msgData : receivedMessages) {
+                delete msgData.msg;
+            }
+            receivedMessages.clear();
             break;
         }
         default:
@@ -88,6 +96,10 @@ bool ClientNetwork::connect(const std::string &addr, uint16_t port, int timeoutM
     }
 
     pendingDisconnect.reset();
+    for (auto &msgData : receivedMessages) {
+        delete msgData.msg;
+    }
+    receivedMessages.clear();
 
     if (!transport->connect(addr, port, timeoutMs)) {
         spdlog::info("Connection to server failed.");
@@ -100,6 +112,20 @@ bool ClientNetwork::connect(const std::string &addr, uint16_t port, int timeoutM
     auto remotePort = transport->getRemotePort();
     serverEndpoint = ServerEndpointInfo{ remoteIp.value_or(addr), remotePort.value_or(port) };
     return true;
+}
+
+void ClientNetwork::disconnect(const std::string &reason) {
+    if (!transport || !transport->isConnected()) {
+        return;
+    }
+
+    transport->disconnect();
+    pendingDisconnect = DisconnectEvent{ reason.empty() ? DISCONNECT_REASON : reason };
+    serverEndpoint.reset();
+    for (auto &msgData : receivedMessages) {
+        delete msgData.msg;
+    }
+    receivedMessages.clear();
 }
 
 std::optional<ClientNetwork::DisconnectEvent> ClientNetwork::consumeDisconnectEvent() {
@@ -133,4 +159,3 @@ void ClientNetwork::sendImpl(const ClientMsg &input, bool flush) {
 
     transport->send(encoded->data(), encoded->size(), delivery, flush);
 }
-

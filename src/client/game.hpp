@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include <vector>
 #include "engine/types.hpp"
 #include "engine/client_engine.hpp"
@@ -21,12 +22,12 @@ private:
 public:
     ClientEngine &engine;
 
-    Player *player;
-    World *world;
-    Console *console;
+    std::unique_ptr<Player> player;
+    std::unique_ptr<World> world;
+    std::unique_ptr<Console> console;
 
-    std::vector<Client *> clients;
-    std::vector<Shot *> shots;
+    std::vector<std::unique_ptr<Client>> clients;
+    std::vector<std::unique_ptr<Shot>> shots;
 
     FOCUS_STATE getFocusState() const { return focusState; }
 
@@ -36,7 +37,7 @@ public:
     void earlyUpdate(TimeUtils::duration deltaTime);
     void lateUpdate(TimeUtils::duration deltaTime);
 
-    void addShot(Shot *shot) { shots.push_back(shot); }
+    void addShot(std::unique_ptr<Shot> shot) { shots.push_back(std::move(shot)); }
 
     Client *getClientById(client_id id);
 };

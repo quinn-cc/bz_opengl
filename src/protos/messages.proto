@@ -99,6 +99,9 @@ message ServerMsg_Init {
   string server_name = 2;
   PlayerParameters default_player_params = 3;
   bytes world_data = 4; // zipped/map/etc
+  string world_name = 5;
+  uint32 protocol_version = 6;
+  repeated string features = 7;
 }
 
 // Wrapper for "ServerMsg { type; }"

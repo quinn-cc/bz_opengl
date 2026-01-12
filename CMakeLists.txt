@@ -79,6 +79,7 @@ target_include_directories(proto_lib PUBLIC ${CMAKE_BINARY_DIR})
 file(GLOB_RECURSE CLIENT_SOURCES "${PROJECT_SOURCE_DIR}/src/client/*.cpp")
 list(APPEND CLIENT_SOURCES
     ${PROJECT_SOURCE_DIR}/src/client/server/server_browser_controller.cpp
+    ${PROJECT_SOURCE_DIR}/src/common/config_helpers.cpp
     ${PROJECT_SOURCE_DIR}/src/common/data_path_resolver.cpp
     ${PROJECT_SOURCE_DIR}/src/common/data_dir_override.cpp
 )
@@ -86,6 +87,7 @@ file(GLOB_RECURSE SERVER_SOURCES "${PROJECT_SOURCE_DIR}/src/server/*.cpp")
 list(APPEND SERVER_SOURCES
     ${PROJECT_SOURCE_DIR}/src/server/terminal_commands.cpp
     ${PROJECT_SOURCE_DIR}/src/server/server_cli_options.cpp
+    ${PROJECT_SOURCE_DIR}/src/common/config_helpers.cpp
     ${PROJECT_SOURCE_DIR}/src/common/data_path_resolver.cpp
     ${PROJECT_SOURCE_DIR}/src/common/data_dir_override.cpp
 )

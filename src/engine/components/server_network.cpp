@@ -81,6 +81,11 @@ void ServerNetwork::update() {
                 break;
             }
 
+            if (decoded->type == ClientMsg_Type_PLAYER_JOIN || decoded->type == ClientMsg_Type_PLAYER_LEAVE) {
+                spdlog::warn("ServerNetwork::update: Ignoring client-sent join/leave message");
+                break;
+            }
+
             const client_id cid = getClient(evt.connection);
             if (cid == 0) {
                 break;

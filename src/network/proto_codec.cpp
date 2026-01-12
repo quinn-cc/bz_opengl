@@ -12,6 +12,56 @@ std::vector<std::byte> toBytes(const std::string &buffer) {
     return std::vector<std::byte>(ptr, ptr + buffer.size());
 }
 
+void decodeVec3(const bz::Vec3 &input, glm::vec3 &output) {
+    output.x = input.x();
+    output.y = input.y();
+    output.z = input.z();
+}
+
+void encodeVec3(const glm::vec3 &input, bz::Vec3 *output) {
+    output->set_x(input.x);
+    output->set_y(input.y);
+    output->set_z(input.z);
+}
+
+void decodeQuat(const bz::Quat &input, glm::quat &output) {
+    output.w = input.w();
+    output.x = input.x();
+    output.y = input.y();
+    output.z = input.z();
+}
+
+void encodeQuat(const glm::quat &input, bz::Quat *output) {
+    output->set_w(input.w);
+    output->set_x(input.x);
+    output->set_y(input.y);
+    output->set_z(input.z);
+}
+
+void decodePlayerState(const bz::PlayerState &input, PlayerState &output) {
+    output.name = input.name();
+    decodeVec3(input.position(), output.position);
+    decodeQuat(input.rotation(), output.rotation);
+    decodeVec3(input.velocity(), output.velocity);
+    output.alive = input.alive();
+    output.params.clear();
+    for (const auto &[key, val] : input.params().params()) {
+        output.params[key] = val;
+    }
+}
+
+void encodePlayerState(const PlayerState &input, bz::PlayerState *output) {
+    output->set_name(input.name);
+    encodeVec3(input.position, output->mutable_position());
+    encodeQuat(input.rotation, output->mutable_rotation());
+    encodeVec3(input.velocity, output->mutable_velocity());
+    output->set_alive(input.alive);
+    auto *params = output->mutable_params();
+    for (const auto &[key, val] : input.params) {
+        (*params->mutable_params())[key] = val;
+    }
+}
+
 } // namespace
 
 std::unique_ptr<ServerMsg> decodeServerMsg(const std::byte *data, std::size_t size) {
@@ -29,18 +79,7 @@ std::unique_ptr<ServerMsg> decodeServerMsg(const std::byte *data, std::size_t si
     case bz::ServerMsg::kPlayerJoin: {
         auto out = std::make_unique<ServerMsg_PlayerJoin>();
         out->clientId = msg.player_join().client_id();
-        out->state.name = msg.player_join().state().name();
-        out->state.position.x = msg.player_join().state().position().x();
-        out->state.position.y = msg.player_join().state().position().y();
-        out->state.position.z = msg.player_join().state().position().z();
-        out->state.rotation.w = msg.player_join().state().rotation().w();
-        out->state.rotation.x = msg.player_join().state().rotation().x();
-        out->state.rotation.y = msg.player_join().state().rotation().y();
-        out->state.rotation.z = msg.player_join().state().rotation().z();
-        out->state.velocity.x = msg.player_join().state().velocity().x();
-        out->state.velocity.y = msg.player_join().state().velocity().y();
-        out->state.velocity.z = msg.player_join().state().velocity().z();
-        out->state.alive = msg.player_join().state().alive();
+        decodePlayerState(msg.player_join().state(), out->state);
         return out;
     }
 
@@ -53,18 +92,7 @@ std::unique_ptr<ServerMsg> decodeServerMsg(const std::byte *data, std::size_t si
     case bz::ServerMsg::kPlayerState: {
         auto out = std::make_unique<ServerMsg_PlayerState>();
         out->clientId = msg.player_state().client_id();
-        out->state.name = msg.player_state().state().name();
-        out->state.position.x = msg.player_state().state().position().x();
-        out->state.position.y = msg.player_state().state().position().y();
-        out->state.position.z = msg.player_state().state().position().z();
-        out->state.rotation.w = msg.player_state().state().rotation().w();
-        out->state.rotation.x = msg.player_state().state().rotation().x();
-        out->state.rotation.y = msg.player_state().state().rotation().y();
-        out->state.rotation.z = msg.player_state().state().rotation().z();
-        out->state.velocity.x = msg.player_state().state().velocity().x();
-        out->state.velocity.y = msg.player_state().state().velocity().y();
-        out->state.velocity.z = msg.player_state().state().velocity().z();
-        out->state.alive = msg.player_state().state().alive();
+        decodePlayerState(msg.player_state().state(), out->state);
         return out;
     }
 
@@ -80,32 +108,18 @@ std::unique_ptr<ServerMsg> decodeServerMsg(const std::byte *data, std::size_t si
     case bz::ServerMsg::kPlayerLocation: {
         auto out = std::make_unique<ServerMsg_PlayerLocation>();
         out->clientId = msg.player_location().client_id();
-        out->position.x = msg.player_location().position().x();
-        out->position.y = msg.player_location().position().y();
-        out->position.z = msg.player_location().position().z();
-        out->rotation.w = msg.player_location().rotation().w();
-        out->rotation.x = msg.player_location().rotation().x();
-        out->rotation.y = msg.player_location().rotation().y();
-        out->rotation.z = msg.player_location().rotation().z();
-        out->velocity.x = msg.player_location().velocity().x();
-        out->velocity.y = msg.player_location().velocity().y();
-        out->velocity.z = msg.player_location().velocity().z();
+        decodeVec3(msg.player_location().position(), out->position);
+        decodeQuat(msg.player_location().rotation(), out->rotation);
+        decodeVec3(msg.player_location().velocity(), out->velocity);
         return out;
     }
 
     case bz::ServerMsg::kPlayerSpawn: {
         auto out = std::make_unique<ServerMsg_PlayerSpawn>();
         out->clientId = msg.player_spawn().client_id();
-        out->position.x = msg.player_spawn().position().x();
-        out->position.y = msg.player_spawn().position().y();
-        out->position.z = msg.player_spawn().position().z();
-        out->rotation.w = msg.player_spawn().rotation().w();
-        out->rotation.x = msg.player_spawn().rotation().x();
-        out->rotation.y = msg.player_spawn().rotation().y();
-        out->rotation.z = msg.player_spawn().rotation().z();
-        out->velocity.x = msg.player_spawn().velocity().x();
-        out->velocity.y = msg.player_spawn().velocity().y();
-        out->velocity.z = msg.player_spawn().velocity().z();
+        decodeVec3(msg.player_spawn().position(), out->position);
+        decodeQuat(msg.player_spawn().rotation(), out->rotation);
+        decodeVec3(msg.player_spawn().velocity(), out->velocity);
         return out;
     }
 
@@ -118,12 +132,8 @@ std::unique_ptr<ServerMsg> decodeServerMsg(const std::byte *data, std::size_t si
     case bz::ServerMsg::kCreateShot: {
         auto out = std::make_unique<ServerMsg_CreateShot>();
         out->globalShotId = msg.create_shot().global_shot_id();
-        out->position.x = msg.create_shot().position().x();
-        out->position.y = msg.create_shot().position().y();
-        out->position.z = msg.create_shot().position().z();
-        out->velocity.x = msg.create_shot().velocity().x();
-        out->velocity.y = msg.create_shot().velocity().y();
-        out->velocity.z = msg.create_shot().velocity().z();
+        decodeVec3(msg.create_shot().position(), out->position);
+        decodeVec3(msg.create_shot().velocity(), out->velocity);
         return out;
     }
 
@@ -138,6 +148,9 @@ std::unique_ptr<ServerMsg> decodeServerMsg(const std::byte *data, std::size_t si
         auto out = std::make_unique<ServerMsg_Init>();
         out->clientId = msg.init().client_id();
         out->serverName = msg.init().server_name();
+        out->worldName = msg.init().world_name();
+        out->protocolVersion = msg.init().protocol_version();
+        out->features.assign(msg.init().features().begin(), msg.init().features().end());
         for (const auto& [key, val] : msg.init().default_player_params().params()) {
             out->defaultPlayerParams[key] = val;
         }
@@ -191,13 +204,8 @@ std::unique_ptr<ClientMsg> decodeClientMsg(const std::byte *data, std::size_t si
     case bz::ClientMsg::kPlayerLocation: {
         auto out = std::make_unique<ClientMsg_PlayerLocation>();
         out->clientId = msg.client_id();
-        out->position.x = msg.player_location().position().x();
-        out->position.y = msg.player_location().position().y();
-        out->position.z = msg.player_location().position().z();
-        out->rotation.w = msg.player_location().rotation().w();
-        out->rotation.x = msg.player_location().rotation().x();
-        out->rotation.y = msg.player_location().rotation().y();
-        out->rotation.z = msg.player_location().rotation().z();
+        decodeVec3(msg.player_location().position(), out->position);
+        decodeQuat(msg.player_location().rotation(), out->rotation);
         return out;
     }
 
@@ -211,12 +219,8 @@ std::unique_ptr<ClientMsg> decodeClientMsg(const std::byte *data, std::size_t si
         auto out = std::make_unique<ClientMsg_CreateShot>();
         out->clientId = msg.client_id();
         out->localShotId = msg.create_shot().local_shot_id();
-        out->position.x = msg.create_shot().position().x();
-        out->position.y = msg.create_shot().position().y();
-        out->position.z = msg.create_shot().position().z();
-        out->velocity.x = msg.create_shot().velocity().x();
-        out->velocity.y = msg.create_shot().velocity().y();
-        out->velocity.z = msg.create_shot().velocity().z();
+        decodeVec3(msg.create_shot().position(), out->position);
+        decodeVec3(msg.create_shot().velocity(), out->velocity);
         return out;
     }
 
@@ -261,13 +265,8 @@ std::optional<std::vector<std::byte>> encodeClientMsg(const ClientMsg &input) {
         msg.set_type(bz::ClientMsg::PLAYER_LOCATION);
         const auto &typed = static_cast<const ClientMsg_PlayerLocation&>(input);
         auto* loc = msg.mutable_player_location();
-        loc->mutable_position()->set_x(typed.position.x);
-        loc->mutable_position()->set_y(typed.position.y);
-        loc->mutable_position()->set_z(typed.position.z);
-        loc->mutable_rotation()->set_w(typed.rotation.w);
-        loc->mutable_rotation()->set_x(typed.rotation.x);
-        loc->mutable_rotation()->set_y(typed.rotation.y);
-        loc->mutable_rotation()->set_z(typed.rotation.z);
+        encodeVec3(typed.position, loc->mutable_position());
+        encodeQuat(typed.rotation, loc->mutable_rotation());
         break;
     }
     case ClientMsg_Type_REQUEST_PLAYER_SPAWN: {
@@ -280,12 +279,8 @@ std::optional<std::vector<std::byte>> encodeClientMsg(const ClientMsg &input) {
         const auto &typed = static_cast<const ClientMsg_CreateShot&>(input);
         auto* shot = msg.mutable_create_shot();
         shot->set_local_shot_id(typed.localShotId);
-        shot->mutable_position()->set_x(typed.position.x);
-        shot->mutable_position()->set_y(typed.position.y);
-        shot->mutable_position()->set_z(typed.position.z);
-        shot->mutable_velocity()->set_x(typed.velocity.x);
-        shot->mutable_velocity()->set_y(typed.velocity.y);
-        shot->mutable_velocity()->set_z(typed.velocity.z);
+        encodeVec3(typed.position, shot->mutable_position());
+        encodeVec3(typed.velocity, shot->mutable_velocity());
         break;
     }
     case ClientMsg_Type_PLAYER_JOIN: {
@@ -317,19 +312,7 @@ std::optional<std::vector<std::byte>> encodeServerMsg(const ServerMsg &input) {
         const auto &typed = static_cast<const ServerMsg_PlayerJoin&>(input);
         auto* join = msg.mutable_player_join();
         join->set_client_id(typed.clientId);
-        auto* state = join->mutable_state();
-        state->set_name(typed.state.name);
-        state->mutable_position()->set_x(typed.state.position.x);
-        state->mutable_position()->set_y(typed.state.position.y);
-        state->mutable_position()->set_z(typed.state.position.z);
-        state->mutable_rotation()->set_x(typed.state.rotation.x);
-        state->mutable_rotation()->set_y(typed.state.rotation.y);
-        state->mutable_rotation()->set_z(typed.state.rotation.z);
-        state->mutable_rotation()->set_w(typed.state.rotation.w);
-        state->mutable_velocity()->set_x(typed.state.velocity.x);
-        state->mutable_velocity()->set_y(typed.state.velocity.y);
-        state->mutable_velocity()->set_z(typed.state.velocity.z);
-        state->set_alive(typed.state.alive);
+        encodePlayerState(typed.state, join->mutable_state());
         break;
     }
     case ServerMsg_Type_PLAYER_LEAVE: {
@@ -343,19 +326,7 @@ std::optional<std::vector<std::byte>> encodeServerMsg(const ServerMsg &input) {
         const auto &typed = static_cast<const ServerMsg_PlayerState&>(input);
         auto* ps = msg.mutable_player_state();
         ps->set_client_id(typed.clientId);
-        auto* state = ps->mutable_state();
-        state->set_name(typed.state.name);
-        state->mutable_position()->set_x(typed.state.position.x);
-        state->mutable_position()->set_y(typed.state.position.y);
-        state->mutable_position()->set_z(typed.state.position.z);
-        state->mutable_rotation()->set_x(typed.state.rotation.x);
-        state->mutable_rotation()->set_y(typed.state.rotation.y);
-        state->mutable_rotation()->set_z(typed.state.rotation.z);
-        state->mutable_rotation()->set_w(typed.state.rotation.w);
-        state->mutable_velocity()->set_x(typed.state.velocity.x);
-        state->mutable_velocity()->set_y(typed.state.velocity.y);
-        state->mutable_velocity()->set_z(typed.state.velocity.z);
-        state->set_alive(typed.state.alive);
+        encodePlayerState(typed.state, ps->mutable_state());
         break;
     }
     case ServerMsg_Type_PLAYER_PARAMETERS: {
@@ -374,16 +345,9 @@ std::optional<std::vector<std::byte>> encodeServerMsg(const ServerMsg &input) {
         const auto &typed = static_cast<const ServerMsg_PlayerLocation&>(input);
         auto* loc = msg.mutable_player_location();
         loc->set_client_id(typed.clientId);
-        loc->mutable_position()->set_x(typed.position.x);
-        loc->mutable_position()->set_y(typed.position.y);
-        loc->mutable_position()->set_z(typed.position.z);
-        loc->mutable_rotation()->set_x(typed.rotation.x);
-        loc->mutable_rotation()->set_y(typed.rotation.y);
-        loc->mutable_rotation()->set_z(typed.rotation.z);
-        loc->mutable_rotation()->set_w(typed.rotation.w);
-        loc->mutable_velocity()->set_x(typed.velocity.x);
-        loc->mutable_velocity()->set_y(typed.velocity.y);
-        loc->mutable_velocity()->set_z(typed.velocity.z);
+        encodeVec3(typed.position, loc->mutable_position());
+        encodeQuat(typed.rotation, loc->mutable_rotation());
+        encodeVec3(typed.velocity, loc->mutable_velocity());
         break;
     }
     case ServerMsg_Type_PLAYER_SPAWN: {
@@ -391,16 +355,9 @@ std::optional<std::vector<std::byte>> encodeServerMsg(const ServerMsg &input) {
         const auto &typed = static_cast<const ServerMsg_PlayerSpawn&>(input);
         auto* spawn = msg.mutable_player_spawn();
         spawn->set_client_id(typed.clientId);
-        spawn->mutable_position()->set_x(typed.position.x);
-        spawn->mutable_position()->set_y(typed.position.y);
-        spawn->mutable_position()->set_z(typed.position.z);
-        spawn->mutable_rotation()->set_x(typed.rotation.x);
-        spawn->mutable_rotation()->set_y(typed.rotation.y);
-        spawn->mutable_rotation()->set_z(typed.rotation.z);
-        spawn->mutable_rotation()->set_w(typed.rotation.w);
-        spawn->mutable_velocity()->set_x(typed.velocity.x);
-        spawn->mutable_velocity()->set_y(typed.velocity.y);
-        spawn->mutable_velocity()->set_z(typed.velocity.z);
+        encodeVec3(typed.position, spawn->mutable_position());
+        encodeQuat(typed.rotation, spawn->mutable_rotation());
+        encodeVec3(typed.velocity, spawn->mutable_velocity());
         break;
     }
     case ServerMsg_Type_PLAYER_DEATH: {
@@ -414,12 +371,8 @@ std::optional<std::vector<std::byte>> encodeServerMsg(const ServerMsg &input) {
         const auto &typed = static_cast<const ServerMsg_CreateShot&>(input);
         auto* shot = msg.mutable_create_shot();
         shot->set_global_shot_id(typed.globalShotId);
-        shot->mutable_position()->set_x(typed.position.x);
-        shot->mutable_position()->set_y(typed.position.y);
-        shot->mutable_position()->set_z(typed.position.z);
-        shot->mutable_velocity()->set_x(typed.velocity.x);
-        shot->mutable_velocity()->set_y(typed.velocity.y);
-        shot->mutable_velocity()->set_z(typed.velocity.z);
+        encodeVec3(typed.position, shot->mutable_position());
+        encodeVec3(typed.velocity, shot->mutable_velocity());
         break;
     }
     case ServerMsg_Type_REMOVE_SHOT: {
@@ -445,6 +398,11 @@ std::optional<std::vector<std::byte>> encodeServerMsg(const ServerMsg &input) {
         auto* init = msg.mutable_init();
         init->set_client_id(typed.clientId);
         init->set_server_name(typed.serverName);
+        init->set_world_name(typed.worldName);
+        init->set_protocol_version(typed.protocolVersion);
+        for (const auto &feature : typed.features) {
+            init->add_features(feature);
+        }
         auto* params = init->mutable_default_player_params();
         for (const auto& [key, val] : typed.defaultPlayerParams) {
             (*params->mutable_params())[key] = val;

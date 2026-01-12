@@ -7,6 +7,7 @@
 #include "server/server_cli_options.hpp"
 #include "common/data_dir_override.hpp"
 #include "common/data_path_resolver.hpp"
+#include "common/config_helpers.hpp"
 #include <nlohmann/json.hpp>
 #include <pybind11/embed.h>
 #include <csignal>
@@ -109,28 +110,13 @@ int main(int argc, char *argv[]) {
 
     uint16_t port = cliOptions.hostPort;
     if (!cliOptions.hostPortExplicit) {
-        if (const auto *portNode = bz::data::ConfigValue("network.ServerPort")) {
-            if (portNode->is_number_unsigned()) {
-                port = static_cast<uint16_t>(portNode->get<unsigned int>());
-            } else if (portNode->is_string()) {
-                try {
-                    const auto parsed = static_cast<int>(std::stoi(portNode->get<std::string>()));
-                    if (parsed > 0 && parsed <= std::numeric_limits<uint16_t>::max()) {
-                        port = static_cast<uint16_t>(parsed);
-                    }
-                } catch (...) {
-                    spdlog::warn("main: Failed to parse network.ServerPort string value");
-                }
-            }
-        }
+        port = bz::data::ReadUInt16Config({"network.ServerPort"}, port);
     } else {
         port = cliOptions.hostPort;
     }
 
-    std::string serverName = "BZ OpenGL Server";
-    if (const auto *serverNameNode = bz::data::ConfigValue("serverName"); serverNameNode && serverNameNode->is_string()) {
-        serverName = serverNameNode->get<std::string>();
-    }
+    std::string serverName = bz::data::ReadStringConfig("serverName", "BZ OpenGL Server");
+    std::string worldName = bz::data::ReadStringConfig("worldName", worldDirPath.filename().string());
 
     ServerEngine engine(port);
     g_engine = &engine;
@@ -138,11 +124,11 @@ int main(int argc, char *argv[]) {
 
     const bool shouldZipWorld = cliOptions.customWorldProvided;
 
-    Game game(engine, serverName, *worldConfigPtr, worldDirPath.string(), shouldZipWorld);
+    Game game(engine, serverName, worldName, *worldConfigPtr, worldDirPath.string(), shouldZipWorld);
     g_game = &game;
     spdlog::trace("Game initialized successfully");
 
-    ServerDiscoveryBeacon discoveryBeacon(port, "BZ Server", worldDirPath.filename().string());
+    ServerDiscoveryBeacon discoveryBeacon(port, serverName, worldName);
 
     spdlog::trace("Loading plugins...");
     py::scoped_interpreter guard{};

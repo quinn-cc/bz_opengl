@@ -50,11 +50,17 @@ ENetPacketFlag toEnetFlag(Delivery delivery) {
     case Delivery::Reliable:
         return ENET_PACKET_FLAG_RELIABLE;
     case Delivery::Unreliable:
-        // Matches previous behavior in this repo.
-        return ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT;
+        return static_cast<ENetPacketFlag>(0);
     default:
         return ENET_PACKET_FLAG_RELIABLE;
     }
+}
+
+enet_uint8 toEnetChannel(Delivery delivery, int numChannels) {
+    if (delivery == Delivery::Unreliable && numChannels > 1) {
+        return 1;
+    }
+    return 0;
 }
 
 std::optional<std::string> peerIpString(const ENetAddress &addr) {
@@ -82,7 +88,7 @@ public:
         remotePort.reset();
 
         if (!host) {
-            host = enet_host_create(nullptr, 1, 2, 0, 0);
+            host = enet_host_create(nullptr, 1, channelCount, 0, 0);
             if (!host) {
                 spdlog::error("ENet client: failed to create host");
                 return false;
@@ -137,7 +143,7 @@ public:
             case ENET_EVENT_TYPE_RECEIVE: {
                 Event e;
                 e.type = Event::Type::Receive;
-                e.connection = reinterpret_cast<ConnectionHandle>(peer);
+                e.connection = reinterpret_cast<ConnectionHandle>(event.peer);
                 e.payload.resize(event.packet->dataLength);
                 std::memcpy(e.payload.data(), event.packet->data, event.packet->dataLength);
                 outEvents.push_back(std::move(e));
@@ -184,7 +190,7 @@ public:
         }
 
         ENetPacket *packet = enet_packet_create(data, size, toEnetFlag(delivery));
-        enet_peer_send(peer, 0, packet);
+        enet_peer_send(peer, toEnetChannel(delivery, 2), packet);
 
         if (flush) {
             enet_host_flush(host);
@@ -205,6 +211,7 @@ private:
     ENetPeer *peer = nullptr;
     std::optional<std::string> remoteIp;
     std::optional<uint16_t> remotePort;
+    static constexpr int channelCount = 2;
 };
 
 class EnetServerTransport final : public IServerTransport {
@@ -215,6 +222,7 @@ public:
         address.port = port;
 
         host = enet_host_create(&address, maxClients, numChannels, 0, 0);
+        channelCount = numChannels;
         if (!host) {
             spdlog::error("ENet server: failed to create host on port {}", port);
         }
@@ -295,7 +303,7 @@ public:
         }
 
         ENetPacket *packet = enet_packet_create(data, size, toEnetFlag(delivery));
-        enet_peer_send(peer, 0, packet);
+        enet_peer_send(peer, toEnetChannel(delivery, channelCount), packet);
 
         if (flush) {
             enet_host_flush(host);
@@ -314,6 +322,7 @@ public:
 private:
     EnetGlobal global;
     ENetHost *host = nullptr;
+    int channelCount = 1;
 };
 
 } // namespace

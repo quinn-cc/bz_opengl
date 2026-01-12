@@ -58,6 +58,26 @@ public:
         return nullptr;
     };
 
+    template<typename T> std::vector<T> consumeMessages(std::function<bool(const T&)> predicate = [](const T&) { return true; }) {
+        static_assert(std::is_base_of_v<ClientMsg, T>, "T must be a subclass of ClientMsg");
+
+        std::vector<T> results;
+        auto it = receivedMessages.begin();
+        while (it != receivedMessages.end()) {
+            if (it->msg && it->msg->type == T::Type) {
+                auto* casted = static_cast<T*>(it->msg);
+                if (predicate(*casted)) {
+                    results.push_back(*casted);
+                    delete it->msg;
+                    it = receivedMessages.erase(it);
+                    continue;
+                }
+            }
+            ++it;
+        }
+        return results;
+    }
+
     template<typename T> void send(client_id clientId, const T *input) {
         static_assert(std::is_base_of_v<ServerMsg, T>, "T must be a subclass of ServerMsg");
 

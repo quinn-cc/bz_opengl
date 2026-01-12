@@ -45,6 +45,7 @@ private:
 
 public:
     bool connect(const std::string &address, uint16_t port, int timeoutMs = 5000);
+    void disconnect(const std::string &reason = "");
     std::optional<DisconnectEvent> consumeDisconnectEvent();
     bool isConnected() const { return transport && transport->isConnected(); }
     std::optional<ServerEndpointInfo> getServerEndpoint() const { return serverEndpoint; }
@@ -65,6 +66,26 @@ public:
 
         return nullptr;
     };
+
+    template<typename T> std::vector<T> consumeMessages(std::function<bool(const T&)> predicate = [](const T&) { return true; }) {
+        static_assert(std::is_base_of_v<ServerMsg, T>, "T must be a subclass of ServerMsg");
+
+        std::vector<T> results;
+        auto it = receivedMessages.begin();
+        while (it != receivedMessages.end()) {
+            if (it->msg && it->msg->type == T::Type) {
+                auto* casted = static_cast<T*>(it->msg);
+                if (predicate(*casted)) {
+                    results.push_back(*casted);
+                    delete it->msg;
+                    it = receivedMessages.erase(it);
+                    continue;
+                }
+            }
+            ++it;
+        }
+        return results;
+    }
 
     template<typename T> void send(const T &input, bool flush = false) {
         static_assert(std::is_base_of_v<ClientMsg, T>, "T must be a subclass of ClientMsg");

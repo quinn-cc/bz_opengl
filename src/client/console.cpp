@@ -31,23 +31,23 @@ void Console::update() {
         }
     }
 
-    if (auto msg = game.engine.network->peekMessage<ServerMsg_Chat>()) {
+    for (const auto &msg : game.engine.network->consumeMessages<ServerMsg_Chat>()) {
         std::string name = "";
 
-        if (game.getClientById(msg->fromId) == nullptr) {
-            if (msg->fromId == game.player->getClientId()) {
+        if (game.getClientById(msg.fromId) == nullptr) {
+            if (msg.fromId == game.player->getClientId()) {
                 name = "YOU";
-            } else if (msg->fromId == SERVER_CLIENT_ID) {
+            } else if (msg.fromId == SERVER_CLIENT_ID) {
                 name = "SERVER";
             } else {
                 name = "UNKNOWN";
             }
         }
 
-        if (msg->toId == game.player->getClientId()) {
+        if (msg.toId == game.player->getClientId()) {
             name = "[" + name + " -> YOU]";
         }
 
-        game.engine.gui->addConsoleLine(name, msg->text);
+        game.engine.gui->addConsoleLine(name, msg.text);
     }
 }

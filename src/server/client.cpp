@@ -29,32 +29,30 @@ std::string Client::getName() const {
 }
 
 void Client::update() {
-    if (auto *initMsg = game.engine.network->peekMessage<ClientMsg_Init>([this](const ClientMsg_Init &msg) {
+    for (const auto &initMsg : game.engine.network->consumeMessages<ClientMsg_Init>([this](const ClientMsg_Init &msg) {
         return msg.clientId == id;
     })) {
         if (initialized) {
             spdlog::warn("Client::update: Client id {} sent duplicate initialization message", id);
-            return;
-        } else {
-            spdlog::info("Client::update: Client id {} initialized with name {}", id, initMsg->name);
-            state.name = initMsg->name;
-            initialized = true;
-
-            // Notify all other clients about this new connection
-            ServerMsg_PlayerJoin connMsg;
-            connMsg.clientId = id;
-            connMsg.state = state;
-            game.engine.network->sendExcept<ServerMsg_PlayerJoin>(id, &connMsg);
+            continue;
         }
+
+        spdlog::info("Client::update: Client id {} initialized with name {}", id, initMsg.name);
+        state.name = initMsg.name;
+        initialized = true;
+
+        ServerMsg_PlayerJoin connMsg;
+        connMsg.clientId = id;
+        connMsg.state = state;
+        game.engine.network->sendExcept<ServerMsg_PlayerJoin>(id, &connMsg);
     }
 
     if (initialized) {
-        // If this client sent a location update, update it and broadcast to all other clients
-        if (auto *locMsg = game.engine.network->peekMessage<ClientMsg_PlayerLocation>([this](const ClientMsg_PlayerLocation &msg) {
+        for (const auto &locMsg : game.engine.network->consumeMessages<ClientMsg_PlayerLocation>([this](const ClientMsg_PlayerLocation &msg) {
             return msg.clientId == id;
-        })) { 
-            state.position = locMsg->position;
-            state.rotation = locMsg->rotation;
+        })) {
+            state.position = locMsg.position;
+            state.rotation = locMsg.rotation;
 
             ServerMsg_PlayerLocation updateMsg;
             updateMsg.clientId = id;
@@ -62,37 +60,27 @@ void Client::update() {
             updateMsg.rotation = state.rotation;
             game.engine.network->sendExcept<ServerMsg_PlayerLocation>(id, &updateMsg);
         }
-
-        // If another client joins then send them the connection message of this client
-        if (auto *msg = game.engine.network->peekMessage<ClientMsg_PlayerJoin>([this](const ClientMsg_PlayerJoin &msg) {
-            return msg.clientId != id;
-        })) {
-            ServerMsg_PlayerJoin connMsg;
-            connMsg.clientId = id;
-            connMsg.state = state;
-            game.engine.network->send<ServerMsg_PlayerJoin>(msg->clientId, &connMsg);
-        }
     }
 
-    if (auto *spawnMsg = game.engine.network->peekMessage<ClientMsg_RequestPlayerSpawn>([this](const ClientMsg_RequestPlayerSpawn &msg) {
+    for (const auto &spawnMsg : game.engine.network->consumeMessages<ClientMsg_RequestPlayerSpawn>([this](const ClientMsg_RequestPlayerSpawn &msg) {
         return msg.clientId == id;
     })) {
         if (state.alive) {
             spdlog::warn("Client::update: Client id {} requested spawn while already alive", id);
-        } else {
-            Location spawnLocation = game.world->getSpawnLocation();
-            state.position = spawnLocation.position;
-            state.rotation = spawnLocation.rotation;
-
-            // Send spawn command to this client
-            ServerMsg_PlayerSpawn spawnRespMsg;
-            spawnRespMsg.clientId = id;
-            spawnRespMsg.position = state.position;
-            spawnRespMsg.rotation = state.rotation;
-            game.engine.network->sendAll<ServerMsg_PlayerSpawn>(&spawnRespMsg);
-
-            state.alive = true;
+            continue;
         }
+
+        Location spawnLocation = game.world->getSpawnLocation();
+        state.position = spawnLocation.position;
+        state.rotation = spawnLocation.rotation;
+
+        ServerMsg_PlayerSpawn spawnRespMsg;
+        spawnRespMsg.clientId = id;
+        spawnRespMsg.position = state.position;
+        spawnRespMsg.rotation = state.rotation;
+        game.engine.network->sendAll<ServerMsg_PlayerSpawn>(&spawnRespMsg);
+
+        state.alive = true;
     }
 }
 

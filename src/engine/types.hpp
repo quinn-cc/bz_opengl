@@ -5,6 +5,7 @@
 #include <type_traits>
 #include <cstddef>
 #include <string>
+#include <vector>
 #include <chrono>
 #include <unordered_map>
 #include <thread>
@@ -74,6 +75,8 @@ using shot_id = uint32_t;
 using render_id = uint32_t;
 
 using PlayerParameters = std::map<std::string, float>;
+
+constexpr uint32_t NET_PROTOCOL_VERSION = 1;
 
 typedef struct PlayerState {
     std::string name;
@@ -186,6 +189,9 @@ typedef struct ServerMsg_Init : ServerMsg {
     ServerMsg_Init() { type = Type; }
     client_id clientId;
     std::string serverName;
+    std::string worldName;
+    uint32_t protocolVersion = NET_PROTOCOL_VERSION;
+    std::vector<std::string> features;
     PlayerParameters defaultPlayerParams;
     std::vector<std::byte> worldData;
 } ServerMsg_Init;
