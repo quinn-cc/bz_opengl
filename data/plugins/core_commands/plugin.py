@@ -1,5 +1,5 @@
 import bzapi
-from plugins.bzpyapi import Command
+from plugins.bzpyapi import Command, LANG
 
 c = Command("kick")
 c.description = {
@@ -162,15 +162,33 @@ c.description = {
     "ru": 'Отправить личное сообщение другому игроку.',
     "zh": '向另一位玩家发送私人消息。'
 }
-c.handler = lambda tokens, from_id: (
-    bzapi.send_chat_message(0, from_id, "Usage: /msg <player_name> <message>")
-    if len(tokens) < 3
-    else (
+def _msg_handler(tokens, from_id):
+    if len(tokens) < 3:
+        bzapi.send_chat_message(0, from_id, "Usage: /msg <player_name> <message>")
+        return
+
+    target_id = bzapi.get_player_by_name(tokens[1])
+    if target_id == 0:
         bzapi.send_chat_message(0, from_id, f"Player '{tokens[1]}' not found.")
-        if (target_id := bzapi.get_player_by_name(tokens[1])) == 0
-        else bzapi.send_chat_message(from_id, target_id, " ".join(tokens[2:]))
-    )
-)
+        return
+
+    if target_id == from_id:
+        self_msg = {
+            "en": "Talking to yourself is a sign of dementia.",
+            "fr": "Se parler à soi-même est un signe de démence.",
+            "de": "Mit sich selbst zu reden ist ein Zeichen von Demenz.",
+            "es": "Hablar contigo mismo es un signo de demencia.",
+            "pt": "Falar consigo mesmo é um sinal de demência.",
+            "ja": "独り言は認知症の兆候です。",
+            "ru": "Разговоры с самим собой — признак деменции.",
+            "zh": "自言自语是痴呆的征兆。"
+        }
+        bzapi.send_chat_message(0, from_id, self_msg.get(LANG, self_msg["en"]))
+        return
+
+    bzapi.send_chat_message(from_id, target_id, " ".join(tokens[2:]))
+
+c.handler = _msg_handler
 
 
 c = Command("quit")
@@ -190,4 +208,3 @@ c.handler = lambda tokens, from_id: (
         f"{bzapi.get_player_name(from_id)} has left the server." + ("" if len(tokens) == 1 else " " + " ".join(tokens[1:]))
     )
 )
-

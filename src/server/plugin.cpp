@@ -151,12 +151,12 @@ void PluginAPI::disconnectPlayer(client_id targetId, const std::string &reason) 
     g_engine->network->disconnectClient(targetId, reason);
 }
 
-std::optional<client_id> PluginAPI::getPlayerByName(const std::string &name) {
+client_id PluginAPI::getPlayerByName(const std::string &name) {
     Client* client = g_game->getClientByName(name);
     if (client) {
         return client->getId();
     }
-    return std::nullopt;
+    return 0;
 }
 
 std::vector<client_id> PluginAPI::getAllPlayerIds() {

@@ -16,8 +16,22 @@ void Console::update() {
         if (game.engine.gui->getChatInputBuffer().length() > 0) {
             spdlog::trace("Console::update: Processing submitted chat input");
             std::string message = game.engine.gui->getChatInputBuffer();
+            std::string consoleMessage = message;
+            bool includePlayerName = true;
 
-            game.engine.gui->addConsoleLine(game.player->getName(), message);
+            const std::string prefix = "/msg ";
+            if (message.rfind(prefix, 0) == 0) {
+                const std::size_t afterPrefix = prefix.size();
+                const std::size_t nameEnd = message.find(' ', afterPrefix);
+                if (nameEnd != std::string::npos && nameEnd + 1 < message.size()) {
+                    const std::string targetName = message.substr(afterPrefix, nameEnd - afterPrefix);
+                    const std::string msgBody = message.substr(nameEnd + 1);
+                    consoleMessage = "[-> " + targetName + "] " + msgBody;
+                    includePlayerName = false;
+                }
+            }
+
+            game.engine.gui->addConsoleLine(includePlayerName ? game.player->getName() : std::string(), consoleMessage);
 
             ClientMsg_Chat chatMsg;
             chatMsg.toId = BROADCAST_CLIENT_ID;
@@ -32,20 +46,19 @@ void Console::update() {
     }
 
     for (const auto &msg : game.engine.network->consumeMessages<ServerMsg_Chat>()) {
-        std::string name = "";
-
-        if (game.getClientById(msg.fromId) == nullptr) {
-            if (msg.fromId == game.player->getClientId()) {
-                name = "YOU";
-            } else if (msg.fromId == SERVER_CLIENT_ID) {
-                name = "SERVER";
-            } else {
-                name = "UNKNOWN";
-            }
+        std::string name;
+        if (auto *client = game.getClientById(msg.fromId)) {
+            name = client->getName();
+        } else if (msg.fromId == game.player->getClientId()) {
+            name = "YOU";
+        } else if (msg.fromId == SERVER_CLIENT_ID) {
+            name = "SERVER";
+        } else {
+            name = "UNKNOWN";
         }
 
         if (msg.toId == game.player->getClientId()) {
-            name = "[" + name + " -> YOU]";
+            name = "[" + name + " ->]";
         }
 
         game.engine.gui->addConsoleLine(name, msg.text);
